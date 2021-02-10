@@ -38,6 +38,17 @@ footer {
   background-color: #203040;
   color: #ffffff;
 }
+
+footer a {
+  color: #34c6f3;
+  padding: 0.55rem;
+}
+
+footer a:hover {
+  color: #19e012;
+}
+
+
 /* Common */
 h1 {
   font-size: 1.8rem;
