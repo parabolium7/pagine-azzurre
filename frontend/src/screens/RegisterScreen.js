@@ -36,26 +36,36 @@ export default function RegisterScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Create Account</h1>
+          <h1>Crea il tuo Account</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Nome</label>
           <input
             type="text"
             id="name"
-            placeholder="Enter name"
+            placeholder="Inserisci il nome"
             required
             onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="surname">Cognome</label>
+          <input
+            type="text"
+            id="surname"
+            placeholder="Inserisci il cognome"
+            required
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="email">Indirizzo Email </label>
           <input
             type="email"
             id="email"
-            placeholder="Enter email"
+            placeholder="Inserisci il tuo email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -65,17 +75,17 @@ export default function RegisterScreen(props) {
           <input
             type="password"
             id="password"
-            placeholder="Enter password"
+            placeholder="Inserisci password"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Conferma Password</label>
           <input
             type="password"
             id="confirmPassword"
-            placeholder="Enter confirm password"
+            placeholder="Conferma Password"
             required
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
@@ -83,14 +93,14 @@ export default function RegisterScreen(props) {
         <div>
           <label />
           <button className="primary" type="submit">
-            Register
+            Registro
           </button>
         </div>
         <div>
           <label />
           <div>
-            Already have an account?{' '}
-            <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+            Hai già un account?{' '}
+            <Link to={`/signin?redirect=${redirect}`}>Accedi</Link>
           </div>
         </div>
       </form>
