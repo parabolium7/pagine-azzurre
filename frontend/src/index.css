@@ -18,16 +18,45 @@ body {
 .grid-container {
   display: grid;
   grid-template-areas:
+    'blubar'
+    'pre-header'
     'header'
+    'post-header'
     'main'
     'footer';
   grid-template-columns: 1fr;
-  grid-template-rows: 5rem 1fr 5rem;
+  grid-template-rows: 0.5rem 2rem 6rem 2rem 1fr 5rem;
   height: 100%;
+}
+.blubar{
+  grid-area: blubar;
+  background-color: #75bcfd;
+}
+.pre-header{
+  grid-area: pre-header;
+  background-color: #f4f4f4;
+  color: #46a2f8;
+}
+.pre-header p{
+  margin: 2px auto 0 15%;
 }
 header {
   grid-area: header;
   background-color: #203040;
+}
+.post-header{
+  grid-area: post-header;
+  background-color: #2f5780;
+  color: #eff1ef;
+}
+.post-header p{
+  margin: 2px auto 0 20%;
+}
+.post-header p a{
+  color: #f0c040;
+}
+.post-header p a:hover{
+  color: #bcf7aa;
 }
 main {
   grid-area: main;
@@ -45,7 +74,7 @@ footer a {
 }
 
 footer a:hover {
-  color: #19e012;
+  color: #bcf7aa;
 }
 
 
