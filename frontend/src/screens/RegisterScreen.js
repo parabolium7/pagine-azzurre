@@ -81,6 +81,7 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
+          {/* TODO: levare le freccete impostate pre defaultq */}
           <label htmlFor="zip">CAP</label>
           <input
             type="number"
