@@ -52,7 +52,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="row">
+      <header className="row">
           <div>
             <button
               type="button"
@@ -73,11 +73,15 @@ function App() {
             ></Route>
           </div>
           <div>
+            {/* TODO: "{userInfo ? (" per nascondere il link carrello a usuari non logati */}
             <Link to="/cart">
               Carrello
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
+            </Link>
+            <Link to="/register">
+              Registrati
             </Link>
             {userInfo ? (
               <div className="dropdown">
@@ -123,22 +127,22 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to="/dashboard">Pannello di controllo</Link>
                   </li>
                   <li>
-                    <Link to="/productlist">Products</Link>
+                    <Link to="/productlist">Prodotti</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist">Orders</Link>
+                    <Link to="/orderlist">Ordini</Link>
                   </li>
                   <li>
-                    <Link to="/userlist">Users</Link>
+                    <Link to="/userlist">Utenti</Link>
                   </li>
                 </ul>
               </div>
             )}
           </div>
-        </header>
+</header>
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li>
