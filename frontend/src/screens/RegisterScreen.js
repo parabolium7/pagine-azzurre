@@ -61,12 +61,41 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="email">Indirizzo Email </label>
+          <label htmlFor="email">Indirizzo Email</label>
           <input
             type="email"
             id="email"
             placeholder="Inserisci il tuo email"
             required
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="city">Cità</label>
+          <input
+            type="text"
+            id="city"
+            placeholder="Inserisci la tua cità di residenza"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="zip">CAP</label>
+          <input
+            type="number"
+            id="zip"
+            placeholder="Inserisci il cap della tua cità"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="phone">Numero di telefono</label>
+          <input
+            type="number"
+            id="phone"
+            placeholder="Inserisci il tuo numero di cellulare (opzionale)"
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
