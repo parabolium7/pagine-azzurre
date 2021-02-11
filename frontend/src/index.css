@@ -38,7 +38,7 @@ body {
   color: #46a2f8;
 }
 .pre-header p{
-  margin: 2px auto 0 15%;
+  margin: 2px 0 0 15%;
 }
 header {
   grid-area: header;
@@ -403,4 +403,30 @@ img.large {
 }
 .pagination a.active {
   font-weight: bold;
+}
+
+.Logo1 {
+  height: 5.5rem;
+  border-radius: 10rem;
+  margin-top: 1px;
+}
+
+.Logo2 {
+  height: 5.5rem;
+  border-radius: 10rem;
+}
+
+.Logo3 {
+  height: 5.5rem;
+  border-radius: 10rem;
+}
+
+.Logo4 {
+  height: 5.5rem;
+  border-radius: 10rem;
+}
+
+.Logo5 {
+  height: 5.5rem;
+  border-radius: 10rem;
 }

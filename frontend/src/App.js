@@ -28,6 +28,11 @@ import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import MapScreen from './screens/MapScreen';
+import logo1 from './resources/logos/magic_hands.jpg';
+import logo2 from './resources/logos/bannerarancione.jpg';
+import logo3 from './resources/logos/yinyang.jpg';
+import logo4 from './resources/logos/bannerblu.jpg';
+import logo5 from './resources/logos/bannergiallo.jpg';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -68,6 +73,21 @@ function App() {
             <Link className="brand" to="/">
               Pagine Azzurre
             </Link>
+          </div>
+          <div>
+            <img className="Logo1" src={logo1} alt="Logo" />
+          </div>
+          <div>
+            <img className="Logo2" src={logo2} alt="Logo" />
+          </div>
+          <div>
+            <img className="Logo3" src={logo3} alt="Logo" />
+          </div>
+          <div>
+            <img className="Logo4" src={logo4} alt="Logo" />
+          </div>
+          <div>
+            <img className="Logo5" src={logo5} alt="Logo" />
           </div>
           <div>
             <Route
@@ -146,10 +166,10 @@ function App() {
               </div>
             )}
           </div>
-</header>
-<div className="post-header">
-  <p>Iscriviti qui: {<a href="https://valazco.it">valazco.it</a>} per avere i VAL contributo di esistenza giornaliero da utilizzabile subito</p>
-</div>
+        </header>
+        <div className="post-header">
+          <p>Iscriviti qui: {<a href="https://valazco.it">valazco.it</a>} per avere i VAL contributo di esistenza giornaliero da utilizzabile subito</p>
+        </div>
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li>
