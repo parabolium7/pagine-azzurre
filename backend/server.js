@@ -12,7 +12,6 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-console.log("My process: ", process.env.MONGODB_URL)
 
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/pagine_azzurre', {
   useNewUrlParser: true,
