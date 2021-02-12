@@ -39,6 +39,7 @@ function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
+  console.log(userSignin)
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
@@ -97,16 +98,19 @@ function App() {
             ></Route>
           </div>
           <div>
-            {/* TODO: "{userInfo ? (" per nascondere il link carrello a usuari non logati */}
-            <Link to="/cart">
-              Carrello
-              {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
-              )}
-            </Link>
+            { userInfo === 'null' ? (
+                <div>
+                  <Link to="/cart">
+                    Carrello
+                    {cartItems.length > 0 && (
+                      <span className="badge">{cartItems.length}</span>
+                    )}
+                  </Link>
+                </div>) : (<div></div>)
+            }
             <Link to="/register">
               Registrati
-            </Link>
+            </Link> 
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
