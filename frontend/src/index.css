@@ -233,6 +233,9 @@ img.medium {
 img.large {
   width: 100%;
 }
+.emoji {
+  margin: 0 0.5rem;
+}
 
 /* Card */
 .card {
