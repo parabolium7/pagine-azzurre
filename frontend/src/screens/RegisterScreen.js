@@ -7,7 +7,11 @@ import MessageBox from '../components/MessageBox';
 
 export default function RegisterScreen(props) {
   const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -24,7 +28,7 @@ export default function RegisterScreen(props) {
     if (password !== confirmPassword) {
       alert('Password and confirm password are not match');
     } else {
-      dispatch(register(name, email, password));
+      dispatch(register(name, surname, email, city, zipCode, phone, password));
     }
   };
   useEffect(() => {
@@ -57,7 +61,7 @@ export default function RegisterScreen(props) {
             id="surname"
             placeholder="Inserisci il cognome"
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setSurname(e.target.value)}
           ></input>
         </div>
         <div>
@@ -71,24 +75,24 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="city">Cità</label>
+          <label htmlFor="city">Città</label>
           <input
             type="text"
             id="city"
             placeholder="Inserisci la tua cità di residenza"
             required
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setCity(e.target.value)}
           ></input>
         </div>
         <div>
           {/* TODO: levare le freccete impostate pre defaultq */}
-          <label htmlFor="zip">CAP</label>
+          <label htmlFor="zipCode">CAP</label>
           <input
             type="number"
-            id="zip"
+            id="zipCode"
             placeholder="Inserisci il cap della tua cità"
             required
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setZipCode(e.target.value)}
           ></input>
         </div>
         <div>
@@ -97,7 +101,7 @@ export default function RegisterScreen(props) {
             type="number"
             id="phone"
             placeholder="Inserisci il tuo numero di cellulare (opzionale)"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setPhone(e.target.value)}
           ></input>
         </div>
         <div>
