@@ -181,6 +181,9 @@ a.brand {
 .p-1 {
   padding: 1rem;
 }
+.last-element {
+  margin-right: 4vw;
+}
 /* Aside */
 aside {
   position: fixed;

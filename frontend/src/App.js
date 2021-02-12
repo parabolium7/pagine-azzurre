@@ -97,41 +97,47 @@ function App() {
               )}
             ></Route>
           </div>
-          <div>
-            { userInfo === 'null' ? (
-                <div>
-                  <Link to="/cart">
-                    Carrello
-                    {cartItems.length > 0 && (
-                      <span className="badge">{cartItems.length}</span>
-                    )}
+          { userInfo === 'null' ? (
+            <div>
+              <Link to="/cart">
+                Carrello
+                {cartItems.length > 0 && (
+                  <span className="badge">{cartItems.length}</span>
+                )}
+              </Link>
+            </div>
+            ) : ('')
+          }
+          { userInfo ? ('') : (
+            <div>
+              <Link to="/register">
+                Registrati
+              </Link>
+            </div>)
+          }
+          {userInfo ? (
+            <div className="dropdown last-element">
+              <Link to="#">
+                {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
+              </Link>
+              <ul className="dropdown-content">
+                <li>
+                  <Link to="/profile">Profilo</Link>
+                </li>
+                <li>
+                  <Link to="/orderhistory">Istoriale</Link>
+                </li>
+                <li>
+                  <Link to="#signout" onClick={signoutHandler}>
+                    Uscire
                   </Link>
-                </div>) : (<div></div>)
-            }
-            <Link to="/register">
-              Registrati
-            </Link> 
-            {userInfo ? (
-              <div className="dropdown">
-                <Link to="#">
-                  {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/profile">Profilo</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderhistory">Istoriale</Link>
-                  </li>
-                  <li>
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Uscire
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+                </li>
+              </ul>
+            </div>
             ) : (
-              <Link to="/signin">Accedi</Link>
+              <div className="last-element">
+                <Link to="/signin">Accedi</Link>
+              </div>
             )}
             {userInfo && userInfo.isSeller && (
               <div className="dropdown">
@@ -169,7 +175,6 @@ function App() {
                 </ul>
               </div>
             )}
-          </div>
         </header>
         <div className="post-header">
           <p>Iscriviti qui: {<a href="https://valazco.it">valazco.it</a>} per avere i VAL contributo di esistenza giornaliero da utilizzare subito</p>
