@@ -37,9 +37,6 @@ body {
   background-color: #f4f4f4;
   color: #46a2f8;
 }
-.pre-header p{
-  margin: 2px 0 0 15%;
-}
 header {
   grid-area: header;
   background-color: #203040;
@@ -48,9 +45,6 @@ header {
   grid-area: post-header;
   background-color: #2f5780;
   color: #eff1ef;
-}
-.post-header p{
-  margin: 2px auto 0 20%;
 }
 .post-header p a{
   color: #f0c040;

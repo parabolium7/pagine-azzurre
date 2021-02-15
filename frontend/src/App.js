@@ -59,8 +59,8 @@ function App() {
     <BrowserRouter>
       <div className="grid-container">
       <div className="blubar"></div>
-      <div className="pre-header">
-        <p className="pre-header">PAGINE  AZZURRE  del VAL - PAGINE AZZURRE  del  VAL.AZ.CO. -  VALorizzatore del AZione COncordata</p>
+      <div className="pre-header row center">
+        PAGINE  AZZURRE  del VAL - PAGINE AZZURRE  del  VAL.AZ.CO. -  VALorizzatore del AZione COncordata
       </div>
       <header className="row">
           <div>
@@ -176,8 +176,8 @@ function App() {
               </div>
             )}
         </header>
-        <div className="post-header">
-          <p>Iscriviti qui: {<a href="https://valazco.it">valazco.it</a>} per avere i VAL contributo di esistenza giornaliero da utilizzare subito</p>
+        <div className="post-header row center">
+          Iscriviti qui: {<a href="https://valazco.it">valazco.it</a>} per avere i VAL contributo di esistenza giornaliero da utilizzare subito
         </div>
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
