@@ -50,10 +50,10 @@ header {
   background-color: #2f5780;
   color: #eff1ef;
 }
-.post-header p a{
+.post-header a{
   color: #f0c040;
 }
-.post-header p a:hover{
+.post-header a:hover{
   color: #bcf7aa;
 }
 main {
