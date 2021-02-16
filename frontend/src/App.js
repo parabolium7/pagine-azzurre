@@ -177,7 +177,7 @@ function App() {
             )}
         </header>
         <div className="post-header row center">
-          Iscriviti qui: {<a href="https://valazco.it">valazco.it</a>} per avere i VAL contributo di esistenza giornaliero da utilizzare subito
+          Iscriviti qui: {<a className="val_link" href="https://valazco.it">valazco.it</a>} per avere i VAL contributo di esistenza giornaliero da utilizzare subito
         </div>
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
