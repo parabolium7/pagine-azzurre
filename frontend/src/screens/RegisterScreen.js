@@ -75,11 +75,21 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
+          <label htmlFor="email">Conferma Email *</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Conferma il tuo email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+        </div>
+        <div>
           <label htmlFor="city">Città *</label>
           <input
             type="text"
             id="city"
-            placeholder="Inserisci la tua cità di residenza"
+            placeholder="Inserisci la tua città di residenza"
             required
             onChange={(e) => setCity(e.target.value)}
           ></input>
@@ -127,7 +137,7 @@ export default function RegisterScreen(props) {
         <div>
           <label />
           <button className="primary" type="submit">
-            Registro
+            Registrati
           </button>
         </div>
         <div>
