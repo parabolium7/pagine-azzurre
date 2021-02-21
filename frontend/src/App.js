@@ -28,12 +28,18 @@ import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import MapScreen from './screens/MapScreen';
+import logo1 from './resources/logos/magic_hands.jpg';
+import logo2 from './resources/logos/bannerarancione.jpg';
+import logo3 from './resources/logos/yinyang.jpg';
+import logo4 from './resources/logos/bannerblu.jpg';
+import logo5 from './resources/logos/bannergiallo.jpg';
 
 function App() {
   const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
+  console.log(userSignin)
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
@@ -52,7 +58,11 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="row">
+      <div className="blubar"></div>
+      <div className="pre-header row center">
+        PAGINE  AZZURRE  del VAL - PAGINE AZZURRE  del  VAL.AZ.CO. -  VALorizzatore del AZione COncordata
+      </div>
+      <header className="row">
           <div>
             <button
               type="button"
@@ -62,8 +72,23 @@ function App() {
               <i className="fa fa-bars"></i>
             </button>
             <Link className="brand" to="/">
-              amazona
+              Pagine Azzurre
             </Link>
+          </div>
+          <div>
+            <img className="Logo1" src={logo1} alt="Logo" />
+          </div>
+          <div>
+            <img className="Logo2" src={logo2} alt="Logo" />
+          </div>
+          <div>
+            <img className="Logo3" src={logo3} alt="Logo" />
+          </div>
+          <div>
+            <img className="Logo4" src={logo4} alt="Logo" />
+          </div>
+          <div>
+            <img className="Logo5" src={logo5} alt="Logo" />
           </div>
           <div>
             <Route
@@ -72,46 +97,59 @@ function App() {
               )}
             ></Route>
           </div>
-          <div>
-            <Link to="/cart">
-              Cart
-              {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
-              )}
-            </Link>
-            {userInfo ? (
-              <div className="dropdown">
-                <Link to="#">
-                  {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/profile">User Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderhistory">Order History</Link>
-                  </li>
-                  <li>
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+          { userInfo === 'null' ? (
+            <div>
+              <Link to="/cart">
+                Carrello
+                {cartItems.length > 0 && (
+                  <span className="badge">{cartItems.length}</span>
+                )}
+              </Link>
+            </div>
+            ) : ('')
+          }
+          { userInfo ? ('') : (
+            <div>
+              <Link to="/register">
+                Registrati
+              </Link>
+            </div>)
+          }
+          {userInfo ? (
+            <div className="dropdown last-element">
+              <Link to="#">
+                {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
+              </Link>
+              <ul className="dropdown-content">
+                <li>
+                  <Link to="/profile">Profilo</Link>
+                </li>
+                <li>
+                  <Link to="/orderhistory">Istoriale</Link>
+                </li>
+                <li>
+                  <Link to="#signout" onClick={signoutHandler}>
+                    Uscire
+                  </Link>
+                </li>
+              </ul>
+            </div>
             ) : (
-              <Link to="/signin">Sign In</Link>
+              <div className="last-element">
+                <Link to="/signin">Accedi</Link>
+              </div>
             )}
             {userInfo && userInfo.isSeller && (
               <div className="dropdown">
                 <Link to="#admin">
-                  Seller <i className="fa fa-caret-down"></i>
+                  Venditore <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/productlist/seller">Products</Link>
+                    <Link to="/productlist/seller">Prodotti</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist/seller">Orders</Link>
+                    <Link to="/orderlist/seller">Ordini</Link>
                   </li>
                 </ul>
               </div>
@@ -123,26 +161,28 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to="/dashboard">Pannello di controllo</Link>
                   </li>
                   <li>
-                    <Link to="/productlist">Products</Link>
+                    <Link to="/productlist">Prodotti</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist">Orders</Link>
+                    <Link to="/orderlist">Ordini</Link>
                   </li>
                   <li>
-                    <Link to="/userlist">Users</Link>
+                    <Link to="/userlist">Utenti</Link>
                   </li>
                 </ul>
               </div>
             )}
-          </div>
         </header>
+        <div className="post-header row center">
+          Iscriviti qui: {<a className="val_link" href="https://valazco.it">valazco.it</a>} per avere i VAL contributo di esistenza giornaliero da utilizzare subito
+        </div>
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li>
-              <strong>Categories</strong>
+              <strong>Categorie</strong>
               <button
                 onClick={() => setSidebarIsOpen(false)}
                 className="close-sidebar"
@@ -241,7 +281,7 @@ function App() {
 
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center">All right reserved</footer>
+        <footer className="row center">Un progetto fatto con <span className="emoji" role="img" aria-label="a heart">❤️</span> dal team  {<a href="https://valazco.it">valazco.it</a>}</footer>
       </div>
     </BrowserRouter>
   );

@@ -7,7 +7,11 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 export default function ProfileScreen() {
   const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [sellerName, setSellerName] = useState('');
@@ -31,7 +35,11 @@ export default function ProfileScreen() {
       dispatch(detailsUser(userInfo._id));
     } else {
       setName(user.name);
+      setSurname(user.surname);
       setEmail(user.email);
+      setCity(user.city);
+      setZipCode(user.zipCode);
+      setPhone(user.phone);
       if (user.seller) {
         setSellerName(user.seller.name);
         setSellerLogo(user.seller.logo);
@@ -49,7 +57,11 @@ export default function ProfileScreen() {
         updateUserProfile({
           userId: user._id,
           name,
+          surname,
           email,
+          city,
+          zipCode,
+          phone,
           password,
           sellerName,
           sellerLogo,
@@ -65,12 +77,12 @@ export default function ProfileScreen() {
           <h1>User Profile</h1>
         </div>
         {loading ? (
-          <LoadingBox></LoadingBox>
+          <LoadingBox/>
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <>
-            {loadingUpdate && <LoadingBox></LoadingBox>}
+            {loadingUpdate && <LoadingBox/>}
             {errorUpdate && (
               <MessageBox variant="danger">{errorUpdate}</MessageBox>
             )}
@@ -84,9 +96,19 @@ export default function ProfileScreen() {
               <input
                 id="name"
                 type="text"
-                placeholder="Enter name"
+                placeholder="Corregere il nome"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="surname">Cognome</label>
+              <input
+                id="surname"
+                type="text"
+                placeholder="Corregere il cognome"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
               ></input>
             </div>
             <div>
@@ -94,26 +116,56 @@ export default function ProfileScreen() {
               <input
                 id="email"
                 type="email"
-                placeholder="Enter email"
+                placeholder="Corregere l'email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="city">Città</label>
+              <input
+                id="city"
+                type="text"
+                placeholder="Corregere la città"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="zipCode">CAP</label>
+              <input
+                id="zipCode"
+                type="number"
+                placeholder="Corregere il CAP"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="phone">Telefono</label>
+              <input
+                id="phone"
+                type="number"
+                placeholder="Corregere il telefono"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="password">Cambiare Password</label>
               <input
                 id="password"
                 type="password"
-                placeholder="Enter password"
+                placeholder="Una nuova password?"
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="confirmPassword">confirm Password</label>
+              <label htmlFor="confirmPassword">Conferma Password</label>
               <input
                 id="confirmPassword"
                 type="password"
-                placeholder="Enter confirm password"
+                placeholder="Conferma nuova password"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
@@ -155,7 +207,7 @@ export default function ProfileScreen() {
             <div>
               <label />
               <button className="primary" type="submit">
-                Update
+                Aggiorna
               </button>
             </div>
           </>

@@ -14,20 +14,47 @@ body {
   height: 100%;
 }
 
+.val_link {
+  margin: 0 0.55rem;
+}
+
 /* Layout */
 .grid-container {
   display: grid;
   grid-template-areas:
+    'blubar'
+    'pre-header'
     'header'
+    'post-header'
     'main'
     'footer';
   grid-template-columns: 1fr;
-  grid-template-rows: 5rem 1fr 5rem;
+  grid-template-rows: 0.5rem 2rem 6rem 2rem 1fr 5rem;
   height: 100%;
+}
+.blubar{
+  grid-area: blubar;
+  background-color: #75bcfd;
+}
+.pre-header{
+  grid-area: pre-header;
+  background-color: #f4f4f4;
+  color: #46a2f8;
 }
 header {
   grid-area: header;
   background-color: #203040;
+}
+.post-header{
+  grid-area: post-header;
+  background-color: #2f5780;
+  color: #eff1ef;
+}
+.post-header a{
+  color: #f0c040;
+}
+.post-header a:hover{
+  color: #bcf7aa;
 }
 main {
   grid-area: main;
@@ -38,6 +65,17 @@ footer {
   background-color: #203040;
   color: #ffffff;
 }
+
+footer a {
+  color: #34c6f3;
+  padding: 0.55rem;
+}
+
+footer a:hover {
+  color: #bcf7aa;
+}
+
+
 /* Common */
 h1 {
   font-size: 1.8rem;
@@ -141,6 +179,9 @@ a.brand {
 .p-1 {
   padding: 1rem;
 }
+.last-element {
+  margin-right: 4vw;
+}
 /* Aside */
 aside {
   position: fixed;
@@ -192,6 +233,9 @@ img.medium {
 }
 img.large {
   width: 100%;
+}
+.emoji {
+  margin: 0 0.5rem;
 }
 
 /* Card */
@@ -364,3 +408,87 @@ img.large {
 .pagination a.active {
   font-weight: bold;
 }
+
+.Logo1 {
+  height: 5.5rem;
+  border-radius: 10rem;
+  margin-top: 2px;
+}
+
+.Logo2 {
+  height: 5.5rem;
+  border-radius: 10rem;
+  margin-top: 2px;
+}
+
+.Logo3 {
+  height: 5.5rem;
+  border-radius: 10rem;
+  margin-top: 2px;
+}
+
+.Logo4 {
+  height: 5.5rem;
+  border-radius: 10rem;
+  margin-top: 2px;
+}
+
+.Logo5 {
+  height: 5.5rem;
+  border-radius: 10rem;
+  margin-top: 2px;
+}
+
+@media screen and (max-width: 1450px){
+  .Logo1 {
+    height: 4.5rem;
+    border-radius: 10rem;
+    margin-top: 2px;
+  }
+  
+  .Logo2 {
+    height: 4.5rem;
+    border-radius: 10rem;
+    margin-top: 2px;
+  }
+  
+  .Logo3 {
+    height: 4.5rem;
+    border-radius: 10rem;
+    margin-top: 2px;
+  }
+  
+  .Logo4 {
+    height: 4.5rem;
+    border-radius: 10rem;
+    margin-top: 2px;
+  }
+  
+  .Logo5 {
+    height: 4.5rem;
+    border-radius: 10rem;
+    margin-top: 2px;
+  }
+} 
+
+@media screen and (max-width: 1330px){
+  .Logo1 {
+    display: none;
+  }
+  
+  .Logo2 {
+    display: none;
+  }
+  
+  .Logo3 {
+    display: none;
+  }
+  
+  .Logo4 {
+    display: none;
+  }
+  
+  .Logo5 {
+    display: none;
+  }
+} 

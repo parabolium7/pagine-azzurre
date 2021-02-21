@@ -30,7 +30,7 @@ export default function SigninScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Sign In</h1>
+          <h1>Accedi</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
@@ -39,7 +39,7 @@ export default function SigninScreen(props) {
           <input
             type="email"
             id="email"
-            placeholder="Enter email"
+            placeholder="Inserici la tua email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -49,7 +49,7 @@ export default function SigninScreen(props) {
           <input
             type="password"
             id="password"
-            placeholder="Enter password"
+            placeholder="Inserici la tua password"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
@@ -57,15 +57,15 @@ export default function SigninScreen(props) {
         <div>
           <label />
           <button className="primary" type="submit">
-            Sign In
+            Accedi
           </button>
         </div>
         <div>
           <label />
           <div>
-            New customer?{' '}
+            Nuovo usuario?{' '}
             <Link to={`/register?redirect=${redirect}`}>
-              Create your account
+              Registrati
             </Link>
           </div>
         </div>
