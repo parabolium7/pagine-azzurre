@@ -69,7 +69,7 @@ export default function RegisterScreen(props) {
           <input
             type="email"
             id="email"
-            placeholder="Inserisci il tuo email"
+            placeholder="Inserisci email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -79,7 +79,7 @@ export default function RegisterScreen(props) {
           <input
             type="email"
             id="email"
-            placeholder="Conferma il tuo email"
+            placeholder="Conferma email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -89,7 +89,7 @@ export default function RegisterScreen(props) {
           <input
             type="text"
             id="city"
-            placeholder="Inserisci la tua città di residenza"
+            placeholder="Inserisci la città di residenza"
             required
             onChange={(e) => setCity(e.target.value)}
           ></input>
@@ -99,7 +99,7 @@ export default function RegisterScreen(props) {
           <input
             type="number"
             id="zipCode"
-            placeholder="Inserisci il cap della tua cità"
+            placeholder="Inserisci il cap"
             required
             onChange={(e) => setZipCode(e.target.value)}
           ></input>
@@ -109,7 +109,7 @@ export default function RegisterScreen(props) {
           <input
             type="number"
             id="phone"
-            placeholder="Inserisci il tuo numero di cellulare (opzionale)"
+            placeholder="Inserisci il numero di cellulare (opzionale)"
             onChange={(e) => setPhone(e.target.value)}
           ></input>
         </div>
