@@ -207,7 +207,7 @@ export default function ProfileScreen() {
             <div>
               <label />
               <button className="primary" type="submit">
-                Update
+                Aggiorna
               </button>
             </div>
           </>
