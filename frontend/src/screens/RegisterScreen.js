@@ -85,7 +85,6 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          {/* TODO: levare le freccete impostate pre defaultq */}
           <label htmlFor="zipCode">CAP *</label>
           <input
             type="number"
@@ -124,7 +123,7 @@ export default function RegisterScreen(props) {
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
         </div>
-        <div><p className="asterisk">(*) Campi Obligatori</p></div>
+        <div><p className="asterisk">(*) Campi Obbligatori</p></div>
         <div>
           <label />
           <button className="primary" type="submit">
