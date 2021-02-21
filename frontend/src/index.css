@@ -182,6 +182,9 @@ a.brand {
 .last-element {
   margin-right: 4vw;
 }
+.asterisk {
+  font-size: 1rem;
+} 
 /* Aside */
 aside {
   position: fixed;

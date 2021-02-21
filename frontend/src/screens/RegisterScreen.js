@@ -40,12 +40,12 @@ export default function RegisterScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Crea il tuo Account</h1>
+          <h1 className="row center">Crea il tuo Account</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="name">Nome</label>
+          <label htmlFor="name">Nome *</label>
           <input
             type="text"
             id="name"
@@ -55,7 +55,7 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="surname">Cognome</label>
+          <label htmlFor="surname">Cognome *</label>
           <input
             type="text"
             id="surname"
@@ -65,7 +65,7 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="email">Indirizzo Email</label>
+          <label htmlFor="email">Indirizzo Email *</label>
           <input
             type="email"
             id="email"
@@ -75,7 +75,7 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="city">Città</label>
+          <label htmlFor="city">Città *</label>
           <input
             type="text"
             id="city"
@@ -86,7 +86,7 @@ export default function RegisterScreen(props) {
         </div>
         <div>
           {/* TODO: levare le freccete impostate pre defaultq */}
-          <label htmlFor="zipCode">CAP</label>
+          <label htmlFor="zipCode">CAP *</label>
           <input
             type="number"
             id="zipCode"
@@ -105,7 +105,7 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password *</label>
           <input
             type="password"
             id="password"
@@ -115,7 +115,7 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="confirmPassword">Conferma Password</label>
+          <label htmlFor="confirmPassword">Conferma Password *</label>
           <input
             type="password"
             id="confirmPassword"
@@ -124,6 +124,7 @@ export default function RegisterScreen(props) {
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
         </div>
+        <div><p className="asterisk">(*) Campi Obligatori</p></div>
         <div>
           <label />
           <button className="primary" type="submit">
