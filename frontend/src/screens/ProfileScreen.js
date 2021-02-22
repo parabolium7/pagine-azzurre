@@ -51,7 +51,7 @@ export default function ProfileScreen() {
     e.preventDefault();
     // dispatch update profile
     if (password !== confirmPassword) {
-      alert('Password and Confirm Password Are Not Matched');
+      alert('- Le Password non coincidono');
     } else {
       dispatch(
         updateUserProfile({
