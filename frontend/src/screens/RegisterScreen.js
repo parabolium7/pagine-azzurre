@@ -9,6 +9,7 @@ export default function RegisterScreen(props) {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
   const [city, setCity] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [phone, setPhone] = useState('');
@@ -25,8 +26,14 @@ export default function RegisterScreen(props) {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Password and confirm password are not match');
+    if (password !== confirmPassword && email !== confirmEmail) {
+      alert('- Le Password non coincidono\n- Controlla la esatteza della email.');
+    }
+    else if (email !== confirmEmail) {
+      alert('Controlla la esatteza della email.');
+    }
+    else if (password !== confirmPassword) {
+      alert('Le Password non coincidono');
     } else {
       dispatch(register(name, surname, email, city, zipCode, phone, password));
     }
@@ -78,10 +85,10 @@ export default function RegisterScreen(props) {
           <label htmlFor="email">Conferma Email *</label>
           <input
             type="email"
-            id="email"
+            id="confirmEmail"
             placeholder="Conferma email"
             required
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setConfirmEmail(e.target.value)}
           ></input>
         </div>
         <div>
