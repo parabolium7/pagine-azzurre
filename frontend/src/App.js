@@ -39,7 +39,6 @@ function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
-  console.log(userSignin)
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   const signoutHandler = () => {
