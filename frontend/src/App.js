@@ -22,6 +22,7 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import SellerRoute from './components/SellerRoute';
 import SellerScreen from './screens/SellerScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
@@ -124,6 +125,9 @@ function App() {
                   <Link to="/profile">Profilo</Link>
                 </li>
                 <li>
+                  <Link to='/'>Crea annuncio</Link>
+                </li>
+                <li>
                   <Link to="/orderhistory">Istoriale</Link>
                 </li>
                 <li>
@@ -212,11 +216,7 @@ function App() {
           <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
-          <Route
-            path="/product/:id/edit"
-            component={ProductEditScreen}
-            exact
-          ></Route>
+          <Route path="/product/:id/edit" component={ProductEditScreen} exact></Route>
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
@@ -224,60 +224,19 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
-          <Route
-            path="/search/name/:name?"
-            component={SearchScreen}
-            exact
-          ></Route>
-          <Route
-            path="/search/category/:category"
-            component={SearchScreen}
-            exact
-          ></Route>
-          <Route
-            path="/search/category/:category/name/:name"
-            component={SearchScreen}
-            exact
-          ></Route>
-          <Route
-            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
-            component={SearchScreen}
-            exact
-          ></Route>
-          <PrivateRoute
-            path="/profile"
-            component={ProfileScreen}
-          ></PrivateRoute>
+          <Route path="/search/name/:name?" component={SearchScreen} exact></Route>
+          <Route path="/search/category/:category" component={SearchScreen} exact></Route>
+          <Route path="/search/category/:category/name/:name" component={SearchScreen} exact></Route>
+          <Route path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber" component={SearchScreen} exact></Route>
+          <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
           <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
-          <AdminRoute
-            path="/productlist"
-            component={ProductListScreen}
-            exact
-          ></AdminRoute>
-          <AdminRoute
-            path="/productlist/pageNumber/:pageNumber"
-            component={ProductListScreen}
-            exact
-          ></AdminRoute>
-          <AdminRoute
-            path="/orderlist"
-            component={OrderListScreen}
-            exact
-          ></AdminRoute>
+          <AdminRoute path="/productlist" component={ProductListScreen} exact></AdminRoute>
+          <AdminRoute path="/productlist/pageNumber/:pageNumber" component={ProductListScreen} exact></AdminRoute>
+          <AdminRoute path="/orderlist" component={OrderListScreen} exact></AdminRoute>
           <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>
-          <AdminRoute
-            path="/user/:id/edit"
-            component={UserEditScreen}
-          ></AdminRoute>
-          <SellerRoute
-            path="/productlist/seller"
-            component={ProductListScreen}
-          ></SellerRoute>
-          <SellerRoute
-            path="/orderlist/seller"
-            component={OrderListScreen}
-          ></SellerRoute>
-
+          <AdminRoute path="/user/:id/edit" component={UserEditScreen}></AdminRoute>
+          <SellerRoute path="/productlist/seller" component={ProductListScreen}></SellerRoute>
+          <SellerRoute path="/orderlist/seller" component={OrderListScreen}></SellerRoute>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">Un progetto fatto con <span className="emoji" role="img" aria-label="a heart">❤️</span> dal team  {<a href="https://valazco.it">valazco.it</a>}</footer>
