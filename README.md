@@ -1,22 +1,17 @@
 # Pagine azzurre ECommerce Website
-![pagine_azzurre](/template/images/pagine_azzurre.jpg)
-
-# React & Node Tutorial - Full ECommerce in 9 Hours [2021]
-
-Welcome to my React and Node tutorial to build a fully-functional e-commerce website exactly like amazon. Open your code editor and follow me for the next hours to build an e-commerce website using MERN stack (MongoDB, ExpressJS, React and Node.JS).
+![pagine_azzurre](/template/images/book-icon.png)
 
 ## Demo Website
 
-TODO: Bring to heroku
-- 👉 Heroku : [https://pagine_azzurre.herokuapp.com](https://newamazona-final.herokuapp.com)
+- 👉 Heroku : [https://pagine-azzurre.herokuapp.com](https://newamazona-final.herokuapp.com)
 
 ## Run Locally
 
 ### 1. Clone repo
 
 ```
-$ git clone git@github.com:basir/amazona.git
-$ cd amazona
+$ git clone git@github.com:valazco/pagine_azzurre.git
+$ cd pagine_azzurre
 ```
 
 ### 2. Setup MongoDB
@@ -60,5 +55,8 @@ $ npm start
 
 ## Support
 
-- Q/A: https://webacademy.pro/amazona
+- Any Issue with pagine-azzurre? Contact Manteiner: [Germán Lugo](mailto:g.lugo.dev@gmail.com)
+- Do you want to help to our project developing along us: https://webacademy.pro/amazona is a nice place to start how.
+- This project is based on the code of "React & Node Tutorial - Full ECommerce in 9 Hours [2020] 
+  from https://github.com/basir/amazona
 - Contact Instructor: [Basir](mailto:basir.jafarzadeh@gmail.com)
