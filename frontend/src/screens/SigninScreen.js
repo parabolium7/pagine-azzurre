@@ -56,7 +56,7 @@ export default function SigninScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primary blu" type="submit">
             Accedi
           </button>
         </div>

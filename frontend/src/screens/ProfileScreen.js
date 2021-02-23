@@ -77,7 +77,7 @@ export default function ProfileScreen() {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div className="row center">
-          <h1>User Profile</h1>
+          <h1>Profilo Utente</h1>
         </div>
         {loading ? (
           <LoadingBox/>
@@ -220,7 +220,7 @@ export default function ProfileScreen() {
             )}
             <div>
               <label />
-              <button className="primary" type="submit">
+              <button className="primary blu" type="submit">
                 Aggiorna
               </button>
             </div>

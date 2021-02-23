@@ -129,6 +129,9 @@ button:hover {
 button.primary {
   background-color: #f0c040;
 }
+button.primary.blu {
+  background-color: #6ccef5;
+}
 button.block {
   width: 100%;
 }

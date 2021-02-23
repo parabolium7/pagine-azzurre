@@ -155,7 +155,7 @@ export default function RegisterScreen(props) {
         <div><p className="asterisk">(*) Campi Obbligatori</p></div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primary blu" type="submit">
             Registrati
           </button>
         </div>
