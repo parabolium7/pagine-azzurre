@@ -57,6 +57,7 @@ userRouter.post(
       city: req.body.city,
       zipCode: req.body.zipCode,
       phone: req.body.phone,
+      referer: req.body.referer,
       password: bcrypt.hashSync(req.body.password, 8),
     });
     const createdUser = await user.save();
@@ -68,6 +69,7 @@ userRouter.post(
       city: createdUser.city,
       zipCode: createdUser.zipCode,
       phone: createdUser.phone,
+      referer: createdUser.referer,
       isAdmin: createdUser.isAdmin,
       isSeller: user.isSeller,
       token: generateToken(createdUser),
@@ -96,6 +98,7 @@ userRouter.put(
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
       user.phone = req.body.phone || user.phone;
+      user.referer = req.body.referer || user.referer;
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
         user.seller.logo = req.body.sellerLogo || user.seller.logo;
@@ -106,11 +109,13 @@ userRouter.put(
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
       const updatedUser = await user.save();
+      console.log(updatedUser)
       res.send({
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
         phone: updatedUser.phone,
+        referer: updatedUser.referer,
         isAdmin: updatedUser.isAdmin,
         isSeller: user.isSeller,
         token: generateToken(updatedUser),

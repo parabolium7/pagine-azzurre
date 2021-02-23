@@ -13,6 +13,7 @@ export default function RegisterScreen(props) {
   const [city, setCity] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [phone, setPhone] = useState('');
+  const [referer, setReferer] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -35,7 +36,7 @@ export default function RegisterScreen(props) {
     else if (password !== confirmPassword) {
       alert('Le Password non coincidono');
     } else {
-      dispatch(register(name, surname, email, city, zipCode, phone, password));
+      dispatch(register(name, surname, email, city, zipCode, phone, referer, password));
     }
   };
   useEffect(() => {
@@ -119,6 +120,17 @@ export default function RegisterScreen(props) {
             placeholder="Inserisci il numero di cellulare (opzionale)"
             onChange={(e) => setPhone(e.target.value)}
           ></input>
+        </div>
+        <div>
+          <label htmlFor="referer">
+            Participi in una de queste associazioni?
+            <select onChange={(e) => setReferer(e.target.value)}>
+              <option value="Associazione A">Associazione A</option>
+              <option value="Associazione B">Associazione B</option>
+              <option value="Associazione C">Associazione C</option>
+              <option value="Associazione D">Associazione D</option>
+            </select>
+          </label>
         </div>
         <div>
           <label htmlFor="password">Password *</label>

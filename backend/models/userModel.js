@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     zipCode: { type: Number, required: true },
     phone: { type: Number, required: false },
     password: { type: String, required: true },
+    referer: {type: String , required: false },
     isAdmin: { type: Boolean, default: false, required: true },
     isSeller: { type: Boolean, default: false, required: true },
     seller: {

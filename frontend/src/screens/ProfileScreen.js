@@ -13,6 +13,7 @@ export default function ProfileScreen() {
   const [zipCode, setZipCode] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [referer, setReferer] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [sellerName, setSellerName] = useState('');
   const [sellerLogo, setSellerLogo] = useState('');
@@ -40,6 +41,7 @@ export default function ProfileScreen() {
       setCity(user.city);
       setZipCode(user.zipCode);
       setPhone(user.phone);
+      setReferer(user.referer);
       if (user.seller) {
         setSellerName(user.seller.name);
         setSellerLogo(user.seller.logo);
@@ -62,6 +64,7 @@ export default function ProfileScreen() {
           city,
           zipCode,
           phone,
+          referer,
           password,
           sellerName,
           sellerLogo,
@@ -150,6 +153,17 @@ export default function ProfileScreen() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               ></input>
+            </div>
+            <div>
+              <label>
+                Participi in una de queste associazioni?
+                <select value={referer} onChange={(e) => setReferer(e.target.value)}>
+                  <option value="Associazione A">Associazione A</option>
+                  <option value="Associazione B">Associazione B</option>
+                  <option value="Associazione C">Associazione C</option>
+                  <option value="Associazione D">Associazione D</option>
+                </select>
+              </label>
             </div>
             <div>
               <label htmlFor="password">Cambiare Password</label>
