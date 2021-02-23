@@ -22,7 +22,6 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import SellerRoute from './components/SellerRoute';
 import SellerScreen from './screens/SellerScreen';
-import ProductEditScreen from './screens/ProductEditScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
@@ -125,7 +124,7 @@ function App() {
                   <Link to="/profile">Profilo</Link>
                 </li>
                 <li>
-                  <Link to='/'>Crea annuncio</Link>
+                  <Link to='/product'>Crea annuncio</Link>
                 </li>
                 <li>
                   <Link to="/orderhistory">Istoriale</Link>
@@ -217,6 +216,7 @@ function App() {
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route path="/product/:id/edit" component={ProductEditScreen} exact></Route>
+          <Route path="/product/" component={ProductEditScreen}></Route>
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
