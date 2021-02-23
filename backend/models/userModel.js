@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     referer: {type: String , required: false },
     isAdmin: { type: Boolean, default: false, required: true },
-    isSeller: { type: Boolean, default: false, required: true },
+    isSeller: { type: Boolean, default: true, required: true },
     seller: {
       name: String,
       logo: String,
