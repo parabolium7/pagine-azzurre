@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
     referer: {type: String , required: false },
     isAdmin: { type: Boolean, default: false, required: true },
     isSeller: { type: Boolean, default: true, required: true },
+    activity: { type: Number, default: 0, require: false},
     seller: {
       name: String,
       logo: String,
