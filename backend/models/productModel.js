@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema(
     countInStock: { type: Number, required: true },
     rating: { type: Number, required: true },
     numReviews: { type: Number, required: true },
-    reviews: [reviewSchema],
+    allowComments: { type: Boolean, required: false, default: true}
   },
   {
     timestamps: true,
