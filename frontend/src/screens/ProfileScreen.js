@@ -8,6 +8,8 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 export default function ProfileScreen() {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
+  const [username, setUsername] = useState('');
+  const [birthday, setBirthday] = useState('');
   const [email, setEmail] = useState('');
   const [city, setCity] = useState('');
   const [zipCode, setZipCode] = useState('');
@@ -37,6 +39,8 @@ export default function ProfileScreen() {
     } else {
       setName(user.name);
       setSurname(user.surname);
+      setUsername(user.username);
+      setBirthday(user.birthday);
       setEmail(user.email);
       setCity(user.city);
       setZipCode(user.zipCode);
@@ -60,6 +64,8 @@ export default function ProfileScreen() {
           userId: user._id,
           name,
           surname,
+          username,
+          birthday,
           email,
           city,
           zipCode,
@@ -77,7 +83,7 @@ export default function ProfileScreen() {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div className="row center">
-          <h1>Profilo Utente</h1>
+          <h1>Profilo Utente { username }</h1>
         </div>
         {loading ? (
           <LoadingBox/>
@@ -91,7 +97,7 @@ export default function ProfileScreen() {
             )}
             {successUpdate && (
               <MessageBox variant="success">
-                Profile Updated Successfully
+                Profilo aggiornato con successo
               </MessageBox>
             )}
             <div>
@@ -183,6 +189,7 @@ export default function ProfileScreen() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
+            <div>Data di Nascita: { birthday }</div>
             {user.isSeller && (
               <>
                 <h2>Seller</h2>
