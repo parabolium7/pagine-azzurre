@@ -4,10 +4,20 @@ import { Link } from 'react-router-dom';
 import { register } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import { DateUtils } from 'react-day-picker';
+import dateFnsFormat from 'date-fns/format';
+import dateFnsParse from 'date-fns/parse';
+import 'react-day-picker/lib/style.css';
 
 export default function RegisterScreen(props) {
+  const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [birthplace, setBirthplace] = useState('');
+  const [gender, setGender] = useState('');
+  const [cf, setCf] = useState('');
   const [email, setEmail] = useState('');
   const [confirmEmail, setConfirmEmail] = useState('');
   const [city, setCity] = useState('');
@@ -17,12 +27,36 @@ export default function RegisterScreen(props) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const CalFORMAT = 'dd/MM/yyyy';
+
+  function parseDate(str, format, locale) {
+    const parsed = dateFnsParse(str, format, new Date(), { locale });
+    if (DateUtils.isDate(parsed)) {
+      return parsed;
+    }
+    return undefined;
+  }
+
+  function formatDate(date, format, locale) {
+    return dateFnsFormat(date, format, { locale });
+  }
+
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/';
 
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
+
+  const GetFormattedDate = (birthday) => {
+    console.log("Get Birthday", birthday)
+    if (typeof birthday === 'object') {
+      var month = birthday.getMonth()
+      var day = birthday.getDate()
+      var year = birthday.getFullYear()
+      setBirthday(`${day}/${month}/${year}`)
+    }
+  }
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
@@ -36,7 +70,8 @@ export default function RegisterScreen(props) {
     else if (password !== confirmPassword) {
       alert('Le Password non coincidono');
     } else {
-      dispatch(register(name, surname, email, city, zipCode, phone, referer, password));
+      let formattedBirthday = GetFormattedDate(birthday)
+      dispatch(register(username, name, surname, birthday, birthplace, gender, cf, email, city, zipCode, phone, referer, password));
     }
   };
   useEffect(() => {
@@ -48,10 +83,20 @@ export default function RegisterScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1 className="row center">Crea il tuo Account</h1>
+          <h1 className="row center">Crea il tuo Account </h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <div>
+          <label htmlFor="username">Username *</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Inserisci il username"
+            required
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
+        </div>
         <div>
           <label htmlFor="name">Nome *</label>
           <input
@@ -70,6 +115,47 @@ export default function RegisterScreen(props) {
             placeholder="Inserisci il cognome"
             required
             onChange={(e) => setSurname(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="gender">Genere *</label>
+            <label htmlFor="male">
+              <input type="radio" id="male" name="gender" value="M" onChange={(e) => setGender(e.target.value)}/>
+              M
+            </label>
+            <label htmlFor="female">
+              <input type="radio" id="female" name="gender" value="F" onChange={(e) => setGender(e.target.value)}/>
+              F
+            </label>
+        </div>
+        <div>
+          <label htmlFor="birthday">Data di Nascita *</label>
+          <DayPickerInput
+          parseDate={parseDate}
+          format={CalFORMAT}
+          formatDate={formatDate}
+          placeholder={`${dateFnsFormat(new Date(), CalFORMAT)}`}
+          onDayChange={(e)=>GetFormattedDate(e)}
+          />
+        </div>
+        <div>
+          <label htmlFor="birthplace">Comune di Nascita *</label>
+          <input
+            type="text"
+            id="birthplace"
+            placeholder="Seleziona comune di nascita"
+            required
+            onChange={(e) => setBirthplace(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="cf">Codice Fiscale *</label>
+          <input
+            type="text"
+            id="cf"
+            placeholder="Inserisci il Codice Fiscale"
+            required
+            onChange={(e) => setCf(e.target.value)}
           ></input>
         </div>
         <div>
@@ -155,7 +241,7 @@ export default function RegisterScreen(props) {
         <div><p className="asterisk">(*) Campi Obbligatori</p></div>
         <div>
           <label />
-          <button className="primary blu" type="submit">
+          <button className="primary blu big" type="submit">
             Registrati
           </button>
         </div>

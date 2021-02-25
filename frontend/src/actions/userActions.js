@@ -26,12 +26,17 @@ import {
   USER_TOPSELLERS_LIST_FAIL,
 } from '../constants/userConstants';
 
-export const register = (name, surname, email, city, zipCode, phone, referer, password) => async (dispatch) => {
+export const register = (username, name, surname, birthday, birthplace, gender, cf, email, city, zipCode, phone, referer, password) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post('/api/users/register', {
+      username,
       name,
       surname,
+      birthday,
+      birthplace,
+      gender,
+      cf,
       email,
       city,
       zipCode,
@@ -43,7 +48,6 @@ export const register = (name, surname, email, city, zipCode, phone, referer, pa
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
-    console.log("Error: My fault")
     dispatch({
       type: USER_REGISTER_FAIL,
       payload:

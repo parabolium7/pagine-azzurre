@@ -51,8 +51,13 @@ userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
     const user = new User({
+      username: req.body.username,
       name: req.body.name,
       surname: req.body.surname,
+      birthday: req.body.birthday,
+      birthplace: req.body.birthplace,
+      gender: req.body.gender,
+      cf: req.body.cf,
       email: req.body.email,
       city: req.body.city,
       zipCode: req.body.zipCode,
