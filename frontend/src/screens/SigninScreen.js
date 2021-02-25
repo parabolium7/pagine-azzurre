@@ -35,7 +35,7 @@ export default function SigninScreen(props) {
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Indirizzo email </label>
           <input
             type="email"
             id="email"
@@ -56,7 +56,7 @@ export default function SigninScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary blu" type="submit">
+          <button className="primary blu big" type="submit">
             Accedi
           </button>
         </div>
@@ -66,6 +66,12 @@ export default function SigninScreen(props) {
             Nuovo usuario?{' '}
             <Link to={`/register?redirect=${redirect}`}>
               Registrati
+            </Link>
+          </div>
+          <div className="row center little-line">
+            Hai dimenticato la pasword?
+            <Link to={`/passwordRecovery`}>
+              Recupera password
             </Link>
           </div>
         </div>

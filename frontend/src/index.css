@@ -132,12 +132,25 @@ button.primary {
 button.primary.blu {
   background-color: #6ccef5;
 }
+button.primary.blu.big {
+  font-size: 1.65rem;
+}
 button.block {
   width: 100%;
 }
 button.small {
   font-size: 1.2rem;
 }
+
+.little-line {
+  font-size: 1.16rem;
+  margin-top: 3.8rem;
+}
+
+.little-line a{
+  padding-left: 1.4rem;
+}
+
 /* Header */
 header a {
   color: #ffffff;
@@ -310,7 +323,7 @@ img.large {
   margin: 1rem;
 }
 .form label {
-  margin: 1rem 0;
+  margin: 0.8rem 0;
 }
 /* Dropdown */
 .dropdown {

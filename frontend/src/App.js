@@ -20,6 +20,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import PasswordRecovery from './screens/PasswordRecoveryScreen';
 import SellerRoute from './components/SellerRoute';
 import SellerScreen from './screens/SellerScreen';
 import SearchBox from './components/SearchBox';
@@ -228,6 +229,7 @@ function App() {
           <Route path="/search/category/:category" component={SearchScreen} exact></Route>
           <Route path="/search/category/:category/name/:name" component={SearchScreen} exact></Route>
           <Route path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber" component={SearchScreen} exact></Route>
+          <Route path="/recovery" component={PasswordRecovery} exact></Route>
           <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
           <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
           <AdminRoute path="/productlist" component={ProductListScreen} exact></AdminRoute>
