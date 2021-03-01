@@ -70,7 +70,7 @@ export default function SigninScreen(props) {
           </div>
           <div className="row center little-line">
             Hai dimenticato la pasword?
-            <Link to={`/passwordRecovery`}>
+            <Link to={`/password-recovery`}>
               Recupera password
             </Link>
           </div>

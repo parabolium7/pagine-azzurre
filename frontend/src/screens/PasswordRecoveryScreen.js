@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useEffect, useState }  from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signin } from '../actions/userActions'
+import { userPasswordRecovery } from '../actions/userActions'
+import LoadingBox from '../components/LoadingBox'
+import MessageBox from '../components/MessageBox'
 
-function PasswordRecoveryScreen(props) {
-  const [email, setEmail] = useState('')
-
+export default function PasswordRecoveryScreen(props) {
+  const [emailInput, setEmail] = useState('')
+  
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/'
   
-  const userSignin = useSelector((state) => state.userSignin)
-  const { userInfo } = userSignin
-
+  const emailStatus = useSelector((state) => state.userPasswordRecovery)
+  const { email, loading, error} = emailStatus
   const dispatch = useDispatch()
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch({email})
+    dispatch(userPasswordRecovery(emailInput))
   };
   useEffect(() => {
-    if (userInfo) {
-      props.history.push('/top-sellers')
-    }
-  }, [props.history, redirect, userInfo])
+    props.history.push('/password-recovery')
+  },  [props.history, redirect, emailInput, loading ])
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
@@ -38,6 +36,12 @@ function PasswordRecoveryScreen(props) {
           ></input>
         </div>
         <div>
+          {loading?<LoadingBox></LoadingBox>:email && email !==''?
+          <div className="success row center">'Check your email to confirm a reset of Password'</div>:
+          <div></div>}
+          {error && <MessageBox variant="danger">{'Email no registered yet. Don\'t you want to singup?'}</MessageBox>}
+        </div>
+        <div>
           <label />
           <button className="primary blu big" type="submit">
             Ricupera Password
@@ -50,5 +54,3 @@ function PasswordRecoveryScreen(props) {
     </div>
   )
 }
-
-export default withRouter(PasswordRecoveryScreen);

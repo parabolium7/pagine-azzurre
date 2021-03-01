@@ -24,6 +24,9 @@ import {
   USER_TOPSELLERS_LIST_REQUEST,
   USER_TOPSELLERS_LIST_SUCCESS,
   USER_TOPSELLERS_LIST_FAIL,
+  USER_PASSWORDRECOVERY_SUCCESS,
+  USER_PASSWORDRECOVERY_REQUEST,
+  USER_PASSWORDRECOVERY_FAIL,
 } from '../constants/userConstants';
 
 export const register = (username, name, surname, birthday, birthplace, gender, cf, email, city, zipCode, phone, referer, password) => async (dispatch) => {
@@ -189,3 +192,36 @@ export const listTopSellers = () => async (dispatch) => {
     dispatch({ type: USER_TOPSELLERS_LIST_FAIL, payload: message });
   }
 };
+
+export const userPasswordRecovery = (email) => async (dispatch) => {
+  // TODO Email is empty why?
+  dispatch({ type: USER_PASSWORDRECOVERY_REQUEST, payload: email });
+  try {
+    const { data } = await Axios.post('/api/users/password-recovery', { email })
+    dispatch({ type: USER_PASSWORDRECOVERY_SUCCESS, payload: { data }})
+  } catch(error) {
+    const message =
+    error.response && error.response.data.messagew
+      ? error.response.data.message
+      : error.message;
+    dispatch({ type: USER_PASSWORDRECOVERY_FAIL, payload: message });
+  }
+}
+
+// export const signin = (email, password) => async (dispatch) => {
+//   console.log("From Action", email, password)
+//   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
+//   try {
+//     const { data } = await Axios.post('/api/users/signin', { email, password });
+//     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+//     localStorage.setItem('userInfo', JSON.stringify(data));
+//   } catch (error) {
+//     dispatch({
+//       type: USER_SIGNIN_FAIL,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };

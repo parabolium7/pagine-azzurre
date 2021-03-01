@@ -29,15 +29,18 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_RESET,
   USER_UPDATE_SUCCESS,
+  USER_PASSWORDRECOVERY_REQUEST,
+  USER_PASSWORDRECOVERY_SUCCESS,
+  USER_PASSWORDRECOVERY_FAIL,  
 } from '../constants/userConstants'
 
-export const userRegisterReducer = (state = {}, action) => {
+export const userPasswordRecoveryReducer = ( state = { email: '', loading: false }, action ) => {
   switch (action.type) {
-    case USER_REGISTER_REQUEST:
-      return { loading: true }
-    case USER_REGISTER_SUCCESS:
-      return { loading: false, userInfo: action.payload }
-    case USER_REGISTER_FAIL:
+    case USER_PASSWORDRECOVERY_REQUEST:
+      return { loading: true, email: action.payload }
+    case USER_PASSWORDRECOVERY_SUCCESS:
+      return { loading: false, email: action.payload }
+    case USER_PASSWORDRECOVERY_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
@@ -54,6 +57,19 @@ export const userSigninReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
     case USER_SIGNOUT:
       return {}
+    default:
+      return state
+  }
+}
+
+export const userRegisterReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_REGISTER_REQUEST:
+      return { loading: true }
+    case USER_REGISTER_SUCCESS:
+      return { loading: false, userInfo: action.payload }
+    case USER_REGISTER_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

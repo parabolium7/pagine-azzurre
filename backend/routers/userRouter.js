@@ -93,6 +93,7 @@ userRouter.get(
     }
   })
 );
+
 userRouter.put(
   '/profile',
   isAuth,
@@ -169,12 +170,28 @@ userRouter.put(
       user.email = req.body.email || user.email;
       user.isSeller = Boolean(req.body.isSeller);
       user.isAdmin = Boolean(req.body.isAdmin);
+      // TODO: Enable Admin
       // user.isAdmin = req.body.isAdmin || user.isAdmin;
       const updatedUser = await user.save();
       res.send({ message: 'User Updated', user: updatedUser });
     } else {
       res.status(404).send({ message: 'User Not Found' });
     }
+  })
+);
+
+userRouter.post(
+  '/password-recovery',
+  expressAsyncHandler(async (req, res) => {
+    // TODO use to validate also CF const user = await User.findOne({ cf: "LGMGMNL0176Z614M" });
+    const data = await User.find({ email: req.body.email });
+    if (data.length > 0 && data[0].email === req.body.email) {
+      res.send({email: true, loading: false })
+      return
+    } else {
+      res.status(404).send({ message: 'Email Not Found' })
+      return
+    } 
   })
 );
 

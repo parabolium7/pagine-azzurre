@@ -229,7 +229,7 @@ function App() {
           <Route path="/search/category/:category" component={SearchScreen} exact></Route>
           <Route path="/search/category/:category/name/:name" component={SearchScreen} exact></Route>
           <Route path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber" component={SearchScreen} exact></Route>
-          <Route path="/recovery" component={PasswordRecovery} exact></Route>
+          <Route path="/password-recovery" component={PasswordRecovery} exact></Route>
           <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
           <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
           <AdminRoute path="/productlist" component={ProductListScreen} exact></AdminRoute>

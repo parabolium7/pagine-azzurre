@@ -54,6 +54,7 @@ export default function RegisterScreen(props) {
       var month = birthday.getMonth()
       var day = birthday.getDate()
       var year = birthday.getFullYear()
+      console.log("Birthday", day, month, year)
       setBirthday(`${day}/${month}/${year}`)
     }
   }
@@ -70,7 +71,6 @@ export default function RegisterScreen(props) {
     else if (password !== confirmPassword) {
       alert('Le Password non coincidono');
     } else {
-      let formattedBirthday = GetFormattedDate(birthday)
       dispatch(register(username, name, surname, birthday, birthplace, gender, cf, email, city, zipCode, phone, referer, password));
     }
   };
