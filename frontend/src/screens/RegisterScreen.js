@@ -52,7 +52,7 @@ export default function RegisterScreen(props) {
     console.log("Get Birthday", birthday)
     if (typeof birthday === 'object') {
       var month = birthday.getMonth()
-      var day = birthday.getDate()
+      var day = birthday.getDate() + 1
       var year = birthday.getFullYear()
       console.log("Birthday", day, month, year)
       setBirthday(`${day}/${month}/${year}`)
