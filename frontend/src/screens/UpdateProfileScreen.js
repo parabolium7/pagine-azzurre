@@ -49,7 +49,6 @@ export default function RegisterScreen(props) {
   const { userInfo, loading, error } = userRegister;
 
   const GetFormattedDate = (birthday) => {
-    console.log("Get Birthday", birthday)
     if (typeof birthday === 'object') {
       var month = birthday.getMonth()
       var day = birthday.getDate() + 1

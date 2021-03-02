@@ -29,22 +29,12 @@ import {
   USER_PASSWORDRECOVERY_FAIL,
 } from '../constants/userConstants';
 
-export const register = (username, name, surname, birthday, birthplace, gender, cf, email, city, zipCode, phone, referer, password) => async (dispatch) => {
+export const register = (username, email, password) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post('/api/users/register', {
       username,
-      name,
-      surname,
-      birthday,
-      birthplace,
-      gender,
-      cf,
       email,
-      city,
-      zipCode,
-      phone,
-      referer,
       password,
     });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
