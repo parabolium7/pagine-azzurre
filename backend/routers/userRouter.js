@@ -3,7 +3,14 @@ import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
+import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
+import sgMail from "@sendgrid/mail"
+import { msgRegistration, msgPasswordRecovery } from '../emailTemplates/mailMsg.js'
+
+dotenv.config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+console.log("sg:", sgMail)
 
 const userRouter = express.Router();
 
@@ -66,6 +73,15 @@ userRouter.post(
       password: bcrypt.hashSync(req.body.password, 8),
     });
     const createdUser = await user.save();
+    let recipient = msgRegistration(createdUser.email)
+    sgMail.send(recipient)
+      .then(() => {
+        console.log('Email sent')
+      })
+      .catch((error) => {
+        console.error(error)
+      }
+    )
     res.send({
       _id: createdUser._id,
       name: createdUser.name,
@@ -185,12 +201,20 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     // TODO use to validate also CF const user = await User.findOne({ cf: "LGMGMNL0176Z614M" });
     const data = await User.find({ email: req.body.email });
-    if (data.length > 0 && data[0].email === req.body.email) {
+    console.log("Password Recovery", data[0].email === req.body.email)
+    if (data[0].email === req.body.email) {
+      let recipient = msgPasswordRecovery(data[0].email)
       res.send({email: true, loading: false })
+      sgMail.send(recipient)
+        .then(() => {
+          console.log('Email sent')
+        })
+        .catch((error) => {
+          console.error(error)
+        })
       return
     } else {
       res.status(404).send({ message: 'Email Not Found' })
-      return
     } 
   })
 );

@@ -39,7 +39,7 @@ export default function PasswordRecoveryScreen(props) {
           {loading?<LoadingBox></LoadingBox>:email && email !==''?
           <div className="success row center">'Check your email to confirm a reset of Password'</div>:
           <div></div>}
-          {error && <MessageBox variant="danger">{'Email no registered yet. Don\'t you want to singup?'}</MessageBox>}
+          {error && <MessageBox variant="danger">{'L\'email non risulta registrato. Vorresti registrarti addesso?'}</MessageBox>}
         </div>
         <div>
           <label />
