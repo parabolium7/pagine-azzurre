@@ -29,6 +29,7 @@ import {
   userTopSellerListReducer,
   userUpdateProfileReducer,
   userUpdateReducer,
+  userPasswordRecoveryReducer,
 } from './reducers/userReducers';
 
 const initialState = {
@@ -45,7 +46,7 @@ const initialState = {
       ? JSON.parse(localStorage.getItem('shippingAddress'))
       : {},
     paymentMethod: 'PayPal',
-  },
+  }
 };
 const reducer = combineReducers({
   productList: productListReducer,
@@ -72,6 +73,7 @@ const reducer = combineReducers({
   productCategoryList: productCategoryListReducer,
   productReviewCreate: productReviewCreateReducer,
   userAddressMap: userAddressMapReducer,
+  userPasswordRecovery: userPasswordRecoveryReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

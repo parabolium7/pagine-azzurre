@@ -100,7 +100,7 @@ export default function ProductEditScreen(props) {
         ) : (
           <>
             <div>
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Nome</label>
               <input
                 id="name"
                 type="text"
@@ -110,7 +110,7 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="price">Price</label>
+              <label htmlFor="price">Prezzo</label>
               <input
                 id="price"
                 type="text"
@@ -143,7 +143,7 @@ export default function ProductEditScreen(props) {
               )}
             </div>
             <div>
-              <label htmlFor="category">Category</label>
+              <label htmlFor="category">Categoria</label>
               <input
                 id="category"
                 type="text"
@@ -185,8 +185,8 @@ export default function ProductEditScreen(props) {
             </div>
             <div>
               <label></label>
-              <button className="primary" type="submit">
-                Update
+              <button className="primary blu" type="submit">
+                Aggiorna
               </button>
             </div>
           </>

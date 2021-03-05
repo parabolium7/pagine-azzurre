@@ -6,12 +6,9 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function RegisterScreen(props) {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [city, setCity] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [phone, setPhone] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -21,14 +18,26 @@ export default function RegisterScreen(props) {
 
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
-
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Password and confirm password are not match');
+    if (password !== confirmPassword && email !== confirmEmail) {
+      alert('- Le Password non coincidono\n- Controlla la esatteza della email.');
+    }
+    else if (email !== confirmEmail) {
+      alert('Controlla la esatteza della email.');
+    }
+    else if (password !== confirmPassword) {
+      alert('Le Password non coincidono');
     } else {
-      dispatch(register(name, surname, email, city, zipCode, phone, password));
+      /* set Phone and CF same as email because both required as true
+         but register process don't use this values anymore
+         It should be register(username, email, password, phone, cf)
+      */
+      let cf = ''
+      email.split('').forEach( l => cf += l.charCodeAt(0))
+      console.log("cf", cf)
+      dispatch(register(username, email, password, email, cf));
     }
   };
   useEffect(() => {
@@ -40,94 +49,65 @@ export default function RegisterScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Crea il tuo Account</h1>
+          <h1 className="row center">Crea il tuo Account </h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="name">Nome</label>
+          <label htmlFor="username">Username *</label>
           <input
             type="text"
-            id="name"
-            placeholder="Inserisci il nome"
+            id="username"
+            placeholder="Inserisci il username"
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="surname">Cognome</label>
-          <input
-            type="text"
-            id="surname"
-            placeholder="Inserisci il cognome"
-            required
-            onChange={(e) => setSurname(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="email">Indirizzo Email</label>
+          <label htmlFor="email">Indirizzo Email *</label>
           <input
             type="email"
             id="email"
-            placeholder="Inserisci il tuo email"
+            placeholder="Inserisci email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="city">Città</label>
+          <label htmlFor="email">Conferma Email *</label>
           <input
-            type="text"
-            id="city"
-            placeholder="Inserisci la tua cità di residenza"
+            type="email"
+            id="confirmEmail"
+            placeholder="Conferma email"
             required
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => setConfirmEmail(e.target.value)}
           ></input>
         </div>
         <div>
-          {/* TODO: levare le freccete impostate pre defaultq */}
-          <label htmlFor="zipCode">CAP</label>
-          <input
-            type="number"
-            id="zipCode"
-            placeholder="Inserisci il cap della tua cità"
-            required
-            onChange={(e) => setZipCode(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="phone">Numero di telefono</label>
-          <input
-            type="number"
-            id="phone"
-            placeholder="Inserisci il tuo numero di cellulare (opzionale)"
-            onChange={(e) => setPhone(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password *</label>
           <input
             type="password"
-            id="password"
+            id="ConfirmPassword"
             placeholder="Inserisci password"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="confirmPassword">Conferma Password</label>
+          <label htmlFor="confirmPassword">Conferma Password *</label>
           <input
             type="password"
             id="confirmPassword"
-            placeholder="Conferma Password"
+            placeholder="Conferma password"
             required
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
         </div>
+        <div><p className="asterisk">(*) Campi Obbligatori</p></div>
         <div>
           <label />
-          <button className="primary" type="submit">
-            Registro
+          <button className="primary blu big" type="submit">
+            Registrati
           </button>
         </div>
         <div>

@@ -196,7 +196,7 @@ export default function ProductScreen(props) {
                     </div>
                     <div>
                       <label />
-                      <button className="primary" type="submit">
+                      <button className="primary blu" type="submit">
                         Submit
                       </button>
                     </div>

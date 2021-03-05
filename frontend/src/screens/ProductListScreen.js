@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {
   createProduct,
-  deleteProduct,
+  // deleteProduct,
   listProducts,
 } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
@@ -59,20 +59,20 @@ export default function ProductListScreen(props) {
     pageNumber,
   ]);
 
-  const deleteHandler = (product) => {
-    if (window.confirm('Are you sure to delete?')) {
-      dispatch(deleteProduct(product._id));
-    }
-  };
+  // const deleteHandler = (product) => {
+  //   if (window.confirm('Are you sure to delete?')) {
+  //     dispatch(deleteProduct(product._id));
+  //   }
+  // };
   const createHandler = () => {
     dispatch(createProduct());
   };
   return (
     <div>
       <div className="row">
-        <h1>Products</h1>
-        <button type="button" className="primary" onClick={createHandler}>
-          Create Product
+        <h1>Crea annunzio</h1>
+        <button type="button" className="primary blu" onClick={createHandler}>
+          Crea 
         </button>
       </div>
 
@@ -119,7 +119,7 @@ export default function ProductListScreen(props) {
                     <button
                       type="button"
                       className="small"
-                      onClick={() => deleteHandler(product)}
+                      // onClick={() => deleteHandler(product)}
                     >
                       Delete
                     </button>
