@@ -147,8 +147,44 @@ button.small {
   margin-top: 3.8rem;
 }
 
+.little-sisterline {
+  font-size: 1.16rem;
+  margin-top: 0.1rem;
+}
+
 .little-line a{
   padding-left: 1.4rem;
+}
+
+/* .demoWrapper {
+  padding: 10px;
+  background: white;
+  box-sizing: border-box;
+  resize: horizontal;
+  border: 1px dashed;
+  overflow: auto;
+  max-width: 100%;
+  height: calc(100vh - 16px);
+} */
+
+.issue {
+  font-family: 'Courier New', Courier, monospace;
+  color: #1b6d1b;
+  font-size: 1rem;
+  background-color: #fad504;
+  width: 20vw;
+  padding-top: 0.4rem;
+  padding-right: 0.8rem;
+  padding-bottom: 0.4rem;
+  padding-left: 0.8rem;
+  border-radius: 3px 10px 4px 3px;
+  transition: 0.3s;
+}
+
+.issue:hover {
+  background-color: #016401;
+  border-radius: 3px 4px 10px 3px;
+  color: #fdfdfd;
 }
 
 /* Header */

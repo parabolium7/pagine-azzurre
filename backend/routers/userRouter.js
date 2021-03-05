@@ -10,7 +10,6 @@ import { msgRegistration, msgPasswordRecovery } from '../emailTemplates/mailMsg.
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-console.log("sg:", sgMail)
 
 const userRouter = express.Router();
 
@@ -38,13 +37,25 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
+      console.log(user)
       if (bcrypt.compareSync(req.body.password, user.password)) {
         res.send({
           _id: user._id,
+          username: user.username,
           name: user.name,
+          surname: user.surname,
+          birthday: user.birthplace,
+          birthplace: user.birthplace,
+          gender: user.gender,
+          cf: user.cf,
+          city: user.city,
+          zipCode: user.zipCode,
+          phone: user.phone,
           email: user.email,
+          referer: user.referer,
           isAdmin: user.isAdmin,
           isSeller: user.isSeller,
+          test: "test Router!!!",
           token: generateToken(user),
         });
         return;
@@ -57,19 +68,12 @@ userRouter.post(
 userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
+    console.log(req.body)
     const user = new User({
       username: req.body.username,
-      name: req.body.name,
-      surname: req.body.surname,
-      birthday: req.body.birthday,
-      birthplace: req.body.birthplace,
-      gender: req.body.gender,
       cf: req.body.cf,
       email: req.body.email,
-      city: req.body.city,
-      zipCode: req.body.zipCode,
       phone: req.body.phone,
-      referer: req.body.referer,
       password: bcrypt.hashSync(req.body.password, 8),
     });
     const createdUser = await user.save();
@@ -84,15 +88,10 @@ userRouter.post(
     )
     res.send({
       _id: createdUser._id,
-      name: createdUser.name,
-      surname: createdUser.surname,
+      username: createdUser.username,
       email: createdUser.email,
-      city: createdUser.city,
-      zipCode: createdUser.zipCode,
-      phone: createdUser.phone,
-      referer: createdUser.referer,
-      isAdmin: createdUser.isAdmin,
-      isSeller: user.isSeller,
+      phone: createdUser.email,
+      cf: createdUser.email,
       token: generateToken(createdUser),
     });
   })
@@ -115,10 +114,69 @@ userRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    console.log("U_Router", user)
+    console.log("Router_Get", user.phone)
+    console.log("Router_Get", req.body.phone)
+
     if (user) {
       user.name = req.body.name || user.name;
+      user.surname = req.body.surname || user.surname;
+      user.username = req.body.username || user.username;
+      user.gender = req.body.gender || user.gender;
+      user.birthplace = req.body.birthplace || user.birthplace;
+      user.birthday = req.body.birthday || user.birthday;
+      user.cf = req.body.cf || user.cf;
       user.email = req.body.email || user.email;
+      user.city = req.body.city || user.city;
+      user.zipCode = req.body.zipCode || user.zipCode;
+      user.phone = req.body.phone || user.phone;
+      user.referer = req.body.referer || user.referer;
+      if (user.isSeller) {
+        user.seller.name = req.body.sellerName || user.seller.name;
+        user.seller.logo = req.body.sellerLogo || user.seller.logo;
+        user.seller.description =
+          req.body.sellerDescription || user.seller.description;
+      }
+      if (req.body.password) {
+        user.password = bcrypt.hashSync(req.body.password, 8);
+      }
+      const updatedUser = await user.save();
+      console.log("userProfile", updatedUser)
+      res.send({
+        _id: updatedUser._id,
+        username: updatedUser.username,
+        name: updatedUser.name,
+        surname: updatedUser.surname,
+        cf: updatedUser.cf,
+        birthday: user.birthday,
+        birthplace: updatedUser.birthplace,
+        city: updatedUser.city,
+        gender: updatedUser.gender,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+        referer: updatedUser.referer,
+        isAdmin: updatedUser.isAdmin,
+        isSeller: user.isSeller,
+        token: generateToken(updatedUser),
+      });
+    }
+  })
+);
+
+userRouter.get(
+  '/profile',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    console.log("UserRouter_Get", user)
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.surname = req.body.surmame || user.surname;
+      user.username = req.body.username || user.username;
+      user.gender = req.body.gender || user.gender;
+      user.cf = req.body.cf || user.cf;
+      user.email = req.body.email || user.email;
+      user.city = req.body.city || user.city;
+      user.zipCode = req.body.zipCode || user.zipCode;
       user.phone = req.body.phone || user.phone;
       user.referer = req.body.referer || user.referer;
       if (user.isSeller) {

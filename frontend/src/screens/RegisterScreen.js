@@ -9,7 +9,6 @@ export default function RegisterScreen(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [confirmEmail, setConfirmEmail] = useState('');
-  const [referer, setReferer] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -31,7 +30,14 @@ export default function RegisterScreen(props) {
     else if (password !== confirmPassword) {
       alert('Le Password non coincidono');
     } else {
-      dispatch(register(username, email, password));
+      /* set Phone and CF same as email because both required as true
+         but register process don't use this values anymore
+         It should be register(username, email, password, phone, cf)
+      */
+      let cf = ''
+      email.split('').forEach( l => cf += l.charCodeAt(0))
+      console.log("cf", cf)
+      dispatch(register(username, email, password, email, cf));
     }
   };
   useEffect(() => {

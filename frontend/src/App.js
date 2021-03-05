@@ -52,9 +52,12 @@ function App() {
     error: errorCategories,
     categories,
   } = productCategoryList;
+  
   useEffect(() => {
+    console.log("From App:", userInfo)
     dispatch(listProductCategories());
-  }, [dispatch]);
+  }, [dispatch, userInfo]);
+
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -118,7 +121,7 @@ function App() {
           {userInfo ? (
             <div className="dropdown last-element">
               <Link to="#">
-                {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
+                {userInfo.username} <i className="fa fa-caret-down"></i>{' '}
               </Link>
               <ul className="dropdown-content">
                 <li>

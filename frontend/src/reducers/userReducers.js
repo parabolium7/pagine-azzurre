@@ -52,6 +52,7 @@ export const userSigninReducer = (state = {}, action) => {
     case USER_SIGNIN_REQUEST:
       return { loading: true }
     case USER_SIGNIN_SUCCESS:
+      console.log("From Reducer", action.payload)
       return { loading: false, userInfo: action.payload }
     case USER_SIGNIN_FAIL:
       return { loading: false, error: action.payload }
@@ -80,6 +81,7 @@ export const userDetailsReducer = (state = { loading: true }, action) => {
     case USER_DETAILS_REQUEST:
       return { loading: true }
     case USER_DETAILS_SUCCESS:
+      console.log('From userDatailsreducer', action.payload)
       return { loading: false, user: action.payload }
     case USER_DETAILS_FAIL:
       return { loading: false, error: action.payload }

@@ -23,6 +23,7 @@ export default function SigninScreen(props) {
   };
   useEffect(() => {
     if (userInfo) {
+      console.log("fromSignInScreen", userInfo)
       props.history.push(redirect);
     }
   }, [props.history, redirect, userInfo]);
