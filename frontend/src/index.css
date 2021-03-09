@@ -120,6 +120,11 @@ button {
   background-color: #f8f8f8;
   cursor: pointer;
 }
+
+#referer {
+  width: 100%;
+}
+
 input:hover,
 select:hover,
 textarea:hover,
