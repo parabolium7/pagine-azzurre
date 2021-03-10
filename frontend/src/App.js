@@ -165,7 +165,7 @@ function App() {
                 <Link to="#admin">
                   Admin <i className="fa fa-caret-down"></i>
                 </Link>
-                <ul className="dropdown-content">
+                <ul className="dropdown-content admin">
                   <li>
                     <Link to="/dashboard">Pannello di controllo</Link>
                   </li>
