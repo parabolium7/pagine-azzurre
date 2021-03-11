@@ -12,7 +12,7 @@ export default function RegisterScreen(props) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isReferer, setIsReferer] = useState('NO')
-  const [referer, setReferer] = useState('NO')
+  const [referer, setReferer] = useState('')
 
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
@@ -51,10 +51,6 @@ export default function RegisterScreen(props) {
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1 className="row center">Crea il tuo Account </h1>
-        </div>
-        {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
-        <div>
           <label htmlFor="username">Username *</label>
           <input
             type="text"
@@ -147,9 +143,12 @@ export default function RegisterScreen(props) {
               )
           }
         </div>
-        <div><p className="asterisk">(*) Campi Obbligatori</p></div>
         <div>
-          <label />
+          {loading && <LoadingBox></LoadingBox>}
+          {error && <MessageBox variant="danger">{error}</MessageBox>}
+        </div>
+        <div>
+          <div><p className="asterisk">(*) Campi Obbligatori</p></div>
           <button className="primary blu big" type="submit">
             Registrati
           </button>
