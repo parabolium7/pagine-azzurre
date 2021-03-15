@@ -198,7 +198,7 @@ export default function ProfileScreen() {
                 id="birthplace"
                 placeholder="Aggiungere comune di nascita"
                 value={birthplace}
-                onChange={(e) => setBirthplace(e.target.value)}
+                onChange={(e) => setBirthplace(e.target.value.toUpperCase())}
               ></input>
             </div>
             <div>
@@ -236,7 +236,7 @@ export default function ProfileScreen() {
                 type="text"
                 placeholder="Aggiungere città di domicilio"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={(e) => setCity(e.target.value.toUpperCase())}
               ></input>
             </div>
             <div>
