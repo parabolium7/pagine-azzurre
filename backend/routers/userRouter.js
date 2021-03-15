@@ -74,6 +74,7 @@ userRouter.post(
       email: req.body.email,
       phone: req.body.phone,
       password: bcrypt.hashSync(req.body.password, 8),
+      referer: req.body.referer
     });
     const createdUser = await user.save();
     let recipient = msgRegistration(createdUser.email)
@@ -91,6 +92,7 @@ userRouter.post(
       email: createdUser.email,
       phone: createdUser.email,
       cf: createdUser.email,
+      referer: createdUser.referer,
       token: generateToken(createdUser),
     });
   })

@@ -64,10 +64,10 @@ export default function ProfileScreen() {
   } = userUpdateProfile;
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     console.log("User", user)
     if (!user) {
-      console.log("UserInfo", userInfo) // ************* here the main Bug
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(detailsUser(userInfo._id));
     } else {
@@ -91,6 +91,7 @@ export default function ProfileScreen() {
       }
     }
   }, [dispatch, userInfo._id, user, userInfo]);
+
   const submitHandler = (e) => {
     // dispatch update profile
     // e.preventDefault();
@@ -120,10 +121,13 @@ export default function ProfileScreen() {
       );
     }
   };
+
   const addETS = (e) => {
     e.preventDefault()
     setReferer(referer.concat(newReferer))
+    setNewReferer('')
   }
+
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
@@ -268,25 +272,25 @@ export default function ProfileScreen() {
             </div>
             <div>
               { referer.length === 0 ?
-              (<div className="row start">
-                <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
-                  <input
-                    type="radio"
-                    id="no_referer"
-                    name="isReferer"
-                    onClick={ (e) => setHasReferer(true)}
-                  />Si
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    id="yes_referer"
-                    name="isReferer"
-                    onClick={ (e) => setHasReferer(false)}
-                    defaultChecked
-                  />No
-                </label>
-              </div>)
+                (<div className="row start">
+                  <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
+                    <input
+                      type="radio"
+                      id="no_referer"
+                      name="isReferer"
+                      onClick={ (e) => setHasReferer(true)}
+                    />Si
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      id="yes_referer"
+                      name="isReferer"
+                      onClick={ (e) => setHasReferer(false)}
+                      defaultChecked
+                    />No
+                  </label>
+                </div>)
               :''
               }
               {
@@ -299,26 +303,25 @@ export default function ProfileScreen() {
                           type="text"
                           id="referer"
                           placeholder="Inserici l'ente del terzo settore al qualle partecipi"
-                          required
-                          value={newReferer}
+                          value={ newReferer }
                           // TODO: Autosearch here!
                           onChange={(e) => setNewReferer(e.target.value.toUpperCase())}
                         ></input>
                     </div>
                     {
-                      referer.length > 0 && (
                       <div className="row">
-                        <div>
                           <ol>
                            {
                              referer.map( (item, idx ) => {if(idx <= 2) return <li key={idx}>{item}</li>})
                            }       
                           </ol>
-                        </div>
-                        <button className="primary blu little" onClick={addETS}>
-                          aggiungi
-                        </button>
-                      </div>)
+                            {
+                              newReferer.length > 0 && referer.length < 3 &&
+                                (<button className="primary blu little" onClick={addETS}>
+                                  aggiungi
+                                </button>)
+                            }
+                      </div>
                     }
                     </div>
                   ):''

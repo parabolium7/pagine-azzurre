@@ -12,7 +12,8 @@ export default function RegisterScreen(props) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hasReferer, setHasReferer] = useState(false)
-  const [referer, setReferer] = useState('')
+  const [referer, setReferer] = useState([])
+  const [newReferer, setNewReferer] = useState('')
 
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
@@ -20,7 +21,9 @@ export default function RegisterScreen(props) {
 
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
+
   const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword && email !== confirmEmail) {
@@ -37,15 +40,23 @@ export default function RegisterScreen(props) {
          It should be register(username, email, password, phone, cf)
       */
       let cf = ''
-      email.split('').forEach( l => cf += l.charCodeAt(0)) //todo: 
-      dispatch(register(username, email, password, email, cf));
+      email.split('').forEach( l => cf += l.charCodeAt(0))
+      dispatch(register(username, email, password, email, cf, referer))
     }
   };
+
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
     }
   }, [props.history, redirect, userInfo]);
+
+  const addETS = (e) => {
+    e.preventDefault()
+    setReferer(referer.concat(newReferer))
+    setNewReferer('')
+  }
+
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
@@ -132,11 +143,24 @@ export default function RegisterScreen(props) {
                       type="text"
                       id="referer"
                       placeholder="Inserici l'ente del terzo settore al qualle partecipi"
-                      required
-                      value={referer}
-                      onChange={(e) => setReferer(e.target.value)}
+                      value={ newReferer }
+                      // TODO: Autosearch here too! 
+                      onChange={(e) => setNewReferer(e.target.value.toUpperCase())}
                     ></input>
                   </div>
+                    <div className="row">
+                        <ol>
+                          {
+                            referer.map( (item, idx ) => { if(idx <= 2) return <li key={idx}>{item}</li> })
+                          }       
+                        </ol>
+                          {
+                            newReferer.length > 0 && referer.length < 3 &&
+                              (<button className="primary blu little" onClick={addETS}>
+                                aggiungi
+                              </button>)
+                          }
+                    </div>       
                 </div>
               ):''
           }
