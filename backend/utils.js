@@ -16,6 +16,13 @@ export const generateToken = (user) => {
   );
 };
 
+export const userBecomesOfferer = (user) => {
+  // TODO: Use CFvalidator here!
+  if (user.name && user.surname && user.birthday && user.birthplace && user.gender && user.cf){
+    user.isSeller = true
+  }
+}
+
 export const isAuth = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (authorization) {
