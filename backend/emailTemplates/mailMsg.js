@@ -27,7 +27,7 @@ let msgRegistration = (recipient) => {
   console.log("From mailMsg!", msg)
   return msg 
 }
-
+// TODO: To Andrei.
 let msgPasswordRecovery = (recipient) => {
   let msg = { 
     to: recipient,

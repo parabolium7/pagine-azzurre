@@ -265,6 +265,7 @@ userRouter.post(
       res.send({email: true, loading: false })
       sgMail.send(recipient)
         .then(() => {
+          // TODO: To Andrei.
           console.log('Email sent')
         })
         .catch((error) => {
