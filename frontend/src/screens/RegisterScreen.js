@@ -11,7 +11,7 @@ export default function RegisterScreen(props) {
   const [confirmEmail, setConfirmEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isReferer, setIsReferer] = useState('NO')
+  const [hasReferer, setHasReferer] = useState(false)
   const [referer, setReferer] = useState('')
 
   const redirect = props.location.search
@@ -101,32 +101,29 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
+          <div className="row start">
+            <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
+              <input
+                type="radio"
+                id="no_referer"
+                name="referer"
+                onClick={ (e) => setHasReferer(true)}
+              />Si
+            </label>
+            <label>
+              <input
+                type="radio"
+                id="yes_referer"
+                name="referer"
+                defaultChecked
+                onClick={ (e) => {
+                  setHasReferer(false)
+                }}
+              />No
+            </label>
+          </div>
           {
-            isReferer==='NO'?
-              (
-                <div className="row start">
-                  <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
-                    <input
-                      type="radio"
-                      id="no_referer"
-                      name="referer"
-                      value="SI"
-                      onClick={ (e) => setIsReferer(e.target.value)}
-                    />Si
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      id="yes_referer"
-                      name="referer"
-                      value="NO"
-                      defaultChecked
-                      onClick={ (e) => {
-                        setReferer(e.target.value)
-                      }}
-                    />No
-                  </label>
-                </div>):
+            hasReferer?
               (
                 <div>
                   <label htmlFor="referer" className="row center">Ente del terzo settore al qualle partecipi *</label>
@@ -140,7 +137,7 @@ export default function RegisterScreen(props) {
                     ></input>
                   </div>
                 </div>
-              )
+              ):''
           }
         </div>
         <div>

@@ -28,6 +28,7 @@ export default function ProfileScreen() {
   const [sellerName, setSellerName] = useState('');
   const [sellerLogo, setSellerLogo] = useState('');
   const [sellerDescription, setSellerDescription] = useState('');
+  const [hasReferer, setHasReferer] = useState(false)
 
   function parseDate(str, format, locale) {
     const parsed = dateFnsParse(str, format, new Date(), { locale });
@@ -81,6 +82,7 @@ export default function ProfileScreen() {
       setCity(user.city);
       setPhone(user.phone);
       setEmail(user.email);
+      setReferer(user.referer)
       if (user.seller) {
         setSellerName(user.seller.name);
         setSellerLogo(user.seller.logo);
@@ -259,7 +261,7 @@ export default function ProfileScreen() {
                 onChange={(e) => setPhone(e.target.value)}
               ></input>
             </div>
-            <div>
+            {/* <div>
               <label>
                 Participi in una de queste associazioni?
                 <select value={referer} onChange={(e) => setReferer(e.target.value)}>
@@ -269,6 +271,46 @@ export default function ProfileScreen() {
                   <option value="Associazione D">Associazione D</option>
                 </select>
               </label>
+            </div> */}
+            <div>
+              <div className="row start">
+                <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
+                  <input
+                    type="radio"
+                    id="no_referer"
+                    name="referer"
+                    onClick={ (e) => setHasReferer(true)}
+                  />Si
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    id="yes_referer"
+                    name="referer"
+                    defaultChecked
+                    onClick={ (e) => {
+                      setHasReferer(false)
+                    }}
+                  />No
+                </label>
+              </div>
+              {
+                hasReferer?
+                  (
+                    <div>
+                      <label htmlFor="referer" className="row center">Ente del terzo settore al qualle partecipi *</label>
+                      <div className="row">
+                        <input
+                          type="text"
+                          id="referer"
+                          placeholder="Inserici l'ente del terzo settore al qualle partecipi"
+                          required
+                          onChange={(e) => setReferer(e.target.value)}
+                        ></input>
+                      </div>
+                    </div>
+                  ):''
+              }
             </div>
             <div>
               <label htmlFor="password">Cambiare Password</label>
@@ -302,7 +344,7 @@ export default function ProfileScreen() {
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="sellerLogo">Seller Logo</label>
+                  <label htmlFor="sellerLogo">Offerente Logo</label>
                   <input
                     id="sellerLogo"
                     type="text"

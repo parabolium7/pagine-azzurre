@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
 import { msgRegistration, msgPasswordRecovery } from '../emailTemplates/mailMsg.js'
+import { userBecomesOfferer } from '../utils.js'
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
@@ -37,14 +38,14 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      console.log(user)
       if (bcrypt.compareSync(req.body.password, user.password)) {
+        userBecomesOfferer(user)
         res.send({
           _id: user._id,
           username: user.username,
           name: user.name,
           surname: user.surname,
-          birthday: user.birthplace,
+          birthday: user.birthday,
           birthplace: user.birthplace,
           gender: user.gender,
           cf: user.cf,
@@ -55,7 +56,6 @@ userRouter.post(
           referer: user.referer,
           isAdmin: user.isAdmin,
           isSeller: user.isSeller,
-          test: "test Router!!!",
           token: generateToken(user),
         });
         return;
@@ -68,7 +68,6 @@ userRouter.post(
 userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
-    console.log(req.body)
     const user = new User({
       username: req.body.username,
       cf: req.body.cf,
@@ -116,8 +115,10 @@ userRouter.put(
     const user = await User.findById(req.user._id);
     console.log("Router_Get", user.phone)
     console.log("Router_Get", req.body.phone)
-
     if (user) {
+      console.log("Before", user.isSeller)
+      userBecomesOfferer(user)
+      console.log("After", user.isSeller)
       user.name = req.body.name || user.name;
       user.surname = req.body.surname || user.surname;
       user.username = req.body.username || user.username;
