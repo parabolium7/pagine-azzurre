@@ -89,8 +89,8 @@ export default function ProfileScreen() {
     }
   }, [dispatch, userInfo._id, user, userInfo]);
   const submitHandler = (e) => {
-    e.preventDefault();
     // dispatch update profile
+    // e.preventDefault();
     if (password !== confirmPassword) {
       alert('Password and Confirm Password Are Not Matched');
     } else {
