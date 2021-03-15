@@ -21,7 +21,8 @@ export default function ProfileScreen() {
   const [cf, setCf] = useState('')
   const [zipCode, setZipcode ] = useState('') 
   const [phone, setPhone ] = useState('') 
-  const [referer, setReferer ] = useState('') 
+  const [referer, setReferer ] = useState([])
+  const [newReferer, setNewReferer ] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -119,6 +120,10 @@ export default function ProfileScreen() {
       );
     }
   };
+  const addETS = (e) => {
+    e.preventDefault()
+    setReferer(referer.concat(newReferer))
+  }
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
@@ -261,24 +266,14 @@ export default function ProfileScreen() {
                 onChange={(e) => setPhone(e.target.value)}
               ></input>
             </div>
-            {/* <div>
-              <label>
-                Participi in una de queste associazioni?
-                <select value={referer} onChange={(e) => setReferer(e.target.value)}>
-                  <option value="Associazione A">Associazione A</option>
-                  <option value="Associazione B">Associazione B</option>
-                  <option value="Associazione C">Associazione C</option>
-                  <option value="Associazione D">Associazione D</option>
-                </select>
-              </label>
-            </div> */}
             <div>
-              <div className="row start">
+              { referer.length === 0 ?
+              (<div className="row start">
                 <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
                   <input
                     type="radio"
                     id="no_referer"
-                    name="referer"
+                    name="isReferer"
                     onClick={ (e) => setHasReferer(true)}
                   />Si
                 </label>
@@ -286,16 +281,16 @@ export default function ProfileScreen() {
                   <input
                     type="radio"
                     id="yes_referer"
-                    name="referer"
+                    name="isReferer"
+                    onClick={ (e) => setHasReferer(false)}
                     defaultChecked
-                    onClick={ (e) => {
-                      setHasReferer(false)
-                    }}
                   />No
                 </label>
-              </div>
+              </div>)
+              :''
+              }
               {
-                hasReferer?
+                hasReferer || referer.length > 0 ?
                   (
                     <div>
                       <label htmlFor="referer" className="row center">Ente del terzo settore al qualle partecipi *</label>
@@ -305,9 +300,26 @@ export default function ProfileScreen() {
                           id="referer"
                           placeholder="Inserici l'ente del terzo settore al qualle partecipi"
                           required
-                          onChange={(e) => setReferer(e.target.value)}
+                          value={newReferer}
+                          // TODO: Autosearch here!
+                          onChange={(e) => setNewReferer(e.target.value.toUpperCase())}
                         ></input>
-                      </div>
+                    </div>
+                    {
+                      referer.length > 0 && (
+                      <div className="row">
+                        <div>
+                          <ol>
+                           {
+                             referer.map( (item, idx ) => {if(idx <= 2) return <li key={idx}>{item}</li>})
+                           }       
+                          </ol>
+                        </div>
+                        <button className="primary blu little" onClick={addETS}>
+                          aggiungi
+                        </button>
+                      </div>)
+                    }
                     </div>
                   ):''
               }

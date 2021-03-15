@@ -133,6 +133,7 @@ export default function RegisterScreen(props) {
                       id="referer"
                       placeholder="Inserici l'ente del terzo settore al qualle partecipi"
                       required
+                      value={referer}
                       onChange={(e) => setReferer(e.target.value)}
                     ></input>
                   </div>
