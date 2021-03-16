@@ -520,6 +520,12 @@ input[type="number"] {
   margin-top: 2px;
 }
 
+/* WEB3 */
+
+.test_web3 {
+  margin: 0.2rem;
+}
+
 @media screen and (max-width: 1450px){
   .Logo1 {
     height: 4.5rem;

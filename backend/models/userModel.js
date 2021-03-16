@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
   {
+    account: { type: String, requiered: true, unique: true},
+    accountKey: { type: String, required: true, unique: true }, 
     username: { type: String, required: true, unique: true },
     name: { type: String, required: false },
     surname: { type: String, required: false },
@@ -14,7 +16,7 @@ const userSchema = new mongoose.Schema(
     zipCode: { type: Number, required: false },
     phone: { type: String, required: false, unique: true },
     password: { type: String, required: true },
-    referer: {type: String , required: false },
+    referer: {type: Array , required: false },
     isAdmin: { type: Boolean, default: false, required: true },
     isSeller: { type: Boolean, default: false, required: true },
     activity: { type: Number, default: 0, require: false },

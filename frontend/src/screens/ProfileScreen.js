@@ -11,6 +11,7 @@ import dateFnsParse from 'date-fns/parse';
 import 'react-day-picker/lib/style.css';
 
 export default function ProfileScreen() {
+  const [account, setAccount] = useState(''); 
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [username, setUsername] = useState('');
@@ -21,7 +22,8 @@ export default function ProfileScreen() {
   const [cf, setCf] = useState('')
   const [zipCode, setZipcode ] = useState('') 
   const [phone, setPhone ] = useState('') 
-  const [referer, setReferer ] = useState('') 
+  const [referer, setReferer ] = useState([])
+  const [newReferer, setNewReferer ] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -63,16 +65,17 @@ export default function ProfileScreen() {
   } = userUpdateProfile;
 
   const dispatch = useDispatch();
+
   useEffect(() => {
+    // TODO: For security reasons split 
     console.log("User", user)
     if (!user) {
-      console.log("UserInfo", userInfo) // ************* here the main Bug
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(detailsUser(userInfo._id));
     } else {
-      console.log(user)
       setName(user.name);
       setSurname(user.surname);
+      setAccount(user.account);
       setUsername(user.username); 
       setGender(user.gender);
       setBirthday(user.birthday);
@@ -90,6 +93,7 @@ export default function ProfileScreen() {
       }
     }
   }, [dispatch, userInfo._id, user, userInfo]);
+
   const submitHandler = (e) => {
     // dispatch update profile
     // e.preventDefault();
@@ -119,12 +123,21 @@ export default function ProfileScreen() {
       );
     }
   };
+
+  const addETS = (e) => {
+    e.preventDefault()
+    setReferer(referer.concat(newReferer))
+    setNewReferer('')
+  }
+
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1 className="row center">User Profile</h1>
         </div>
+          <p className="test_web3">{`User Account: ${account}`}</p>
+          <p className="test_web3">{`Balance:`}<span style={{fontSize:2+'rem'}}>☯</span>[BALANCE]</p>
         { loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -261,41 +274,31 @@ export default function ProfileScreen() {
                 onChange={(e) => setPhone(e.target.value)}
               ></input>
             </div>
-            {/* <div>
-              <label>
-                Participi in una de queste associazioni?
-                <select value={referer} onChange={(e) => setReferer(e.target.value)}>
-                  <option value="Associazione A">Associazione A</option>
-                  <option value="Associazione B">Associazione B</option>
-                  <option value="Associazione C">Associazione C</option>
-                  <option value="Associazione D">Associazione D</option>
-                </select>
-              </label>
-            </div> */}
             <div>
-              <div className="row start">
-                <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
-                  <input
-                    type="radio"
-                    id="no_referer"
-                    name="referer"
-                    onClick={ (e) => setHasReferer(true)}
-                  />Si
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    id="yes_referer"
-                    name="referer"
-                    defaultChecked
-                    onClick={ (e) => {
-                      setHasReferer(false)
-                    }}
-                  />No
-                </label>
-              </div>
+              { referer.length === 0 ?
+                (<div className="row start">
+                  <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
+                    <input
+                      type="radio"
+                      id="no_referer"
+                      name="isReferer"
+                      onClick={ (e) => setHasReferer(true)}
+                    />Si
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      id="yes_referer"
+                      name="isReferer"
+                      onClick={ (e) => setHasReferer(false)}
+                      defaultChecked
+                    />No
+                  </label>
+                </div>)
+              :''
+              }
               {
-                hasReferer?
+                hasReferer || referer.length > 0 ?
                   (
                     <div>
                       <label htmlFor="referer" className="row center">Ente del terzo settore al qualle partecipi *</label>
@@ -304,10 +307,26 @@ export default function ProfileScreen() {
                           type="text"
                           id="referer"
                           placeholder="Inserici l'ente del terzo settore al qualle partecipi"
-                          required
-                          onChange={(e) => setReferer(e.target.value)}
+                          value={ newReferer }
+                          // TODO: Autosearch here!
+                          onChange={(e) => setNewReferer(e.target.value.toUpperCase())}
                         ></input>
+                    </div>
+                    {
+                      <div className="row">
+                          <ol>
+                           {
+                             referer.map( (item, idx ) => {if(idx <= 2) return <li key={idx}>{item}</li>})
+                           }       
+                          </ol>
+                            {
+                              newReferer.length > 0 && referer.length < 3 &&
+                                (<button className="primary blu little" onClick={addETS}>
+                                  aggiungi
+                                </button>)
+                            }
                       </div>
+                    }
                     </div>
                   ):''
               }

@@ -6,6 +6,7 @@ import User from '../models/userModel.js';
 import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
+import Web3 from 'web3'
 import { msgRegistration, msgPasswordRecovery } from '../emailTemplates/mailMsg.js'
 import { userBecomesOfferer } from '../utils.js'
 
@@ -13,6 +14,8 @@ dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const userRouter = express.Router();
+
+const web3 = new Web3()
 
 userRouter.get(
   '/top-sellers',
@@ -42,6 +45,7 @@ userRouter.post(
         userBecomesOfferer(user)
         res.send({
           _id: user._id,
+          account: user.account,
           username: user.username,
           name: user.name,
           surname: user.surname,
@@ -68,12 +72,17 @@ userRouter.post(
 userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
+    const userPassword = bcrypt.hashSync(req.body.password, 8)
+    const userAccount = await web3.eth.accounts.create((userPassword + process.env.ENTROPY))
     const user = new User({
+      account: userAccount.address,
+      accountKey: userAccount.privateKey,
       username: req.body.username,
       cf: req.body.cf,
       email: req.body.email,
       phone: req.body.phone,
-      password: bcrypt.hashSync(req.body.password, 8),
+      password: userPassword,
+      referer: req.body.referer
     });
     const createdUser = await user.save();
     let recipient = msgRegistration(createdUser.email)
@@ -87,10 +96,12 @@ userRouter.post(
     )
     res.send({
       _id: createdUser._id,
+      account: createdUser.account,
       username: createdUser.username,
       email: createdUser.email,
       phone: createdUser.email,
       cf: createdUser.email,
+      referer: createdUser.referer,
       token: generateToken(createdUser),
     });
   })
@@ -113,20 +124,17 @@ userRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    console.log("Router_Get", user.phone)
-    console.log("Router_Get", req.body.phone)
     if (user) {
-      console.log("Before", user.isSeller)
       userBecomesOfferer(user)
-      console.log("After", user.isSeller)
+      user.account = user.account,
       user.name = req.body.name || user.name;
       user.surname = req.body.surname || user.surname;
-      user.username = req.body.username || user.username;
+      user.username = user.username;
       user.gender = req.body.gender || user.gender;
       user.birthplace = req.body.birthplace || user.birthplace;
       user.birthday = req.body.birthday || user.birthday;
       user.cf = req.body.cf || user.cf;
-      user.email = req.body.email || user.email;
+      user.email = user.email;
       user.city = req.body.city || user.city;
       user.zipCode = req.body.zipCode || user.zipCode;
       user.phone = req.body.phone || user.phone;
@@ -144,6 +152,7 @@ userRouter.put(
       console.log("userProfile", updatedUser)
       res.send({
         _id: updatedUser._id,
+        account: updatedUser.account,
         username: updatedUser.username,
         name: updatedUser.name,
         surname: updatedUser.surname,
@@ -168,8 +177,9 @@ userRouter.get(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    console.log("UserRouter_Get", user)
+    console.log("UserRouter_Get_ALERT", user)
     if (user) {
+      user.account = req.body.account || user.account;
       user.name = req.body.name || user.name;
       user.surname = req.body.surmame || user.surname;
       user.username = req.body.username || user.username;
