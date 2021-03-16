@@ -11,6 +11,7 @@ import dateFnsParse from 'date-fns/parse';
 import 'react-day-picker/lib/style.css';
 
 export default function ProfileScreen() {
+  const [account, setAccount] = useState(''); 
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [username, setUsername] = useState('');
@@ -66,14 +67,15 @@ export default function ProfileScreen() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // TODO: For security reasons split 
     console.log("User", user)
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(detailsUser(userInfo._id));
     } else {
-      console.log(user)
       setName(user.name);
       setSurname(user.surname);
+      setAccount(user.account);
       setUsername(user.username); 
       setGender(user.gender);
       setBirthday(user.birthday);
@@ -134,6 +136,8 @@ export default function ProfileScreen() {
         <div>
           <h1 className="row center">User Profile</h1>
         </div>
+          <p className="test_web3">{`User Account: ${account}`}</p>
+          <p className="test_web3">{`Balance:`}<span style={{fontSize:2+'rem'}}>☯</span>[BALANCE]</p>
         { loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
