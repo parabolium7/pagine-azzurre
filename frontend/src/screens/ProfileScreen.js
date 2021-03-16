@@ -245,7 +245,7 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
-              <label htmlFor="city">Città</label>
+              <label htmlFor="city">Città *</label>
               <input
                 id="city"
                 type="text"

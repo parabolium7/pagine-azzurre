@@ -124,7 +124,7 @@ userRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    if (user) {
+    if ("From PUT", user) {
       userBecomesOfferer(user)
       user.account = user.account,
       user.name = req.body.name || user.name;
@@ -139,6 +139,7 @@ userRouter.put(
       user.zipCode = req.body.zipCode || user.zipCode;
       user.phone = req.body.phone || user.phone;
       user.referer = req.body.referer || user.referer;
+      user.isSeller = user.isSeller
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
         user.seller.logo = req.body.sellerLogo || user.seller.logo;
