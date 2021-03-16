@@ -58,7 +58,7 @@ export const signin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post('/api/users/signin', { email, password });
-    console.log("from ActionSignIn", data)
+    // console.log("from ActionSignIn", data)
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -89,7 +89,7 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
     const { data } = await Axios.get(`/api/users/${userId}`, {
       headers: { Authorization: `Bearer ${userInfo?.token}` },
     });
-    console.log("Data UserAction details", data)
+    // console.log("Data UserAction details", data)
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -106,11 +106,11 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    console.log("Before updateUserProfile", user)
+    // console.log("Before updateUserProfile", user)
     const { data } = await Axios.put(`/api/users/profile`, user, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    console.log("After updateUserProfile2", data)
+    // console.log("After updateUserProfile2", data)
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));

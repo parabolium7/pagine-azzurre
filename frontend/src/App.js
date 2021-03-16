@@ -54,7 +54,7 @@ function App() {
   } = productCategoryList;
   
   useEffect(() => {
-    console.log("From App:", userInfo)
+    // console.log("From App:", userInfo)
     dispatch(listProductCategories());
   }, [dispatch, userInfo]);
 
