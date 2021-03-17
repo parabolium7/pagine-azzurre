@@ -46,7 +46,6 @@ export default function ProductEditScreen(props) {
   }, [product, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
-    // TODO: dispatch update product
     dispatch(
       updateProduct({
         _id: productId,
@@ -89,7 +88,8 @@ export default function ProductEditScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Edit Product {productId}</h1>
+          <h1 className="row center">Modifica Annuncio N°:</h1>
+          <p className="row center"> {productId}</p>
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
@@ -104,7 +104,7 @@ export default function ProductEditScreen(props) {
               <input
                 id="name"
                 type="text"
-                placeholder="Enter name"
+                placeholder="Inserisci nome"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
@@ -114,27 +114,27 @@ export default function ProductEditScreen(props) {
               <input
                 id="price"
                 type="text"
-                placeholder="Enter price"
+                placeholder="Inserisci prezzo"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="image">Image</label>
+              <label htmlFor="image">Immagine</label>
               <input
                 id="image"
                 type="text"
-                placeholder="Enter image"
+                placeholder="Inserisci immagine"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="imageFile">Image File</label>
+              <label htmlFor="imageFile">Immagine File</label>
               <input
                 type="file"
                 id="imageFile"
-                label="Choose Image"
+                label="Seleziona il file"
                 onChange={uploadFileHandler}
               ></input>
               {loadingUpload && <LoadingBox></LoadingBox>}
@@ -147,7 +147,7 @@ export default function ProductEditScreen(props) {
               <input
                 id="category"
                 type="text"
-                placeholder="Enter category"
+                placeholder="Inserisci categoria"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               ></input>
@@ -157,28 +157,28 @@ export default function ProductEditScreen(props) {
               <input
                 id="brand"
                 type="text"
-                placeholder="Enter brand"
+                placeholder="Inserisci brand"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="countInStock">Count In Stock</label>
+              <label htmlFor="countInStock">Numero proddotti in magazzino</label>
               <input
                 id="countInStock"
                 type="text"
-                placeholder="Enter countInStock"
+                placeholder="Inserisci numero di proddotti in offerta"
                 value={countInStock}
                 onChange={(e) => setCountInStock(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="description">Description</label>
+              <label htmlFor="description">Descrizione</label>
               <textarea
                 id="description"
                 rows="3"
                 type="text"
-                placeholder="Enter description"
+                placeholder="Inserisci la descrizione dell'annuncio"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
