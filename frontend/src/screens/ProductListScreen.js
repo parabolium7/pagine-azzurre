@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {
   createProduct,
-  // deleteProduct,
+  deleteProduct,
   listProducts,
 } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
@@ -59,20 +59,20 @@ export default function ProductListScreen(props) {
     pageNumber,
   ]);
 
-  // const deleteHandler = (product) => {
-  //   if (window.confirm('Are you sure to delete?')) {
-  //     dispatch(deleteProduct(product._id));
-  //   }
-  // };
+  const deleteHandler = (product) => {
+    if (window.confirm('Are you sure to delete?')) {
+      dispatch(deleteProduct(product._id));
+    }
+  };
   const createHandler = () => {
     dispatch(createProduct());
   };
   return (
     <div>
       <div className="row">
-        <h1>Crea annunzio</h1>
+        <h1>Lista di Annunci</h1>
         <button type="button" className="primary blu" onClick={createHandler}>
-          Crea 
+          Crea Annuncio
         </button>
       </div>
 
@@ -91,11 +91,11 @@ export default function ProductListScreen(props) {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
+                <th>NOME</th>
+                <th>PREZZO</th>
+                <th>CATEGORIA</th>
                 <th>BRAND</th>
-                <th>ACTIONS</th>
+                <th>MODIFICA / CANCELLA</th>
               </tr>
             </thead>
             <tbody>
@@ -114,14 +114,14 @@ export default function ProductListScreen(props) {
                         props.history.push(`/product/${product._id}/edit`)
                       }
                     >
-                      Edit
+                      Modifica
                     </button>
                     <button
                       type="button"
                       className="small"
-                      // onClick={() => deleteHandler(product)}
+                      onClick={() => deleteHandler(product)}
                     >
-                      Delete
+                      Cancella
                     </button>
                   </td>
                 </tr>

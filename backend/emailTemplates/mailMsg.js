@@ -24,7 +24,7 @@ let msgRegistration = (recipient) => {
            doni e servizi senza euro.</p></br>\n\
            I Cittadini Volontari (NOI VOI) ti ringraziano della registrazione e collaborazione.'
   }
-  console.log("From mailMsg!", msg)
+  // console.log("From mailMsg!", msg)
   return msg 
 }
 // TODO: To Andrei.
@@ -36,7 +36,7 @@ let msgPasswordRecovery = (recipient) => {
     text: 'Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso',
     html: '<p>Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso</p}>'
   }
-  console.log("From mailMsg!", msg)
+  // console.log("From mailMsg!", msg)
   return msg 
 }
 

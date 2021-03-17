@@ -68,7 +68,7 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     // TODO: For security reasons split 
-    console.log("User", user)
+    // console.log("User", user)
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(detailsUser(userInfo._id));
@@ -245,7 +245,7 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
-              <label htmlFor="city">Città</label>
+              <label htmlFor="city">Città *</label>
               <input
                 id="city"
                 type="text"

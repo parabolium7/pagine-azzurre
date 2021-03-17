@@ -88,7 +88,7 @@ userRouter.post(
     let recipient = msgRegistration(createdUser.email)
     sgMail.send(recipient)
       .then(() => {
-        console.log('Email sent')
+        // console.log('Email sent')
       })
       .catch((error) => {
         console.error(error)
@@ -124,7 +124,7 @@ userRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    if (user) {
+    if ("From PUT", user) {
       userBecomesOfferer(user)
       user.account = user.account,
       user.name = req.body.name || user.name;
@@ -139,6 +139,7 @@ userRouter.put(
       user.zipCode = req.body.zipCode || user.zipCode;
       user.phone = req.body.phone || user.phone;
       user.referer = req.body.referer || user.referer;
+      user.isSeller = user.isSeller
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
         user.seller.logo = req.body.sellerLogo || user.seller.logo;
@@ -149,7 +150,7 @@ userRouter.put(
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
       const updatedUser = await user.save();
-      console.log("userProfile", updatedUser)
+      // console.log("userProfile", updatedUser)
       res.send({
         _id: updatedUser._id,
         account: updatedUser.account,
@@ -177,7 +178,7 @@ userRouter.get(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    console.log("UserRouter_Get_ALERT", user)
+    // console.log("UserRouter_Get_ALERT", user)
     if (user) {
       user.account = req.body.account || user.account;
       user.name = req.body.name || user.name;
@@ -200,7 +201,7 @@ userRouter.get(
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
       const updatedUser = await user.save();
-      console.log(updatedUser)
+      // console.log(updatedUser)
       res.send({
         _id: updatedUser._id,
         name: updatedUser.name,
@@ -270,14 +271,14 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     // TODO use to validate also CF const user = await User.findOne({ cf: "LGMGMNL0176Z614M" });
     const data = await User.find({ email: req.body.email });
-    console.log("Password Recovery", data[0].email === req.body.email)
+    // console.log("Password Recovery", data[0].email === req.body.email)
     if (data[0].email === req.body.email) {
       let recipient = msgPasswordRecovery(data[0].email)
       res.send({email: true, loading: false })
       sgMail.send(recipient)
         .then(() => {
           // TODO: To Andrei.
-          console.log('Email sent')
+          // console.log('Email sent')
         })
         .catch((error) => {
           console.error(error)
