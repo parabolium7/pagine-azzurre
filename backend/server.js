@@ -41,5 +41,10 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5050;
 app.listen(port, () => {
+  if(process.env.MONGODB_URL) { 
+    console.log("Connected with MongoDb cluster cloud.")
+  } else {
+    console.log("Connected with Local MongoDB")
+  }
   console.log(`Serve at http://localhost:${port}`);
 });
