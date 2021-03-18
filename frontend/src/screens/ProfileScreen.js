@@ -134,7 +134,7 @@ export default function ProfileScreen() {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1 className="row center">User Profile</h1>
+          <h1 className="row center">Profilo di Ususario</h1>
         </div>
           <p className="test_web3">{`User Account: ${account}`}</p>
           <p className="test_web3">{`Balance:`}<span style={{fontSize:2+'rem'}}>☯</span>[BALANCE]</p>
@@ -150,7 +150,7 @@ export default function ProfileScreen() {
             )}
             {successUpdate && (
               <MessageBox variant="success">
-                Profile Updated Successfully
+                Profilo aggiornato con successo
               </MessageBox>
             )}
             <div>

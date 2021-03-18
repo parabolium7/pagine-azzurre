@@ -47,7 +47,7 @@ export default function OrderListScreen(props) {
               <th>TOTAL</th>
               <th>PAGATO</th>
               <th>CONSEGNATO</th>
-              <th>MODIFICA / CANCELLA</th>
+              <th>DETTAGLI / CANCELLA</th>
             </tr>
           </thead>
           <tbody>
