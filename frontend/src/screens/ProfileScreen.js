@@ -67,7 +67,7 @@ export default function ProfileScreen() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // TODO: For security reasons split 
+    // TODO: For security reasons split db
     // console.log("User", user)
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
@@ -136,8 +136,6 @@ export default function ProfileScreen() {
         <div>
           <h1 className="row center">Profilo di Ususario</h1>
         </div>
-          <p className="test_web3">{`User Account: ${account}`}</p>
-          <p className="test_web3">{`Balance:`}<span style={{fontSize:2+'rem'}}>☯</span>[BALANCE]</p>
         { loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -165,6 +163,15 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
+                <label htmlFor="account">Valazco account</label>
+                <input type="text" readOnly value={account} style={{display:"inline", whiteSpace:"nowrap", color: "#5A5A5A", fontSize: "1.8rem"}}></input>
+            </div>
+            <div>
+                <label htmlFor="balance">Bilancio</label>
+                <input type="text" readOnly value={"☯ 100"} style={{display:"inline", whiteSpace:"nowrap", color: "#3A3A3A", fontSize: "1.8rem"}}></input>
+            </div>
+            <div>
+              <h2>Dati anagrafici:</h2>
               <label htmlFor="name">Nome *</label>
               <input
                 id="name"
@@ -234,6 +241,7 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
+              <h2>Dettagli contatto:</h2>
               <label htmlFor="email">Email **</label>
               <input
                 id="email"
@@ -331,28 +339,10 @@ export default function ProfileScreen() {
                   ):''
               }
             </div>
-            <div>
-              <label htmlFor="password">Cambiare Password</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Digita nuova password"
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="confirmPassword">Conferma Password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                placeholder="Inserire conferma di password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              ></input>
-            </div>
             {user.isSeller && (
               <>
-                <h2>Offerente</h2>
                 <div>
+                  <h2>Dati Offerente:</h2>
                   <label htmlFor="sellerName">Nome offerente</label>
                   <input
                     id="sellerName"
@@ -384,6 +374,25 @@ export default function ProfileScreen() {
                 </div>
               </>
             )}
+            <div>
+              <h2>Cambio Password:</h2>
+              <label htmlFor="password">Cambiare Password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Digita nuova password"
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="confirmPassword">Conferma Password</label>
+              <input
+                id="confirmPassword"
+                type="password"
+                placeholder="Inserire conferma di password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              ></input>
+            </div>
             <div className="asterisk">
               <div className="little-line">(**)  Campo non modificabile</div>
               <div className="little-sisterline">(*) Campi obbligatori per offrire beni o servizi su le pagine azzurre</div>

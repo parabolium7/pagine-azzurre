@@ -41,8 +41,7 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        userBecomesOfferer(user)
+      if (bcrypt.compareSync(req.body.password, user.password)) {   
         res.send({
           _id: user._id,
           account: user.account,
@@ -59,7 +58,7 @@ userRouter.post(
           email: user.email,
           referer: user.referer,
           isAdmin: user.isAdmin,
-          isSeller: user.isSeller,
+          isSeller: userBecomesOfferer(user),
           token: generateToken(user),
         });
         return;
@@ -88,7 +87,6 @@ userRouter.post(
     let recipient = msgRegistration(createdUser.email)
     sgMail.send(recipient)
       .then(() => {
-        // console.log('Email sent')
       })
       .catch((error) => {
         console.error(error)
@@ -125,7 +123,6 @@ userRouter.put(
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
-      userBecomesOfferer(user)
       user.account = user.account,
       user.name = req.body.name || user.name;
       user.surname = req.body.surname || user.surname;
@@ -139,7 +136,7 @@ userRouter.put(
       user.zipCode = req.body.zipCode || user.zipCode;
       user.phone = req.body.phone || user.phone;
       user.referer = req.body.referer || user.referer;
-      user.isSeller = user.isSeller
+      user.isSeller = userBecomesOfferer(user)
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
         user.seller.logo = req.body.sellerLogo || user.seller.logo;
@@ -150,7 +147,6 @@ userRouter.put(
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
       const updatedUser = await user.save();
-      // console.log("userProfile", updatedUser)
       res.send({
         _id: updatedUser._id,
         account: updatedUser.account,
