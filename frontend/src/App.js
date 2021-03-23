@@ -100,10 +100,10 @@ function App() {
               )}
             ></Route>
           </div>
-          { userInfo === 'null' ? (
+          { userInfo ? (
             <div>
               <Link to="/cart">
-                Carrello
+              <span role="img" className="carrellino" aria-label="carrello">🛒</span>
                 {cartItems.length > 0 && (
                   <span className="badge">{cartItems.length}</span>
                 )}

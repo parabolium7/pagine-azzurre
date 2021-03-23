@@ -21,7 +21,7 @@ export default function ShippingAddressScreen(props) {
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-  const [country, setCountry] = useState(shippingAddress.country);
+  const [country, setCountry] = useState("Italia");
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -32,12 +32,13 @@ export default function ShippingAddressScreen(props) {
       setLng(addressMap.lng);
     }
     let moveOn = true;
-    if (!newLat || !newLng) {
-      moveOn = window.confirm(
-        'You did not set your location on map. Continue?'
-      );
-    }
+    // if (!newLat || !newLng) {
+    //   moveOn = window.confirm(
+    //     'You did not set your location on map. Continue?'
+    //   );
+    // }
     if (moveOn) {
+      console.log(country)
       dispatch(
         saveShippingAddress({
           fullName,
@@ -52,92 +53,92 @@ export default function ShippingAddressScreen(props) {
       props.history.push('/payment');
     }
   };
-  const chooseOnMap = () => {
-    dispatch(
-      saveShippingAddress({
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-        lat,
-        lng,
-      })
-    );
-    props.history.push('/map');
-  };
+  // const chooseOnMap = () => {
+  //   dispatch(
+  //     saveShippingAddress({
+  //       fullName,
+  //       address,
+  //       city,
+  //       postalCode,
+  //       country,
+  //       lat,
+  //       lng,
+  //     })
+  //   );
+  //   props.history.push('/map');
+  // };
   return (
     <div>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Shipping Address</h1>
+          <h1>Indirizzo di Spedizione</h1>
         </div>
         <div>
-          <label htmlFor="fullName">Full Name</label>
+          <label htmlFor="fullName">Nome</label>
           <input
             type="text"
             id="fullName"
-            placeholder="Enter full name"
+            placeholder="Inserisci nome e cognome"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="address">Address</label>
+          <label htmlFor="address">Indirizzo</label>
           <input
             type="text"
             id="address"
-            placeholder="Enter address"
+            placeholder="Inserisci indirizzo"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="city">City</label>
+          <label htmlFor="city">Città</label>
           <input
             type="text"
             id="city"
-            placeholder="Enter city"
+            placeholder="Inserisci città"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="postalCode">Postal Code</label>
+          <label htmlFor="city">Nazione</label>
+          <input
+            type="text"
+            id="country"
+            value={"Italia"}
+            readOnly
+            onChange={() => setCountry("Italia")}
+            required
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="postalCode">Codice postale</label>
           <input
             type="text"
             id="postalCode"
-            placeholder="Enter postal code"
+            placeholder="Inserisci codice postale"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
             required
           ></input>
         </div>
-        <div>
-          <label htmlFor="country">Country</label>
-          <input
-            type="text"
-            id="country"
-            placeholder="Enter country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="chooseOnMap">Location</label>
+        {/* <div>
+          <label htmlFor="chooseOnMap">Punto d'incontro *<span style={{fontSize:"1.25rem"}}>per consegne personali</span></label>
           <button type="button" onClick={chooseOnMap}>
-            Choose On Map
+            Scegli sulla mappa
           </button>
-        </div>
+        </div> */}
         <div>
           <label />
           <button className="primary blu" type="submit">
-            Continue
+            Continua
           </button>
         </div>
       </form>

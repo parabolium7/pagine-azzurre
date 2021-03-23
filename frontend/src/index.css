@@ -208,7 +208,7 @@ a.brand {
   border-radius: 50%;
   padding: 0.2rem 0.7rem;
   font-size: 1.4rem;
-  margin-left: 0.2rem;
+  margin-left: -10px;
 }
 .row {
   display: flex;
@@ -502,6 +502,15 @@ img.large {
   height: 5.5rem;
   border-radius: 10rem;
   margin-top: 2px;
+}
+
+/*  Carrello */
+
+.carrellino { 
+  background-color: snow;
+  padding: 1rem;
+  border-radius: 2.5rem;
+  font-size: 2rem;
 }
 
 /* Hide HTML5 Up and Down arrows. */
