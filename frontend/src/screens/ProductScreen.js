@@ -142,7 +142,7 @@ export default function ProductScreen(props) {
                           onClick={addToCartHandler}
                           className="primary blu block"
                         >
-                          Aggiungi al carrello
+                          Contatta Offerente
                         </button>
                       </li>
                     </>
