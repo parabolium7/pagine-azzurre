@@ -146,7 +146,7 @@ productRouter.put(
 productRouter.delete(
   '/:id',
   isAuth,
-  isAdmin,
+  isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     console.log("Trying to delete product")
     const product = await Product.findById(req.params.id);

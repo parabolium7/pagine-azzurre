@@ -116,7 +116,7 @@ export default function ProductEditScreen(props) {
               <input
                 id="name"
                 type="text"
-                placeholder="Inserisci nome"
+                placeholder="Inserisci nome del bene o servizio che voi barattare"
                 value={!name.match(/Annunciø/)?name:null}
                 onChange={(e) => setName(e.target.value)}
               ></input>
