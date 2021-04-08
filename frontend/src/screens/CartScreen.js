@@ -66,7 +66,7 @@ export default function CartScreen(props) {
                       ))}
                     </select>
                   </div>
-                  <div>€{item.priceEuro}</div>
+                  <div>€{'. '+item.priceEuro}</div>
                   <div> e ☯{item.priceVal}</div>
                   <div>
                     <button

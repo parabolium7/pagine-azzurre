@@ -85,7 +85,7 @@ const reducer = combineReducers({
   userUpgrade: userUpgradeReducer,
   userPasswordRecovery: userPasswordRecoveryReducer,
 });
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true }) || compose;
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
   initialState,
