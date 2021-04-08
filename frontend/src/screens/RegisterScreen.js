@@ -41,7 +41,8 @@ export default function RegisterScreen(props) {
       */
       let cf = ''
       email.split('').forEach( l => cf += l.charCodeAt(0))
-      dispatch(register(username, email, password, email, cf, referer))
+      // TODO: Set seller name as username.
+      dispatch(register(username, email, password, username, email, cf, referer))
     }
   };
 

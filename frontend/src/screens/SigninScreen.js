@@ -23,7 +23,6 @@ export default function SigninScreen(props) {
   };
   useEffect(() => {
     if (userInfo) {
-      console.log("fromSignInScreen", userInfo)
       props.history.push(redirect);
     }
   }, [props.history, redirect, userInfo]);
@@ -70,7 +69,7 @@ export default function SigninScreen(props) {
             </Link>
           </div>
           <div className="row center little-line">
-            Hai dimenticato la pasword?
+            Hai dimenticato la password?
             <Link to={`/password-recovery`}>
               Recupera password
             </Link>

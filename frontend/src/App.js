@@ -25,6 +25,7 @@ import SellerRoute from './components/SellerRoute';
 import SellerScreen from './screens/SellerScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
+import NewsletterScreen from './screens/NewsletterScreen';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
@@ -54,7 +55,6 @@ function App() {
   } = productCategoryList;
   
   useEffect(() => {
-    // console.log("From App:", userInfo)
     dispatch(listProductCategories());
   }, [dispatch, userInfo]);
 
@@ -103,7 +103,7 @@ function App() {
           { userInfo ? (
             <div>
               <Link to="/cart">
-              <span role="img" className="carrellino" aria-label="carrello">🛒</span>
+              <span role="img" className="carrellino" aria-label="carrello">🤝</span>
                 {cartItems.length > 0 && (
                   <span className="badge">{cartItems.length}</span>
                 )}
@@ -213,6 +213,7 @@ function App() {
           </ul>
         </aside>
         <main>
+          <Route path="/newsletter/" component={NewsletterScreen}></Route>
           <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>

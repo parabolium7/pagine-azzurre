@@ -22,6 +22,7 @@ import {
   PRODUCT_REVIEW_CREATE_SUCCESS,
   PRODUCT_REVIEW_CREATE_FAIL,
 } from '../constants/productConstants';
+import { upgradeUser } from '../actions/userActions';
 
 export const listProducts = ({
   pageNumber = '',
@@ -45,6 +46,18 @@ export const listProducts = ({
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
   }
 };
+
+// export const listProducts = () => async (dispatch) => {
+//   dispatch({
+//     type: PRODUCT_LIST_REQUEST,
+//   });
+//   try {
+//     const { data } = await Axios.get('/api/products');
+//     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+//   } catch (error) {
+//     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
+//   }
+// };
 
 export const listProductCategories = () => async (dispatch) => {
   dispatch({
@@ -108,6 +121,9 @@ export const updateProduct = (product) => async (dispatch, getState) => {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
+    if(!product.name.match(/Annunciø/) && !userInfo.hasAd){
+      dispatch(upgradeUser(userInfo._id))
+    }
   } catch (error) {
     const message =
       error.response && error.response.data.message

@@ -22,7 +22,38 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
+  ORDER_SEND_DOUBLE_NOTIFICATION_REQUEST,
+  ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS,
+  ORDER_SEND_DOUBLE_NOTIFICATION_FAIL,
+  ORDER_SEND_NOTIFICATION_REQUEST,
+  ORDER_SEND_NOTIFICATION_SUCCESS,
+  ORDER_SEND_NOTIFICATION_FAIL,
 } from '../constants/orderConstants';
+
+export const mailingOrder = (envelop) => async (dispatch, getState) => {
+  dispatch({ type: ORDER_SEND_NOTIFICATION_REQUEST,  payload: envelop })
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const data = await Axios.post('/api/orders/mailing', envelop, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    })
+    dispatch({ type: ORDER_SEND_NOTIFICATION_SUCCESS, payload: data.data } )
+    console.log("EMAIL SENT TO OFFERER:", data)
+  } catch(error) {
+    console.log("Error mailing", error)
+    dispatch({
+      type: ORDER_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
 
 export const createOrder = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
@@ -145,6 +176,25 @@ export const deleteOrder = (orderId) => async (dispatch, getState) => {
     dispatch({ type: ORDER_DELETE_FAIL, payload: message });
   }
 };
+
+export const sendOrderDoubleNotification = (order) => async (dispatch, getState) => {
+  dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_REQUEST, payload: order})
+  const { userSignin: { userInfo } } = getState()
+  if(true) {
+    try {
+      const { data } = await Axios.post(`/api/orders/notifications/`, order, {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      });
+      dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS, payload: data });
+    } catch (error) {
+      const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+      dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_FAIL, payload: message });
+    }
+  }
+}
 
 export const deliverOrder = (orderId) => async (dispatch, getState) => {
   dispatch({ type: ORDER_DELIVER_REQUEST, payload: orderId });

@@ -1,7 +1,16 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
+import User from '../models/userModel.js'
 import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
+import dotenv from 'dotenv'
+import sgMail from "@sendgrid/mail"
+import { msgOrderNotificationToOfferer,
+         msgOrderNotificationToBuyer,
+         secondMailToOfferer } from '../emailTemplates/mailMsg.js'
+
+dotenv.config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const orderRouter = express.Router();
 orderRouter.get(
@@ -29,6 +38,25 @@ orderRouter.get(
 );
 
 orderRouter.post(
+  '/mailing',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+  const seller = await User.findById(req.body.order.seller)
+  const order = await Order.findById(req.body.order._id)
+  let orderNames = ""
+  req.body.order.orderItems.forEach((o) => orderNames += o.name + ' ')
+  let envelop = { offerer: { email: seller.email, name: ( seller.name ? seller.name : seller.username )}, buyer: req.body.buyer, orderNames}
+  const recipient = secondMailToOfferer(envelop)
+  sgMail.send(recipient)
+  .then((res) => {
+    console.log("Mailing Order RES_CODE: ", res[0].statusCode)
+  })
+  .catch((error) => { console.error(error)})
+
+  res.status(202).send({ mailStatus: "Mail Sent.", resp_code: 1 })
+}))
+
+orderRouter.post(
   '/',
   isAuth,
   expressAsyncHandler(async (req, res) => {
@@ -40,10 +68,11 @@ orderRouter.post(
         orderItems: req.body.orderItems,
         shippingAddress: req.body.shippingAddress,
         paymentMethod: req.body.paymentMethod,
-        itemsPrice: req.body.itemsPrice,
+        itemsPriceVal: req.body.itemsPriceVal,
+        itemsPriceEuro: req.body.itemsPriceEuro,
+        totalPriceVal: req.body.totalPriceVal,
+        totalPriceEuro: req.body.totalPriceEuro,
         shippingPrice: req.body.shippingPrice,
-        taxPrice: req.body.taxPrice,
-        totalPrice: req.body.totalPrice,
         user: req.user._id,
       });
       const createdOrder = await order.save();
@@ -120,6 +149,35 @@ orderRouter.put(
       res.status(404).send({ message: 'Order Not Found' });
     }
   })
+);
+
+orderRouter.post(
+  '/notifications',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    console.log("Order", req.body.orderItems[0])
+    const offerer = await User.findById(req.body.seller);
+    const buyer = await User.findById(req.body.user);
+    console.log("Offerer: ", offerer.username, "Buyer: ", buyer)
+    let recipientOfferer = msgOrderNotificationToOfferer(offerer, req.body.orderItems[0], buyer)
+    let recipientBuyer = msgOrderNotificationToBuyer(buyer, req.body.orderItems[0], offerer)
+    sgMail.send(recipientOfferer)
+        .then(() => {
+          console.log("Notification sent to offerer")
+          sgMail.send(recipientBuyer)
+            .then(() => {
+              console.log("Notification sent to buyer")
+              res.status(200)
+            })
+            .catch((error) => {
+              console.error(error)
+            })
+        }) 
+        .catch((error) => {
+          console.error(error)
+        })
+  })
+
 );
 
 export default orderRouter;

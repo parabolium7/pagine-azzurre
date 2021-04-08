@@ -24,7 +24,39 @@ import {
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
   ORDER_DELIVER_RESET,
+  ORDER_SEND_NOTIFICATION_REQUEST,
+  ORDER_SEND_NOTIFICATION_SUCCESS,
+  ORDER_SEND_NOTIFICATION_FAIL,
+  ORDER_SEND_DOUBLE_NOTIFICATION_REQUEST,
+  ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS,
+  ORDER_SEND_DOUBLE_NOTIFICATION_FAIL,
 } from '../constants/orderConstants';
+
+export const orderDoubleNotificationReducer = (state = {} , action) => {
+  switch (action.type){
+    case ORDER_SEND_DOUBLE_NOTIFICATION_REQUEST:
+      return { loading: true, order: action.payload }
+    case ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS:
+      return { loading: false, success: true, resp_code: action.payload }
+    case ORDER_SEND_DOUBLE_NOTIFICATION_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state;
+  }
+}
+
+export const orderMailingReducer = (state = {}, action) => {
+  switch (action.type){
+    case ORDER_SEND_NOTIFICATION_REQUEST:
+      return { loading: true }
+    case ORDER_SEND_NOTIFICATION_SUCCESS:
+      return { loading: false, success: true, resp_code: action.payload }
+    case ORDER_SEND_NOTIFICATION_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
 
 export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {

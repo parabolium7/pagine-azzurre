@@ -60,7 +60,7 @@ export default function SearchScreen(props) {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <div>{products.length} Results</div>
+          <div>{products.length} Risultati</div>
         )}
         <div>
           Sort by{' '}
@@ -70,16 +70,16 @@ export default function SearchScreen(props) {
               props.history.push(getFilterUrl({ order: e.target.value }));
             }}
           >
-            <option value="newest">Newest Arrivals</option>
-            <option value="lowest">Price: Low to High</option>
-            <option value="highest">Price: High to Low</option>
+            <option value="newest">Più recenti</option>
+            <option value="lowest">Prezzo: Low to High</option>
+            <option value="highest">Prezzo: High to Low</option>
             <option value="toprated">Avg. Customer Reviews</option>
           </select>
         </div>
       </div>
       <div className="row top">
         <div className="col-1">
-          <h3>Department</h3>
+          <h3>Dipartimento</h3>
           <div>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
@@ -109,7 +109,7 @@ export default function SearchScreen(props) {
             )}
           </div>
           <div>
-            <h3>Price</h3>
+            <h3>Prezzo</h3>
             <ul>
               {prices.map((p) => (
                 <li key={p.name}>
@@ -134,7 +134,7 @@ export default function SearchScreen(props) {
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? 'active' : ''}
                   >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
+                    <Rating caption={' & +'} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}
@@ -149,7 +149,7 @@ export default function SearchScreen(props) {
           ) : (
             <>
               {products.length === 0 && (
-                <MessageBox>No Product Found</MessageBox>
+                <MessageBox>Prodotto non trovato</MessageBox>
               )}
               <div className="row center">
                 {products.map((product) => (

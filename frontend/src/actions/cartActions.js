@@ -23,7 +23,8 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
       payload: {
         name: data.name,
         image: data.image,
-        price: data.price,
+        priceVal: data.priceVal,
+        priceEuro: data.priceEuro,
         countInStock: data.countInStock,
         product: data._id,
         seller: data.seller,
@@ -44,8 +45,10 @@ export const removeFromCart = (productId) => (dispatch, getState) => {
 
 export const saveShippingAddress = (data) => (dispatch) => {
   dispatch({ type: CART_SAVE_SHIPPING_ADDRESS, payload: data });
+  console.log("Shipping Address", data)
   localStorage.setItem('shippingAddress', JSON.stringify(data));
 };
+
 export const savePaymentMethod = (data) => (dispatch) => {
   dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: data });
 };

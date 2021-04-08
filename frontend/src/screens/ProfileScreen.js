@@ -55,6 +55,7 @@ export default function ProfileScreen() {
   const CalFORMAT = 'dd/MM/yyyy';
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  // TODO: Delete referer from userInfo
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
@@ -68,7 +69,6 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     // TODO: For security reasons split db
-    // console.log("User", user)
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(detailsUser(userInfo._id));
@@ -96,6 +96,7 @@ export default function ProfileScreen() {
 
   const submitHandler = (e) => {
     // dispatch update profile
+    // TODO: See if e.preventDefault() active is ok.
     // e.preventDefault();
     if (password !== confirmPassword) {
       alert('Password and Confirm Password Are Not Matched');
@@ -134,7 +135,7 @@ export default function ProfileScreen() {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1 className="row center">Profilo di Ususario</h1>
+          <h1 className="row center">Profilo di Usuario</h1>
         </div>
         { loading ? (
           <LoadingBox></LoadingBox>

@@ -2,43 +2,45 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
+import MessageBox from '../components/MessageBox'
 
 export default function ShippingAddressScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
-
   const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-  const [lat, setLat] = useState(shippingAddress.lat);
-  const [lng, setLng] = useState(shippingAddress.lng);
-  const userAddressMap = useSelector((state) => state.userAddressMap);
-  const { address: addressMap } = userAddressMap;
+  // const [lat, setLat] = useState(shippingAddress.lat);
+  // const [lng, setLng] = useState(shippingAddress.lng);
+  // const userAddressMap = useSelector((state) => state.userAddressMap);
+  // const { address: addressMap } = userAddressMap;
 
   if (!userInfo) {
     props.history.push('/signin');
   }
+  
   const [fullName, setFullName] = useState(shippingAddress.fullName);
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState("Italia");
+  const [email, setEmail] = useState(userInfo.email)
+  const [phone, setPhone] = useState(userInfo.email === userInfo.phone ?'':userInfo.phone )
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    const newLat = addressMap ? addressMap.lat : lat;
-    const newLng = addressMap ? addressMap.lng : lng;
-    if (addressMap) {
-      setLat(addressMap.lat);
-      setLng(addressMap.lng);
-    }
-    let moveOn = true;
+    // const newLat = addressMap ? addressMap.lat : lat;
+    // const newLng = addressMap ? addressMap.lng : lng;
+    // if (addressMap) {
+    //   setLat(addressMap.lat);
+    //   setLng(addressMap.lng);
+    // }
+    // let moveOn = true;
     // if (!newLat || !newLng) {
     //   moveOn = window.confirm(
     //     'You did not set your location on map. Continue?'
     //   );
     // }
-    if (moveOn) {
-      console.log(country)
+    // if (moveOn) {
       dispatch(
         saveShippingAddress({
           fullName,
@@ -46,12 +48,14 @@ export default function ShippingAddressScreen(props) {
           city,
           postalCode,
           country,
-          lat: newLat,
-          lng: newLng,
+          email,
+          phone
+          // lat: newLat,
+          // lng: newLng,
         })
       );
       props.history.push('/payment');
-    }
+    // }
   };
   // const chooseOnMap = () => {
   //   dispatch(
@@ -71,8 +75,8 @@ export default function ShippingAddressScreen(props) {
     <div>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Indirizzo di Spedizione</h1>
+        <div className="row center">
+          <h1>Indirizzo di Spedizione e datti per il conttato con il offerente</h1>
         </div>
         <div>
           <label htmlFor="fullName">Nome</label>
@@ -108,17 +112,6 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="city">Nazione</label>
-          <input
-            type="text"
-            id="country"
-            value={"Italia"}
-            readOnly
-            onChange={() => setCountry("Italia")}
-            required
-          ></input>
-        </div>
-        <div>
           <label htmlFor="postalCode">Codice postale</label>
           <input
             type="text"
@@ -127,6 +120,38 @@ export default function ShippingAddressScreen(props) {
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
             required
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="city">Nazione</label>
+          <input
+            type="text"
+            id="country"
+            value={"🇮🇹  Italia"}
+            readOnly
+            onChange={() => setCountry("Italia")}
+            required
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="email">e-mail  <span role="img" aria-label="email">📧</span></label>
+          <input
+            type="text"
+            id="email"
+            placeholder="Inserisci indirizzo"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="phone">Telefono <span role="img" aria-label="phone">📞</span></label>
+          <input
+            type="number"
+            id="phone"
+            placeholder="Inserisci Telefono"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           ></input>
         </div>
         {/* <div>
@@ -140,6 +165,13 @@ export default function ShippingAddressScreen(props) {
           <button className="primary blu" type="submit">
             Continua
           </button>
+          { !userInfo.hasAd && 
+            (
+              <MessageBox variant="alert">
+                Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
+              </MessageBox>
+            )
+          }
         </div>
       </form>
     </div>

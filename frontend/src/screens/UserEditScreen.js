@@ -43,6 +43,7 @@ export default function UserEditScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update user
+    // TODO: Add hasAd option.
     dispatch(updateUser({ _id: userId, name, email, isSeller, isAdmin }));
   };
   return (
@@ -92,7 +93,7 @@ export default function UserEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="isSeller">Venditore</label>
+              <label htmlFor="isSeller">Offerente</label>
               <input
                 id="isSeller"
                 type="checkbox"

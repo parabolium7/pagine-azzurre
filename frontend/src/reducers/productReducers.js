@@ -107,7 +107,6 @@ export const productDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEST:
       return { loading: true };
-    // TODO: investigate why it doesn't work!
     case PRODUCT_DELETE_SUCCESS:
       return { loading: false, success: true };
     case PRODUCT_DELETE_FAIL:

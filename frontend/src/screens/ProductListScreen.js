@@ -60,7 +60,8 @@ export default function ProductListScreen(props) {
   ]);
 
   const deleteHandler = (product) => {
-    if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('Sicuro di voler cancellare il annuncio?')) {
+      // TODO: Check this delete Product
       dispatch(deleteProduct(product._id));
     }
   };
@@ -71,6 +72,13 @@ export default function ProductListScreen(props) {
     <div>
       <div className="row">
         <h1>Lista di Annunci</h1>
+        { !userInfo.hasAd && 
+          (
+            <MessageBox variant="alert">
+              Per conttatare un offerente devi diventarlo tu prima. Crea un annuncio promozionando un bene o servizio che vorresti baratare per beni o servizi di altri.
+            </MessageBox>
+          )
+        }
         <button type="button" className="primary blu" onClick={createHandler}>
           Crea Annuncio
         </button>
@@ -103,7 +111,7 @@ export default function ProductListScreen(props) {
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
-                  <td>{product.price}</td>
+                  <td>☯ {product.priceVal} / € {product.priceEuro}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>

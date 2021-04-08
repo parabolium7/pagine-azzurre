@@ -2,7 +2,6 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../models/productModel.js';
-import User from '../models/userModel.js';
 import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
 
 const productRouter = express.Router();
@@ -10,7 +9,7 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const pageSize = 3;
+    const pageSize = 8;
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const category = req.query.category || '';
@@ -91,6 +90,7 @@ productRouter.get(
 productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
+    // TODO: Fix bug
     const product = await Product.findById(req.params.id).populate(
       'seller',
       'seller.name seller.logo seller.rating seller.numReviews'
@@ -109,16 +109,11 @@ productRouter.post(
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
-      name: 'sample name ' + Date.now(),
+      name: 'Annunciø n° ' + Date.now(),
       seller: req.user._id,
       image: '/images/p1.jpg',
-      price: 0,
-      category: 'sample category',
-      brand: 'sample brand',
-      countInStock: 0,
       rating: 0,
-      numReviews: 0,
-      description: 'sample description',
+      numReviews: 0
     });
     const createdProduct = await product.save();
     res.send({ message: 'Product Created', product: createdProduct });
@@ -133,7 +128,8 @@ productRouter.put(
     const product = await Product.findById(productId);
     if (product) {
       product.name = req.body.name;
-      product.price = req.body.price;
+      product.priceVal = req.body.priceVal;
+      product.priceEuro = req.body.priceEuro;
       product.image = req.body.image;
       product.category = req.body.category;
       product.brand = req.body.brand;
@@ -152,9 +148,11 @@ productRouter.delete(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
+    console.log("Trying to delete product")
     const product = await Product.findById(req.params.id);
     if (product) {
       const deleteProduct = await product.remove();
+      console.log("Deleted product?", deleteProduct);
       res.send({ message: 'Product Deleted', product: deleteProduct });
     } else {
       res.status(404).send({ message: 'Product Not Found' });

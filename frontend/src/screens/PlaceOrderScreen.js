@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createOrder } from '../actions/orderActions';
+import { createOrder, sendOrderDoubleNotification } from '../actions/orderActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function PlaceOrderScreen(props) {
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
   if (!cart.paymentMethod) {
     props.history.push('/payment');
@@ -15,20 +17,31 @@ export default function PlaceOrderScreen(props) {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
   const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
-  cart.itemsPrice = toPrice(
-    cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+  cart.itemsPriceVal = toPrice(
+    cart.cartItems.reduce((a, c) => a + c.qty * c.priceVal, 0)
+  );
+  cart.itemsPriceEuro = toPrice(
+    cart.cartItems.reduce((a, c) => a + c.qty * c.priceEuro, 0)
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+  cart.totalPriceVal = cart.itemsPriceVal;
+  cart.totalPriceEuro = cart.itemsPriceEuro;
   const dispatch = useDispatch();
-  const placeOrderHandler = () => {
-    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+  const placeOrderHandler = (e) => {
+    e.preventDefault()
+    if( userInfo.hasAd ) {
+      dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+      dispatch(sendOrderDoubleNotification(order))
+    } else {
+      window.alert("Per poter conttatare il offerente avere un prodotto in vetrina.")
+    }
+
   };
   useEffect(() => {
     if (success) {
       props.history.push(`/order/${order._id}`);
-      dispatch({ type: ORDER_CREATE_RESET });
+      dispatch({ type: ORDER_CREATE_RESET, payload: order });
     }
   }, [dispatch, order, props.history, success]);
   return (
@@ -52,7 +65,8 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body">
                 <h2>Pagamento spedizione</h2>
                 <p>
-                  <strong>Metodo:</strong> {cart.paymentMethod}
+                  <strong>Metodo: Da concordare con l'offerente</strong>
+                    {/* </strong> {cart.paymentMethod} */}
                 </p>
               </div>
             </li>
@@ -76,7 +90,7 @@ export default function PlaceOrderScreen(props) {
                           </Link>
                         </div>
                         <div>
-                          {item.qty} x ☯{item.price} = ☯{item.qty * item.price}
+                        {item.qty} x €{item.priceEuro} = €{item.qty * item.priceEuro} oppure {item.qty} x ☯{item.priceVal} = ☯{item.qty * item.priceVal}  
                         </div>
                       </div>
                     </li>
@@ -95,13 +109,14 @@ export default function PlaceOrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>☯ {cart.itemsPrice.toFixed(2)}</div>
+                  <div>€ {cart.itemsPriceEuro.toFixed(2)}</div>
+                  <div> oppure ☯ {cart.itemsPriceVal.toFixed(2)}</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Prezzo spedizione</div>
-                  <div>€ {cart.shippingPrice.toFixed(2)}</div>
+                  <div>Da concordare con l'offerente</div>
                 </div>
               </li>
               {/* <li>
@@ -110,16 +125,18 @@ export default function PlaceOrderScreen(props) {
                   <div>${cart.taxPrice.toFixed(2)}</div>
                 </div>
               </li> */}
-              {/* <li>
+              <li>
                 <div className="row">
                   <div>
                     <strong>Ordine totale</strong>
                   </div>
                   <div>
-                    <strong>☯{cart.totalPrice.toFixed(2)}</strong>
+                    <strong>☯{cart.totalPriceVal.toFixed(2)}</strong>
+                    {' | '}
+                    <strong>€{cart.totalPriceEuro.toFixed(2)}</strong>
                   </div>
                 </div>
-              </li> */}
+              </li>
               <li>
                 <button
                   type="button"
@@ -127,8 +144,15 @@ export default function PlaceOrderScreen(props) {
                   className="primary block"
                   disabled={cart.cartItems.length === 0}
                 >
-                  Invia ordine
+                  Invia richiesta all'offerente
                 </button>
+                { !userInfo.hasAd && 
+                  (
+                    <MessageBox variant="alert">
+                      Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
+                    </MessageBox>
+                  )
+                }
               </li>
               {loading && <LoadingBox></LoadingBox>}
               {error && <MessageBox variant="danger">{error}</MessageBox>}

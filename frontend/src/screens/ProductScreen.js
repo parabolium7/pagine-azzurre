@@ -56,7 +56,7 @@ export default function ProductScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <Link to="/">Back to result</Link>
+          <Link to="/">Torna ai articoli</Link>
           <div className="row top">
             <div className="col-2">
               <img
@@ -66,6 +66,7 @@ export default function ProductScreen(props) {
               ></img>
             </div>
             <div className="col-1">
+              {/* TODO: Add some margin between image and text */}
               <ul>
                 <li>
                   <h1>{product.name}</h1>
@@ -76,7 +77,8 @@ export default function ProductScreen(props) {
                     numReviews={product.numReviews}
                   ></Rating>
                 </li>
-                <li>Prezzo : ☯ {product.price}</li>
+                <li>Prezzo in Euro: € {product.priceEuro}</li>
+                <li>Prezzo in Val: ☯ {product.priceVal}</li>
                 <li>
                   Descrizione:
                   <p>{product.description}</p>
@@ -99,9 +101,10 @@ export default function ProductScreen(props) {
                     ></Rating>
                   </li>
                   <li>
-                    <div className="row">
-                      <div>Prezzo</div>
-                      <div className="price">☯{product.price}</div>
+                    <div className="row start">
+                      <div style={{paddingRight:"1.8rem"}}>Prezzo</div>
+                      <div className="price euro">€{product.priceEuro}&nbsp;</div>
+                      <div className="price">/ ☯{product.priceVal}</div>
                     </div>
                   </li>
                   <li>
@@ -144,6 +147,13 @@ export default function ProductScreen(props) {
                         >
                           Contatta Offerente
                         </button>
+                        { !userInfo.hasAd && 
+                          (
+                            <MessageBox variant="alert">
+                              Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
+                            </MessageBox>
+                          )
+                        }
                       </li>
                     </>
                   )}

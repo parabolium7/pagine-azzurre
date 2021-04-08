@@ -247,6 +247,7 @@ a.brand {
   font-size: 1rem;
   padding: 1.6rem 0;
 } 
+
 /* Aside */
 aside {
   position: fixed;
@@ -319,6 +320,10 @@ img.large {
 .price {
   font-size: 2rem;
 }
+
+.price.euro{
+  padding-left: 1.3rem;
+}
 /* Rating */
 .rating span {
   color: #f0c040;
@@ -341,6 +346,13 @@ img.large {
   padding: 1rem;
   border: 0.1rem solid transparent;
   border-radius: 0.5rem;
+}
+.alert-alert {
+  color: #995911;
+  background-color: #f7daaf;
+  margin: 1rem auto;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .alert-info {
   color: #2020a0;
@@ -367,6 +379,27 @@ img.large {
 .form label {
   margin: 0.8rem 0;
 }
+
+/* Squeeze*/
+
+.squeeze {
+  display: flex;
+}
+
+.newsletter{
+  width: 55vw;  /* Or whatever */
+  height: 100%; /* Or whatever */
+  margin: auto;
+}
+
+.notification-blue {
+  background-color: rgb(151, 215, 245);
+  padding: 1.2rem;
+  margin: 1rem;
+  border-radius: 5px;
+  font-style: italic;
+}
+
 /* Dropdown */
 .dropdown {
   display: inline-block;

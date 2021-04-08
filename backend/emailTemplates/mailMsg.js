@@ -34,10 +34,44 @@ let msgPasswordRecovery = (recipient) => {
     from: 'g.lugo.dev@gmail.com',
     subject: 'Pagine Azzurre Richiesta cambio Password',
     text: 'Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso',
-    html: '<p>Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso</p}>'
+    html: '<p>Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso</p>'
   }
-  // console.log("From mailMsg!", msg)
   return msg 
 }
 
-export { msgRegistration, msgPasswordRecovery }
+let msgOrderNotificationToOfferer = (offerer, orderdetails, buyer) => {
+  let msg = {
+    to: offerer.email,
+    from: "g.lugo.dev@gmail.com",
+    subject: "Pagine Azzurre Notificazione d\'Ordine al offerente",
+    html: `<p>Buongiorno ${offerer.username},</p><br><p><strong>Hai un nuovo ordine nelle pagine azzurre</strong></p><br><p>Nome annuncio: ${orderdetails.name}</p><p>Product ID: ${orderdetails.product}</p><p>Order id: ${orderdetails._id}</p><p>Quantità: ${orderdetails.qty}</p><p>Prezzo in Val: ☯${orderdetails.priceVal}</p><p>Prezzo in Euro: €${orderdetails.priceEuro}</p><br><p><strong>Informazione del compratore</strong></p><br><p>Username: ${buyer.username}</p><p>Email: ${buyer.email}</p><p>Telefono: ${buyer.phone !== buyer.email? buyer.phone : 'Non disponible'}</p>`
+  }
+  return msg
+}
+
+let msgOrderNotificationToBuyer = (buyer, orderdetails, offerer) => {
+  let msg = {
+    to: buyer.email,
+    from: "g.lugo.dev@gmail.com",
+    subject: "Pagine Azzurre Notificazione d\'Ordine al compratore",
+    html: `<p>Buongiorno ${buyer.username},</p><br><p><strong>Hai un nuovo ordine nelle pagine azzurre</strong></p><br><p>Nome annuncio: ${orderdetails.name}</p><p>Product ID: ${orderdetails.product}</p><p>Order id: ${orderdetails._id}</p><p>Quantità: ${orderdetails.qty}</p><p>Prezzo in Val: ☯${orderdetails.priceVal}</p><p>Prezzo in Euro: €${orderdetails.priceEuro}</p><br><p><strong>Informazione del Offerente</strong></p><br><p>Username: ${offerer.username}</p><p>Email: ${offerer.email}</p><p>Telefono: ${offerer.phone !== offerer.email? offerer.phone : 'Non disponible'}</p>`
+  }
+  return msg
+}
+
+let secondMailToOfferer = (envelop) => {
+  console.log(envelop)
+  let msg = {
+    to: envelop.offerer.email,
+    from: "g.lugo.dev@gmail.com",
+    subject: `${envelop.offerer.name}, ${envelop.buyer} ti ha scrito un messagio."`,
+    html: `<p>Buongiorno ${envelop.offerer.name},</p><br><p>Hai un messagio di ${envelop.buyer} relativo alla tua inserzione ${envelop.orderNames}</p><br><p>Messagio: ${envelop.emailBody}`
+  }
+  return msg
+}
+
+export { msgRegistration,
+         msgPasswordRecovery,
+         msgOrderNotificationToOfferer,
+         msgOrderNotificationToBuyer,
+         secondMailToOfferer  }

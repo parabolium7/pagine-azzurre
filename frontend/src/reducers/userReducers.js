@@ -26,6 +26,9 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_RESET,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_UPGRADE_REQUEST,
+  USER_UPGRADE_SUCCESS,
+  USER_UPGRADE_FAIL,
   USER_UPDATE_REQUEST,
   USER_UPDATE_RESET,
   USER_UPDATE_SUCCESS,
@@ -52,7 +55,6 @@ export const userSigninReducer = (state = {}, action) => {
     case USER_SIGNIN_REQUEST:
       return { loading: true }
     case USER_SIGNIN_SUCCESS:
-      // console.log("From Reducer", action.payload)
       return { loading: false, userInfo: action.payload }
     case USER_SIGNIN_FAIL:
       return { loading: false, error: action.payload }
@@ -81,12 +83,24 @@ export const userDetailsReducer = (state = { loading: true }, action) => {
     case USER_DETAILS_REQUEST:
       return { loading: true }
     case USER_DETAILS_SUCCESS:
-      // console.log('From userDatailsreducer', action.payload)
       return { loading: false, user: action.payload }
     case USER_DETAILS_FAIL:
       return { loading: false, error: action.payload }
     case USER_DETAILS_RESET:
       return { loading: true }
+    default:
+      return state
+  }
+}
+
+export const userUpgradeReducer = (state = { loading: false }, action) => {
+  switch (action.type) {
+    case USER_UPGRADE_REQUEST:
+      return { loading: true }
+    case USER_UPGRADE_SUCCESS:
+      return { loading: false, userInfo: action.payload.user }
+    case USER_UPGRADE_FAIL:
+      return { loading: false, error: action.payload }
     default:
       return state
   }

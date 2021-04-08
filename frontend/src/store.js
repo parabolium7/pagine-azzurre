@@ -9,6 +9,8 @@ import {
   orderListReducer,
   orderMineListReducer,
   orderPayReducer,
+  orderDoubleNotificationReducer,
+  orderMailingReducer,
 } from './reducers/orderReducers';
 import {
   productCategoryListReducer,
@@ -29,6 +31,7 @@ import {
   userTopSellerListReducer,
   userUpdateProfileReducer,
   userUpdateReducer,
+  userUpgradeReducer,
   userPasswordRecoveryReducer,
 } from './reducers/userReducers';
 
@@ -45,7 +48,11 @@ const initialState = {
     shippingAddress: localStorage.getItem('shippingAddress')
       ? JSON.parse(localStorage.getItem('shippingAddress'))
       : {},
-    paymentMethod: 'PayPal',
+    paymentMethod: 'Concordato',
+  },
+  orderMailing: {
+    loading: false,
+    resp_code: 0
   }
 };
 const reducer = combineReducers({
@@ -73,9 +80,12 @@ const reducer = combineReducers({
   productCategoryList: productCategoryListReducer,
   productReviewCreate: productReviewCreateReducer,
   userAddressMap: userAddressMapReducer,
+  orderDoubleNotification: orderDoubleNotificationReducer,
+  orderMailing: orderMailingReducer,
+  userUpgrade: userUpgradeReducer,
   userPasswordRecovery: userPasswordRecoveryReducer,
 });
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true }) || compose;
 const store = createStore(
   reducer,
   initialState,

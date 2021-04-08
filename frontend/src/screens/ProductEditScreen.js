@@ -9,7 +9,8 @@ import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
+  const [priceVal, setPriceVal] = useState('');
+  const [priceEuro, setPriceEuro] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
@@ -29,14 +30,15 @@ export default function ProductEditScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (successUpdate) {
-      props.history.push('/productlist');
+      props.history.push('/productlist/seller');
     }
     if (!product || product._id !== productId || successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
-      setPrice(product.price);
+      setPriceVal(product.priceVal);
+      setPriceEuro(product.priceEuro);
       setImage(product.image);
       setCategory(product.category);
       setCountInStock(product.countInStock);
@@ -50,7 +52,8 @@ export default function ProductEditScreen(props) {
       updateProduct({
         _id: productId,
         name,
-        price,
+        priceVal,
+        priceEuro,
         image,
         category,
         brand,
@@ -59,11 +62,13 @@ export default function ProductEditScreen(props) {
       })
     );
   };
+
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -88,8 +93,15 @@ export default function ProductEditScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1 className="row center">Modifica Annuncio N°:</h1>
+          <h1 className="row center">Crea / Modifica Annuncio N°:</h1>
           <p className="row center"> {productId}</p>
+          { !userInfo.hasAd && 
+            (
+              <MessageBox variant="alert">
+                Per conttatare un offerente devi diventarlo tu prima. Crea un annuncio promozionando un bene o servizio che vorresti baratare per beni o servizi di altri.
+              </MessageBox>
+            )
+          }
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
@@ -105,27 +117,38 @@ export default function ProductEditScreen(props) {
                 id="name"
                 type="text"
                 placeholder="Inserisci nome"
-                value={name}
+                value={!name.match(/Annunciø/)?name:null}
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="price">Prezzo</label>
+              <label htmlFor="priceVal">Prezzo in Val </label>
               <input
-                id="price"
-                type="text"
-                placeholder="Inserisci prezzo"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                id="priceVal"
+                type="number"
+                placeholder="Inserisci prezzo ☯"
+                value={priceVal}
+                onChange={(e) => setPriceVal(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="image">Immagine</label>
+              <label htmlFor="priceEuro">Prezzo in Euro </label>
+              <input
+                id="priceEuro"
+                type="number"
+                placeholder="Inserisci prezzo 💶"
+                value={priceEuro}
+                onChange={(e) => setPriceEuro(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="image" style={{display:"none"}}>Immagine</label>
               <input
                 id="image"
-                type="text"
+                type="hidden"
                 placeholder="Inserisci immagine"
                 value={image}
+                disabled
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div>
@@ -163,11 +186,11 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="countInStock">Numero proddotti in magazzino</label>
+              <label htmlFor="countInStock">Numero prodotti in magazzino</label>
               <input
                 id="countInStock"
                 type="text"
-                placeholder="Inserisci numero di proddotti in offerta"
+                placeholder="Inserisci numero di prodotti in offerta"
                 value={countInStock}
                 onChange={(e) => setCountInStock(e.target.value)}
               ></input>

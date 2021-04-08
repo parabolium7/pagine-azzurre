@@ -5,6 +5,8 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 import MessageBox from '../components/MessageBox';
 
 export default function CartScreen(props) {
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const productId = props.match.params.id;
   const qty = props.location.search
     ? Number(props.location.search.split('=')[1])
@@ -29,7 +31,7 @@ export default function CartScreen(props) {
   return (
     <div className="row top">
       <div className="col-2">
-        <h1>Carrello</h1>
+        <h1>Processo di conttato al offerente</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
@@ -54,9 +56,7 @@ export default function CartScreen(props) {
                     <select
                       value={item.qty}
                       onChange={(e) =>
-                        dispatch(
-                          addToCart(item.product, Number(e.target.value))
-                        )
+                        dispatch(addToCart(item.product, Number(e.target.value)))
                       }
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
@@ -66,7 +66,8 @@ export default function CartScreen(props) {
                       ))}
                     </select>
                   </div>
-                  <div>☯{item.price}</div>
+                  <div>€{item.priceEuro}</div>
+                  <div> / ☯{item.priceVal}</div>
                   <div>
                     <button
                       type="button"
@@ -85,9 +86,10 @@ export default function CartScreen(props) {
         <div className="card card-body">
           <ul>
             <li>
+              <strong>Comincia cercando articoli che ti interessano?</strong>
               <h2>
                 totale parziale ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : ☯
-                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                {cartItems.reduce((a, c) => a + c.priceVal * c.qty, 0)} / € {cartItems.reduce((a, c) => a + c.priceEuro * c.qty, 0)}
               </h2>
             </li>
             <li>
@@ -97,8 +99,15 @@ export default function CartScreen(props) {
                 className="primary block"
                 disabled={cartItems.length === 0}
               >
-                Procedere al checkout
+                Continua per conttatare offerente
               </button>
+              { !userInfo.hasAd && 
+                (
+                  <MessageBox variant="alert">
+                    Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
+                  </MessageBox>
+                )
+              }
             </li>
           </ul>
         </div>

@@ -8,7 +8,6 @@ import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
 import Web3 from 'web3'
 import { msgRegistration, msgPasswordRecovery } from '../emailTemplates/mailMsg.js'
-import { userBecomesOfferer } from '../utils.js'
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
@@ -58,7 +57,8 @@ userRouter.post(
           email: user.email,
           referer: user.referer,
           isAdmin: user.isAdmin,
-          isSeller: userBecomesOfferer(user),
+          isSeller: user.isSeller,
+          hasAd: user.hasAd,
           token: generateToken(user),
         });
         return;
@@ -81,24 +81,28 @@ userRouter.post(
       email: req.body.email,
       phone: req.body.phone,
       password: userPassword,
-      referer: req.body.referer
+      seller: { name: req.body.sellername },
+      referer: req.body.referer,
+      isSeller: true,
+      hasAd: false,
     });
     const createdUser = await user.save();
     let recipient = msgRegistration(createdUser.email)
     sgMail.send(recipient)
-      .then(() => {
+      .then((res) => {
+        console.log("Welcome email Sent.")
       })
-      .catch((error) => {
-        console.error(error)
-      }
-    )
-    res.send({
+      .catch((error) => {console.error(error)})
+    
+      res.send({
       _id: createdUser._id,
       account: createdUser.account,
       username: createdUser.username,
       email: createdUser.email,
       phone: createdUser.email,
       cf: createdUser.email,
+      isSeller: createdUser.isSeller,
+      hasAd: createdUser.hasAd,
       referer: createdUser.referer,
       token: generateToken(createdUser),
     });
@@ -136,7 +140,8 @@ userRouter.put(
       user.zipCode = req.body.zipCode || user.zipCode;
       user.phone = req.body.phone || user.phone;
       user.referer = req.body.referer || user.referer;
-      user.isSeller = userBecomesOfferer(user)
+      user.isSeller = user.isSeller
+      user.hasAd = user.hasAd
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
         user.seller.logo = req.body.sellerLogo || user.seller.logo;
@@ -162,7 +167,8 @@ userRouter.put(
         phone: updatedUser.phone,
         referer: updatedUser.referer,
         isAdmin: updatedUser.isAdmin,
-        isSeller: user.isSeller,
+        isSeller: updatedUser.isSeller,
+        hasAd: updatedUser.hasAd,
         token: generateToken(updatedUser),
       });
     }
@@ -174,11 +180,10 @@ userRouter.get(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
-    // console.log("UserRouter_Get_ALERT", user)
     if (user) {
       user.account = req.body.account || user.account;
       user.name = req.body.name || user.name;
-      user.surname = req.body.surmame || user.surname;
+      user.surname = req.body.surname || user.surname;
       user.username = req.body.username || user.username;
       user.gender = req.body.gender || user.gender;
       user.cf = req.body.cf || user.cf;
@@ -187,6 +192,8 @@ userRouter.get(
       user.zipCode = req.body.zipCode || user.zipCode;
       user.phone = req.body.phone || user.phone;
       user.referer = req.body.referer || user.referer;
+      user.isSeller = req.body.referer || user.isSeller;
+      user.hasAd = req.body.hasAd || user.hasAd;
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
         user.seller.logo = req.body.sellerLogo || user.seller.logo;
@@ -197,7 +204,6 @@ userRouter.get(
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
       const updatedUser = await user.save();
-      // console.log(updatedUser)
       res.send({
         _id: updatedUser._id,
         name: updatedUser.name,
@@ -205,7 +211,8 @@ userRouter.get(
         phone: updatedUser.phone,
         referer: updatedUser.referer,
         isAdmin: updatedUser.isAdmin,
-        isSeller: user.isSeller,
+        isSeller: updatedUser.isSeller,
+        hasAd: updatedUser.hasAd,
         token: generateToken(updatedUser),
       });
     }
@@ -262,19 +269,32 @@ userRouter.put(
   })
 );
 
+userRouter.put(
+  '/upgrade/:id',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if (!user.hasAd) {
+      user.hasAd = true;
+      const upgradedUser = await user.save();
+      res.send({ message: 'User Upgraded', user: upgradedUser });
+    } else {
+      res.status(404).send({ message: 'User Not Found' });
+    }
+  })
+);
+
 userRouter.post(
   '/password-recovery',
   expressAsyncHandler(async (req, res) => {
     // TODO use to validate also CF const user = await User.findOne({ cf: "LGMGMNL0176Z614M" });
     const data = await User.find({ email: req.body.email });
-    // console.log("Password Recovery", data[0].email === req.body.email)
     if (data[0].email === req.body.email) {
       let recipient = msgPasswordRecovery(data[0].email)
       res.send({email: true, loading: false })
       sgMail.send(recipient)
         .then(() => {
           // TODO: To Andrei.
-          // console.log('Email sent')
         })
         .catch((error) => {
           console.error(error)
