@@ -18,7 +18,7 @@ export default function Product(props) {
           numReviews={product.numReviews}
         ></Rating>
         <div className="row start">
-          <div className="price euro">€{' '+product.priceEuro}&nbsp;{' /'}</div>
+          <div className="price euro">€{' '+product.priceEuro}&nbsp;{' e'}</div>
           <div className="price">&nbsp;&nbsp;☯{' '+product.priceVal}</div>
           <div>
             <Link to={`/product/${product._id}`}>

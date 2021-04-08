@@ -104,7 +104,7 @@ export default function ProductScreen(props) {
                     <div className="row start">
                       <div style={{paddingRight:"1.8rem"}}>Prezzo</div>
                       <div className="price euro">€{product.priceEuro}&nbsp;</div>
-                      <div className="price">/ ☯{product.priceVal}</div>
+                      <div className="price">e ☯{product.priceVal}</div>
                     </div>
                   </li>
                   <li>

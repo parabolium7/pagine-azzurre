@@ -67,7 +67,7 @@ export default function CartScreen(props) {
                     </select>
                   </div>
                   <div>€{item.priceEuro}</div>
-                  <div> / ☯{item.priceVal}</div>
+                  <div> e ☯{item.priceVal}</div>
                   <div>
                     <button
                       type="button"
@@ -89,7 +89,7 @@ export default function CartScreen(props) {
               <strong>Comincia cercando articoli che ti interessano?</strong>
               <h2>
                 totale parziale ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : ☯
-                {cartItems.reduce((a, c) => a + c.priceVal * c.qty, 0)} / € {cartItems.reduce((a, c) => a + c.priceEuro * c.qty, 0)}
+                {cartItems.reduce((a, c) => a + c.priceVal * c.qty, 0)} e € {cartItems.reduce((a, c) => a + c.priceEuro * c.qty, 0)}
               </h2>
             </li>
             <li>

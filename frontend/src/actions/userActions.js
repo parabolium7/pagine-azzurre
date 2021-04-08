@@ -151,8 +151,8 @@ export const upgradeUser = (user) => async (dispatch, getState) => {
     const { data } = await Axios.put(`/api/users/upgrade/${user._id}`, user, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    dispatch({ type: USER_UPGRADE_SUCCESS, payload: data.user });
     localStorage.setItem('userInfo', JSON.stringify(data.user));
+    dispatch({ type: USER_UPGRADE_SUCCESS, payload: data.user });
     window.location.reload()
   } catch (error) {
     const message =
