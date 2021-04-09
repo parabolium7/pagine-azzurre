@@ -277,7 +277,7 @@ userRouter.put(
     if (!user.hasAd) {
       user.hasAd = true;
       const upgradedUser = await user.save();
-      res.send({ message: 'User Upgraded', user: upgradedUser });
+      res.send({ token: generateToken(user), message: 'User Upgraded', user: upgradedUser });
     } else {
       res.status(404).send({ message: 'User Not Found' });
     }

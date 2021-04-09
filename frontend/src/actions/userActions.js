@@ -64,6 +64,7 @@ export const signin = (email, password) => async (dispatch) => {
     const { data } = await Axios.post('/api/users/signin', { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
+    console.log("Signin Action Good", data)
   } catch (error) {
     dispatch({
       type: USER_SIGNIN_FAIL,
@@ -154,6 +155,7 @@ export const upgradeUser = (user) => async (dispatch, getState) => {
     localStorage.setItem('userInfo', JSON.stringify(data.user));
     dispatch({ type: USER_UPGRADE_SUCCESS, payload: data.user });
     window.location.reload()
+    console.log("Upgrade action bad", data)
   } catch (error) {
     const message =
       error.response && error.response.data.message
