@@ -101,12 +101,17 @@ export default function CartScreen(props) {
               >
                 Continua per conttatare offerente
               </button>
-              { !userInfo.hasAd && 
+              { userInfo && !userInfo.hasAd && 
                 (
                   <MessageBox variant="alert">
                     Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
                   </MessageBox>
                 )
+              }
+              { !userInfo && 
+                <MessageBox variant="alert">
+                  Devi essere logato.
+                </MessageBox>
               }
             </li>
           </ul>

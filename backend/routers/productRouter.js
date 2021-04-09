@@ -90,7 +90,6 @@ productRouter.get(
 productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    // TODO: Fix bug
     const product = await Product.findById(req.params.id).populate(
       'seller',
       'seller.name seller.logo seller.rating seller.numReviews'

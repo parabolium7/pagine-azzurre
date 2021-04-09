@@ -15,7 +15,7 @@ export default function ProductScreen(props) {
   const { loading, error, product } = productDetails;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
+  console.log('State user', userInfo)
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const {
     loading: loadingReviewCreate,
@@ -147,7 +147,7 @@ export default function ProductScreen(props) {
                         >
                           Contatta Offerente
                         </button>
-                        { !userInfo.hasAd && 
+                        { userInfo && !userInfo.hasAd && 
                           (
                             <MessageBox variant="alert">
                               Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
