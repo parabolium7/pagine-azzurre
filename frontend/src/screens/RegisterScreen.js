@@ -114,7 +114,7 @@ export default function RegisterScreen(props) {
         </div>
         <div>
           <div className="row start">
-            <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
+            <label htmlFor="isReferer">Partecipi a gruppi, movimenti, comitati o associazioni no profit?
               <input
                 type="radio"
                 id="no_referer"
