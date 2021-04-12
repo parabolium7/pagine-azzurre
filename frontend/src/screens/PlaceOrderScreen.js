@@ -33,7 +33,6 @@ export default function PlaceOrderScreen(props) {
     e.preventDefault()
     if( userInfo.hasAd ) {
       dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
-      dispatch(sendOrderDoubleNotification(order))
     } else {
       window.alert("Per poter conttatare il offerente avere un prodotto in vetrina.")
     }
@@ -61,7 +60,7 @@ export default function PlaceOrderScreen(props) {
                   ,{cart.shippingAddress.country}<br/>
                   {cart.shippingAddress.email && (<strong>Email: </strong>)}
                   {cart.shippingAddress.email && cart.shippingAddress.email}<br/>
-                  {cart.shippingAddress.phone && (<strong>phone: </strong>)}
+                  {cart.shippingAddress.phone && (<strong>Telefono: </strong>)}
                   {cart.shippingAddress.phone && cart.shippingAddress.phone}
                 </p>
               </div>

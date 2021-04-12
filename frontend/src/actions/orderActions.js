@@ -67,6 +67,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     });
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
+    dispatch(sendOrderDoubleNotification(data))
     dispatch({ type: CART_EMPTY });
     localStorage.removeItem('cartItems');
   } catch (error) {
@@ -179,13 +180,14 @@ export const deleteOrder = (orderId) => async (dispatch, getState) => {
 
 export const sendOrderDoubleNotification = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_REQUEST, payload: order})
+  console.log("ACTION ORDER", order)
   const { userSignin: { userInfo } } = getState()
   if(true) {
     try {
-      const { data } = await Axios.post(`/api/orders/notifications/`, order, {
+      const { data } = await Axios.post(`/api/orders/notifications/`, order.order, {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
-      dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS, payload: data });
+      dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS, payload: data.order });
     } catch (error) {
       const message =
       error.response && error.response.data.message

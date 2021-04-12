@@ -155,12 +155,15 @@ orderRouter.post(
   '/notifications',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    console.log("Order", req.body.orderItems[0])
+    // console.log("Request", req.body)
+    // console.log("User Buyer", req.user.email)
+    // console.log("User Offerer", req.body.seller)
+    const buyer = await User.find({ email: req.user.email });
     const offerer = await User.findById(req.body.seller);
-    const buyer = await User.findById(req.body.user);
-    console.log("Offerer: ", offerer.username, "Buyer: ", buyer)
-    let recipientOfferer = msgOrderNotificationToOfferer(offerer, req.body.orderItems[0], buyer)
-    let recipientBuyer = msgOrderNotificationToBuyer(buyer, req.body.orderItems[0], offerer)
+    // console.log("Offerer: ", offerer, "Buyer: ", buyer)
+    // console.log("Order Details: ", req.body)
+    let recipientOfferer = msgOrderNotificationToOfferer(offerer, req.body, buyer)
+    let recipientBuyer = msgOrderNotificationToBuyer(buyer, req.body, offerer)
     sgMail.send(recipientOfferer)
         .then(() => {
           console.log("Notification sent to offerer")
