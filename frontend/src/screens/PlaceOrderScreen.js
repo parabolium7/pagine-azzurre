@@ -11,6 +11,7 @@ export default function PlaceOrderScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
+  console.log("CART:", cart)
   if (!cart.paymentMethod) {
     props.history.push('/payment');
   }
@@ -57,7 +58,11 @@ export default function PlaceOrderScreen(props) {
                   <strong>Nome:</strong> {cart.shippingAddress.fullName} <br />
                   <strong>Indirizzo: </strong> {cart.shippingAddress.address},
                   {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
-                  ,{cart.shippingAddress.country}
+                  ,{cart.shippingAddress.country}<br/>
+                  {cart.shippingAddress.email && (<strong>Email: </strong>)}
+                  {cart.shippingAddress.email && cart.shippingAddress.email}<br/>
+                  {cart.shippingAddress.phone && (<strong>phone: </strong>)}
+                  {cart.shippingAddress.phone && cart.shippingAddress.phone}
                 </p>
               </div>
             </li>
