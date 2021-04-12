@@ -42,15 +42,24 @@ let msgPasswordRecovery = (recipient) => {
 let msgOrderNotificationToOfferer = (offerer, orderdetails, buyer) => {
   // console.log(offerer, orderdetails, buyer)
   console.log("Buyer", buyer[0])
-  console.log("buyer username", buyer[0].username)
-  console.log("offerer order Details", orderdetails)
+  console.log("buyer Phone", buyer[0].phone)
+  console.log("offerer order Details", orderdetails.shippingAddress.phone)
   // console.log("orderdetails name", orderdetails.cartItems[0].name)
   // console.log("orderdetails product", orderdetails.cartItems[0].product)
   let msg = {
     to: offerer.email,
     from: "g.lugo.dev@gmail.com",
     subject: "Pagine Azzurre Notificazione d\'Ordine al offerente",
-    html: `<p>Buongiorno ${offerer.username},</p><br><p><strong>Hai un nuovo ordine nelle pagine azzurre</strong></p><br><p>Nome annuncio: ${orderdetails.orderItems[0].name}</p><p>Product ID: ${orderdetails.orderItems[0].product}</p><p>Order id: ${orderdetails._id}</p><p>Quantità: ${orderdetails.qty}</p><p>Prezzo in Val: ☯${orderdetails.priceVal}</p><p>Prezzo in Euro: €${orderdetails.priceEuro}</p><br><p><strong>Informazione del compratore</strong></p><br><p>Username: ${buyer[0].username}</p><p>Email: ${buyer[0].email}</p><p>Telefono: ${buyer[0].phone !== buyer[0].email? buyer.phone : 'Non disponible'}</p>`
+    html: `<p>Buongiorno ${offerer.username},</p><br><p><strong>Hai un nuovo ordine nelle pagine azzurre</strong></p><br><p>Nome annuncio: 
+           ${orderdetails.orderItems[0].name}</p><p>Product ID: 
+           ${orderdetails.orderItems[0].product}</p><p>Order id: 
+           ${orderdetails._id}</p><p>Quantità: 
+           ${orderdetails.orderItems[0].qty}</p><p>Prezzo in Val: ☯
+           ${orderdetails.orderItems[0].priceVal}</p><p>Prezzo in Euro: €
+           ${orderdetails.orderItems[0].priceEuro}</p><br><p><strong>Informazione del compratore</strong></p><br><p>Username: 
+           ${buyer[0].username}</p><p>Email: 
+           ${buyer[0].email}</p><p>Telefono: 
+           ${ orderdetails.shippingAddress.phone !== buyer[0].email && orderdetails.shippingAddress.phone !== '' ? orderdetails.shippingAddress.phone : buyer[0].phone !== buyer[0].email ? buyer[0].phone : 'Non Disponibile'}</p>`
   }
   return msg
 }
@@ -62,7 +71,7 @@ let msgOrderNotificationToBuyer = (buyer, orderdetails, offerer) => {
     subject: "Pagine Azzurre Notificazione d\'Ordine al compratore",
     html: `<p>Buongiorno ${buyer.username},</p><br><p><strong>Hai un nuovo ordine nelle pagine azzurre</strong></p><br><p>Nome annuncio: ${orderdetails.name}</p><p>Product ID: ${orderdetails.product}</p><p>Order id: ${orderdetails._id}</p><p>Quantità: ${orderdetails.qty}</p><p>Prezzo in Val: ☯${orderdetails.priceVal}</p><p>Prezzo in Euro: €${orderdetails.priceEuro}</p><br><p><strong>Informazione del Offerente</strong></p><br><p>Username: ${offerer.username}</p><p>Email: ${offerer.email}</p><p>Telefono: ${offerer.phone !== offerer.email? offerer.phone : 'Non disponible'}</p>`
   }
-  return "msg"
+  return msg
 }
 
 let secondMailToOfferer = (envelop) => {
