@@ -37,24 +37,24 @@ orderRouter.get(
   })
 );
 
-orderRouter.post(
-  '/mailing',
-  isAuth,
-  expressAsyncHandler(async (req, res) => {
-  const seller = await User.findById(req.body.order.seller)
-  const order = await Order.findById(req.body.order._id)
-  let orderNames = ""
-  req.body.order.orderItems.forEach((o) => orderNames += o.name + ' ')
-  let envelop = { offerer: { email: seller.email, name: ( seller.name ? seller.name : seller.username )}, buyer: req.body.buyer, orderNames}
-  const recipient = secondMailToOfferer(envelop)
-  sgMail.send(recipient)
-  .then((res) => {
-    console.log("Mailing Order RES_CODE: ", res[0].statusCode)
-  })
-  .catch((error) => { console.error(error)})
-
-  res.status(202).send({ mailStatus: "Mail Sent.", resp_code: 1 })
-}))
+// orderRouter.post(
+//   '/mailing',
+//   isAuth,
+//   expressAsyncHandler(async (req, res) => {
+//   const seller = await User.findById(req.body.order.seller)
+//   const order = await Order.findById(req.body.order._id)
+//   console.log("mailing", req.body)
+//   let orderNames = ""
+//   req.body.order.orderItems.forEach((o) => orderNames += o.name + ' ')
+//   let envelop = { offerer: { email: seller.email, name: ( seller.name ? seller.name : seller.username )}, buyer: req.body.buyer, orderNames}
+//   const recipient = secondMailToOfferer(envelop)
+//   sgMail.send(recipient)
+//   .then((res) => {
+//     console.log("Mailing Order RES_CODE: ", res[0].statusCode)
+//   })
+//   .catch((error) => { console.error(error)})
+//   res.status(202).send({ mailStatus: "Mail Sent.", resp_code: 1 })
+// }))
 
 orderRouter.post(
   '/',
@@ -152,10 +152,29 @@ orderRouter.put(
 );
 
 orderRouter.post(
+  '/mailing',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+  const seller = await User.findById(req.body.order.seller)
+  const order = await Order.findById(req.body.order._id)
+  console.log("mailing", req.body)
+  let orderNames = ""
+  req.body.order.orderItems.forEach((o) => orderNames += o.name + ' ')
+  let envelop = { offerer: { email: seller.email, name: ( seller.name ? seller.name : seller.username )}, buyer: req.body.buyer, orderNames, emailBody: req.body.emailBody}
+  const recipient = secondMailToOfferer(envelop)
+  sgMail.send(recipient)
+    .then((res) => {
+      console.log("Mailing Order RES_CODE: ", res[0].statusCode)
+    })
+    .catch((error) => { console.error(error)})
+  res.status(202).send({ mailStatus: "Mail Sent.", resp_code: 1 })
+}))
+
+orderRouter.post(
   '/notifications',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    // console.log("Request", req.body)
+    console.log("Request notification", req.body)
     // console.log("User Buyer", req.user.email)
     // console.log("User Offerer", req.body.seller)
     const buyer = await User.find({ email: req.user.email });
@@ -170,7 +189,6 @@ orderRouter.post(
           sgMail.send(recipientBuyer)
             .then(() => {
               console.log("Notification sent to buyer")
-              res.status(200)
             })
             .catch((error) => {
               console.error(error)
@@ -179,6 +197,7 @@ orderRouter.post(
         .catch((error) => {
           console.error(error)
         })
+    res.status(202).send({ mailStatus: "Mail Sent.", resp_code: 2 })
   })
 
 );

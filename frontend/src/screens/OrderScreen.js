@@ -21,7 +21,8 @@ export default function OrderScreen(props) {
   const { userInfo } = userSignin;
   const mailingDetails = useSelector((state) => state.orderMailing)
   const { loading: loading_mailing, resp_code } = mailingDetails
-  // console.log("mailingDetails:", mailingDetails)
+  const uniqueNotification = useSelector((state) => state.orderDoubleNotification)
+  const { loading: loading_unique_mailing, resp_code: resp_code_double } = uniqueNotification
   const [mailing, setMailing] = useState(false)
   const [emailBody, setEmailbody] = useState('Puoi aggiungere informazione al offerente per fare più facile tutto, come proporre un punto, ora e data di incontro. Cancella questo testo e scrivi quello che vuoi.')
   const orderPay = useSelector((state) => state.orderPay);
@@ -236,12 +237,11 @@ export default function OrderScreen(props) {
                           className="primary block"
                           onClick={askAnotherEmail}
                         >
-
                           {!mailing?'Vuoi mandare una seconda EMAIL al offerente?':"Invia"}
                         </button>
                       }
                       { loading_mailing && <LoadingBox></LoadingBox> }
-                      { resp_code === 1
+                      { resp_code === 2
                           ?
                             <>
                               <MessageBox variant="success">Email Consegnato al offerente</MessageBox>

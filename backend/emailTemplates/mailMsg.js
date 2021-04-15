@@ -84,7 +84,7 @@ let msgOrderNotificationToBuyer = (buyer, orderdetails, offerer) => {
 }
 
 let secondMailToOfferer = (envelop) => {
-  console.log(envelop)
+  console.log("Envelop:", envelop)
   let msg = {
     to: envelop.offerer.email,
     from: "g.lugo.dev@gmail.com",

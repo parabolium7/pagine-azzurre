@@ -30,30 +30,30 @@ import {
   ORDER_SEND_NOTIFICATION_FAIL,
 } from '../constants/orderConstants';
 
-export const mailingOrder = (envelop) => async (dispatch, getState) => {
-  dispatch({ type: ORDER_SEND_NOTIFICATION_REQUEST,  payload: envelop })
-  const {
-    userSignin: { userInfo },
-  } = getState();
-  try {
-    const data = await Axios.post('/api/orders/mailing', envelop, {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    })
-    dispatch({ type: ORDER_SEND_NOTIFICATION_SUCCESS, payload: data.data } )
-    console.log("EMAIL SENT TO OFFERER:", data)
-  } catch(error) {
-    console.log("Error mailing", error)
-    dispatch({
-      type: ORDER_CREATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-}
+// export const mailingOrder = (envelop) => async (dispatch, getState) => {
+//   dispatch({ type: ORDER_SEND_NOTIFICATION_REQUEST,  payload: envelop })
+//   const {
+//     userSignin: { userInfo },
+//   } = getState();
+//   try {
+//     const data = await Axios.post('/api/orders/mailing', envelop, {
+//       headers: {
+//         Authorization: `Bearer ${userInfo.token}`,
+//       },
+//     })
+//     dispatch({ type: ORDER_SEND_NOTIFICATION_SUCCESS, payload: data.data } )
+//     console.log("EMAIL SENT TO OFFERER:", data.data)
+//   } catch(error) {
+//     console.log("Error mailing", error)
+//     dispatch({
+//       type: ORDER_SEND_NOTIFICATION_FAIL,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// }
 
 export const createOrder = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
@@ -67,7 +67,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     });
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
-    dispatch(sendOrderDoubleNotification(data))
+    dispatch(orderDoubleNotification(data))
     dispatch({ type: CART_EMPTY });
     localStorage.removeItem('cartItems');
   } catch (error) {
@@ -178,23 +178,47 @@ export const deleteOrder = (orderId) => async (dispatch, getState) => {
   }
 };
 
-export const sendOrderDoubleNotification = (order) => async (dispatch, getState) => {
+export const orderDoubleNotification = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_REQUEST, payload: order})
   console.log("ACTION ORDER", order)
   const { userSignin: { userInfo } } = getState()
-  if(true) {
-    try {
-      const { data } = await Axios.post(`/api/orders/notifications/`, order.order, {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      });
-      dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS, payload: data.order });
-    } catch (error) {
-      const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-      dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_FAIL, payload: message });
-    }
+  try {
+    const { data } = await Axios.post(`/api/orders/notifications/`, order.order, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    console.log("Double Notification", data)
+    dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+    error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    dispatch({ type: ORDER_SEND_DOUBLE_NOTIFICATION_FAIL, payload: message });
+  }
+}
+
+export const mailingOrder = (envelop) => async (dispatch, getState) => {
+  dispatch({ type: ORDER_SEND_NOTIFICATION_REQUEST,  payload: envelop })
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const data = await Axios.post('/api/orders/mailing', envelop, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    })
+    console.log("Single mail:", data)
+    dispatch({ type: ORDER_SEND_NOTIFICATION_SUCCESS, payload: data } )
+  } catch(error) {
+    console.log("Error mailing", error)
+    dispatch({
+      type: ORDER_SEND_NOTIFICATION_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
 }
 

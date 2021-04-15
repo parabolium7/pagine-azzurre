@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createOrder, sendOrderDoubleNotification } from '../actions/orderActions';
+import { createOrder, sendOrderUniqueNotification } from '../actions/orderActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
@@ -11,7 +11,6 @@ export default function PlaceOrderScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const cart = useSelector((state) => state.cart);
-  console.log("CART:", cart)
   if (!cart.paymentMethod) {
     props.history.push('/payment');
   }
