@@ -49,7 +49,7 @@ export default function HomeScreen() {
           </Carousel> */}
         </>
       {/* )} */}
-      <h1 className="row center">ULTIMI INSERIMENTI</h1>
+      <h1 className="row center">ULTIME ATTIVITÀ</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
