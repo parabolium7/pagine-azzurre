@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createOrder, sendOrderUniqueNotification } from '../actions/orderActions';
+import { createOrder } from '../actions/orderActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
@@ -152,7 +152,7 @@ export default function PlaceOrderScreen(props) {
                 { !userInfo.hasAd && 
                   (
                     <MessageBox variant="alert">
-                      Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
+                      Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina. <br></br> <Link to='/productlist/seller'>Crea l'annuncio addeso</Link>
                     </MessageBox>
                   )
                 }

@@ -149,7 +149,7 @@ export default function ProductScreen(props) {
                         { userInfo && !userInfo.hasAd && 
                           (
                             <MessageBox variant="alert">
-                              Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
+                              Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.<br></br> <Link to='/productlist/seller'>Crea l'annuncio addeso</Link>
                             </MessageBox>
                           )
                         }

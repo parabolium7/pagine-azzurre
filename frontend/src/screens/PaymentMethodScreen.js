@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { savePaymentMethod } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 import MessageBox from '../components/MessageBox';
@@ -64,7 +65,7 @@ export default function PaymentMethodScreen(props) {
           { !userInfo.hasAd && 
             (
               <MessageBox variant="alert">
-                Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.
+                Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina. <Link to='/productlist/seller'>Crea l'annuncio addeso</Link>
               </MessageBox>
             )
           }
