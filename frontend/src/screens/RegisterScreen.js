@@ -168,9 +168,10 @@ export default function RegisterScreen(props) {
         </div>
         <div>
           {loading && <LoadingBox></LoadingBox>}
-          {error && <MessageBox variant="danger">{error}</MessageBox>}
+          {error && <MessageBox variant="info">{error}</MessageBox>}
         </div>
         <div>
+          <MessageBox variant="info">Nello spirito di scambio in solidarietà di beni, per vantaggi comuni; sei invitato a creare un annuncio. Una proposta o una  richiesta, per scambiare prodotti  servizi e conoscenze. Dove c’è scambio c’è vita. Sovranità consapevolezza</MessageBox>
           <div><p className="asterisk">(*) Campi Obbligatori</p></div>
           <button className="primary blu big" type="submit">
             Registrati
