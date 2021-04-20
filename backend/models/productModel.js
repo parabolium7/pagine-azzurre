@@ -23,6 +23,7 @@ const productSchema = new mongoose.Schema(
     countInStock: { type: Number, required: false },
     rating: { type: Number, required: true },
     numReviews: { type: Number, required: true },
+    section: {type: String, required: true, default: 'cerco'},
     reviews: [reviewSchema],
   },
   {

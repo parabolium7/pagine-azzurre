@@ -16,6 +16,7 @@ export default function ProductEditScreen(props) {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const [section, setSection] = useState('');
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -44,6 +45,7 @@ export default function ProductEditScreen(props) {
       setCountInStock(product.countInStock);
       setBrand(product.brand);
       setDescription(product.description);
+      setSection(product.section);
     }
   }, [product, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
@@ -59,6 +61,7 @@ export default function ProductEditScreen(props) {
         brand,
         countInStock,
         description,
+        section,
       })
     );
   };
@@ -121,6 +124,17 @@ export default function ProductEditScreen(props) {
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
+            <div>
+            <label htmlFor="section">Tipo annuncio</label>
+              <select
+                id="section"
+                name="section"
+                onClick={ (e) => setSection(e.target.value)}
+              >
+                  <option value="cerco" selected>Cerco</option>
+                  <option value="offro">Offro</option>
+              </select>
+          </div>
             <div>
               <label htmlFor="priceVal">Prezzo in Val </label>
               <input

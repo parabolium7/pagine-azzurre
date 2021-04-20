@@ -50,6 +50,10 @@ export default function HomeScreen() {
         </>
       {/* )} */}
       <h1 className="row center">ULTIME ATTIVITÀ</h1>
+      <div className="row center">
+        <button>offro</button>
+        <button>cerco</button>
+      </div>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

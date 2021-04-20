@@ -161,7 +161,7 @@ export default function RegisterScreen(props) {
                                 aggiungi
                               </button>)
                           }
-                    </div>       
+                    </div>
                 </div>
               ):''
           }
