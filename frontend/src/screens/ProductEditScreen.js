@@ -129,14 +129,15 @@ export default function ProductEditScreen(props) {
               <select
                 id="section"
                 name="section"
+                value={section.toString()}
                 onChange={ (e) => setSection(e.target.value) }
               >
-                  <option value="cerco" selected>Cerco</option>
-                  <option value="offro">Offro</option>
-                  <option value="propongo">Propongo</option>
-                  <option value="Avviso">Avviso</option>
+                  <option value="offro" >Offro</option>
+                  <option value="cerco" >Cerco</option>
+                  <option value="propongo" >Propongo</option>
+                  <option value="avviso">Avviso</option>
               </select>
-          </div>
+            </div>
             <div>
               <label htmlFor="priceVal">Prezzo in Val </label>
               <input
