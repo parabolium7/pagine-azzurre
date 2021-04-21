@@ -568,6 +568,21 @@ input[type="number"] {
   margin: 0.2rem;
 }
 
+/* Buttons */
+
+.filter {
+  background-color: #caf0f8;
+  padding: 0.4rem;
+  margin: 0 0.4rem;
+}
+
+.filter.active {
+ background-color: #dff3f7;
+ padding: 0.6rem;
+ box-shadow: 5px 5px 8px #c7c7c7;
+ text-decoration: underline;
+}
+
 @media screen and (max-width: 1450px){
   .Logo1 {
     height: 4.5rem;

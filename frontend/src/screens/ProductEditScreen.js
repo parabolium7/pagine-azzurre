@@ -129,10 +129,12 @@ export default function ProductEditScreen(props) {
               <select
                 id="section"
                 name="section"
-                onClick={ (e) => setSection(e.target.value)}
+                onChange={ (e) => setSection(e.target.value) }
               >
                   <option value="cerco" selected>Cerco</option>
                   <option value="offro">Offro</option>
+                  <option value="propongo">Propongo</option>
+                  <option value="Avviso">Avviso</option>
               </select>
           </div>
             <div>
