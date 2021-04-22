@@ -1,32 +1,33 @@
 let msgRegistration = (recipient, username) => {
   let now = new Date()
   let hrs = now.getHours()
-  
+
   let moment = 'Salve'
 
   if(hrs < 12) moment = 'Buongiorno'
   if(hrs === 12) moment = 'Buon pomeriggio'
   if(hrs >= 13) moment = 'Buona sera'
 
-  let msg = { 
+  let msg = {
     to: recipient,
     from: "g.lugo.dev@gmail.com",
     subject: `${username}, Benvenuto nelle Pagine Azzurre.`,
-    html: `<p>${moment} ${username}:</p></br>\
-           <p>Benvenuto con Noi nelle PAGINE AZZURRE. Ti sei registrato con successo.</br>\
-           Aderisci e usufruisci della convenzione: VALorizza le AZioni che COncordi.</br>\
-           Ora puoi partecipare con le tue proposte, inserisci le cose che vuoi mettere</br>\
-           in scambio e hai piacere ti siano richieste. Esponi  richieste di cose e servizi</br>\
-           che cerchi, e avresti piacere di trovare. Ti auguriamo Buoni scambi.</br>\
-           Dove c\'è scambio c\'è vita, ancor meglio se con meno Euro.</br>\
-           Ricordati di riconoscere un minimo di ringraziamento in VAL nello scambio di volontari</br>\
-           doni e servizi senza euro.</p></br>\n\
-           I Cittadini Volontari (NOI VOI) ti ringraziano della registrazione e collaborazione.</br>\n\
-           </br>\n\
-           NB: Questa è la versione beta delle pagine azzurre, pensata a essere visualizzata per
-           un circolo stretto di amici per avere di loro sugerenze e dettetare bugs.
-           Se questa email ti è arrivata per sbaglio per favore facci una segnalazione rispondendo
-           al mitternte, cosi da cancellare la tua mail del db.` 
+    html: `<p>${moment} ${username},</p></br>\
+    <p>Benvenuto con noi nelle PAGINE AZZURRE. Ti sei registrato con successo.</br>\
+    Aderisci e usufruisci della convenzione: VALorizza le AZioni che COncordi.</br>\
+    Ora puoi partecipare con le tue proposte, inserisci le cose che vuoi mettere</br>\
+    in scambio e hai piacere ti siano richieste. Esponi  richieste di cose e servizi</br>\
+    che cerchi, e avresti piacere di trovare. Ti auguriamo Buoni scambi.</br>\
+    Dove c\'è scambio c\'è vita, ancor meglio se con meno Euro.</br>\
+    Ricordati di riconoscere un minimo di ringraziamento in VAL nello scambio di volontari</br>\
+    doni e servizi senza euro.</p></br>\n\
+    I Cittadini Volontari (NOI VOI) ti ringraziano della registrazione e collaborazione.</br>\n\
+    </br>\n\
+    NB: Questa è versione beta delle pagine azzurre, pensata per essere visualizzata e implementata</br>\n\
+    per avere dagli amici e collaboratori suggerimenti e osservazioni su i bachi (Bugs! 🐛).</br>\n\
+    Se questa email ti è arrivata per sbaglio, facci una segnalazione rispondendo</br>\n\
+    al mittente, cosi da cancellare la tua email dal nostro database.</br>\n\
+    `
   }
   return msg 
 }
