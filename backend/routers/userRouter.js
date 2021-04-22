@@ -87,13 +87,13 @@ userRouter.post(
       hasAd: false,
     });
     const createdUser = await user.save();
-    let recipient = msgRegistration(createdUser.email)
+    let recipient = msgRegistration(createdUser.email, createdUser.username)
     sgMail.send(recipient)
       .then((res) => {
         console.log("Welcome email Sent.")
       })
       .catch((error) => {console.error(error)})
-    
+      // TODO: Rev. other generateToken in the code.
       res.send({
       _id: createdUser._id,
       account: createdUser.account,
@@ -152,6 +152,7 @@ userRouter.put(
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
       const updatedUser = await user.save();
+      // TODO: Update cookie too after this call.
       res.send({
         _id: updatedUser._id,
         account: updatedUser.account,

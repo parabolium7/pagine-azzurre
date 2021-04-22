@@ -1,19 +1,18 @@
-let msgRegistration = (recipient) => {
+let msgRegistration = (recipient, username) => {
+  let now = new Date()
+  let hrs = now.getHours()
+  
+  let moment = 'Salve'
+
+  if(hrs < 12) moment = 'Buongiorno'
+  if(hrs === 12) moment = 'Buon pomeriggio'
+  if(hrs >= 13) moment = 'Buona sera'
+
   let msg = { 
     to: recipient,
     from: "g.lugo.dev@gmail.com",
-    subject: 'Benvenuto alle Pagine Azzurre',
-    text: 'Buongiorno/Ciao nuovo Fruitore:\n\n\
-           Benvenuto con Noi nelle PAGINE AZZURRE. Ti sei registrato con successo.\n\
-           Aderisci e usufruisci della convenzione: VALorizza le AZioni che COncordi.\n\
-           Ora puoi partecipare con le tue proposte, inserisci le cose che vuoi mettere\n\
-           in scambio e hai piacere ti siano richieste. Esponi  richieste di cose e servizi\n\
-           che cerchi, e avresti piacere di trovare. Ti auguriamo Buoni scambi.\n\
-           Dove c\'è scambio c\'è vita, ancor meglio se con meno Euro.\n\
-           Ricordati di riconoscere un minimo di ringraziamento in VAL nello scambio di volontari\n\
-           doni e servizi senza euro.\n\n\
-           I Cittadini Volontari (NOI VOI) ringraziano della registrazione e collaborazione.',
-    html: '<p>Buongiorno/Ciao Nuovo Fruitore:</p></br>\
+    subject: `${username}, Benvenuto nelle Pagine Azzurre.`,
+    html: `<p>${moment} ${username}:</p></br>\
            <p>Benvenuto con Noi nelle PAGINE AZZURRE. Ti sei registrato con successo.</br>\
            Aderisci e usufruisci della convenzione: VALorizza le AZioni che COncordi.</br>\
            Ora puoi partecipare con le tue proposte, inserisci le cose che vuoi mettere</br>\
@@ -22,9 +21,13 @@ let msgRegistration = (recipient) => {
            Dove c\'è scambio c\'è vita, ancor meglio se con meno Euro.</br>\
            Ricordati di riconoscere un minimo di ringraziamento in VAL nello scambio di volontari</br>\
            doni e servizi senza euro.</p></br>\n\
-           I Cittadini Volontari (NOI VOI) ti ringraziano della registrazione e collaborazione.'
+           I Cittadini Volontari (NOI VOI) ti ringraziano della registrazione e collaborazione.</br>\n\
+           </br>\n\
+           NB: Questa è la versione beta delle pagine azzurre, pensata a essere visualizzata per
+           un circolo stretto di amici per avere di loro sugerenze e dettetare bugs.
+           Se questa email ti è arrivata per sbaglio per favore facci una segnalazione rispondendo
+           al mitternte, cosi da cancellare la tua mail del db.` 
   }
-  // console.log("From mailMsg!", msg)
   return msg 
 }
 // TODO: To Andrei.
