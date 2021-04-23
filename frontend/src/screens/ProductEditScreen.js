@@ -229,7 +229,7 @@ export default function ProductEditScreen(props) {
                 onChange={(e) => setCategory(e.target.value)}
               ></input>
             </div>
-            { section != 'avviso' && 
+            { section !== 'avviso' && 
               (<>
                 <div>
                   <label htmlFor="priceVal">Prezzo in Val </label>
@@ -277,7 +277,7 @@ export default function ProductEditScreen(props) {
                 <MessageBox variant="danger">{errorUpload}</MessageBox>
               )}
             </div>
-            { section != 'avviso' &&  
+            { section !== 'avviso' &&  
               <div>
                 <label htmlFor="brand">Brand</label>
                 <input
@@ -289,7 +289,7 @@ export default function ProductEditScreen(props) {
                 ></input>
               </div>
             }
-            { section != 'avviso' && 
+            { section !== 'avviso' && 
               <div>
                 <label htmlFor="countInStock">Numero prodotti in magazzino</label>
                 <input
@@ -311,7 +311,7 @@ export default function ProductEditScreen(props) {
                 onChange={(e) => setAuxPhone(e.target.value)}
               ></input>
             </div>
-            { section != 'avviso' && 
+            { section !== 'avviso' && 
               <div>
                 <label htmlFor="delivery">Forma di consegna preferita</label>
                   <select
@@ -350,7 +350,7 @@ export default function ProductEditScreen(props) {
               ></textarea>
             </div>
             <div>
-              <div>Pausa</div>
+              <div>Disattiva annuncio temporaneamente</div>
               <label class="switch">
                 <input
                   type="checkbox"
