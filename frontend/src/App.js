@@ -127,6 +127,16 @@ function App() {
                 <li>
                   <Link to="/profile">Profilo</Link>
                 </li>
+                {userInfo && userInfo.isSeller && (
+                <>
+                  <li>
+                    <Link to="/productlist/seller">Crea Annuncio</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist/seller">Ordini</Link>
+                  </li>
+                </>
+              )}
                 <li>
                   <Link to="/orderhistory">Istoriale</Link>
                 </li>
@@ -140,21 +150,6 @@ function App() {
             ) : (
               <div className="last-element">
                 <Link to="/signin">Accedi</Link>
-              </div>
-            )}
-            {userInfo && userInfo.isSeller && (
-              <div className="dropdown">
-                <Link to="#admin">
-                  Crea Annuncio <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/productlist/seller">Prodotti</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderlist/seller">Ordini</Link>
-                  </li>
-                </ul>
               </div>
             )}
             {userInfo && userInfo.isAdmin && (
