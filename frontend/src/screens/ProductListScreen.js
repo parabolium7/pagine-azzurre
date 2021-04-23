@@ -101,6 +101,7 @@ export default function ProductListScreen(props) {
                 <th>ID</th>
                 <th>NOME</th>
                 <th>PREZZO</th>
+                <th>SEZIONE</th>
                 <th>CATEGORIA</th>
                 <th>BRAND</th>
                 <th>MODIFICA / CANCELLA</th>
@@ -112,6 +113,7 @@ export default function ProductListScreen(props) {
                   <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>☯ {product.priceVal} e € {product.priceEuro}</td>
+                  <td>{ product.section[0].toUpperCase() + product.section.substring(1)}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>

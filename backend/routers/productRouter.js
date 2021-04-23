@@ -134,7 +134,16 @@ productRouter.put(
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
-      product.section = req.body.section
+      product.section = req.body.section;
+      product.isService = req.body.isService;
+      product.pause = req.body.pause;
+      product.auxPhone = req.body.auxPhone;
+      product.delivery = req.body.delivery;
+      product.expiry = req.body.expiry;
+      product.country = req.body.country;
+      product.state = req.body.state;
+      product.city = req.body.city;
+      product.municipality = req.body.municipality;
       const updatedProduct = await product.save();
       res.send({ message: 'Product Updated', product: updatedProduct });
     } else {

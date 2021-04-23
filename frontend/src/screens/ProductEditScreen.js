@@ -5,6 +5,11 @@ import { detailsProduct, updateProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import { DateUtils } from 'react-day-picker';
+import dateFnsFormat from 'date-fns/format';
+import dateFnsParse from 'date-fns/parse';
+import 'react-day-picker/lib/style.css';
 
 export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
@@ -16,7 +21,38 @@ export default function ProductEditScreen(props) {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
-  const [section, setSection] = useState('');
+  const [section, setSection] = useState('')
+  const [isService, setIsService] = useState('')
+  const [auxPhone, setAuxPhone] = useState('')
+  const [delivery, setDelivery] = useState('')
+  const [expiry, setExpiry] = useState('')
+  const [pause, setPause] = useState('')
+  const [country, setCountry] = useState('')
+  const [state, setState] = useState('')
+  const [city, setCity] = useState('')
+  const [municipality, setMunicipality] = useState('')
+
+  function parseDate(str, format, locale) {
+    const parsed = dateFnsParse(str, format, new Date(), { locale });
+    if (DateUtils.isDate(parsed)) {
+      return parsed;
+    }
+    return undefined;
+  }
+
+  function formatDate(date, format, locale) {
+    return dateFnsFormat(date, format, { locale });
+  }
+
+  const GetFormattedDate = (expiry) => {
+    if (typeof expiry === 'object') {
+      var day = expiry.getDate()
+      var month = expiry.getMonth() + 1
+      var year = expiry.getFullYear()
+      setExpiry(`${day}/${month}/${year}`)
+    }
+  }
+  const CalFORMAT = 'dd/MM/yyyy';
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -46,6 +82,15 @@ export default function ProductEditScreen(props) {
       setBrand(product.brand);
       setDescription(product.description);
       setSection(product.section);
+      setIsService(product.kindof)
+      setAuxPhone(product.setAuxPhone)
+      setDelivery(product.setDelivery)
+      setExpiry(product.setExpiry)
+      setPause(false)
+      setCountry(product.setCountry)
+      setState(product.setState)
+      setCity(product.setCity)
+      setMunicipality(product.setMunicipality)
     }
   }, [product, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
@@ -62,6 +107,15 @@ export default function ProductEditScreen(props) {
         countInStock,
         description,
         section,
+        isService,
+        pause,
+        auxPhone,
+        delivery,
+        expiry,
+        country,
+        state,
+        city,
+        municipality,
       })
     );
   };
@@ -92,6 +146,12 @@ export default function ProductEditScreen(props) {
     }
   };
 
+  const infoText = "Per conttatare un offerente devi diventarlo tu prima." +
+                   " Crea un annuncio promozionando un bene o servizio che vorresti baratare per beni o servizi di altri." +
+                   " Compila tutti i campi obbligatori contrassegnati da un (*)." +
+                   " Prima e dopo della pubblicazione potrai comunque rivedere e modificare il tuo annuncio." + 
+                   " Il tuo annuncio, se rispetta le consuete normative, sarà pubblicato gratuitamente."
+
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
@@ -101,13 +161,13 @@ export default function ProductEditScreen(props) {
           { !userInfo.hasAd && 
             (
               <MessageBox variant="alert">
-                Per conttatare un offerente devi diventarlo tu prima. Crea un annuncio promozionando un bene o servizio che vorresti baratare per beni o servizi di altri.
+               { infoText }
               </MessageBox>
             )
           }
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
-        {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
+        {errorUpdate && <MessageBox variant="danger">{ errorUpdate }</MessageBox>}
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -115,7 +175,42 @@ export default function ProductEditScreen(props) {
         ) : (
           <>
             <div>
-              <label htmlFor="name">Nome</label>
+              <label htmlFor="section">Tipo annuncio</label>
+                <select
+                  id="section"
+                  name="section"
+                  value={section.toString()}
+                  onChange={ (e) => setSection(e.target.value) }
+                >
+                    <option value="offro">Offro</option>
+                    <option value="cerco">Cerco</option>
+                    <option value="propongo">Propongo</option>
+                    <option value="avviso">Avviso</option>
+                </select>
+            </div>
+            <div>
+              <label htmlFor="isService">
+                <input
+                  type="radio"
+                  id="kindof"
+                  name="isService"
+                  onClick={ (e) => setIsService(true)}
+                />Prodotto
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  id="kindof2"
+                  name="isService"
+                  defaultChecked
+                  onClick={ (e) => {
+                    setIsService(false)
+                  }}
+                />Servizio
+              </label>
+            </div>
+            <div>
+              <label htmlFor="name">Nome *</label>
               <input
                 id="name"
                 type="text"
@@ -125,39 +220,39 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-            <label htmlFor="section">Tipo annuncio</label>
-              <select
-                id="section"
-                name="section"
-                value={section.toString()}
-                onChange={ (e) => setSection(e.target.value) }
-              >
-                  <option value="offro" >Offro</option>
-                  <option value="cerco" >Cerco</option>
-                  <option value="propongo" >Propongo</option>
-                  <option value="avviso">Avviso</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="priceVal">Prezzo in Val </label>
+              <label htmlFor="category">Categoria</label>
               <input
-                id="priceVal"
-                type="number"
-                placeholder="Inserisci prezzo ☯"
-                value={priceVal}
-                onChange={(e) => setPriceVal(e.target.value)}
+                id="category"
+                type="text"
+                placeholder="Inserisci categoria"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               ></input>
             </div>
-            <div>
-              <label htmlFor="priceEuro">Prezzo in Euro </label>
-              <input
-                id="priceEuro"
-                type="number"
-                placeholder="Inserisci prezzo 💶"
-                value={priceEuro}
-                onChange={(e) => setPriceEuro(e.target.value)}
-              ></input>
-            </div>
+            { section != 'avviso' && 
+              (<>
+                <div>
+                  <label htmlFor="priceVal">Prezzo in Val </label>
+                  <input
+                    id="priceVal"
+                    type="number"
+                    placeholder="Inserisci prezzo ☯"
+                    value={priceVal}
+                    onChange={(e) => setPriceVal(e.target.value)}
+                  ></input>
+                </div>
+                <div>
+                  <label htmlFor="priceEuro">Prezzo in Euro </label>
+                  <input
+                    id="priceEuro"
+                    type="number"
+                    placeholder="Inserisci prezzo 💶"
+                    value={priceEuro}
+                    onChange={(e) => setPriceEuro(e.target.value)}
+                  ></input>
+                </div>
+              </>)
+            }
             <div>
               <label htmlFor="image" style={{display:"none"}}>Immagine</label>
               <input
@@ -182,35 +277,66 @@ export default function ProductEditScreen(props) {
                 <MessageBox variant="danger">{errorUpload}</MessageBox>
               )}
             </div>
+            { section != 'avviso' &&  
+              <div>
+                <label htmlFor="brand">Brand</label>
+                <input
+                  id="brand"
+                  type="text"
+                  placeholder="Inserisci brand"
+                  value={brand}
+                  onChange={(e) => setBrand(e.target.value)}
+                ></input>
+              </div>
+            }
+            { section != 'avviso' && 
+              <div>
+                <label htmlFor="countInStock">Numero prodotti in magazzino</label>
+                <input
+                  id="countInStock"
+                  type="text"
+                  placeholder="Inserisci numero di prodotti in offerta"
+                  value={countInStock}
+                  onChange={(e) => setCountInStock(e.target.value)}
+                ></input>
+              </div>
+            }
             <div>
-              <label htmlFor="category">Categoria</label>
+              <label htmlFor="auxPhone">Telefono di conttato per questo annuncio</label>
               <input
-                id="category"
+                id="auxPhone"
                 type="text"
-                placeholder="Inserisci categoria"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                placeholder="Inserisci numero di telefono per conttato"
+                value={auxPhone}
+                onChange={(e) => setAuxPhone(e.target.value)}
               ></input>
             </div>
+            { section != 'avviso' && 
+              <div>
+                <label htmlFor="delivery">Forma di consegna preferita</label>
+                  <select
+                    id="delivery"
+                    name="delivery"
+                    value={delivery}
+                    onChange={ (e) => setDelivery(e.target.value) }
+                  >
+                      <option value="no preferences">Indifferente</option>
+                      <option value="personalmente">Personalmente</option>
+                      <option value="posta">Posta</option>
+                      <option value="corriere">Corriere</option>
+                  </select>
+              </div>
+            }
             <div>
-              <label htmlFor="brand">Brand</label>
-              <input
-                id="brand"
-                type="text"
-                placeholder="Inserisci brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="countInStock">Numero prodotti in magazzino</label>
-              <input
-                id="countInStock"
-                type="text"
-                placeholder="Inserisci numero di prodotti in offerta"
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
-              ></input>
+              <label htmlFor="expiry">Data di scadenza annuncio*</label>
+              <DayPickerInput
+                parseDate={parseDate}
+                format={CalFORMAT}
+                formatDate={formatDate}
+                value={expiry}
+                placeholder={`${dateFnsFormat(new Date(), CalFORMAT)}`}
+                onDayChange={(e)=>GetFormattedDate(e)}
+              />
             </div>
             <div>
               <label htmlFor="description">Descrizione</label>
@@ -218,10 +344,20 @@ export default function ProductEditScreen(props) {
                 id="description"
                 rows="3"
                 type="text"
-                placeholder="Inserisci la descrizione dell'annuncio"
+                placeholder="Inserisci la descrizione dell'annuncio."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
+            </div>
+            <div>
+              <div>Pausa</div>
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  onClick={(e) => setPause(!pause)}
+                />
+                <span class="slider round"></span>
+              </label>
             </div>
             <div>
               <label></label>

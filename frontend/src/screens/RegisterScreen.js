@@ -128,9 +128,7 @@ export default function RegisterScreen(props) {
                 id="yes_referer"
                 name="referer"
                 defaultChecked
-                onClick={ (e) => {
-                  setHasReferer(false)
-                }}
+                onClick={ (e) => setHasReferer(false)}
               />No
             </label>
           </div>
