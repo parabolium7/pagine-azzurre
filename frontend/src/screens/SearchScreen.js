@@ -63,7 +63,7 @@ export default function SearchScreen(props) {
           <div>{products.length} Risultati</div>
         )}
         <div>
-          Sort by{' '}
+        Ordina per{' '}
           <select
             value={order}
             onChange={(e) => {
@@ -92,7 +92,7 @@ export default function SearchScreen(props) {
                     className={'all' === category ? 'active' : ''}
                     to={getFilterUrl({ category: 'all' })}
                   >
-                    Any
+                    Tutti
                   </Link>
                 </li>
                 {categories.map((c) => (
@@ -126,7 +126,7 @@ export default function SearchScreen(props) {
             </ul>
           </div>
           <div>
-            <h3>Avg. Customer Review</h3>
+            <h3>Recensione dei clienti</h3>
             <ul>
               {ratings.map((r) => (
                 <li key={r.name}>
