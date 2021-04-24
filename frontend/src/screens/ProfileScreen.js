@@ -325,7 +325,13 @@ export default function ProfileScreen() {
                       <div className="row">
                           <ol>
                            {
-                             referer.map( (item, idx ) => {if(idx <= 2) return <li key={idx}>{item}</li>})
+                              referer.map( (item, idx ) => {
+                                if(idx <= 2){
+                                 return <li key={idx}>{item}</li>
+                                } else {
+                                  return ''
+                                }
+                              })
                            }       
                           </ol>
                             {
