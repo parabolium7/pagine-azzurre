@@ -112,6 +112,7 @@ productRouter.post(
       seller: req.user._id,
       image: '/images/p1.jpg',
       rating: 0,
+      isService: false,
       numReviews: 0
     });
     const createdProduct = await product.save();

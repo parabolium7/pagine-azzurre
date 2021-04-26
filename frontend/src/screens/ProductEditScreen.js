@@ -22,7 +22,7 @@ export default function ProductEditScreen(props) {
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
   const [section, setSection] = useState('')
-  const [isService, setIsService] = useState('')
+  const [isService, setIsService] = useState(false)
   const [auxPhone, setAuxPhone] = useState('')
   const [delivery, setDelivery] = useState('')
   const [expiry, setExpiry] = useState('')
@@ -82,8 +82,8 @@ export default function ProductEditScreen(props) {
       setBrand(product.brand);
       setDescription(product.description);
       setSection(product.section);
-      setIsService(product.kindof)
-      setAuxPhone(product.setAuxPhone)
+      setIsService(product.isService)
+      setAuxPhone(product.auxPhone)
       setDelivery(product.setDelivery)
       setExpiry(product.setExpiry)
       setPause(false)
@@ -188,27 +188,27 @@ export default function ProductEditScreen(props) {
                     <option value="avviso">Avviso</option>
                 </select>
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="isService">
                 <input
                   type="radio"
                   id="kindof"
                   name="isService"
+                  defaultChecked
                   onClick={ (e) => setIsService(true)}
                 />Prodotto
               </label>
-              <label>
+              <label htmlFor="isService">
                 <input
                   type="radio"
                   id="kindof2"
                   name="isService"
-                  defaultChecked
                   onClick={ (e) => {
                     setIsService(false)
                   }}
                 />Servizio
               </label>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="name">Nome *</label>
               <input
@@ -306,8 +306,8 @@ export default function ProductEditScreen(props) {
               <input
                 id="auxPhone"
                 type="text"
-                placeholder="Inserisci numero di telefono per conttato"
-                value={auxPhone}
+                placeholder={ parseInt(userInfo.phone) || "Inserisci numero di telefono per conttato"}
+                value={ auxPhone }
                 onChange={(e) => setAuxPhone(e.target.value)}
               ></input>
             </div>
@@ -351,12 +351,12 @@ export default function ProductEditScreen(props) {
             </div>
             <div>
               <div>Disattiva annuncio temporaneamente</div>
-              <label class="switch">
+              <label className="switch">
                 <input
                   type="checkbox"
                   onClick={(e) => setPause(!pause)}
                 />
-                <span class="slider round"></span>
+                <span className="slider round"></span>
               </label>
             </div>
             <div>
