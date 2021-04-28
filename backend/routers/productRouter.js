@@ -126,7 +126,6 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
-    let imageByDefault
     if (product) {
       if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'offro') product.image = req.body.image
       if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'cerco') product.image = '/images/cerco_prodotto.jpg'
