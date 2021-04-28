@@ -110,7 +110,7 @@ productRouter.post(
     const product = new Product({
       name: 'Annunciø n° ' + Date.now(),
       seller: req.user._id,
-      image: '/images/p1.jpg',
+      image: '/images/offro_prodotto.jpg',
       rating: 0,
       isService: false,
       numReviews: 0
@@ -126,11 +126,15 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
+    let imageByDefault
     if (product) {
+      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'offro') product.image = req.body.image
+      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'cerco') product.image = '/images/cerco_prodotto.jpg'
+      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'avviso') product.image = '/images/avviso_prodotto.jpg'
+      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'propongo') product.image = '/images/propongo.jpg'
       product.name = req.body.name;
       product.priceVal = req.body.priceVal;
       product.priceEuro = req.body.priceEuro;
-      product.image = req.body.image;
       product.category = req.body.category;
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
