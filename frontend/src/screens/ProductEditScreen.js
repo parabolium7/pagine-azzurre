@@ -188,7 +188,7 @@ export default function ProductEditScreen(props) {
                     <option value="avviso">Avviso</option>
                 </select>
             </div>
-            {/* <div>
+            <div>
               <label htmlFor="isService">
                 <input
                   type="radio"
@@ -208,7 +208,7 @@ export default function ProductEditScreen(props) {
                   }}
                 />Servizio
               </label>
-            </div> */}
+            </div>
             <div>
               <label htmlFor="name">Nome *</label>
               <input

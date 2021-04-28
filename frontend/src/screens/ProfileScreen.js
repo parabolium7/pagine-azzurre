@@ -310,7 +310,7 @@ export default function ProfileScreen() {
                 hasReferer || referer.length > 0 ?
                   (
                     <div>
-                      <label htmlFor="referer" className="row center">Ente del terzo settore al qualle partecipi *</label>
+                      <label htmlFor="referer" className="row center">Partecipi a gruppi, movimenti, comitati o associazioni no profit? *</label>
                       <div className="row">
                         <input
                           type="text"

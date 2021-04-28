@@ -129,7 +129,7 @@ productRouter.put(
     if (product) {
       if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'offro') product.image = req.body.image
       if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'cerco') product.image = '/images/cerco_prodotto.jpg'
-      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'avviso') product.image = '/images/avviso_prodotto.jpg'
+      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'avviso') product.image = '/images/avviso.jpg'
       if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'propongo') product.image = '/images/propongo.jpg'
       product.name = req.body.name;
       product.priceVal = req.body.priceVal;

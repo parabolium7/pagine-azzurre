@@ -159,7 +159,7 @@ export default function OrderScreen(props) {
                           {item.qty} x ☯{item.priceVal} = ☯{item.qty * item.priceVal}
                         </div>
                         <div>
-                          oppure {item.qty} x €{item.priceEuro} = €{item.qty * item.priceEuro}
+                          e {item.qty} x €{item.priceEuro} = €{item.qty * item.priceEuro}
                         </div>
                       </div>
                     </li>
@@ -179,7 +179,7 @@ export default function OrderScreen(props) {
                 <div className="row">
                   <div>Items</div>
                   <div>☯{order.itemsPriceVal.toFixed(2)}</div>
-                  oppure
+                  e
                   <div>€{order.itemsPriceEuro.toFixed(2)}</div>
                 </div>
               </li>
@@ -212,7 +212,7 @@ export default function OrderScreen(props) {
                 </div>
                 <div className="row">
                   <div>
-                    <div>oppure</div>
+                    <div>e</div>
                   </div>
                   <strong>€{order.totalPriceEuro.toFixed(2)}</strong>
                 </div>

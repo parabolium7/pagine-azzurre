@@ -93,7 +93,7 @@ export default function PlaceOrderScreen(props) {
                           </Link>
                         </div>
                         <div>
-                        {item.qty} x €{item.priceEuro} = €{item.qty * item.priceEuro} oppure {item.qty} x ☯{item.priceVal} = ☯{item.qty * item.priceVal}  
+                        {item.qty} x €{item.priceEuro} = €{item.qty * item.priceEuro} e {item.qty} x ☯{item.priceVal} = ☯{item.qty * item.priceVal}  
                         </div>
                       </div>
                     </li>
@@ -113,7 +113,7 @@ export default function PlaceOrderScreen(props) {
                 <div className="row">
                   <div>Items</div>
                   <div>€ {cart.itemsPriceEuro.toFixed(2)}</div>
-                  <div> oppure ☯ {cart.itemsPriceVal.toFixed(2)}</div>
+                  <div> e ☯ {cart.itemsPriceVal.toFixed(2)}</div>
                 </div>
               </li>
               <li>

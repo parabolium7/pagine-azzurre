@@ -136,7 +136,6 @@ export default function RegisterScreen(props) {
             hasReferer?
               (
                 <div>
-                  <label htmlFor="referer" className="row center">Ente del terzo settore al qualle partecipi *</label>
                   <div className="row">
                     <input
                       type="text"
