@@ -254,8 +254,10 @@ export default function ProductEditScreen(props) {
               </>)
             }
             <div>
-              <div>Immagine</div>
-              <img src={image} style={{ height:"100px", width:"100px"}}/>
+            <div>Immagine</div>
+              <img src={image} style={{ display: "block",  maxWidth:"150px", maxHeight:"150px", width: "auto", height: "auto" }}/>
+              { loadingUpload && <LoadingBox></LoadingBox> }
+              { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
             </div>
             <div>
               <label htmlFor="imageFile">Immagine File</label>
@@ -265,10 +267,6 @@ export default function ProductEditScreen(props) {
                 accept="image/png, image/jpeg"
                 onChange={uploadFileHandler}
               ></input>
-              {loadingUpload && <LoadingBox></LoadingBox>}
-              {errorUpload && (
-                <MessageBox variant="danger">{errorUpload}</MessageBox>
-              )}
             </div>
             { section !== 'avviso' &&  
               <div>
