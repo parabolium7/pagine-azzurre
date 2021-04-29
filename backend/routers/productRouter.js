@@ -126,11 +126,27 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
+    console.log("My Image", req.body.image)
     if (product) {
-      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'offro') product.image = req.body.image
-      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'cerco') product.image = '/images/cerco_prodotto.jpg'
-      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'avviso') product.image = '/images/avviso.jpg'
-      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'propongo') product.image = '/images/propongo.jpg'
+      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'offro') {
+        if (req.body.isService){
+          product.image = '/images/offro_servizio.jpg'
+        } else {
+          product.image = '/images/offro_prodotto.jpg'
+        }
+      } else if (req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'cerco') {
+        if (req.body.isService){
+          product.image = '/images/cerco_servizio.jpg'
+        } else {
+          product.image = '/images/cerco_prodotto.jpg'
+        }
+      } else if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'avviso') {
+        product.image = '/images/avviso.jpg'
+      } else if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'propongo') {
+        product.image = '/images/propongo.jpg'
+      } else {
+        product.image = req.body.image
+      }
       product.name = req.body.name;
       product.priceVal = req.body.priceVal;
       product.priceEuro = req.body.priceEuro;

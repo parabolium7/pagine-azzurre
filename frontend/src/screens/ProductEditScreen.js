@@ -254,22 +254,15 @@ export default function ProductEditScreen(props) {
               </>)
             }
             <div>
-              <label htmlFor="image" style={{display:"none"}}>Immagine</label>
-              <input
-                id="image"
-                type="hidden"
-                placeholder="Inserisci immagine"
-                value={image}
-                disabled
-                onChange={(e) => setImage(e.target.value)}
-              ></input>
+              <div>Immagine</div>
+              <img src={image} style={{ height:"100px", width:"100px"}}/>
             </div>
             <div>
               <label htmlFor="imageFile">Immagine File</label>
               <input
                 type="file"
                 id="imageFile"
-                label="Seleziona il file"
+                accept="image/png, image/jpeg"
                 onChange={uploadFileHandler}
               ></input>
               {loadingUpload && <LoadingBox></LoadingBox>}
