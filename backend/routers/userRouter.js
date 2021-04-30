@@ -279,7 +279,6 @@ userRouter.put(
       user.hasAd = true;
       const upgradedUser = await user.save();
       console.log("upgrade User", upgradedUser)
-      // res.send({ token: generateToken(upgradedUser), message: 'User Upgraded', user: upgradedUser });
       res.send({
         _id: upgradedUser._id,
         account: upgradedUser.account,

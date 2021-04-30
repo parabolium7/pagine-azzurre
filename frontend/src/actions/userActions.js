@@ -143,8 +143,6 @@ export const updateUser = (user) => async (dispatch, getState) => {
   }
 };
 
-// Working with this
-
 export const upgradeUser = (user) => async (dispatch, getState) => {
   dispatch({ type: USER_UPGRADE_REQUEST, payload: user });
   const {
