@@ -143,6 +143,8 @@ export const updateUser = (user) => async (dispatch, getState) => {
   }
 };
 
+// Working with this
+
 export const upgradeUser = (user) => async (dispatch, getState) => {
   dispatch({ type: USER_UPGRADE_REQUEST, payload: user });
   const {
@@ -152,10 +154,9 @@ export const upgradeUser = (user) => async (dispatch, getState) => {
     const { data } = await Axios.put(`/api/users/upgrade/${user._id}`, user, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    localStorage.setItem('userInfo', JSON.stringify(data.user));
-    dispatch({ type: USER_UPGRADE_SUCCESS, payload: data.user });
+    localStorage.setItem('userInfo', JSON.stringify(data));
+    dispatch({ type: USER_UPGRADE_SUCCESS, payload: data });
     window.location.reload()
-    console.log("Upgrade action bad", data)
   } catch (error) {
     const message =
       error.response && error.response.data.message

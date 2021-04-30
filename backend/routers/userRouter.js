@@ -278,7 +278,28 @@ userRouter.put(
     if (!user.hasAd) {
       user.hasAd = true;
       const upgradedUser = await user.save();
-      res.send({ token: generateToken(user), message: 'User Upgraded', user: upgradedUser });
+      console.log("upgrade User", upgradedUser)
+      // res.send({ token: generateToken(upgradedUser), message: 'User Upgraded', user: upgradedUser });
+      res.send({
+        _id: upgradedUser._id,
+        account: upgradedUser.account,
+        username: upgradedUser.username,
+        name: upgradedUser.name,
+        surname: upgradedUser.surname,
+        birthday: upgradedUser.birthday,
+        birthplace: upgradedUser.birthplace,
+        gender: upgradedUser.gender,
+        cf: upgradedUser.cf,
+        city: upgradedUser.city,
+        zipCode: upgradedUser.zipCode,
+        phone: upgradedUser.phone,
+        email: upgradedUser.email,
+        referer: upgradedUser.referer,
+        isAdmin: upgradedUser.isAdmin,
+        isSeller: upgradedUser.isSeller,
+        hasAd: upgradedUser.hasAd,
+        token: generateToken(user),
+      });
     } else {
       res.status(404).send({ message: 'User Not Found' });
     }
