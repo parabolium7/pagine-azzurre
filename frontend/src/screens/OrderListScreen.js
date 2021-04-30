@@ -56,7 +56,7 @@ export default function OrderListScreen(props) {
                 <td>{order._id}</td>
                 <td>{order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{'☯'+order.totalPriceVal.toFixed(2)+' e €'+order.totalPriceEuro.toFixed(2)}</td>
+                <td>{order.totalPriceVal && order.totalPriceEuro && '☯' + order.totalPriceVal.toFixed(2) + ' e €'+ order.totalPriceEuro.toFixed(2)}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                 <td>
                   {order.isDelivered

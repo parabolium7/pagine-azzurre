@@ -263,7 +263,7 @@ export default function ProductEditScreen(props) {
               (
                 <div>
                   <div>Immagine</div>
-                  <img src={ image } style={{ display: "block",  maxWidth:"150px", maxHeight:"150px", width: "auto", height: "auto" }}/>
+                  <img src={ image } style={{ display: "block",  maxWidth:"125px", maxHeight:"125px", width: "auto", height: "auto" }}/>
                   { loadingUpload && <LoadingBox></LoadingBox> }
                   { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
                 </div>
@@ -345,7 +345,7 @@ export default function ProductEditScreen(props) {
                 id="description"
                 rows="3"
                 type="text"
-                placeholder="Inserisci la descrizione dell'annuncio."
+                placeholder="Descrivi con precisione il prodotto o servizio proposto."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
