@@ -37,7 +37,6 @@ export const orderDoubleNotificationReducer = (state = {} , action) => {
     case ORDER_SEND_DOUBLE_NOTIFICATION_REQUEST:
       return { loading: true, order: action.payload }
     case ORDER_SEND_DOUBLE_NOTIFICATION_SUCCESS:
-      console.log("??", action.payload)
       return { loading: false, success: true, resp_code: 1 }
     case ORDER_SEND_DOUBLE_NOTIFICATION_FAIL:
       return { loading: false, error: action.payload }
@@ -49,10 +48,8 @@ export const orderDoubleNotificationReducer = (state = {} , action) => {
 export const orderMailingReducer = (state = {}, action) => {
   switch (action.type){
     case ORDER_SEND_NOTIFICATION_REQUEST:
-      console.log("CONTENT OF MAIL", action.payload)
       return { loading: true , message: action.payload}
     case ORDER_SEND_NOTIFICATION_SUCCESS:
-      console.log("?", action.payload)
       return { loading: false, success: true, resp_code: 2 }
     case ORDER_SEND_NOTIFICATION_FAIL:
       return { loading: false, error: action.payload }

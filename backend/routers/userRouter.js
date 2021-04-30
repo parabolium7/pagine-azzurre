@@ -278,7 +278,6 @@ userRouter.put(
     if (!user.hasAd) {
       user.hasAd = true;
       const upgradedUser = await user.save();
-      console.log("upgrade User", upgradedUser)
       res.send({
         _id: upgradedUser._id,
         account: upgradedUser.account,
