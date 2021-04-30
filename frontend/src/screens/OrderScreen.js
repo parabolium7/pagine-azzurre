@@ -178,9 +178,9 @@ export default function OrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Items</div>
-                  <div>☯{order.itemsPriceVal.toFixed(2)}</div>
+                  {order.itemsPriceVal && <div>☯{order.itemsPriceVal.toFixed(2)}</div>}
                   e
-                  <div>€{order.itemsPriceEuro.toFixed(2)}</div>
+                  { order.itemsPriceEuro && <div>€{order.itemsPriceEuro.toFixed(2)}</div>}
                 </div>
               </li>
               <li>
@@ -214,7 +214,7 @@ export default function OrderScreen(props) {
                   <div>
                     <div>e</div>
                   </div>
-                  <strong>€{order.totalPriceEuro.toFixed(2)}</strong>
+                  <strong>{order.totalPriceEuro && '€'+order.totalPriceEuro.toFixed(2)}</strong>
                 </div>
               </li>
               {!order.isPaid && (

@@ -146,6 +146,12 @@ export default function ProductEditScreen(props) {
     }
   };
 
+  const setDefaultImage = (e) => {
+      if(e === 'servizio') setIsService(true)
+      if(e === 'prodotto') setIsService(false)
+      setImage(`/images/${section}_${e}.jpg`)
+  }
+
   const infoText = "Per conttatare un offerente devi diventarlo tu prima." +
                    " Crea un annuncio promozionando un bene o servizio che vorresti baratare per beni o servizi di altri." +
                    " Compila tutti i campi obbligatori contrassegnati da un (*)." +
@@ -188,14 +194,15 @@ export default function ProductEditScreen(props) {
                     <option value="avviso">Avviso</option>
                 </select>
             </div>
-            <div>
+          { section !== 'avviso' && 
+            (<div>
               <label htmlFor="isService">
                 <input
                   type="radio"
                   id="kindof"
                   name="isService"
                   defaultChecked
-                  onClick={ (e) => setIsService(true)}
+                  onClick={ (e) => setDefaultImage('prodotto') }
                 />Prodotto
               </label>
               <label htmlFor="isService">
@@ -203,12 +210,11 @@ export default function ProductEditScreen(props) {
                   type="radio"
                   id="kindof2"
                   name="isService"
-                  onClick={ (e) => {
-                    setIsService(false)
-                  }}
+                  onClick={ (e) => setDefaultImage('servizio') }
                 />Servizio
               </label>
-            </div>
+            </div>)
+            }
             <div>
               <label htmlFor="name">Nome *</label>
               <input
@@ -253,12 +259,16 @@ export default function ProductEditScreen(props) {
                 </div>
               </>)
             }
-            <div>
-            <div>Immagine</div>
-              <img src={image} style={{ display: "block",  maxWidth:"150px", maxHeight:"150px", width: "auto", height: "auto" }}/>
-              { loadingUpload && <LoadingBox></LoadingBox> }
-              { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
-            </div>
+            { section !== 'avviso' && section !== 'propongo' &&
+              (
+                <div>
+                  <div>Immagine</div>
+                  <img src={ image } style={{ display: "block",  maxWidth:"150px", maxHeight:"150px", width: "auto", height: "auto" }}/>
+                  { loadingUpload && <LoadingBox></LoadingBox> }
+                  { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
+                </div>
+              )
+            }
             <div>
               <label htmlFor="imageFile">Immagine File</label>
               <input
