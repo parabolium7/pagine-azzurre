@@ -89,6 +89,14 @@ export default function OrderScreen(props) {
       setMailing(true)
     } 
   }
+
+  const tagAsDelivered = (e) => {
+    window.alert("Segnala come consegnato")
+  }
+
+  const tagAsPayed = (e) => {
+    window.alert("Segnala come Pagato")
+  }
   
 
   return loading ? (
@@ -98,6 +106,8 @@ export default function OrderScreen(props) {
   ) : (
     <div>
       <h1>Ordine {order._id}</h1>
+      { console.log("User seller", userInfo._id) } 
+      { console.log( "Order seller", order.seller) } 
       <div className="row top">
         <div className="col-2">
           <ul>
@@ -231,14 +241,33 @@ export default function OrderScreen(props) {
                         amount={order.totalPrice}
                         onSuccess={successPaymentHandler}
                       ></PayPalButton> */}
-                      { resp_code === 0 &&
-                        <button
+                      { order.seller !== userInfo._id && resp_code === 0 ?
+                        (<button
                           type="button"
                           className="primary block"
                           onClick={askAnotherEmail}
                         >
                           {!mailing?'Vuoi mandare una seconda EMAIL al offerente?':"Invia"}
-                        </button>
+                        </button>)
+                        :
+                        (
+                          <>
+                            <button
+                            type="button"
+                            className="primary block"
+                            onClick={tagAsDelivered}
+                            >
+                              {'Segnala come consegnato'}
+                            </button>
+                            <button
+                              type="button"
+                              className="primary block"
+                              onClick={tagAsPayed}
+                            >
+                              {'Segnala pagamento ricevuto'}
+                            </button>
+                          </>
+                        )
                       }
                       { loading_mailing && <LoadingBox></LoadingBox> }
                       { resp_code === 2
@@ -269,7 +298,7 @@ export default function OrderScreen(props) {
                   )}
                 </li>
               )}
-              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+              { userInfo.seller === order.seller && order.isPaid && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (
