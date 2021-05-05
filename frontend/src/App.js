@@ -137,9 +137,9 @@ function App() {
                   </li>
                 </>
               )}
-                {/* <li>
+                <li>
                   <Link to="/orderhistory">Istoriale</Link>
-                </li> */}
+                </li>
                 <li>
                   <Link to="#signout" onClick={signoutHandler}>
                     Uscire

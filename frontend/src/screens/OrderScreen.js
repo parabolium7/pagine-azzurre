@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { deliverOrder, detailsOrder, payOrder } from '../actions/orderActions';
-import { deliverOrder, detailsOrder, mailingOrder } from '../actions/orderActions';
+import { deliverOrder, detailsOrder, mailingOrder, payOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {
@@ -90,12 +90,8 @@ export default function OrderScreen(props) {
     } 
   }
 
-  const tagAsDelivered = (e) => {
-    window.alert("Segnala come consegnato")
-  }
-
   const tagAsPayed = (e) => {
-    window.alert("Segnala come Pagato")
+    dispatch(payOrder(order, true))
   }
   
 
@@ -106,8 +102,7 @@ export default function OrderScreen(props) {
   ) : (
     <div>
       <h1>Ordine {order._id}</h1>
-      { console.log("User seller", userInfo._id) } 
-      { console.log( "Order seller", order.seller) } 
+      {order.isDelivered.toString()}
       <div className="row top">
         <div className="col-2">
           <ul>
@@ -229,7 +224,7 @@ export default function OrderScreen(props) {
               </li>
               {!order.isPaid && (
                 <li>
-                  {!true ? (
+                  { loading ? (
                     <LoadingBox></LoadingBox>
                   ) : (
                     <>
@@ -247,26 +242,18 @@ export default function OrderScreen(props) {
                           className="primary block"
                           onClick={askAnotherEmail}
                         >
-                          {!mailing?'Vuoi mandare una seconda EMAIL al offerente?':"Invia"}
+                          {!mailing?'Vuoi mandare una seconda EMAIL al offerente?':'Invia'}
                         </button>)
-                        :
+                        :''}
+                      { order.seller === userInfo._id && order.isPaid === false &&
                         (
-                          <>
-                            <button
+                          <button
                             type="button"
                             className="primary block"
-                            onClick={tagAsDelivered}
-                            >
-                              {'Segnala come consegnato'}
-                            </button>
-                            <button
-                              type="button"
-                              className="primary block"
-                              onClick={tagAsPayed}
-                            >
-                              {'Segnala pagamento ricevuto'}
-                            </button>
-                          </>
+                            onClick={tagAsPayed}
+                          >
+                            {'Segnala pagamento ricevuto'}
+                          </button>
                         )
                       }
                       { loading_mailing && <LoadingBox></LoadingBox> }
@@ -298,7 +285,7 @@ export default function OrderScreen(props) {
                   )}
                 </li>
               )}
-              { userInfo.seller === order.seller && order.isPaid && !order.isDelivered && (
+              { userInfo._id !== order.seller && order.isPaid && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (
@@ -309,7 +296,7 @@ export default function OrderScreen(props) {
                     className="primary block"
                     onClick={deliverHandler}
                   >
-                    Consegna l'ordine
+                    Segna l'ordine "Consegnato"
                   </button>
                 </li>
               )}
