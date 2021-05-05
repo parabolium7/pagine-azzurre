@@ -40,11 +40,12 @@ export default function ProductScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     if (comment && rating) {
+      console.log(userInfo)
       dispatch(
-        createReview(productId, { rating, comment, name: userInfo.name })
+        createReview(productId, { rating, comment, name: userInfo.username })
       );
     } else {
-      alert('Please enter comment and rating');
+      alert('Per favore lascia la tua valutazione e un commento');
     }
   };
   return (

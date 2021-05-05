@@ -194,14 +194,15 @@ productRouter.post(
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
+    console.log(req.body)
     if (product) {
-      if (product.reviews.find((x) => x.name === req.user.name)) {
+      if (product.reviews.find((x) => x.name === req.body.name)) {
         return res
           .status(400)
-          .send({ message: 'You already submitted a review' });
+          .send({ message: 'Hai già creato una recensione per questo articulo ' });
       }
       const review = {
-        name: req.user.name,
+        name: req.body.name,
         rating: Number(req.body.rating),
         comment: req.body.comment,
       };
