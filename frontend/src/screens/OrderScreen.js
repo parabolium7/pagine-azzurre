@@ -102,7 +102,6 @@ export default function OrderScreen(props) {
   ) : (
     <div>
       <h1>Ordine {order._id}</h1>
-      {order.isDelivered.toString()}
       <div className="row top">
         <div className="col-2">
           <ul>
