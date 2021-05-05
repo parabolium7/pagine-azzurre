@@ -77,7 +77,7 @@ export default function ShippingAddressScreen(props) {
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div className="row center">
-          <h1>Indirizzo di Spedizione e datti per il conttato con il offerente</h1>
+          <h1>Indirizzo di Spedizione e dati per il contatto con l'offerente</h1>
         </div>
         <div>
           <label htmlFor="fullName">Nome</label>
@@ -151,6 +151,7 @@ export default function ShippingAddressScreen(props) {
             type="number"
             id="phone"
             placeholder="Inserisci Telefono"
+            readOnly
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           ></input>
