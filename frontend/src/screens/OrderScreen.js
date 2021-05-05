@@ -299,6 +299,28 @@ export default function OrderScreen(props) {
                   </button>
                 </li>
               )}
+              { userInfo._id !== order.seller && order.isPaid && order.isDelivered && 
+                <>
+                  {order.orderItems.map((item) => (
+                    <li key={item.product}>
+                      <div className="row">
+                        <div>
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="small"
+                          ></img>
+                        </div>
+                        <div className="min-30">
+                          <Link to={`/product/${item.product}`}>
+                            Lascia una recensione per {item.name}
+                          </Link>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </>
+              }
             </ul>
           </div>
         </div>
