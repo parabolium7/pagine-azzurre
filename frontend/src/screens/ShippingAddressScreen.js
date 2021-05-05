@@ -141,6 +141,7 @@ export default function ShippingAddressScreen(props) {
             id="email"
             placeholder="Inserisci indirizzo"
             value={email}
+            readOnly
             onChange={(e) => setEmail(e.target.value)}
             required
           ></input>
@@ -151,7 +152,6 @@ export default function ShippingAddressScreen(props) {
             type="number"
             id="phone"
             placeholder="Inserisci Telefono"
-            readOnly
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           ></input>
