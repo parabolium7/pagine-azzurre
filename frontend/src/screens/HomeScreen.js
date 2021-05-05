@@ -53,10 +53,10 @@ export default function HomeScreen() {
       {/* )} */}
       <h1 className="row center">ULTIME ATTIVITÀ</h1>
       <div className="row center">
-        <button className={ section === 'offro' ? "filter active":"filter"} onClick={()=> setSection('offro')}>Offro</button>
-        <button className={ section === 'cerco' ? "filter active" : "filter"} onClick={()=> setSection('cerco')}>Cerco</button>
-        <button className={ section === 'propongo' ? "filter active" : "filter"} onClick={()=> setSection('propongo')}>Propongo</button>
-        <button className={ section === 'avviso' ? "filter active" : "filter"} onClick={()=> setSection('avviso')}>Avviso</button>
+        <button className={ section === 'offro' ? "filter active":"filter"} onClick={()=> setSection('offro')}>Offerte</button>
+        <button className={ section === 'cerco' ? "filter active" : "filter"} onClick={()=> setSection('cerco')}>Richieste</button>
+        <button className={ section === 'propongo' ? "filter active" : "filter"} onClick={()=> setSection('propongo')}>Proposte</button>
+        <button className={ section === 'avviso' ? "filter active" : "filter"} onClick={()=> setSection('avviso')}>Avvisi</button>
       </div>
       {loading ? (
         <LoadingBox></LoadingBox>

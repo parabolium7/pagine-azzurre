@@ -306,8 +306,8 @@ img.large {
 
 /* Card */
 .card {
-  border: 0.1rem #c0c0c0 solid;
   background-color: #f8f8f8;
+  border: 0.1rem #c0c0c0 solid;
   border-radius: 0.5rem;
   margin: 1rem;
 }
@@ -316,6 +316,11 @@ img.large {
 }
 .card-body > * {
   margin-bottom: 0.5rem;
+}
+.card-body > a > h2 {
+  max-width: 30ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .price {
   font-size: 2rem;

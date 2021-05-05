@@ -152,11 +152,15 @@ export default function ProductEditScreen(props) {
       setImage(`/images/${section}_${e}.jpg`)
   }
 
-  const infoText = "Per conttatare un offerente devi diventarlo tu prima." +
-                   " Crea un annuncio promozionando un bene o servizio che vorresti baratare per beni o servizi di altri." +
-                   " Compila tutti i campi obbligatori contrassegnati da un (*)." +
-                   " Prima e dopo della pubblicazione potrai comunque rivedere e modificare il tuo annuncio." + 
-                   " Il tuo annuncio, se rispetta le consuete normative, sarà pubblicato gratuitamente."
+  const handleTitle = (e) => {
+    const {value, maxLength} = e.target
+    const title = value.slice(0, maxLength)
+    setName(title)
+  }
+
+  const infoText = " Compila tutti i campi obbligatori contrassegnati da un (*)." +
+                   " Prima e dopo la pubblicazione potrai comunque rivedere e modificare il tuo annuncio." + 
+                   " Se rispetta le consuete normative, il tuo annuncio, sarà pubblicato."
 
   return (
     <div>
@@ -194,7 +198,7 @@ export default function ProductEditScreen(props) {
                     <option value="avviso">Avviso</option>
                 </select>
             </div>
-          { section !== 'avviso' && 
+          { section !== 'avviso' && section !== 'propongo' && 
             (<div>
               <label htmlFor="isService">
                 <input
@@ -216,13 +220,14 @@ export default function ProductEditScreen(props) {
             </div>)
             }
             <div>
-              <label htmlFor="name">Nome *</label>
+              <label htmlFor="name">Titulo *</label>
               <input
                 id="name"
                 type="text"
+                maxLength="90"
                 placeholder="Inserisci nome del bene o servizio che voi barattare"
                 value={!name.match(/Annunciø/)?name:''}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => handleTitle(e)}
               ></input>
             </div>
             <div>
@@ -259,11 +264,11 @@ export default function ProductEditScreen(props) {
                 </div>
               </>)
             }
-            { section !== 'avviso' && section !== 'propongo' &&
+            { 
               (
                 <div>
                   <div>Immagine</div>
-                  <img src={ image } style={{ display: "block",  maxWidth:"125px", maxHeight:"125px", width: "auto", height: "auto" }}/>
+                  <img src={ image } style={{ display: "block",  maxWidth:"115px", maxHeight:"115px", width: "auto", height: "auto" }}/>
                   { loadingUpload && <LoadingBox></LoadingBox> }
                   { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
                 </div>

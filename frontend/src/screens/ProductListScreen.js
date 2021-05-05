@@ -75,7 +75,7 @@ export default function ProductListScreen(props) {
         { !userInfo.hasAd && 
           (
             <MessageBox variant="alert">
-              Per conttatare un offerente devi diventarlo tu prima. Crea un annuncio promozionando un bene o servizio che vorresti baratare per beni o servizi di altri.
+              Per contattare un offerente devi diventarlo tu prima. In questa piazza crea un annuncio con un bene o servizio che vorresti barattare. Dove c’è scambio c’è vita.
             </MessageBox>
           )
         }

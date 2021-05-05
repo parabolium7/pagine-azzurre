@@ -370,11 +370,11 @@ export default function ProfileScreen() {
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="sellerDescription">Descripzione di Offerente</label>
+                  <label htmlFor="sellerDescription">cdi Offerente</label>
                   <input
                     id="sellerDescription"
                     type="text"
-                    placeholder="Inserici descripzione di offerente"
+                    placeholder="Inserici descrizione di offerente"
                     value={sellerDescription}
                     onChange={(e) => setSellerDescription(e.target.value)}
                   ></input>
