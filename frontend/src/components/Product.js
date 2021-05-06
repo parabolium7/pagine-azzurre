@@ -23,10 +23,14 @@ export default function Product(props) {
           rating={product.rating}
           numReviews={product.numReviews}
         ></Rating>
-        <div className="row start">
-          <div className="price euro">€{' '+product.priceEuro}&nbsp;{' e'}</div>
-          <div className="price">&nbsp;&nbsp;☯{' '+product.priceVal}</div>
-        </div>
+          { product.section !== 'avviso' &&
+            (
+              <div className="row start">
+                <div className="price euro">€{' '+product.priceEuro}&nbsp;{' e'}</div>
+                <div className="price">&nbsp;&nbsp;☯{' '+product.priceVal}</div>
+              </div>
+            )
+          }
       </div>
     </div>
   );
