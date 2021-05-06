@@ -9,7 +9,7 @@ export default function Product(props) {
       <Link to={`/product/${product._id}`}>
         <img className="medium" src={product.image} alt={product.name} />
       </Link>
-      <div className="row center">{product.isService?'Servizio':'Prodotto'}</div>
+      <div className="row center">{ product.section !== 'avviso'?(product.isService?'Servizio':'Prodotto'):'Avviso' }</div>
       <div className="card-body">
         <Link to={`/product/${product._id}`}>
           <h2>{product.name}</h2>
