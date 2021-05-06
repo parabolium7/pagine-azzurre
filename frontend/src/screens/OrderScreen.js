@@ -236,13 +236,20 @@ export default function OrderScreen(props) {
                         onSuccess={successPaymentHandler}
                       ></PayPalButton> */}
                       { order.seller !== userInfo._id && resp_code === 0 ?
-                        (<button
-                          type="button"
-                          className="primary block"
-                          onClick={askAnotherEmail}
-                        >
-                          {!mailing?'Vuoi mandare una seconda EMAIL al offerente?':'Invia'}
-                        </button>)
+                        (<>
+                          <button
+                            type="button"
+                            className="primary block"
+                            onClick={askAnotherEmail}
+                          >
+                            {!mailing?'Vuoi mandare una seconda EMAIL al offerente?':'Invia'}
+                          </button>
+                          <div className="row center">
+                          <Link to='/'>
+                           Chiudi e torna alla vetrina
+                          </Link>
+                        </div>
+                        </>)
                         :''}
                       { order.seller === userInfo._id && order.isPaid === false &&
                         (
