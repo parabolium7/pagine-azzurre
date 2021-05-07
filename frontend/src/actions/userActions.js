@@ -113,7 +113,9 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     });
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+    localStorage.removeItem('userInfo');
     localStorage.setItem('userInfo', JSON.stringify(data));
+    window.location.reload()
   } catch (error) {
     const message =
       error.response && error.response.data.message
