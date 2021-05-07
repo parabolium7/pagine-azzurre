@@ -66,9 +66,12 @@ export default function HomeScreen() {
         <>
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
           <div className="row center">
-            { products.map((product) => (
-              !product.name.match(/Annunciø/) && product.section === section && <Product key={product._id} product={product}></Product>
-            ))}
+            { products.map((product) => {
+              let expired = new Date(product.expiry)
+              let now = new Date()
+              const isExpired = expired.getTime() <= now
+              return (!product.name.match(/Annunciø/) && product.section === section && !isExpired && <Product key={product._id} product={product}></Product>)
+              })}
           </div>
         </>
       )}
