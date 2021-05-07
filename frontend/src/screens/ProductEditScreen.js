@@ -319,14 +319,14 @@ export default function ProductEditScreen(props) {
             </div>
             { section !== 'avviso' && 
               <div>
-                <label htmlFor="delivery">Forma di consegna preferita</label>
+                <label htmlFor="delivery">Forma di consegna</label>
                   <select
                     id="delivery"
                     name="delivery"
                     value={delivery}
                     onChange={ (e) => setDelivery(e.target.value) }
                   >
-                      <option value="no preferences">Indifferente</option>
+                      <option value="no preferences">Da concordare</option>
                       <option value="personalmente">Personalmente</option>
                       <option value="posta">Posta</option>
                       <option value="corriere">Corriere</option>
