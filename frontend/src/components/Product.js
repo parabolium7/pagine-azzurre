@@ -9,7 +9,7 @@ export default function Product(props) {
       <Link to={`/product/${product._id}`}>
         <img className="medium" src={product.image} alt={product.name} />
       </Link>
-      <div className="row center">{ product.section !== 'avviso'?(product.isService?'Servizio':'Prodotto'):'Avviso' }</div>
+      <div className="row center">{ product.section !== 'avviso' && product.section !== 'propongo' ? (product.isService?'Servizio':'Prodotto'):'Avviso/Proposta' }</div>
       <div className="card-body">
         <Link to={`/product/${product._id}`}>
           <h2>{product.name}</h2>
@@ -23,7 +23,7 @@ export default function Product(props) {
           rating={product.rating}
           numReviews={product.numReviews}
         ></Rating>
-          { product.section !== 'avviso' &&
+          { product.section !== 'propongo' &&
             (
               <div className="row start">
                 <div className="price euro">€{' '+product.priceEuro}&nbsp;{' e'}</div>
