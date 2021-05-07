@@ -117,6 +117,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   if(typeof product.priceEuro === 'undefined') product.priceEuro = 0
+  if(typeof product.priceVal === 'undefined' || product.priceVal === '') product.priceVal = 1
   try {
     const { data } = await Axios.put(`/api/products/${product._id}`, product, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
