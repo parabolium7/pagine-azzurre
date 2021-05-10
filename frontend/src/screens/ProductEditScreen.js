@@ -235,7 +235,7 @@ export default function ProductEditScreen(props) {
             </div>)
             }
             <div>
-              <label htmlFor="name">Titolo *</label>
+              <label htmlFor="name">{section !== 'propongo'?'Titolo':'Argomento'} *</label>
               <input
                 id="name"
                 type="text"
