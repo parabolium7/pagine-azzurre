@@ -348,7 +348,7 @@ export default function ProductEditScreen(props) {
                   </select>
               </div>
             }
-            <div>
+            {/* <div>
               <label htmlFor="expiry">Data di scadenza annuncio*</label>
               <DayPickerInput
                 parseDate={parseDate}
@@ -358,7 +358,7 @@ export default function ProductEditScreen(props) {
                 placeholder={`${dateFnsFormat(new Date(), CalFORMAT)}`}
                 onDayChange={(e)=>GetFormattedDate(e)}
               />
-            </div>
+            </div> */}
             <div>
               <label htmlFor="description">Descrizione</label>
               <textarea
