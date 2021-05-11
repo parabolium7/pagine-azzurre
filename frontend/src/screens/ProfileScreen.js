@@ -345,7 +345,7 @@ export default function ProfileScreen() {
                     </div>
                   ):''
               }
-            </div>
+            {/* </div>
             {user.isSeller && (
               <>
                 <div>
@@ -381,7 +381,7 @@ export default function ProfileScreen() {
                 </div>
               </>
             )}
-            <div>
+            <div> */}
               <h2>Cambio Password:</h2>
               <label htmlFor="password">Cambiare Password</label>
               <input
