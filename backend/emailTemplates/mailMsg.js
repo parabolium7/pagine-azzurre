@@ -10,7 +10,7 @@ let msgRegistration = (recipient, username) => {
 
   let msg = {
     to: recipient,
-    from: "g.lugo.dev@gmail.com",
+    from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
     subject: `${username}, Benvenuto nelle Pagine Azzurre.`,
     html: `<p>${moment} ${username},</p></br>\
     <p>Benvenuto con noi nelle PAGINE AZZURRE. Ti sei registrato con successo.</br>\
@@ -35,7 +35,7 @@ let msgRegistration = (recipient, username) => {
 let msgPasswordRecovery = (recipient) => {
   let msg = { 
     to: recipient,
-    from: 'g.lugo.dev@gmail.com',
+    from: 'iscrizioni.pagineazzurre@cittadini-volontari.it',
     subject: 'Pagine Azzurre Richiesta cambio Password',
     text: 'Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso',
     html: '<p>Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso</p>'
@@ -46,7 +46,7 @@ let msgPasswordRecovery = (recipient) => {
 let msgOrderNotificationToOfferer = (offerer, orderdetails, buyer) => {
   let msg = {
     to: offerer.email,
-    from: "g.lugo.dev@gmail.com",
+    from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
     subject: "Pagine Azzurre Notificazione d\'Ordine al offerente",
     html: `<p>Buongiorno ${offerer.username},</p><br><p><strong>Hai un nuovo ordine nelle pagine azzurre</strong></p><br><p>Nome annuncio: 
            ${orderdetails.orderItems[0].name}</p><p>Product ID: 
@@ -70,7 +70,7 @@ let msgOrderNotificationToBuyer = (buyer, orderdetails, offerer) => {
   // console.log("orderdetails product", orderdetails.cartItems[0].product)
   let msg = {
     to: buyer[0].email,
-    from: "g.lugo.dev@gmail.com",
+    from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
     subject: "Pagine Azzurre Notificazione d\'Ordine al compratore",
     html: `<p>Buongiorno ${buyer[0].username},</p><br><p><strong>Hai completato un nuovo ordine nelle pagine azzurre</strong></p><br><p>Nome annuncio: 
     ${orderdetails.orderItems[0].name}</p><p>Product ID: 
@@ -91,7 +91,7 @@ let secondMailToOfferer = (envelop) => {
   console.log("Envelop:", envelop)
   let msg = {
     to: envelop.offerer.email,
-    from: "g.lugo.dev@gmail.com",
+    from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
     subject: `${envelop.offerer.name}, ${envelop.buyer} ti ha scrito un messagio."`,
     html: `<p>Buongiorno ${envelop.offerer.name},</p><br><p>Hai un messagio di ${envelop.buyer} relativo alla tua inserzione ${envelop.orderNames}</p><br><p>Messagio: ${envelop.emailBody}`
   }
