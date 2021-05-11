@@ -370,7 +370,7 @@ export default function ProductEditScreen(props) {
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
-            {/* <div>
+            <div>
               <div>Disattiva annuncio temporaneamente</div>
               <label className="switch">
                 <input
@@ -379,7 +379,7 @@ export default function ProductEditScreen(props) {
                 />
                 <span className="slider round"></span>
               </label>
-            </div> */}
+            </div>
             <div>
               <label></label>
               <button className="primary blu" type="submit">
