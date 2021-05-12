@@ -1,4 +1,4 @@
-import React, { useEffect, useState }from 'react';
+import React, { useEffect, useState } from 'react';
 import WelcomeBanner from '../components/WelcomeBanner'
 // import { Carousel } from 'react-responsive-carousel/lib/styles/carousel.min.css'
 import Product from '../components/Product'
@@ -7,6 +7,7 @@ import MessageBox from '../components/MessageBox'
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { listTopSellers } from '../actions/userActions';
+import CookieConsent from "react-cookie-consent"
 // import { Link } from 'react-router-dom';
 
 export default function HomeScreen() {
@@ -30,6 +31,17 @@ export default function HomeScreen() {
   return (
     <div>
       <WelcomeBanner/> 
+        <CookieConsent
+          location="bottom"
+          buttonText="Accetto"
+          cookieName="pagineazzurre"
+          style={{ background: "#626360" }}
+          buttonStyle={{ color: "#626360", fontSize: "15px" }}
+          expires={150}
+        >
+          This website uses cookies to enhance the user experience.{" "}
+          <span style={{ fontSize: "10px" }}>This bit of text is smaller :O</span>
+        </CookieConsent>
       <div>
       {/* <h2>Top Sellers</h2>
       {loadingSellers ? (

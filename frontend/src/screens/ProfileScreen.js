@@ -286,7 +286,7 @@ export default function ProfileScreen() {
             <div>
               { referer.length === 0 ?
                 (<div className="row start">
-                  <label htmlFor="isReferer">Partecipi in un ente del terzo settore?
+                  <label htmlFor="isReferer">Partecipi a gruppi, movimenti, comitati o associazioni no profit?
                     <input
                       type="radio"
                       id="no_referer"
@@ -310,7 +310,7 @@ export default function ProfileScreen() {
                 hasReferer || referer.length > 0 ?
                   (
                     <div>
-                      <label htmlFor="referer" className="row center">Partecipi a gruppi, movimenti, comitati o associazioni no profit? *</label>
+                      <label htmlFor="referer" className="row center">Gruppi, movimenti, comitati o associazioni no profit? *</label>
                       <div className="row">
                         <input
                           type="text"

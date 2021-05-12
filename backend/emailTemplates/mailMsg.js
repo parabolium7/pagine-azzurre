@@ -13,7 +13,7 @@ let msgRegistration = (recipient, username) => {
     from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
     subject: `${username}, Benvenuto nelle Pagine Azzurre.`,
     html: `<p>${moment} ${username},</p></br>\
-    <p>Benvenuto con noi nelle PAGINE AZZURRE. Ti sei registrato con successo.</br>\
+    <p>Benvenuta/o con noi nelle PAGINE AZZURRE. Ti sei registrato con successo.</br>\
     Aderisci e usufruisci della convenzione: VALorizza le AZioni che COncordi.</br>\
     Ora puoi partecipare con le tue proposte, inserisci le cose che vuoi mettere</br>\
     in scambio e hai piacere ti siano richieste. Esponi  richieste di cose e servizi</br>\
@@ -37,8 +37,8 @@ let msgPasswordRecovery = (recipient) => {
     to: recipient,
     from: 'iscrizioni.pagineazzurre@cittadini-volontari.it',
     subject: 'Pagine Azzurre Richiesta cambio Password',
-    text: 'Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso',
-    html: '<p>Hai chiesto un cambio di password? Clicca il link per confermare, puoi ti arrivera una password provisionale che dovrai cambiare al primo accesso</p>'
+    text: 'Hai chiesto un cambio di password?  Il servizio automatico non ancora disponibile. La nuova password la otterrai con richiesta a questa mail g.lugo.dev@gmail.com',
+    html: '<p>Hai chiesto un cambio di password?  Il servizio automatico non ancora disponibile. La nuova password la otterrai con richiesta a questa mail g.lugo.dev@gmail.com</p>'
   }
   return msg 
 }
