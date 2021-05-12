@@ -475,6 +475,11 @@ img.large {
   max-width: 30rem;
 }
 
+/* Privacy */
+.privacy {
+  padding: 10rem 5rem;
+}
+
 /* Search */
 .search button {
   border-radius: 0 0.5rem 0.5rem 0;

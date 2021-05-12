@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { listTopSellers } from '../actions/userActions';
 import CookieConsent from "react-cookie-consent"
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -39,8 +39,10 @@ export default function HomeScreen() {
           buttonStyle={{ color: "#626360", fontSize: "15px" }}
           expires={150}
         >
-          This website uses cookies to enhance the user experience.{" "}
-          <span style={{ fontSize: "10px" }}>This bit of text is smaller :O</span>
+          I cookie ci aiutano ad erogare servizi di qualità.<br></br>
+          Utilizzando i nostri servizi, l'utente accetta le nostre modalità d'uso dei cookie.
+          Qualora l’utente non desideri ricevere alcun tipo di cookie sul proprio elaboratore, né da questo sito né da altri, può elevare il livello di protezione privacy del proprio browser mediante l’apposita funzione,  come specificato di seguito.
+          Le pagineazzurre.net fa uso dei cookie. L'informazione più dettagliata nella nostra pagina sulla <Link to="/privacy">Privacy</Link>
         </CookieConsent>
       <div>
       {/* <h2>Top Sellers</h2>

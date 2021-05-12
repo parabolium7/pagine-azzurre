@@ -35,6 +35,7 @@ import logo2 from './resources/logos/bannerarancione.jpg';
 import logo3 from './resources/logos/yinyang.jpg';
 import logo4 from './resources/logos/bannerblu.jpg';
 import logo5 from './resources/logos/bannergiallo.jpg';
+import PrivacyScreen from './screens/PrivacyScreen'
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -220,6 +221,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+          <Route path="/privacy" component={PrivacyScreen}></Route>
           <Route path="/search/name/:name?" component={SearchScreen} exact></Route>
           <Route path="/search/category/:category" component={SearchScreen} exact></Route>
           <Route path="/search/category/:category/name/:name" component={SearchScreen} exact></Route>
