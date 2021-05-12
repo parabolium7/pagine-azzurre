@@ -310,12 +310,12 @@ export default function ProfileScreen() {
                 hasReferer || referer.length > 0 ?
                   (
                     <div>
-                      <label htmlFor="referer" className="row center">Gruppi, movimenti, comitati o associazioni no profit? *</label>
+                      <label htmlFor="referer" className="row center">Inserisci al massimo numero tre associazioni.</label>
                       <div className="row">
                         <input
                           type="text"
                           id="referer"
-                          placeholder="Inserici l'ente del terzo settore al qualle partecipi"
+                          placeholder="Inserici al massimo numero tre associazioni."
                           value={ newReferer }
                           // TODO: Autosearch here!
                           onChange={(e) => setNewReferer(e.target.value.toUpperCase())}
