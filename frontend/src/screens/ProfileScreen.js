@@ -310,12 +310,12 @@ export default function ProfileScreen() {
                 hasReferer || referer.length > 0 ?
                   (
                     <div>
-                      <label htmlFor="referer" className="row center">Inserisci al massimo numero tre associazioni.</label>
+                      <label htmlFor="referer" className="row ">Gruppi, movimenti, comitati o associazioni no profit</label>
                       <div className="row">
                         <input
                           type="text"
                           id="referer"
-                          placeholder="Inserici al massimo numero tre associazioni."
+                          placeholder="Inserici al massimo numero cinque associazioni."
                           value={ newReferer }
                           // TODO: Autosearch here!
                           onChange={(e) => setNewReferer(e.target.value.toUpperCase())}
@@ -326,16 +326,16 @@ export default function ProfileScreen() {
                           <ol>
                            {
                               referer.map( (item, idx ) => {
-                                if(idx <= 2){
+                                if(idx <= 4){
                                  return <li key={idx}>{item}</li>
                                 } else {
                                   return ''
                                 }
                               })
-                           }       
+                           }
                           </ol>
                             {
-                              newReferer.length > 0 && referer.length < 3 &&
+                              newReferer.length > 0 && referer.length < 5 &&
                                 (<button className="primary blu little" onClick={addETS}>
                                   aggiungi
                                 </button>)
