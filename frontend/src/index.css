@@ -699,6 +699,7 @@ input:checked + .slider:before {
 } 
 
 @media screen and (max-width: 1330px){
+
   .Logo1 {
     display: none;
   }
@@ -718,4 +719,20 @@ input:checked + .slider:before {
   .Logo5 {
     display: none;
   }
-} 
+}
+
+@media screen and (max-width: 540px){
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      'blubar'
+      'pre-header'
+      'header'
+      'post-header'
+      'main'
+      'footer';
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5rem 2rem 12rem 2rem 1fr 5rem;
+    height: 100%;
+  }
+}
