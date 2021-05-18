@@ -149,7 +149,6 @@ export default function ProductEditScreen(props) {
   const setDefaultImage = (e) => {
       if(e === 'servizio') setIsService(true)
       if(e === 'prodotto') setIsService(false)
-      console.log(`/images/${section}_${e}.jpg`)
       setImage(`/images/${section}_${e}.jpg`)
   }
 
@@ -164,7 +163,10 @@ export default function ProductEditScreen(props) {
       setSection("avviso")
       setImage(`/images/avviso.jpg`)
     }
-    console.log(e , section)
+    if(e === "offro" && isService) setImage(`/images/offro_servizio.jpg`)
+    if(e === "offro" && !isService) setImage(`/images/offro_prodotto.jpg`)
+    if(e === "cerco" && isService) setImage(`/images/cerco_servizio.jpg`)
+    if(e === "cerco" && !isService) setImage(`/images/cerco_prodotto.jpg`)
   }
 
   const handleTitle = (e) => {
