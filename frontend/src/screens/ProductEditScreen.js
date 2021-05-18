@@ -329,7 +329,7 @@ export default function ProductEditScreen(props) {
               <input
                 id="city"
                 type="text"
-                placeholder={section === 'offro' || section === 'cerco'?'Inserisci il nome della città dove si trova il ' + (isService?'servizio':'prodotto'):'Inserisci il nome della città da dove parte ' + (section === 'propongo'?'la propuesta':'il avviso')}
+                placeholder={section === 'offro' || section === 'cerco'?'Inserisci il nome della città dove si trova il ' + (isService?'servizio':'prodotto'):'Inserisci il nome della città da dove parte ' + (section === 'propongo'?'la propuesta':'l\'avviso')}
                 value={ city }
                 onChange={(e) => setCity(e.target.value)}
               ></input>
@@ -377,7 +377,7 @@ export default function ProductEditScreen(props) {
                 id="description"
                 rows="3"
                 type="text"
-                placeholder={"Descrivi con precisione " + (section === 'offro' || section === 'cerco'?(isService?'il servizio':'il prodotto'):(section === 'avviso'?'il avviso':'la proposta'))}
+                placeholder={"Descrivi con precisione " + (section === 'offro' || section === 'cerco'?(isService?'il servizio':'il prodotto'):(section === 'avviso'?'l\'avviso':'la proposta'))}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
