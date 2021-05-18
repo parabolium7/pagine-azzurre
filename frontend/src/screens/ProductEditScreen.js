@@ -323,6 +323,16 @@ export default function ProductEditScreen(props) {
               </div>
             }
             <div>
+              <label htmlFor="city">Città</label>
+              <input
+                id="city"
+                type="text"
+                placeholder={"Inserisci il nome della città dove si trova il " + (isService?'servizio':'prodotto')}
+                value={ city }
+                onChange={(e) => setCity(e.target.value)}
+              ></input>
+            </div>
+            <div>
               <label htmlFor="auxPhone">Telefono di conttato per questo annuncio</label>
               <input
                 id="auxPhone"
@@ -365,7 +375,7 @@ export default function ProductEditScreen(props) {
                 id="description"
                 rows="3"
                 type="text"
-                placeholder="Descrivi con precisione il prodotto o servizio proposto."
+                placeholder={"Descrivi con precisione il " + (isService?'servizio':'prodotto') + " proposto"}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
