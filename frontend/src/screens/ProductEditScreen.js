@@ -329,7 +329,7 @@ export default function ProductEditScreen(props) {
               <input
                 id="city"
                 type="text"
-                placeholder={"Inserisci il nome della città dove si trova il " + (isService?'servizio':'prodotto')}
+                placeholder={section === 'offro' || section === 'cerco'?'Inserisci il nome della città dove si trova il ' + (isService?'servizio':'prodotto'):'Inserisci il nome della città da dove parte ' + (section === 'propongo'?'la propuesta':'il avviso')}
                 value={ city }
                 onChange={(e) => setCity(e.target.value)}
               ></input>
