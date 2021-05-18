@@ -377,7 +377,7 @@ export default function ProductEditScreen(props) {
                 id="description"
                 rows="3"
                 type="text"
-                placeholder={"Descrivi con precisione il " + (isService?'servizio':'prodotto') + " proposto"}
+                placeholder={"Descrivi con precisione " + (section === 'offro' || section === 'cerco'?(isService?'il servizio':'il prodotto'):(section === 'avviso'?'il avviso':'la proposta'))}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
