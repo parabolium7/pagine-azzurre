@@ -735,4 +735,20 @@ input:checked + .slider:before {
     grid-template-rows: 0.5rem 2rem 12rem 2rem 1fr 5rem;
     height: 100%;
   }
+
+  .post-header {
+    height: 6rem;
+    text-align: center;
+  }
+
+  h1.row.center {
+    margin: 2rem auto 0;
+    text-align: center;
+  }
+
+  h2.row.center {
+    padding: 0px;
+    margin-top: 0;
+    text-align: center;
+  }
 }
