@@ -1,14 +1,16 @@
 html {
   font-size: 62.5%; /* 16px x 62.5 = 10px = 1rem */
   box-sizing: border-box;
+  background-color: #203040;
 }
 body {
   margin: 0;
-  height: 100vh;
+  height: auto;
   font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white;
 }
 #root {
   height: 100%;
