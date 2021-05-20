@@ -114,7 +114,7 @@ export default function ProductListScreen(props) {
                   <td>{product._id}</td>
                   <td><img className="minInfo" src={product.image}></img></td>
                   <td>{product.name}</td>
-                  <td>☯ {product.priceVal} e € {product.priceEuro}</td>
+                  <td>☯ {product.priceVal} <br/>e € {product.priceEuro}</td>
                   <td>{ product.section[0].toUpperCase() + product.section.substring(1)}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
