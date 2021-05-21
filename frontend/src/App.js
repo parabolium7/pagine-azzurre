@@ -63,8 +63,8 @@ function App() {
     <BrowserRouter>
       <div className="grid-container">
       <div className="blubar"></div>
-      <div className="pre-header row center">
-        PAGINE  AZZURRE  del VAL - PAGINE AZZURRE  del  VAL.AZ.CO. -  VALorizzatore del AZione COncordata
+      <div className="pre-header example1">
+        PAGINE AZZURRE DEL VAL - UN PROGETTO FATTO CON ❤️ DAL TEAM VALAZCO - PAGINE AZZURRE DEL VAL.AZ.CO. - VALorizzatore del AZione COncordata -  
       </div>
       <header className="row">
           <div>

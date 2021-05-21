@@ -686,6 +686,41 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+ .example1 {
+  position: absolute;
+  text-align: center;
+  background-color: transparent;
+  /* Starting position */
+  -moz-transform:translateX(100%);
+  -webkit-transform:translateX(100%);	
+  transform:translateX(100%);
+  /* Apply animation to this element */	
+  -moz-animation: example1 15s linear infinite;
+  -webkit-animation: example1 15s linear infinite;
+  animation: example1 15s linear infinite;
+ }
+ /* Move it (define the animation) */
+ @-moz-keyframes example1 {
+  0%   { -moz-transform: translateX(100%); }
+  100% { -moz-transform: translateX(-100%); }
+ }
+ @-webkit-keyframes example1 {
+  0%   { -webkit-transform: translateX(100%); }
+  100% { -webkit-transform: translateX(-100%); }
+ }
+ @keyframes example1 {
+  0%   { 
+  -moz-transform: translateX(100%); /* Firefox bug fix */
+  -webkit-transform: translateX(100%); /* Firefox bug fix */
+  transform: translateX(100%); 		
+  }
+  100% { 
+  -moz-transform: translateX(-100%); /* Firefox bug fix */
+  -webkit-transform: translateX(-100%); /* Firefox bug fix */
+  transform: translateX(-100%); 
+  }
+ }
+
 @media screen and (max-width: 1450px){
   .Logo1 {
     height: 4.5rem;
@@ -765,6 +800,12 @@ input:checked + .slider:before {
     margin: 2rem auto 0;
     text-align: center;
     font-size: 1.5rem;
+  }
+
+  .example1 {
+    font-size: 0.7rem;
+    padding-top: 5px;
+    width: 100vw;
   }
 
   h2.row.center {
