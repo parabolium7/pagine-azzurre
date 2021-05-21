@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema(
     activity: { type: Number, default: 0, require: false },
     seller: {
       name: { type: String, required: true, unique: true },
+      link: { type: String, require: false },
       logo: String,
       description: String,
       rating: { type: Number, default: 0, required: true },

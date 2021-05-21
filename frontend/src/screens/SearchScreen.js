@@ -36,7 +36,7 @@ export default function SearchScreen(props) {
         category: category !== 'all' ? category : '',
         min,
         max,
-        rating,
+        rating, 
         order,
       })
     );
@@ -53,7 +53,7 @@ export default function SearchScreen(props) {
     return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
-    <div>
+    <div className="flash">
       <div className="row">
         {loading ? (
           <LoadingBox></LoadingBox>
