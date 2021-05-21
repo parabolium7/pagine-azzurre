@@ -61,7 +61,6 @@ export default function ProductListScreen(props) {
 
   const deleteHandler = (product) => {
     if (window.confirm('Sicuro di voler cancellare il annuncio?')) {
-      // TODO: Check this delete Product
       dispatch(deleteProduct(product._id));
     }
   };
@@ -70,7 +69,7 @@ export default function ProductListScreen(props) {
   };
   return (
     <div>
-      <div className="row">
+      <div className="row flash">
         <h1>Lista di Annunci</h1>
         { !userInfo.hasAd && 
           (
@@ -95,7 +94,7 @@ export default function ProductListScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="table">
+          <table className="table special">
             <thead>
               <tr>
                 <th>ID</th>
@@ -114,7 +113,7 @@ export default function ProductListScreen(props) {
                   <td>{product._id}</td>
                   <td><img className="minInfo" src={product.image}></img></td>
                   <td>{product.name}</td>
-                  <td>☯ {product.priceVal} <br/>e € {product.priceEuro}</td>
+                  <td>☯ {product.priceVal} <br/>€ {product.priceEuro}</td>
                   <td>{ product.section[0].toUpperCase() + product.section.substring(1)}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
