@@ -58,15 +58,14 @@ export default function ProductScreen(props) {
         <div>
           <Link to="/">Torna ai articoli</Link>
           <div className="row top">
-            <div className="col-2">
+            <div className="col-1">
               <img
                 className="large"
                 src={product.image}
                 alt={product.name}
               ></img>
             </div>
-            <div className="col-1">
-              {/* TODO: Add some margin between image and text */}
+            <div className="col-1 space">
               <ul>
                 <li>
                   <h1>{product.name}</h1>

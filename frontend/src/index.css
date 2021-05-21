@@ -21,6 +21,10 @@ body {
   margin: 0 0.55rem;
 }
 
+.space{
+  padding: 2rem;
+}
+
 /* Layout */
 .grid-container {
   display: grid;
