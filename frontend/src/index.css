@@ -1,18 +1,19 @@
 html {
   font-size: 62.5%; /* 16px x 62.5 = 10px = 1rem */
   box-sizing: border-box;
-  /* background-color: #203040; */
+  background-color: #203040;
 }
 body {
   margin: 0;
   width: 100vw;
-  height: auto;
+  height: 100%;
   font-size: 1.6rem;
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: white;
 }
+
 #root {
   height: 100%;
 }
@@ -94,6 +95,11 @@ footer a:hover {
   color: #bcf7aa;
 }
 
+.white-force {
+  height: 100vh;
+  z-index: -10000;
+  background-color: white;
+}
 
 /* Common */
 h1 {
@@ -279,8 +285,7 @@ aside {
   position: fixed;
   width: 30rem;
   height: 100%;
-  background-color: #efefef;
-  background-color: #626360;
+  background-color: #dceaff;
   z-index: 1000;
   transform: translateX(-30rem);
   transition: all 0.5s;
