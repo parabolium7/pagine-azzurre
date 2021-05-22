@@ -2,6 +2,7 @@ html {
   font-size: 62.5%; /* 16px x 62.5 = 10px = 1rem */
   box-sizing: border-box;
   background-color: #203040;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
@@ -806,6 +807,12 @@ input:checked + .slider:before {
     font-size: 1.5rem;
   }
 
+  .white-force {
+    height: 100vh;
+    z-index: -10000;
+    background-color: white;
+  }
+
   .example1 {
     font-size: 0.7rem;
     padding-top: 5px;
@@ -816,5 +823,14 @@ input:checked + .slider:before {
     padding: 0px;
     margin-top: 0;
     text-align: center;
+  }
+
+  .html {
+    width: 100vw;
+  }
+
+  .footer {
+    width: 100vw;
+    display: block;
   }
 }
