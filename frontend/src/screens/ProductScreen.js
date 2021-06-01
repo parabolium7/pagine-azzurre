@@ -94,6 +94,11 @@ export default function ProductScreen(props) {
                         {product.seller.seller.name}
                       </Link>
                     </h2>
+                    { product.seller.seller.logo && <img
+                      className="medium"
+                      src={product.seller.seller.logo}
+                      alt={product.seller.seller.name}
+                    /> } 
                     <Rating
                       rating={product.seller.seller.rating}
                       numReviews={product.seller.seller.numReviews}

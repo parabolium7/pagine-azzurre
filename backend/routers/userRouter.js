@@ -145,8 +145,8 @@ userRouter.put(
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
         user.seller.logo = req.body.sellerLogo || user.seller.logo;
-        user.seller.description =
-          req.body.sellerDescription || user.seller.description;
+        user.seller.description = req.body.sellerDescription || user.seller.description;
+        user.seller.link = req.body.sellerLink || user.seller.link;
       }
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);

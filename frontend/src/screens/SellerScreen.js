@@ -25,8 +25,8 @@ export default function SellerScreen(props) {
     dispatch(listProducts({ seller: sellerId }));
   }, [dispatch, sellerId]);
   return (
-    <div className="row top">
-      <div className="col-1">
+    <div className="row top flash">
+      <div className="col-2">
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -37,7 +37,7 @@ export default function SellerScreen(props) {
               <div className="row start">
                 <div className="p-1">
                   <img
-                    className="small"
+                    className="medium"
                     src={user.seller.logo}
                     alt={user.seller.name}
                   ></img>
@@ -54,8 +54,9 @@ export default function SellerScreen(props) {
               ></Rating>
             </li>
             <li>
-              <a href={`mailto:${user.email}`}>Contact Seller</a>
+              <a href={`mailto:${user.email}`}>Contatta Offerente</a>
             </li>
+            <li><h3>Descrizione del Offerente</h3></li>
             <li>{user.seller.description}</li>
           </ul>
         )}

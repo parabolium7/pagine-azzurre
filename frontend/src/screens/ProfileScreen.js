@@ -31,6 +31,8 @@ export default function ProfileScreen() {
   const [sellerLogo, setSellerLogo] = useState('');
   const [sellerDescription, setSellerDescription] = useState('');
   const [hasReferer, setHasReferer] = useState(false)
+  const [partitaIva, setPartitaIva] = useState('')
+  const [sellerLink, setSellerLink] = useState('')
 
   function parseDate(str, format, locale) {
     const parsed = dateFnsParse(str, format, new Date(), { locale });
@@ -86,10 +88,12 @@ export default function ProfileScreen() {
       setPhone(user.phone);
       setEmail(user.email);
       setReferer(user.referer)
+      if (typeof parseInt(user.partitaIva) === 'number' ) setPartitaIva(user.partitaIva)
       if (user.seller) {
         setSellerName(user.seller.name);
         setSellerLogo(user.seller.logo);
         setSellerDescription(user.seller.description);
+        setSellerLink(user.seller.link)
       }
     }
   }, [dispatch, userInfo._id, user, userInfo]);
@@ -120,6 +124,7 @@ export default function ProfileScreen() {
           sellerName,
           sellerLogo,
           sellerDescription,
+          sellerLink,
         })
       );
     }
@@ -345,10 +350,10 @@ export default function ProfileScreen() {
                     </div>
                   ):''
               }
-            {/* </div>
+            </div>
             {user.isSeller && (
               <>
-                <div>
+                {/* <div>
                   <h2>Dati Offerente:</h2>
                   <label htmlFor="sellerName">Nome offerente</label>
                   <input
@@ -358,30 +363,57 @@ export default function ProfileScreen() {
                     value={sellerName}
                     onChange={(e) => setSellerName(e.target.value)}
                   ></input>
-                </div>
+                </div> */}
                 <div>
+                  <h2>Dati Offerente:</h2>
                   <label htmlFor="sellerLogo">Offerente Logo</label>
                   <input
                     id="sellerLogo"
-                    type="text"
-                    placeholder="Inserice immagine di offerente"
+                    type="url"
+                    placeholder="Inserice la url del logo / immagine di offerente"
                     value={sellerLogo}
                     onChange={(e) => setSellerLogo(e.target.value)}
                   ></input>
                 </div>
+                { sellerLogo &&
+                  <div>
+                    <img className="small" src={sellerLogo} alt="logo"/>
+                  </div>
+                }
                 <div>
-                  <label htmlFor="sellerDescription">cdi Offerente</label>
+                  <label htmlFor="linkweb">Pagina Web</label>
                   <input
+                    id="linkweb"
+                    type="url"
+                    placeholder="Inserici link della propria pagina web"
+                    value={sellerLink}
+                    onChange={(e) => setSellerLink(e.target.value)}
+                  ></input>
+                </div>
+                <div>
+                  <label htmlFor="partitaIva">Partita IVA</label>
+                  <input
+                    id="partitaIva"
+                    type="text"
+                    placeholder="Inserici descrizione di offerente"
+                    value={partitaIva}
+                    onChange={(e) => setPartitaIva(e.target.value)}
+                  ></input>
+                </div>
+                <div>
+                  <label htmlFor="sellerDescription">Descrizione Offerente</label>
+                  <textarea
                     id="sellerDescription"
                     type="text"
                     placeholder="Inserici descrizione di offerente"
+                    rows="6"
                     value={sellerDescription}
                     onChange={(e) => setSellerDescription(e.target.value)}
-                  ></input>
+                  ></textarea>
                 </div>
               </>
             )}
-            <div> */}
+            <div>
               <h2>Cambio Password:</h2>
               <label htmlFor="password">Cambiare Password</label>
               <input
