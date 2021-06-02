@@ -26,6 +26,7 @@ import SellerScreen from './screens/SellerScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import NewsletterScreen from './screens/NewsletterScreen';
+import TuttiNoiScreen from './screens/TuttiNoiScreen';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
@@ -100,6 +101,9 @@ function App() {
                 <SearchBox history={history}></SearchBox>
               )}
             ></Route>
+          </div>
+          <div>
+            <Link to="/tutti_noi">Tutti Noi</Link>
           </div>
           { userInfo ? (
             <div>
@@ -209,6 +213,7 @@ function App() {
           </ul>
         </aside>
         <main>
+          <Route path="/tutti_noi/" component={TuttiNoiScreen}></Route>
           <Route path="/newsletter/" component={NewsletterScreen}></Route>
           <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>

@@ -6,7 +6,7 @@ import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
-import { listTopSellers } from '../actions/userActions';
+// import { listTopSellers } from '../actions/userActions';
 import CookieConsent from "react-cookie-consent"
 import { Link } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     dispatch(listProducts({}));
-    dispatch(listTopSellers());
+    // dispatch(listTopSellers());
   }, [dispatch]);
   return (
     <div>

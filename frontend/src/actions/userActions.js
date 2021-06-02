@@ -27,6 +27,9 @@ import {
   USER_TOPSELLERS_LIST_REQUEST,
   USER_TOPSELLERS_LIST_SUCCESS,
   USER_TOPSELLERS_LIST_FAIL,
+  USER_SELLERS_LIST_REQUEST,
+  USER_SELLERS_LIST_SUCCESS,
+  USER_SELLERS_LIST_FAIL,
   USER_PASSWORDRECOVERY_SUCCESS,
   USER_PASSWORDRECOVERY_REQUEST,
   USER_PASSWORDRECOVERY_FAIL,
@@ -216,6 +219,20 @@ export const listTopSellers = () => async (dispatch) => {
         ? error.response.data.message
         : error.message;
     dispatch({ type: USER_TOPSELLERS_LIST_FAIL, payload: message });
+  }
+};
+
+export const listSellers = () => async (dispatch) => {
+  dispatch({ type: USER_SELLERS_LIST_REQUEST });
+  try {
+    const { data } = await Axios.get('/api/users/sellers');
+    dispatch({ type: USER_SELLERS_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_SELLERS_LIST_FAIL, payload: message });
   }
 };
 

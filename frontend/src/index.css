@@ -360,10 +360,33 @@ img.large {
 .price {
   font-size: 2rem;
 }
-
 .price.euro{
   padding-left: 1.3rem;
 }
+
+/* Scheda */
+
+.scheda {
+  background-color: #e3e3e4;
+  padding: 1rem;
+  margin: 1rem;
+  width: 15vw;
+  display: inline-flex;
+  height: 40vh;
+  font-size : 1.5rem;
+  overflow-x: scroll;
+  border-radius: 0.8rem;
+}
+
+.scheda img {
+  width: 10vw;
+  margin: auto;
+}
+
+.scheda p {
+  color: #000;
+}
+
 /* Rating */
 .rating span {
   color: #f0c040;
@@ -691,7 +714,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
- .example1 {
+.example1 {
   position: absolute;
   text-align: center;
   background-color: transparent;

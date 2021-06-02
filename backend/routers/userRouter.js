@@ -27,6 +27,14 @@ userRouter.get(
 );
 
 userRouter.get(
+  '/sellers',
+  expressAsyncHandler(async (req, res) => {
+    const sellers = await User.find({ isSeller: true })
+    res.send(sellers);
+  })
+);
+
+userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
     // await User.remove({});
@@ -152,7 +160,6 @@ userRouter.put(
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
       const updatedUser = await user.save();
-      // TODO: Update cookie too after this call.
       res.send({
         _id: updatedUser._id,
         account: updatedUser.account,
