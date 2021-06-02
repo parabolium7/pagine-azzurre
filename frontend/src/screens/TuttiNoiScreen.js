@@ -21,7 +21,7 @@ export default function TuttiNoi() {
 
   return (
     <>
-      <h1 className="row center">Le Pagine Azzurre siamo Noi</h1>
+      <h1 className="row center">Le Pagine Azzurre Siamo Noi</h1>
       <div>
       { loadingSellers ? (
         <LoadingBox></LoadingBox>
@@ -31,7 +31,7 @@ export default function TuttiNoi() {
         <>
           {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
             {sellers.map((seller) => (
-              ((seller.seller.logo != '' && seller.seller.description) && (<div className="scheda" key={seller._id}>
+              ((seller.seller.logo && seller.seller.description) && (<div className="scheda" key={seller._id}>
                 <Link to={`/seller/${seller._id}`}>
                   <h1 className="row center">{seller.seller.name}</h1>
                   <img className="row center" src={seller.seller.logo} alt={seller.seller.name} />
