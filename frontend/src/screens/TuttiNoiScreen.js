@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import { listSellers } from '../actions/userActions'
+import questionMark from '../resources/logos/informazioni.png'
 import { Link } from 'react-router-dom'
 
 
@@ -21,7 +22,7 @@ export default function TuttiNoi() {
 
   return (
     <>
-      <h1 className="row center">Le Pagine Azzurre Siamo Noi</h1>
+      <h1 className="row center">Le Pagine Azzurre Siamo Noi <img className="qm" src={questionMark} alt="question mark"/><div className="qm_hidden">Per comparire in questa sezione aggiungi una immagine e una descrizione nel tuo profilo</div></h1>
       <div>
       { loadingSellers ? (
         <LoadingBox></LoadingBox>
