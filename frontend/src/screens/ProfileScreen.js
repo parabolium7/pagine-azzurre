@@ -394,8 +394,8 @@ export default function ProfileScreen() {
                   <input
                     id="partitaIva"
                     type="text"
-                    placeholder="Inserici descrizione di offerente"
-                    value={partitaIva}
+                    placeholder="Inserici partita IVA"
+                    value={!partitaIva.match(/GMT/)?partitaIva:''}
                     onChange={(e) => setPartitaIva(e.target.value)}
                   ></input>
                 </div>
