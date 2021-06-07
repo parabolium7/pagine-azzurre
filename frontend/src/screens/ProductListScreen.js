@@ -103,7 +103,7 @@ export default function ProductListScreen(props) {
                 <th>PREZZO</th>
                 <th>SEZIONE</th>
                 <th>CATEGORIA</th>
-                <th>BRAND</th>
+                <th>HASHTAG</th>
                 <th>MODIFICA / CANCELLA</th>
               </tr>
             </thead>

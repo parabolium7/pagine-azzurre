@@ -42,7 +42,7 @@ export default function OrderListScreen(props) {
           <thead>
             <tr>
               <th>ID</th>
-              <th>USUARIO</th>
+              <th>UTÈNTE</th>
               <th>DATA</th>
               <th>TOTAL</th>
               <th>PAGATO</th>
