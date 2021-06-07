@@ -111,7 +111,7 @@ export default function ProductListScreen(props) {
               {products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
-                  <td><img className="minInfo" src={product.image}></img></td>
+                  <td><img className="minInfo" src={product.image} alt={product.name}/></td>
                   <td>{product.name}</td>
                   <td>☯ {product.priceVal} <br/>€ {product.priceEuro}</td>
                   <td>{ product.section[0].toUpperCase() + product.section.substring(1)}</td>
