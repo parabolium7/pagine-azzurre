@@ -9,6 +9,7 @@ import { DateUtils } from 'react-day-picker';
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 import 'react-day-picker/lib/style.css';
+import Axios from 'axios'
 
 export default function ProfileScreen() {
   const [account, setAccount] = useState(''); 
@@ -34,6 +35,9 @@ export default function ProfileScreen() {
   const [partitaIva, setPartitaIva] = useState('')
   const [sellerLink, setSellerLink] = useState('')
 
+  // const [loadingUpload, setLoadingUpload] = useState(false);
+  // const [errorUpload, setErrorUpload] = useState('');
+
   function parseDate(str, format, locale) {
     const parsed = dateFnsParse(str, format, new Date(), { locale });
     if (DateUtils.isDate(parsed)) {
@@ -45,6 +49,32 @@ export default function ProfileScreen() {
   function formatDate(date, format, locale) {
     return dateFnsFormat(date, format, { locale });
   }
+
+  // const uploadFileHandler = async (e) => {
+  //   const file = e.target.files[0];
+  //   const bodyFormData = new FormData();
+  //   bodyFormData.append('image', file);
+  //   setLoadingUpload(true);
+  //   try {
+  //     const { data } = await Axios.post('/api/uploads/s3', bodyFormData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //         Authorization: `Bearer ${userInfo.token}`,
+  //       },
+  //     });
+  //     setSellerLogo(data);
+  //     setLoadingUpload(false);
+  //   } catch (error) {
+  //     setErrorUpload(error.message);
+  //     setLoadingUpload(false);
+  //   }
+  // };
+
+  // async function pseudoSetSellerLogo(e){
+  //     console.log("Yeah", e.value)
+  //     await uploadFileHandler(e)
+  //     setSellerLogo(e.value)
+  // }
 
   const GetFormattedDate = (birthday) => {
     if (typeof birthday === 'object') {
@@ -172,7 +202,7 @@ export default function ProfileScreen() {
                 <input type="text" readOnly value={account} style={{display:"inline", whiteSpace:"nowrap", color: "#5A5A5A", fontSize: "1.8rem"}}></input>
             </div>
             <div>
-                <label htmlFor="balance">Bilancio</label>
+                <label htmlFor="balance">Saldo</label>
                 <input type="text" readOnly value={"☯ 100"} style={{display:"inline", whiteSpace:"nowrap", color: "#3A3A3A", fontSize: "1.8rem"}}></input>
             </div>
             <div>
