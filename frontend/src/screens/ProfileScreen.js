@@ -35,8 +35,8 @@ export default function ProfileScreen() {
   const [partitaIva, setPartitaIva] = useState('')
   const [sellerLink, setSellerLink] = useState('')
 
-  // const [loadingUpload, setLoadingUpload] = useState(false);
-  // const [errorUpload, setErrorUpload] = useState('');
+  const [loadingUpload, setLoadingUpload] = useState(false);
+  const [errorUpload, setErrorUpload] = useState('');
 
   function parseDate(str, format, locale) {
     const parsed = dateFnsParse(str, format, new Date(), { locale });
@@ -50,28 +50,29 @@ export default function ProfileScreen() {
     return dateFnsFormat(date, format, { locale });
   }
 
-  // const uploadFileHandler = async (e) => {
-  //   const file = e.target.files[0];
-  //   const bodyFormData = new FormData();
-  //   bodyFormData.append('image', file);
-  //   setLoadingUpload(true);
-  //   try {
-  //     const { data } = await Axios.post('/api/uploads/s3', bodyFormData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //         Authorization: `Bearer ${userInfo.token}`,
-  //       },
-  //     });
-  //     setSellerLogo(data);
-  //     setLoadingUpload(false);
-  //   } catch (error) {
-  //     setErrorUpload(error.message);
-  //     setLoadingUpload(false);
-  //   }
-  // };
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    console.log("File", file)
+    const bodyFormData = new FormData();
+    bodyFormData.append('image', file);
+    setLoadingUpload(true);
+    try {
+      const { data } = await Axios.post('/api/uploads/s3', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      setSellerLogo(data);
+      setLoadingUpload(false);
+    } catch (error) {
+      setErrorUpload(error.message);
+      setLoadingUpload(false);
+    }
+  };
 
   // async function pseudoSetSellerLogo(e){
-  //     console.log("Yeah", e.value)
+  //     console.log("Yeah", e)
   //     await uploadFileHandler(e)
   //     setSellerLogo(e.value)
   // }
@@ -395,20 +396,21 @@ export default function ProfileScreen() {
                 </div> */}
                 <div>
                   <h2>Dati Offerente:</h2>
-                  <label htmlFor="sellerLogo">Offerente Logo</label>
-                  <input
-                    id="sellerLogo"
-                    type="url"
-                    placeholder="Inserice la url del logo / immagine di offerente"
-                    value={sellerLogo}
-                    onChange={(e) => setSellerLogo(e.target.value)}
-                  ></input>
-                </div>
-                { sellerLogo &&
+                  <label htmlFor="sellerLogo">Logo:</label>
+                  { loadingUpload && <LoadingBox></LoadingBox> }
+                  { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
+                  { sellerLogo &&
                   <div>
-                    <img className="small" src={sellerLogo} alt="logo"/>
+                    <img alt={`${name} logo image`} src={sellerLogo} style={{ display: "block",  maxWidth:"115px", maxHeight:"115px", width: "auto", height: "auto" }}/>
                   </div>
                 }
+                  <input
+                    type="file"
+                    id="sellerLogo"
+                    accept="image/jpeg"
+                    onChange={uploadFileHandler}
+                  ></input>
+                </div>
                 <div>
                   <label htmlFor="linkweb">Pagina Web</label>
                   <input
