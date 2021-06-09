@@ -32,13 +32,24 @@ let msgRegistration = (recipient, username) => {
   return msg 
 }
 // TODO: To Andrei.
-let msgPasswordRecovery = (recipient) => {
+let msgPasswordRecovery = (recipient, hash) => {
   let msg = { 
     to: recipient,
     from: 'iscrizioni.pagineazzurre@cittadini-volontari.it',
-    subject: 'Pagine Azzurre Richiesta cambio Password',
-    text: 'Hai chiesto un cambio di password?  Il servizio automatico non ancora disponibile. La nuova password la otterrai con richiesta a questa mail g.lugo.dev@gmail.com',
-    html: '<p>Hai chiesto un cambio di password?  Il servizio automatico non ancora disponibile. La nuova password la otterrai con richiesta a questa mail g.lugo.dev@gmail.com</p>'
+    subject: 'Pagine Azzurre: Richiesta cambio Password',
+    text: `Hai chiesto un cambio di password?  Per confermare clicca il seguente link http://localhost:2998/password-recovery/${hash} . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.`,
+    html: `<p>Hai chiesto un cambio di password?  Per confermare clicca il seguente <a href="http://localhost:2998/password-recovery/${hash}" target="_blank"}>Link</a> . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.</p>`
+  }
+  return msg 
+}
+
+let msgPasswordReplaced = (recipient, hash) => {
+  let msg = { 
+    to: recipient,
+    from: 'iscrizioni.pagineazzurre@cittadini-volontari.it',
+    subject: 'Pagine Azzurre: Password cambiata con successo',
+    text: `Il cambio password e avvenuto con successo`,
+    html: `<p>Hai chiesto un cambio di password?  Per confermare clicca il seguente <a href="http://pagineazzurre.net/password-recovery/${hash}"}>Link</a> . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.</p>`
   }
   return msg 
 }
@@ -102,4 +113,6 @@ export { msgRegistration,
          msgPasswordRecovery,
          msgOrderNotificationToOfferer,
          msgOrderNotificationToBuyer,
-         secondMailToOfferer  }
+         secondMailToOfferer,
+         msgPasswordReplaced 
+        }
