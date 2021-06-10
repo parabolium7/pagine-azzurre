@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema(
     zipCode: { type: Number, required: false },
     phone: { type: String, required: false, unique: true },
     password: { type: String, required: true },
+    recoveryPasswordId: { type: String, require: false, default: ''},
     referer: {type: Array , required: false },
     isAdmin: { type: Boolean, default: false, required: true },
     isSeller: { type: Boolean, default: true, required: true },

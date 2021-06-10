@@ -37,7 +37,10 @@ import {
   USER_UPDATE_SUCCESS,
   USER_PASSWORDRECOVERY_REQUEST,
   USER_PASSWORDRECOVERY_SUCCESS,
-  USER_PASSWORDRECOVERY_FAIL,  
+  USER_PASSWORDRECOVERY_FAIL,
+  USER_PASSWORD_REPLACEMENT_REQUEST,
+  USER_PASSWORD_REPLACEMENT_SUCCESS,
+  USER_PASSWORD_REPLACEMENT_FAIL,
 } from '../constants/userConstants'
 
 export const userPasswordRecoveryReducer = ( state = { email: '', loading: false }, action ) => {
@@ -197,6 +200,19 @@ export const userAddressMapReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_ADDRESS_MAP_CONFIRM:
       return { address: action.payload }
+    default:
+      return state
+  }
+}
+
+export const userPasswordReplacementReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_PASSWORD_REPLACEMENT_REQUEST:
+      return { loading: true, password_replacement: false }
+    case USER_PASSWORD_REPLACEMENT_SUCCESS:
+      return { loading: false, password_replacement: true }
+    case USER_PASSWORD_REPLACEMENT_FAIL:
+      return { loading: false, message: action.payload }
     default:
       return state
   }

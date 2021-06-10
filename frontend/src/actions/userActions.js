@@ -33,6 +33,9 @@ import {
   USER_PASSWORDRECOVERY_SUCCESS,
   USER_PASSWORDRECOVERY_REQUEST,
   USER_PASSWORDRECOVERY_FAIL,
+  USER_PASSWORD_REPLACEMENT_SUCCESS,
+  USER_PASSWORD_REPLACEMENT_REQUEST,
+  USER_PASSWORD_REPLACEMENT_FAIL,
 } from '../constants/userConstants';
 
 export const register = (username, email, password, sellername, phone, cf, referer) => async (dispatch) => {
@@ -247,5 +250,19 @@ export const userPasswordRecovery = (email) => async (dispatch) => {
       ? error.response.data.message
       : error.message;
     dispatch({ type: USER_PASSWORDRECOVERY_FAIL, payload: message });
+  }
+}
+
+export const userPasswordReplacement = (newData, id) => async (dispatch) => {
+  dispatch({ type: USER_PASSWORD_REPLACEMENT_REQUEST, payload: newData })
+  try {
+    const { data } = await Axios.post('/api/users/password-replacement', { newData, id })
+    dispatch({ type: USER_PASSWORD_REPLACEMENT_SUCCESS, payload: { data }})
+  } catch(error) {
+    const message =
+    error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    dispatch({ type: USER_PASSWORD_REPLACEMENT_FAIL, payload: message });
   }
 }

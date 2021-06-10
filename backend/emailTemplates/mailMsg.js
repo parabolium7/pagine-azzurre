@@ -31,7 +31,7 @@ let msgRegistration = (recipient, username) => {
   }
   return msg 
 }
-// TODO: To Andrei.
+
 let msgPasswordRecovery = (recipient, hash) => {
   let msg = { 
     to: recipient,
@@ -43,13 +43,22 @@ let msgPasswordRecovery = (recipient, hash) => {
   return msg 
 }
 
-let msgPasswordReplaced = (recipient, hash) => {
+let msgPasswordReplaced = (recipient, name) => {
+  let now = new Date()
+  let hrs = now.getHours()
+
+  let moment = 'Salve'
+
+  if(hrs < 12) moment = 'Buongiorno'
+  if(hrs === 12) moment = 'Buon pomeriggio'
+  if(hrs >= 13) moment = 'Buona sera'
+  
   let msg = { 
     to: recipient,
     from: 'iscrizioni.pagineazzurre@cittadini-volontari.it',
     subject: 'Pagine Azzurre: Password cambiata con successo',
     text: `Il cambio password e avvenuto con successo`,
-    html: `<p>Hai chiesto un cambio di password?  Per confermare clicca il seguente <a href="http://pagineazzurre.net/password-recovery/${hash}"}>Link</a> . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.</p>`
+    html: `<p>${moment} ${name}, il cambio password è avvenuto con successo.</p>`
   }
   return msg 
 }
@@ -74,11 +83,6 @@ let msgOrderNotificationToOfferer = (offerer, orderdetails, buyer) => {
 }
 
 let msgOrderNotificationToBuyer = (buyer, orderdetails, offerer) => {
-  console.log("Order Details", orderdetails)
-  console.log("Buyer Phone", buyer[0].phone)
-  console.log("Offerer", offerer)
-  // console.log("orderdetails name", orderdetails.cartItems[0].name)
-  // console.log("orderdetails product", orderdetails.cartItems[0].product)
   let msg = {
     to: buyer[0].email,
     from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
@@ -99,7 +103,6 @@ let msgOrderNotificationToBuyer = (buyer, orderdetails, offerer) => {
 }
 
 let secondMailToOfferer = (envelop) => {
-  console.log("Envelop:", envelop)
   let msg = {
     to: envelop.offerer.email,
     from: "iscrizioni.pagineazzurre@cittadini-volontari.it",

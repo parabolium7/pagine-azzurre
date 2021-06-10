@@ -7,7 +7,7 @@ import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
 import Web3 from 'web3'
-import { msgRegistration, msgPasswordRecovery } from '../emailTemplates/mailMsg.js'
+import { msgRegistration, msgPasswordRecovery, msgPasswordReplaced } from '../emailTemplates/mailMsg.js'
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
@@ -314,14 +314,15 @@ userRouter.put(
 userRouter.post(
   '/password-recovery',
   expressAsyncHandler(async (req, res) => {
-    // TODO use to validate also CF const user = await User.findOne({ cf: "LGMGMNL0176Z614M" });
     const data = await User.find({ email: req.body.email });
     if (data[0].email === req.body.email) {
-      let recipient = msgPasswordRecovery(data[0].email)
       res.send({email: true, loading: false })
+      data[0].recoveryPasswordId = Web3.utils.keccak256(data[0].password)
+      let recipient = msgPasswordRecovery(data[0].email, data[0].recoveryPasswordId)
       sgMail.send(recipient)
         .then(() => {
-          // TODO: To Andrei.
+          const newUserState =  async () => { await data[0].save() }
+          newUserState()
         })
         .catch((error) => {
           console.error(error)
@@ -329,6 +330,31 @@ userRouter.post(
       return
     } else {
       res.status(404).send({ message: 'Email Not Found' })
+    } 
+  })
+);
+
+userRouter.post(
+  '/password-replacement',
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.find({ recoveryPasswordId: req.body.id });
+    if (user[0].recoveryPasswordId === req.body.id) {
+      user[0].password = bcrypt.hashSync(req.body.newData, 8)
+      user[0].recoveryPasswordId = ''
+      let recipient = msgPasswordReplaced(user[0].email, user[0].username)
+      sgMail.send(recipient)
+        .then(() => {
+          const newUserState =  async () => { await user[0].save() }
+          newUserState()
+          res.send({password_replacement: true })
+        })
+        .catch((error) => {
+          console.error(error)
+          res.status(404).send({password_replacement: false, loading: false, message: 'Password non sostituita' })
+        })
+      return
+    } else {
+      res.status(404).send({ message: 'Process has failed' })
     } 
   })
 );

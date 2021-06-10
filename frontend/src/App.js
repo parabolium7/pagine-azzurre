@@ -37,6 +37,7 @@ import logo3 from './resources/logos/yinyang.jpg';
 import logo4 from './resources/logos/bannerblu.jpg';
 import logo5 from './resources/logos/bannergiallo.jpg';
 import PrivacyScreen from './screens/PrivacyScreen'
+import ChangePassword from './screens/ChangePassword'
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -232,6 +233,7 @@ function App() {
           <Route path="/search/category/:category/name/:name" component={SearchScreen} exact></Route>
           <Route path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber" component={SearchScreen} exact></Route>
           <Route path="/password-recovery" component={PasswordRecovery} exact></Route>
+          <Route path="/password-recovery/:id" component={ChangePassword} exact></Route>
           <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
           <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
           <AdminRoute path="/productlist" component={ProductListScreen} exact></AdminRoute>
