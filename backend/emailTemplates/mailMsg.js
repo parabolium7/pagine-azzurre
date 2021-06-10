@@ -37,8 +37,8 @@ let msgPasswordRecovery = (recipient, hash) => {
     to: recipient,
     from: 'iscrizioni.pagineazzurre@cittadini-volontari.it',
     subject: 'Pagine Azzurre: Richiesta cambio Password',
-    text: `Hai chiesto un cambio di password?  Per confermare clicca il seguente link http://localhost:2998/password-recovery/${hash} . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.`,
-    html: `<p>Hai chiesto un cambio di password?  Per confermare clicca il seguente <a href="http://localhost:2998/password-recovery/${hash}" target="_blank"}>Link</a> . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.</p>`
+    text: `Hai chiesto un cambio di password?  Per confermare clicca il seguente link http://pagineazzurre.net/password-recovery/${hash} . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.`,
+    html: `<p>Hai chiesto un cambio di password?  Per confermare clicca il seguente <a href="http://pagineazzurre.net/password-recovery/${hash}" target="_blank"}>Link</a> . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.</p>`
   }
   return msg 
 }
