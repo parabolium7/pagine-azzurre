@@ -401,7 +401,7 @@ export default function ProfileScreen() {
                   { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
                   { sellerLogo &&
                   <div>
-                    <img alt={`${name} logo image`} src={sellerLogo} style={{ display: "block",  maxWidth:"115px", maxHeight:"115px", width: "auto", height: "auto" }}/>
+                    <img alt={`${name} logo`} src={sellerLogo} style={{ display: "block",  maxWidth:"115px", maxHeight:"115px", width: "auto", height: "auto" }}/>
                   </div>
                 }
                   <input
