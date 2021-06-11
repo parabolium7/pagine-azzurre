@@ -139,6 +139,9 @@ function App() {
                     <Link to="/productlist/seller">Crea Annuncio</Link>
                   </li>
                   <li>
+                    <Link to="/productlist/seller">Modifica Annuncio</Link>
+                  </li>
+                  <li>
                     <Link to="/orderlist/seller">Ordini</Link>
                   </li>
                 </>
