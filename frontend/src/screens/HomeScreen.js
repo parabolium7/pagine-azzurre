@@ -36,7 +36,7 @@ export default function HomeScreen() {
           buttonText="Accetto"
           cookieName="pagineazzurre"
           style={{ background: "#626360" }}
-          buttonStyle={{ color: "#626360", fontSize: "15px" }}
+          buttonStyle={{ color: "#626360", fontSize: "15px", marginRight: "150px" }}
           expires={150}
         >
           I cookie ci aiutano ad erogare servizi di qualità.<br></br>
