@@ -133,7 +133,7 @@ export default function ProfileScreen() {
     // dispatch update profile
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert('Password and Confirm Password Are Not Matched');
+      alert('Password e Conferma password non corrispondono');
     } else {
       dispatch(
         updateUserProfile({
