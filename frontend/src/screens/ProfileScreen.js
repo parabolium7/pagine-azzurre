@@ -9,7 +9,9 @@ import { DateUtils } from 'react-day-picker';
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 import 'react-day-picker/lib/style.css';
+import Select from 'react-select'
 import Axios from 'axios'
+import options from '../resources/citiesOptions.js'
 
 export default function ProfileScreen() {
   const [account, setAccount] = useState(''); 
@@ -71,11 +73,11 @@ export default function ProfileScreen() {
     }
   };
 
-  // async function pseudoSetSellerLogo(e){
-  //     console.log("Yeah", e)
-  //     await uploadFileHandler(e)
-  //     setSellerLogo(e.value)
-  // }
+  // const options = [
+  //   { value: 'chocolate', label: 'Chocolate' },
+  //   { value: 'strawberry', label: 'Strawberry' },
+  //   { value: 'vanilla', label: 'Vanilla' }
+  // ]
 
   const GetFormattedDate = (birthday) => {
     if (typeof birthday === 'object') {
@@ -290,13 +292,7 @@ export default function ProfileScreen() {
             </div>
             <div>
               <label htmlFor="city">Città *</label>
-              <input
-                id="city"
-                type="text"
-                placeholder="Aggiungere città di domicilio"
-                value={city}
-                onChange={(e) => setCity(e.target.value.toUpperCase())}
-              ></input>
+              <Select options={options} placeholder="Aggiungere città di domicilio" onChange={(e) => setCity(e.target.value.toUpperCase())} />
             </div>
             <div>
               <label htmlFor="zipCode">CAP</label>
