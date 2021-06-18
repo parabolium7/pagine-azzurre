@@ -304,6 +304,11 @@ a.brand {
   height: auto;
 }
 
+.welcome {
+  padding: 0;
+  margin: 0;
+}
+
 /* Aside */
 aside {
   position: fixed;

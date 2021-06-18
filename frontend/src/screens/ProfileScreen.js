@@ -291,8 +291,8 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
-              <label htmlFor="city">Città *</label>
-              <Select options={options} placeholder="Aggiungere città di domicilio" onChange={(e) => setCity(e.target.value.toUpperCase())} />
+              <label htmlFor="city">Provincia *</label>
+              <Select options={options} placeholder="Aggiungere provincia di domicilio" onChange={(e) => setCity(e.target.value.toUpperCase())} />
             </div>
             <div>
               <label htmlFor="zipCode">CAP</label>
