@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { signout } from './actions/userActions';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -38,6 +38,7 @@ import logo4 from './resources/logos/bannerblu.jpg';
 import logo5 from './resources/logos/bannergiallo.jpg';
 import PrivacyScreen from './screens/PrivacyScreen'
 import ChangePassword from './screens/ChangePassword'
+import ThankYouScreen from './screens/ThankYouScreen'
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -218,7 +219,8 @@ function App() {
         </aside>
         <main>
           <Route path="/tutti_noi/" component={TuttiNoiScreen}></Route>
-          <Route path="/newsletter/" component={NewsletterScreen}></Route>
+          <Route path="/newsletter/" component={NewsletterScreen} exact ></Route>
+          <Route path="/newsletter/:string" component={ThankYouScreen}></Route>
           <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>

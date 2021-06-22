@@ -7,7 +7,8 @@ import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
 import Web3 from 'web3'
-import { msgRegistration, msgPasswordRecovery, msgPasswordReplaced } from '../emailTemplates/mailMsg.js'
+import { msgRegistration, msgPasswordRecovery, msgPasswordReplaced, newsletterWelcome } from '../emailTemplates/mailMsg.js'
+import Newsletter from '../models/newsletterModel.js';
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
@@ -337,7 +338,7 @@ userRouter.post(
 userRouter.post(
   '/password-replacement',
   expressAsyncHandler(async (req, res) => {
-    const user = await User.find({ recoveryPasswordId: req.body.id });
+    const user = await User.find({ email: req.body.email });
     if (user[0].recoveryPasswordId === req.body.id) {
       user[0].password = bcrypt.hashSync(req.body.newData, 8)
       user[0].recoveryPasswordId = ''
@@ -358,5 +359,56 @@ userRouter.post(
     } 
   })
 );
+
+userRouter.post(
+  '/newsletter',
+  expressAsyncHandler(async (req, res) => {
+    let subscriber = await Newsletter.findOne({ email: req.body.email })
+    if (!subscriber) {
+      console.log(req.body.email, subscriber)
+      let recipient = newsletterWelcome( req.body.email, req.body.name)
+      subscriber = new Newsletter({
+        name: req.body.name,
+        email: req.body.email,
+        verified: false
+      })
+      const createdSubscriber = await subscriber.save()
+      sgMail.send(recipient)
+        .then(() => {
+          res.send({ subscriber: true })
+        })
+        .catch((error) => {
+          console.error(error)
+          res.status(404).send({ loading: false, message: 'Error from SendGrid' })
+        })
+      return
+    } else if (subscriber.email && !subscriber.verified) {
+      res.status(404).send({ message: 'Email already subscribed but not verified' })
+    } else if (subscriber.email && subscriber.verified) {
+      res.status(404).send({ message: 'Email already subscribed' })
+    } else {
+      res.status(404).send({ message: 'Process has failed' })
+    }
+  })
+)
+
+userRouter.post(
+  '/newsletterVerify',
+  expressAsyncHandler(async (req, res) => {
+    let subscriber = await Newsletter.find({ email: req.body.email })
+    if (subscriber){
+      subscriber[0].verified = true
+      subscriber[0].save()
+      res.status(200).send({ name: subscriber })
+      return 
+    } else if (subscriber.email && !subscriber.verified) {
+      res.status(404).send({ message: 'Email already subscribed but not verified' })
+    } else if (subscriber.email && subscriber.verified) {
+      res.status(404).send({ message: 'Email already subscribed' })
+    } else {
+      res.status(404).send({ message: 'Process has failed' })
+    }
+  })
+)
 
 export default userRouter;

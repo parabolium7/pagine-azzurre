@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios from 'axios'
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
@@ -36,7 +36,13 @@ import {
   USER_PASSWORD_REPLACEMENT_SUCCESS,
   USER_PASSWORD_REPLACEMENT_REQUEST,
   USER_PASSWORD_REPLACEMENT_FAIL,
-} from '../constants/userConstants';
+  USER_NEWSLETTER_REQUEST,
+  USER_NEWSLETTER_SUCCESS,
+  USER_NEWSLETTER_FAIL,
+  USER_NEWSLETTER_VERIFICATION_REQUEST,
+  USER_NEWSLETTER_VERIFICATION_SUCCESS,
+  USER_NEWSLETTER_VERIFICATION_FAIL,
+} from '../constants/userConstants'
 
 export const register = (username, email, password, sellername, phone, cf, referer) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { username, email, password, sellername, phone, cf, referer } });
@@ -264,5 +270,35 @@ export const userPasswordReplacement = (newData, id) => async (dispatch) => {
       ? error.response.data.message
       : error.message;
     dispatch({ type: USER_PASSWORD_REPLACEMENT_FAIL, payload: message });
+  }
+}
+
+export const newsletter = (name, email) => async (dispatch) => {
+  dispatch({ type: USER_NEWSLETTER_REQUEST, payload: [name, email] })
+  try {
+    const { data } = await Axios.post('/api/users/newsletter', { name, email })
+    dispatch({ type: USER_NEWSLETTER_SUCCESS, payload: { data }})
+  } catch(error) {
+    const message =
+    error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    dispatch({ type: USER_NEWSLETTER_FAIL, payload: message })
+  }
+}
+
+export const verifyNewsletter = (email) => async (dispatch) => {
+  console.log(email)
+  dispatch({ type: USER_NEWSLETTER_VERIFICATION_REQUEST })
+  try {
+    const { data } = await Axios.post('/api/users/newsletterVerify', { email })
+    let name = data.name[0].name
+    dispatch({ type: USER_NEWSLETTER_VERIFICATION_SUCCESS, payload: name })
+  } catch(error) {
+    const message =
+    error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    dispatch({ type: USER_NEWSLETTER_VERIFICATION_FAIL, payload: message })
   }
 }
