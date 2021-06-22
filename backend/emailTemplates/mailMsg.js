@@ -113,10 +113,27 @@ let secondMailToOfferer = (envelop) => {
   return msg
 }
 
+let newsletterWelcome = (email, name) => {
+  let msg = {
+    to: email,
+    from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
+    subject: `${name}, ti sei inscrito alla newsletter delle Pagine Azzurre?`,
+    html: `<h3>${name}, grazie per esserti inscrita/o alla newsletter delle pagine Azzurre</h3>\
+    <br>\
+    <p>${name}, vogliamo tenerti sempre aggiornata/o con le ultime novità.</p>\
+    <p>Ti ringraziamo di cuore per il tuo interesse al progetto.</p>\
+    <p>Ti chiediamo di confermare clicando <a href="http://pagineazzurre.net/newsletter/${email}">qui</a>.</p>\
+    <p>Se hai ricevuto questa email per errore ignòrala.</p>\
+    `
+  }
+  return msg
+}
+
 export { msgRegistration,
          msgPasswordRecovery,
          msgOrderNotificationToOfferer,
          msgOrderNotificationToBuyer,
          secondMailToOfferer,
-         msgPasswordReplaced 
+         msgPasswordReplaced,
+         newsletterWelcome,
         }
