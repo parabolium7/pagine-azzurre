@@ -3,8 +3,8 @@ import React from 'react';
 export default function WelcomeBanner(props) {
   return (
     <div>
-        <h1 className="row center">Piazza mercato per tutte le monete. Speculative: Euro, $, Cripto, ecc. E non speculative: VAL, Crediti, Din, ecc.</h1>
-        <h2 className="row center">Benvenuti qui nella nostra e vostra piazza dove scambiamo con meno Euro e più VAL</h2>
+        <h1 className="row center welcome">Benvenuti in "Pagineazzurre" piazza dove barattiamo e scambiamo con meno Euro e più VAL ☯</h1>
+        <h1 className="row center welcome">"Pagineazzurre" favorisce ogni scambio di prodotti servizi e competenze con moneta speculativa: Euro, $, Cripto, ecc... Meglio se non speculativa: VAL, Crediti, Din, ecc...</h1>
     </div>
   );
 }
