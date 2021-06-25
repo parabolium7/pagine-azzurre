@@ -44,7 +44,7 @@ import {
   USER_NEWSLETTER_VERIFICATION_FAIL,
 } from '../constants/userConstants'
 
-export const register = (username, email, password, sellername, phone, cf, referer) => async (dispatch) => {
+export const register = (username, email, password, sellername, phone, cf, referer, newsletter) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { username, email, password, sellername, phone, cf, referer } });
   try {
     const { data } = await Axios.post('/api/users/register', {
@@ -54,7 +54,8 @@ export const register = (username, email, password, sellername, phone, cf, refer
       sellername,
       phone,
       cf,
-      referer
+      referer,
+      newsletter
     });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });

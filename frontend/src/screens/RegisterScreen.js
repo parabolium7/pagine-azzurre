@@ -14,6 +14,7 @@ export default function RegisterScreen(props) {
   const [hasReferer, setHasReferer] = useState(false)
   const [referer, setReferer] = useState([])
   const [newReferer, setNewReferer] = useState('')
+  const [newsletter, setNewsletter] = useState('false')
 
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
@@ -42,7 +43,7 @@ export default function RegisterScreen(props) {
       let cf = ''
       email.split('').forEach( l => cf += l.charCodeAt(0))
       // TODO: Set seller name as username.
-      dispatch(register(username, email, password, username, email, cf, referer))
+      dispatch(register(username, email, password, username, email, cf, referer, newsletter))
     }
   };
 
@@ -167,6 +168,27 @@ export default function RegisterScreen(props) {
                 </div>
               ):''
           }
+        </div>
+        <div>
+          <div className="row start">
+            <label htmlFor="newsletter">Vuoi inscriverti alla nostra newsletter?
+              <input
+                type="radio"
+                id="no_referer"
+                name="newsletter"
+                onClick={ (e) => setNewsletter(true)}
+              />Si
+            </label>
+            <label>
+              <input
+                type="radio"
+                id="yes_referer"
+                name="newsletter"
+                defaultChecked
+                onClick={ (e) => setNewsletter(false)}
+              />No
+            </label>
+          </div>
         </div>
         <div>
           {loading && <LoadingBox></LoadingBox>}

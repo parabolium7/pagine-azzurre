@@ -3,12 +3,12 @@ import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
+import Newsletter from '../models/newsletterModel.js';
 import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
 import Web3 from 'web3'
 import { msgRegistration, msgPasswordRecovery, msgPasswordReplaced, newsletterWelcome } from '../emailTemplates/mailMsg.js'
-import Newsletter from '../models/newsletterModel.js';
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
@@ -80,6 +80,8 @@ userRouter.post(
 userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
+    let subscriber = false
+    let recipient
     const userPassword = bcrypt.hashSync(req.body.password, 8)
     const userAccount = await web3.eth.accounts.create((userPassword + process.env.ENTROPY))
     const user = new User({
@@ -94,29 +96,54 @@ userRouter.post(
       referer: req.body.referer,
       isSeller: true,
       hasAd: false,
-    });
-    const createdUser = await user.save();
-    let recipient = msgRegistration(createdUser.email, createdUser.username)
+    })
+    const createdUser = await user.save()
+    if (req.body.newsletter){
+      subscriber = await Newsletter.find({ email: req.body.email })
+      console.log(typeof subscriber)
+      if (typeof subscriber === 'object' && subscriber.email === null) {
+        const newsletterRegistry = new Newsletter({ email: req.body.email, verified: true})
+        await newsletterRegistry.save()
+        recipient = msgRegistration(createdUser.email, createdUser.username, true)
+      } else {
+        recipient = msgRegistration(createdUser.email, createdUser.username, false)
+      }
+    }
     sgMail.send(recipient)
       .then((res) => {
         console.log("Welcome email Sent.")
       })
       .catch((error) => {console.error(error)})
-      // TODO: Rev. other generateToken in the code.
+    if(subscriber){
       res.send({
-      _id: createdUser._id,
-      account: createdUser.account,
-      username: createdUser.username,
-      email: createdUser.email,
-      phone: createdUser.email,
-      cf: createdUser.email,
-      isSeller: createdUser.isSeller,
-      hasAd: createdUser.hasAd,
-      referer: createdUser.referer,
-      token: generateToken(createdUser),
-    });
-  })
-);
+        _id: createdUser._id,
+        account: createdUser.account,
+        username: createdUser.username,
+        email: createdUser.email,
+        phone: createdUser.email,
+        cf: createdUser.email,
+        isSeller: createdUser.isSeller,
+        hasAd: createdUser.hasAd,
+        referer: createdUser.referer,
+        newsletter: true,
+        token: generateToken(createdUser)
+      })
+    } else {
+      res.send({
+        _id: createdUser._id,
+        account: createdUser.account,
+        username: createdUser.username,
+        email: createdUser.email,
+        phone: createdUser.email,
+        cf: createdUser.email,
+        isSeller: createdUser.isSeller,
+        hasAd: createdUser.hasAd,
+        referer: createdUser.referer,
+        newsletter: false,
+        token: generateToken(createdUser),
+      })
+    }
+  }))
 
 userRouter.get(
   '/:id',
