@@ -98,15 +98,15 @@ userRouter.post(
       hasAd: false,
     })
     const createdUser = await user.save()
-    if (req.body.newsletter){
+    if (req.body.newsletter === true){
       subscriber = await Newsletter.find({ email: req.body.email })
       if (!subscriber.email) {
-        const newsletterRegistry = new Newsletter({ email: req.body.email, verified: true})
+        const newsletterRegistry = new Newsletter({ email: req.body.email, verified: true })
         await newsletterRegistry.save()
         recipient = msgRegistration(createdUser.email, createdUser.username, true)
-      } else {
-        recipient = msgRegistration(createdUser.email, createdUser.username, false)
       }
+    } else {
+      recipient = msgRegistration(createdUser.email, createdUser.username, false)
     }
     sgMail.send(recipient)
       .then((res) => {

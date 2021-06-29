@@ -10,7 +10,7 @@ let msgRegistration = (recipient, username, isNewsletterRegistred) => {
   if(hrs >= 13) moment = 'Buona sera'
 
   
-  if (isNewsletterRegistred) {
+  if (isNewsletterRegistred === true) {
     msg = {
       to: recipient,
       from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
