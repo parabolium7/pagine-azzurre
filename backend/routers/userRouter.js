@@ -365,7 +365,7 @@ userRouter.post(
 userRouter.post(
   '/password-replacement',
   expressAsyncHandler(async (req, res) => {
-    const user = await User.find({ email: req.body.email });
+    const user = await User.find({ recoveryPasswordId: req.body.id });
     if (user[0].recoveryPasswordId === req.body.id) {
       user[0].password = bcrypt.hashSync(req.body.newData, 8)
       user[0].recoveryPasswordId = ''
