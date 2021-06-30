@@ -99,10 +99,14 @@ userRouter.post(
     })
     const createdUser = await user.save()
     if (req.body.newsletter === true){
-      subscriber = await Newsletter.find({ email: req.body.email })
+      console.log("Req email",req.body.email)
+      subscriber = await Newsletter.findOne({ email: req.body.email })
+      console.log(subscriber.email)
       if (!subscriber.email) {
         const newsletterRegistry = new Newsletter({ email: req.body.email, verified: true })
         await newsletterRegistry.save()
+        recipient = msgRegistration(createdUser.email, createdUser.username, true)
+      } else {
         recipient = msgRegistration(createdUser.email, createdUser.username, true)
       }
     } else {
