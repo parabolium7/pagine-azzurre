@@ -147,9 +147,17 @@ userRouter.post(
 userRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
+    let userData = {}
     const user = await User.findById(req.params.id);
+    userData = {...user._doc}
     if (user) {
-      res.send(user);
+      const verifyNewsletter = await Newsletter.findOne({ email: user.email })
+      if(verifyNewsletter && verifyNewsletter.verified) { 
+        Object.assign( userData, { newsletter : "Verified" } )
+      } else {
+        Object.assign( userData, { newsletter : "Not Verified" } )
+      }
+      res.send(userData)
     } else {
       res.status(404).send({ message: 'User Not Found' });
     }
@@ -386,12 +394,20 @@ userRouter.post(
   })
 );
 
+userRouter.get(
+  '/newsletter/:email',
+  expressAsyncHandler(async (req, res) => {
+    const email = req.url.split('/')[2]
+    let subscriber = await Newsletter.findOne({ email })
+    return subscriber.verified
+  })
+)
+
 userRouter.post(
   '/newsletter',
   expressAsyncHandler(async (req, res) => {
     let subscriber = await Newsletter.findOne({ email: req.body.email })
     if (!subscriber) {
-      console.log(req.body.email, subscriber)
       let recipient = newsletterWelcome( req.body.email, req.body.name)
       subscriber = new Newsletter({
         name: req.body.name,
@@ -434,6 +450,25 @@ userRouter.post(
     } else {
       res.status(404).send({ message: 'Process has failed' })
     }
+  })
+)
+
+userRouter.post(
+  '/newsletterUpdate',
+  expressAsyncHandler(async (req, res) => {
+    let subscriber = await Newsletter.find({ email: req.body.email })
+    if(subscriber[0]) {
+      subscriber[0].verified = !subscriber[0].verified
+      subscriber[0].save()
+    } else {
+      subscriber = new Newsletter({
+        name: req.body.username,
+        email: req.body.email,
+        verified: true
+      })
+      await subscriber.save()
+    }
+    res.status(200).send('yeah!')
   })
 )
 
