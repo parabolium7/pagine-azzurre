@@ -149,7 +149,7 @@ let newsletterWelcome = (email, name) => {
     <br>\
     <p>${name}, vogliamo tenerti sempre aggiornata/o con le ultime novità.</p>\
     <p>Ti ringraziamo di cuore per il tuo interesse al progetto.</p>\
-    <p>Ti chiediamo di confermare clicando <a href="http://pagineazzurre.net/newsletter/${email}">qui</a>.</p>\
+    <p>Ti chiediamo di confermare clicando <a href="http://pagineazzurre.net/newsletter/${email}" target="_blank">qui</a>.</p>\
     <p>Se hai ricevuto questa email per errore ignòrala.</p>\
     `
   }
