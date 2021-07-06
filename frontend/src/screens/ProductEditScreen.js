@@ -242,7 +242,7 @@ export default function ProductEditScreen(props) {
                 id="name"
                 type="text"
                 maxLength="90"
-                placeholder="Inserisci nome del bene o servizio che voi barattare"
+                placeholder="Inserisci nome del bene o servizio che voi barattare e la città dove si trova"
                 value={!name.match(/Annunciø/)?name:''}
                 onChange={(e) => handleTitle(e)}
               ></input>
@@ -297,16 +297,16 @@ export default function ProductEditScreen(props) {
                 type="file"
                 id="imageFile"
                 accept="image/png, image/jpeg"
-                onChange={uploadFileHandler}
+                onChange={ uploadFileHandler }
               ></input>
             </div>
             { section !== 'avviso' &&  
               <div>
-                <label htmlFor="brand">Brand</label>
+                <label htmlFor="brand">Parola chiave </label>
                 <input
                   id="brand"
                   type="text"
-                  placeholder="Inserisci brand"
+                  placeholder="Classifica con una parola chiave"
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                 ></input>
