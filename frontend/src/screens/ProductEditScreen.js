@@ -66,7 +66,6 @@ export default function ProductEditScreen(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(product)
     if (successUpdate) {
       props.history.push('/productlist/seller');
     }
