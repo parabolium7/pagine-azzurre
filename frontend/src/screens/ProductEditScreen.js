@@ -66,6 +66,7 @@ export default function ProductEditScreen(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(product)
     if (successUpdate) {
       props.history.push('/productlist/seller');
     }
@@ -84,13 +85,13 @@ export default function ProductEditScreen(props) {
       setSection(product.section);
       setIsService(product.isService)
       setAuxPhone(product.auxPhone)
-      setDelivery(product.setDelivery)
-      setExpiry(product.setExpiry)
+      setDelivery(product.delivery)
+      setExpiry(product.expiry)
       setPause(false)
-      setCountry(product.setCountry)
-      setState(product.setState)
-      setCity(product.setCity)
-      setMunicipality(product.setMunicipality)
+      setCountry(product.country)
+      setState(product.state)
+      setCity(product.city)
+      setMunicipality(product.municipality)
     }
   }, [product, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
