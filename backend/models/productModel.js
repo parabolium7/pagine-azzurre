@@ -31,7 +31,7 @@ const productSchema = new mongoose.Schema(
     pause: { type: Boolean, required: true , default: false},
     country: { type: String, required: false},
     state: { type: String, required: false },
-    city: { type: String, required: false }, 
+    city: { type: String, required: true, default: '_', uppercase: true }, 
     municipality: { type: String, required: false },
 
     reviews: [reviewSchema],

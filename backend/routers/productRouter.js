@@ -3,12 +3,24 @@ import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../models/productModel.js';
 import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
+import { citiesList } from '../utils.js';
 
 const productRouter = express.Router();
 
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
+    let city = []
+    req.query.name.split(' ').forEach( word => {
+      if(citiesList.includes(word)) {
+        city.push(word)
+      }
+    })
+    let query = req.query.name
+    if(city.length > 0) {
+      query = query.replace(city[0], '')
+      city[0] = city[0].toUpperCase()
+    }
     const pageSize = 100;
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
@@ -24,7 +36,9 @@ productRouter.get(
         ? Number(req.query.rating)
         : 0;
 
-    const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
+    // const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
+    const nameFilter = name ? { name: { $regex: query.trim(), $options: 'i' } } : {};
+    const literalFilter = name ? { name: { $regex: req.query.name, $options: 'i' } } : {};
     const sellerFilter = seller ? { seller } : {};
     const categoryFilter = category ? { category } : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
@@ -44,7 +58,7 @@ productRouter.get(
       ...priceFilter,
       ...ratingFilter,
     });
-    const products = await Product.find({
+    let products = await Product.find({
       ...sellerFilter,
       ...nameFilter,
       ...categoryFilter,
@@ -55,6 +69,36 @@ productRouter.get(
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
       .limit(pageSize);
+    const literal = await Product.find({
+        ...sellerFilter,
+        ...literalFilter,
+        ...categoryFilter,
+        ...priceFilter,
+        ...ratingFilter,
+      })
+        .populate('seller', 'seller.name seller.logo')
+        .sort(sortOrder)
+        .skip(pageSize * (page - 1))
+        .limit(pageSize);
+    console.log("Start!!!!!!!: ", products)
+    console.log(literal)
+    if(city.length > 0){
+      console.log("Products Number before filter", products.length)
+      for (const i in products) {
+        console.log("results cities in products", products[i].city, city)
+        if(products[i].city != city[0]) {
+          console.log("Deleting a:", products[i].city)
+          delete products[i]
+        }
+      }
+    }
+    console.log("products Number after filter", products.length)
+    if(literal.length > 0) {
+      for(const i in literal){
+        products.unshift(literal[i])
+      }
+    }
+    console.log(products)
     res.send({ products, page, pages: Math.ceil(count / pageSize) });
   })
 );
