@@ -80,8 +80,9 @@ productRouter.get(
         .sort(sortOrder)
         .skip(pageSize * (page - 1))
         .limit(pageSize);
-    console.log("Start!!!!!!!: ", products)
-    console.log(literal)
+    console.log("Start!!!!!!!: ", products.length)
+    console.log("literal",literal.length)
+    // console.log("FINE!!!!")
     if(city.length > 0){
       console.log("Products Number before filter", products.length)
       for (const i in products) {
@@ -93,12 +94,12 @@ productRouter.get(
       }
     }
     console.log("products Number after filter", products.length)
-    if(literal.length > 0) {
-      for(const i in literal){
-        products.unshift(literal[i])
-      }
-    }
-    console.log(products)
+    // if(literal.length > 0) {
+    //   for(const i in literal){
+    //     products.unshift(literal[i])
+    //   }
+    // }
+    console.log("Products", products)
     res.send({ products, page, pages: Math.ceil(count / pageSize) });
   })
 );

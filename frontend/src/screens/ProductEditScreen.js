@@ -292,7 +292,7 @@ export default function ProductEditScreen(props) {
               )
             }
             <div>
-              <label htmlFor="imageFile">Immagine File</label>
+              <label htmlFor="imageFile">Immagine File (max. 3 immagini)</label>
               <input
                 type="file"
                 id="imageFile"
@@ -329,8 +329,8 @@ export default function ProductEditScreen(props) {
               <input
                 id="city"
                 type="text"
-                placeholder={section === 'offro' || section === 'cerco'?'Inserisci il nome della città dove si trova il ' + (isService?'servizio':'prodotto'):'Inserisci il nome della città da dove parte ' + (section === 'propongo'?'la propuesta':'l\'avviso')}
-                value={ city }
+                placeholder={ city === '_' || section === 'offro' || section === 'cerco'?'Inserisci il nome della città dove si trova il ' + (isService?'servizio':'prodotto'):'Inserisci il nome della città da dove parte ' + (section === 'propongo'?'la propuesta':'l\'avviso')}
+                value={ city !== '_' ? city : '' }
                 onChange={(e) => setCity(e.target.value)}
               ></input>
             </div>
