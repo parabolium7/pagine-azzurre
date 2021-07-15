@@ -79,21 +79,17 @@ productRouter.get(
         .sort(sortOrder)
         .skip(pageSize * (page - 1))
         .limit(pageSize);
-    console.log("Start!!!!!!!: ", products.length)
-    console.log("literal",literal.length)
-    // console.log("FINE!!!!")
     if(city.length > 0){
-      console.log("Products Number before filter", products.length)
       for (const i in products) {
-        console.log("results cities in products", products[i].city, city)
         if(products[i].city != city[0]) {
-          console.log("Deleting a:", products[i].city)
           delete products[i]
         }
       }
     }
-    console.log("products Number after filter", products.length)
-    if(name !== '' && literal.length > 0) {
+    if(name !== '' && literal.length > 0 && city.length != 0) {
+      console.log("City :", city)
+      console.log("Literal :", literal)
+      console.log("Name ", name)
       for(const i in literal){
         products.unshift(literal[i])
       }
