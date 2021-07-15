@@ -36,7 +36,6 @@ productRouter.get(
         ? Number(req.query.rating)
         : 0;
 
-    // const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
     const nameFilter = name ? { name: { $regex: query.trim(), $options: 'i' } } : {};
     const literalFilter = name ? { name: { $regex: req.query.name, $options: 'i' } } : {};
     const sellerFilter = seller ? { seller } : {};
@@ -94,11 +93,11 @@ productRouter.get(
       }
     }
     console.log("products Number after filter", products.length)
-    // if(literal.length > 0) {
-    //   for(const i in literal){
-    //     products.unshift(literal[i])
-    //   }
-    // }
+    if(name !== '' && literal.length > 0) {
+      for(const i in literal){
+        products.unshift(literal[i])
+      }
+    }
     console.log("Products", products)
     res.send({ products, page, pages: Math.ceil(count / pageSize) });
   })
