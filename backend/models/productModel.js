@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema(
     seller: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
     image: { type: String, required: true },
     brand: { type: String, required: false },
-    category: { type: String, required: false },
+    category: { type: String, required: false, uppercase: true },
     description: { type: String, required: false },
     priceVal: { type: Number, required: false, default: 1 },
     priceEuro: { type: Number, required: false },
