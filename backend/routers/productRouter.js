@@ -79,22 +79,25 @@ productRouter.get(
         .sort(sortOrder)
         .skip(pageSize * (page - 1))
         .limit(pageSize);
-    if(city.length > 0){
-      for (const i in products) {
-        if(products[i].city != city[0]) {
-          delete products[i]
+        
+    var filtred = []
+    if(name !== '' && literal.length > 0 && city.length > 0) {
+      for(const i in literal){
+        for(const y in products){
+          if(JSON.stringify(products[y]._id) === JSON.stringify(literal[i]._id) ){
+            filtred.unshift(JSON.stringify(literal[i]._id))
+          }
+          if(products[y].city != city[0]) {
+            delete products[y]
+          }
         }
       }
-    }
-    if(name !== '' && literal.length > 0 && city.length != 0) {
-      console.log("City :", city)
-      console.log("Literal :", literal)
-      console.log("Name ", name)
+      console.log("filtred:", filtred)
       for(const i in literal){
-        products.unshift(literal[i])
+        console.log(filtred.includes(JSON.stringify(literal[i]._id)))
+        if(!filtred.includes(JSON.stringify(literal[i]._id))) products.unshift(literal[i])
       }
     }
-    console.log("Products", products)
     res.send({ products, page, pages: Math.ceil(count / pageSize) });
   })
 );
