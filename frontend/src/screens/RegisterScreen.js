@@ -14,7 +14,7 @@ export default function RegisterScreen(props) {
   const [hasReferer, setHasReferer] = useState(false)
   const [referer, setReferer] = useState([])
   const [newReferer, setNewReferer] = useState('')
-  const [newsletter, setNewsletter] = useState('false')
+  const [newsletter, setNewsletter] = useState(false)
 
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
@@ -192,7 +192,7 @@ export default function RegisterScreen(props) {
         </div>
         <div>
           {loading && <LoadingBox></LoadingBox>}
-          {error && <MessageBox variant="info">{error}</MessageBox>}
+          {error && <MessageBox variant="alert">{error}</MessageBox>}
         </div>
         <div>
           <MessageBox variant="info">Nello spirito di scambio in solidarietà di beni, per vantaggi comuni; sei invitato a creare un annuncio. Una proposta o una  richiesta, per scambiare prodotti  servizi e conoscenze. Dove c’è scambio c’è vita. Sovranità consapevolezza</MessageBox>

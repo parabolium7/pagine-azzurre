@@ -81,72 +81,82 @@ userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
     let subscriber = false
+    let createdUser
     let recipient
     const userPassword = bcrypt.hashSync(req.body.password, 8)
     const userAccount = await web3.eth.accounts.create((userPassword + process.env.ENTROPY))
-    const user = new User({
-      account: userAccount.address,
-      accountKey: userAccount.privateKey,
-      username: req.body.username,
-      cf: req.body.cf,
-      email: req.body.email,
-      phone: req.body.phone,
-      password: userPassword,
-      seller: { name: req.body.sellername },
-      referer: req.body.referer,
-      isSeller: true,
-      hasAd: false,
-    })
-    const createdUser = await user.save()
-    if (req.body.newsletter === true){
-      console.log("Req email",req.body.email)
-      subscriber = await Newsletter.findOne({ email: req.body.email })
-      console.log(subscriber.email)
-      if (!subscriber.email) {
-        const newsletterRegistry = new Newsletter({ email: req.body.email, verified: true })
-        await newsletterRegistry.save()
-        recipient = msgRegistration(createdUser.email, createdUser.username, true)
+    const isUser = await User.findOne({ email: req.body.email })
+    if(!isUser){
+      const user = new User({
+        account: userAccount.address,
+        accountKey: userAccount.privateKey,
+        username: req.body.username,
+        cf: req.body.cf,
+        email: req.body.email,
+        phone: req.body.phone,
+        password: userPassword,
+        seller: { name: req.body.sellername },
+        referer: req.body.referer,
+        isSeller: true,
+        hasAd: false,
+      })
+      createdUser = await user.save()
+      if ( createdUser.email === req.body.email ) {
+        if (req.body.newsletter) {
+          subscriber = await Newsletter.findOne({ email: req.body.email })
+          if (!subscriber) {
+            const newsletterRegistry = new Newsletter({ email: req.body.email, verified: true })
+            await newsletterRegistry.save()
+            recipient = msgRegistration(createdUser.email, createdUser.username, true)
+          } else {
+            recipient = msgRegistration(createdUser.email, createdUser.username, true)
+          }
+        } else {
+          recipient = msgRegistration(createdUser.email, createdUser.username, false)
+        }
+        if(subscriber){
+          res.send({
+            _id: createdUser._id,
+            account: createdUser.account,
+            username: createdUser.username,
+            email: createdUser.email,
+            phone: createdUser.email,
+            cf: createdUser.email,
+            isSeller: createdUser.isSeller,
+            hasAd: createdUser.hasAd,
+            referer: createdUser.referer,
+            newsletter: true,
+            token: generateToken(createdUser)
+          })
+        } else {
+          res.send({
+            _id: createdUser._id,
+            account: createdUser.account,
+            username: createdUser.username,
+            email: createdUser.email,
+            phone: createdUser.email,
+            cf: createdUser.email,
+            isSeller: createdUser.isSeller,
+            hasAd: createdUser.hasAd,
+            referer: createdUser.referer,
+            newsletter: false,
+            token: generateToken(createdUser),
+          })
+        }
+        sgMail.send(recipient)
+        .then((res) => {
+          console.log("Welcome email Sent.")
+        })
+        .catch((error) => {console.error(error)})
       } else {
-        recipient = msgRegistration(createdUser.email, createdUser.username, true)
+        res.status(500)
       }
+      console.log("Created User: ", createdUser)
     } else {
-      recipient = msgRegistration(createdUser.email, createdUser.username, false)
+      res.status(500).send({ message : "Indirizzo già in uso, utilizzane un altro" })
     }
-    sgMail.send(recipient)
-      .then((res) => {
-        console.log("Welcome email Sent.")
-      })
-      .catch((error) => {console.error(error)})
-    if(subscriber){
-      res.send({
-        _id: createdUser._id,
-        account: createdUser.account,
-        username: createdUser.username,
-        email: createdUser.email,
-        phone: createdUser.email,
-        cf: createdUser.email,
-        isSeller: createdUser.isSeller,
-        hasAd: createdUser.hasAd,
-        referer: createdUser.referer,
-        newsletter: true,
-        token: generateToken(createdUser)
-      })
-    } else {
-      res.send({
-        _id: createdUser._id,
-        account: createdUser.account,
-        username: createdUser.username,
-        email: createdUser.email,
-        phone: createdUser.email,
-        cf: createdUser.email,
-        isSeller: createdUser.isSeller,
-        hasAd: createdUser.hasAd,
-        referer: createdUser.referer,
-        newsletter: false,
-        token: generateToken(createdUser),
-      })
-    }
-  }))
+  })
+)
 
 userRouter.get(
   '/:id',
