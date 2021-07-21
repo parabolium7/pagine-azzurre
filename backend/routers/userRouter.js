@@ -86,7 +86,8 @@ userRouter.post(
     const userPassword = bcrypt.hashSync(req.body.password, 8)
     const userAccount = await web3.eth.accounts.create((userPassword + process.env.ENTROPY))
     const isUser = await User.findOne({ email: req.body.email })
-    if(!isUser){
+    const isUsername = await User.findOne({ username: req.body.username })
+    if(!isUser && !isUsername){
       const user = new User({
         account: userAccount.address,
         accountKey: userAccount.privateKey,
@@ -153,7 +154,13 @@ userRouter.post(
       }
       console.log("Created User: ", createdUser)
     } else {
-      res.status(500).send({ message : "Indirizzo già in uso" })
+      if(isUser) {
+        res.status(500).send({ message : "Indirizzo già in uso" })
+      } else if (isUsername) {
+        res.status(500).send({ message : "Username già in uso" })
+      } else {
+        res.status(500).send({ message : "Errore in registrazione" })
+      }
     }
   })
 )
