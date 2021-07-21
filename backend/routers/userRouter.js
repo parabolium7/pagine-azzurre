@@ -153,7 +153,7 @@ userRouter.post(
       }
       console.log("Created User: ", createdUser)
     } else {
-      res.status(500).send({ message : "Indirizzo già in uso, utilizzane un altro" })
+      res.status(500).send({ message : "Indirizzo già in uso" })
     }
   })
 )
