@@ -70,7 +70,8 @@ export default function RegisterScreen(props) {
             id="username"
             placeholder="Inserisci il username"
             required
-            onChange={(e) => setUsername(e.target.value)}
+            value = { username }
+            onChange={(e) => setUsername(e.target.value.toUpperCase())}
           ></input>
         </div>
         <div>
