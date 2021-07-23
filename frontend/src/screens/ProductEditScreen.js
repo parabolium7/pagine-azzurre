@@ -285,7 +285,7 @@ export default function ProductEditScreen(props) {
               (
                 <div>
                   <div>Immagine</div>
-                  <img src={ image } style={{ display: "block",  maxWidth:"115px", maxHeight:"115px", width: "auto", height: "auto" }}/>
+                  <img src={ image } alt="Product preview" style={{ display: "block",  maxWidth:"115px", maxHeight:"115px", width: "auto", height: "auto" }}/>
                   { loadingUpload && <LoadingBox></LoadingBox> }
                   { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
                 </div>
