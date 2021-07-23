@@ -50,7 +50,7 @@ productRouter.get(
         : order === 'toprated'
         ? { rating: -1 }
         : { _id: -1 };
-    const count = await Product.count({
+    const count = await Product .countDocuments({
       ...sellerFilter,
       ...nameFilter,
       ...categoryFilter,
@@ -194,7 +194,7 @@ productRouter.put(
       product.priceEuro = req.body.priceEuro;
       product.category = req.body.category;
       product.brand = req.body.brand;
-      product.countInStock = req.body.countInStock;
+      product .countDocumentsInStock = req.body .countDocumentsInStock;
       product.description = req.body.description;
       product.section = req.body.section;
       product.isService = req.body.isService;
@@ -202,7 +202,7 @@ productRouter.put(
       product.auxPhone = req.body.auxPhone;
       product.delivery = req.body.delivery;
       product.expiry = req.body.expiry;
-      product.country = req.body.country;
+      product .countDocumentsry = req.body .countDocumentsry;
       product.state = req.body.state;
       product.city = req.body.city;
       product.municipality = req.body.municipality;
