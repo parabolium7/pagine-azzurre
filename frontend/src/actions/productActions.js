@@ -107,6 +107,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
   if(typeof product.priceEuro === 'undefined') product.priceEuro = 0
   if(typeof product.priceVal === 'undefined' || product.priceVal === '') product.priceVal = 1
   product.city = product.city.trim()
+  product.image = product.image.filter(img => typeof img === 'string')
   try {
     const { data } = await Axios.put(`/api/products/${product._id}`, product, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
