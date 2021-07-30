@@ -6,6 +6,8 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -59,11 +61,9 @@ export default function ProductScreen(props) {
           <Link to="/">Torna ai articoli</Link>
           <div className="row top">
             <div className="col-1">
-              <img
-                className="large"
-                src={product.image}
-                alt={product.name}
-              ></img>
+            <Carousel>
+              { product.image.map((image, index) => <img src={image} key={index} alt="preview"/>)}
+            </Carousel>
             </div>
             <div className="col-1 space">
               <ul>
@@ -115,7 +115,7 @@ export default function ProductScreen(props) {
                     <div className="row">
                       <div>Disponibilità</div>
                       <div>
-                        {product .countDocumentsInStock > 0 ? (
+                        {product.countInStock > 0 ? (
                           <span className="success">Disponibile</span>
                         ) : (
                           <span className="danger">Non disponibile</span>
@@ -123,7 +123,7 @@ export default function ProductScreen(props) {
                       </div>
                     </div>
                   </li>
-                  {product .countDocumentsInStock > 0 && (
+                  {product.countInStock > 0 && (
                     <>
                       <li>
                         <div className="row">
@@ -133,7 +133,7 @@ export default function ProductScreen(props) {
                               value={qty}
                               onChange={(e) => setQty(e.target.value)}
                             >
-                              {[...Array(product .countDocumentsInStock).keys()].map(
+                              {[...Array(product.countInStock).keys()].map(
                                 (x) => (
                                   <option key={x + 1} value={x + 1}>
                                     {x + 1}
