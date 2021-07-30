@@ -50,7 +50,7 @@ productRouter.get(
         : order === 'toprated'
         ? { rating: -1 }
         : { _id: -1 };
-    const count = await Product .countDocuments({
+    const count = await Product.countDocuments({
       ...sellerFilter,
       ...nameFilter,
       ...categoryFilter,
@@ -170,22 +170,22 @@ productRouter.put(
     const productId = req.params.id;
     const product = await Product.findById(productId);
     if (product) {
-      if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'offro') {
+      if(req.body.image[0] === ['/images/offro_prodotto.jpg'] && req.body.section === 'offro') {
         if (req.body.isService){
-          product.image = '/images/offro_servizio.jpg'
+          product.image = ['/images/offro_servizio.jpg']
         } else {
-          product.image = '/images/offro_prodotto.jpg'
+          product.image = ['/images/offro_prodotto.jpg']
         }
-      } else if (req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'cerco') {
+      } else if (req.body.image[0] === ['/images/offro_prodotto.jpg'] && req.body.section === 'cerco') {
         if (req.body.isService){
-          product.image = '/images/cerco_servizio.jpg'
+          product.image = ['/images/cerco_servizio.jpg']
         } else {
-          product.image = '/images/cerco_prodotto.jpg'
+          product.image = ['/images/cerco_prodotto.jpg']
         }
-      } else if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'avviso') {
-        product.image = '/images/avviso.jpg'
-      } else if(req.body.image === '/images/offro_prodotto.jpg' && req.body.section === 'propongo') {
-        product.image = '/images/propongo.jpg'
+      } else if(req.body.image[0] === ['/images/offro_prodotto.jpg'] && req.body.section === 'avviso') {
+        product.image = ['/images/avviso.jpg']
+      } else if(req.body.image[0] === ['/images/offro_prodotto.jpg'] && req.body.section === 'propongo') {
+        product.image = ['/images/propongo.jpg']
       } else {
         product.image = req.body.image
       }
@@ -194,7 +194,7 @@ productRouter.put(
       product.priceEuro = req.body.priceEuro;
       product.category = req.body.category;
       product.brand = req.body.brand;
-      product .countDocumentsInStock = req.body .countDocumentsInStock;
+      product.countInStock = req.body.countInStock;
       product.description = req.body.description;
       product.section = req.body.section;
       product.isService = req.body.isService;
@@ -202,7 +202,7 @@ productRouter.put(
       product.auxPhone = req.body.auxPhone;
       product.delivery = req.body.delivery;
       product.expiry = req.body.expiry;
-      product .countDocumentsry = req.body .countDocumentsry;
+      product.country = req.body.country;
       product.state = req.body.state;
       product.city = req.body.city;
       product.municipality = req.body.municipality;
