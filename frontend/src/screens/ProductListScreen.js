@@ -38,6 +38,7 @@ export default function ProductListScreen(props) {
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
       props.history.push(`/product/${createdProduct._id}/edit`);
@@ -69,6 +70,7 @@ export default function ProductListScreen(props) {
   };
   return (
     <div>
+      {/* <ScrollUp /> */}
       <div className="row flash">
         <h1>Lista di Annunci</h1>
         { !userInfo.hasAd && 
