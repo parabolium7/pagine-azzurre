@@ -755,42 +755,58 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.marquee {
+  height: 0px;
+  overflow: hidden;
+  position: relative;
+  background: #fefefe;
+}
+
 .marquee p {
   position: relative;
-  text-align: center;
-  background-color: transparent;
+  width: 100%;
   margin: 0;
-  line-height: 2rem;
-  /* Starting position */
-  -moz-transform:translateX(100%);
-  -webkit-transform:translateX(100%);	
-  transform:translateX(100%);
-  /* Apply animation to this element */	
-  -moz-animation: example1 15s linear infinite;
-  -webkit-animation: example1 15s linear infinite;
-  animation: example1 15s linear infinite;
- }
- /* Move it (define the animation) */
- @-moz-keyframes example1 {
-  0%   { -moz-transform: translateX(100%); }
-  100% { -moz-transform: translateX(-100%); }
- }
- @-webkit-keyframes example1 {
-  0%   { -webkit-transform: translateX(100%); }
-  100% { -webkit-transform: translateX(-100%); }
- }
- @keyframes example1 {
-  0%   { 
-  -moz-transform: translateX(100%); /* Firefox bug fix */
-  -webkit-transform: translateX(100%); /* Firefox bug fix */
-  transform: translateX(100%); 		
+  color: #2196F3;
+  line-height: 1.2rem;
+  text-align: center;
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  -moz-animation: scroll-left 2s linear infinite;
+  -webkit-animation: scroll-left 2s linear infinite;
+  animation: scroll-left 20s linear infinite;
+}
+
+@-moz-keyframes scroll-left {
+  0% {
+      -moz-transform: translateX(100%);
   }
-  100% { 
-  -moz-transform: translateX(-100%); /* Firefox bug fix */
-  -webkit-transform: translateX(-100%); /* Firefox bug fix */
-  transform: translateX(-100%); 
+  100% {
+      -moz-transform: translateX(-100%);
   }
- }
+}
+
+@-webkit-keyframes scroll-left {
+  0% {
+      -webkit-transform: translateX(100%);
+  }
+  100% {
+      -webkit-transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+      -moz-transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+  }
+  100% {
+      -moz-transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%);
+  }
+}
 
 @media screen and (max-width: 1450px){
   .Logo1 {
