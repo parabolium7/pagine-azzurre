@@ -756,7 +756,7 @@ input:checked + .slider:before {
 }
 
 .marquee {
-  height: 0px;
+  height: 2rem;
   overflow: hidden;
   position: relative;
   background: #fefefe;
@@ -764,10 +764,10 @@ input:checked + .slider:before {
 
 .marquee p {
   position: relative;
-  width: 100%;
+  width: 100vw;
   margin: 0;
   color: #2196F3;
-  line-height: 1.2rem;
+  line-height: 2.2rem;
   text-align: center;
   -moz-transform: translateX(100%);
   -webkit-transform: translateX(100%);
