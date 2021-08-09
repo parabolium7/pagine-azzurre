@@ -29,7 +29,7 @@ export default function OrderListScreen(props) {
     }
   };
   return (
-    <div>
+    <div className="flash">
       <h1>Ordini</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
