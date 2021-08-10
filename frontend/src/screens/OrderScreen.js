@@ -101,7 +101,7 @@ export default function OrderScreen(props) {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div>
-      <h1>Ordine {order._id}</h1>
+      <h1 className="flash">Ordine {order._id}</h1>
       <div className="row top">
         <div className="col-2">
           <ul>
@@ -277,7 +277,7 @@ export default function OrderScreen(props) {
                           <textarea id="mailing"
                                     name="mailing"
                                     rows="4"
-                                    cols="93"
+                                    cols="30"
                                     value={ emailBody }
                                     onChange={ (e) => setEmailbody((e.target.value))}
                                     style={{ resize:"vertical",
