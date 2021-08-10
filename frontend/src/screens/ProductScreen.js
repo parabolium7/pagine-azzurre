@@ -28,6 +28,7 @@ export default function ProductScreen(props) {
   const [comment, setComment] = useState('');
 
   useEffect(() => {
+    window.scrollTo(0,0)
     if (successReviewCreate) {
       window.alert('Review Submitted Successfully');
       setRating('');
@@ -61,9 +62,9 @@ export default function ProductScreen(props) {
           <Link to="/">Torna ai articoli</Link>
           <div className="row top">
             <div className="col-1">
-            <Carousel>
-              { product.image.map((image, index) => <img src={image} key={index} alt="preview"/>)}
-            </Carousel>
+              <Carousel>
+                { product.image.map((image, index) => <img src={image} key={index} alt="preview"/>)}
+              </Carousel>
             </div>
             <div className="col-1 space">
               <ul>

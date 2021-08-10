@@ -15,6 +15,7 @@ export default function CartScreen(props) {
   const { cartItems, error } = cart;
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
@@ -29,7 +30,7 @@ export default function CartScreen(props) {
     props.history.push('/signin?redirect=shipping');
   };
   return (
-    <div className="row top">
+    <div className="row top flash">
       <div className="col-2">
         <h1>Processo di conttato al offerente</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}

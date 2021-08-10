@@ -66,6 +66,7 @@ export default function ProductEditScreen(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (successUpdate) {
       props.history.push('/productlist/seller')
     }
@@ -202,7 +203,7 @@ export default function ProductEditScreen(props) {
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
-        <div>
+        <div className="flash\    ">
           <h1 className="row center">Crea / Modifica Annuncio N°:</h1>
           <p className="row center"> {productId}</p>
           { !userInfo.hasAd && 

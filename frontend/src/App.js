@@ -59,6 +59,7 @@ function App() {
   } = productCategoryList;
   
   useEffect(() => {
+    window.scrollTo(0,0)
     dispatch(listProductCategories());
   }, [dispatch, userInfo]);
 

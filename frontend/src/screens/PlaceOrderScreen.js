@@ -38,13 +38,14 @@ export default function PlaceOrderScreen(props) {
 
   };
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (success) {
       props.history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET, payload: order });
     }
   }, [dispatch, order, props.history, success]);
   return (
-    <div>
+    <div className="flash">
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <div className="row top">
         <div className="col-2">
