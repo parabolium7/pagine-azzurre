@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { saveShippingAddress } from '../actions/cartActions';
@@ -72,6 +72,11 @@ export default function ShippingAddressScreen(props) {
   //   );
   //   props.history.push('/map');
   // };
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, []);
+
   return (
     <div className="flash">
       <CheckoutSteps step1 step2></CheckoutSteps>
