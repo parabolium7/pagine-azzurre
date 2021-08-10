@@ -203,7 +203,7 @@ export default function ProductEditScreen(props) {
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
-        <div className="flash\    ">
+        <div className="flash">
           <h1 className="row center">Crea / Modifica Annuncio N°:</h1>
           <p className="row center"> {productId}</p>
           { !userInfo.hasAd && 
