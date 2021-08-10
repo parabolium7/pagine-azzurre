@@ -96,7 +96,7 @@ footer a:hover {
 }
 
 .white-force {
-  height: 100vh;
+  height: 25vh;
   z-index: -10000;
   background-color: white;
 }
@@ -963,7 +963,7 @@ input:checked + .slider:before {
   }
 
   .white-force {
-    height: 100vh;
+    height: 1vh;
     z-index: -10000;
     background-color: white;
   }
