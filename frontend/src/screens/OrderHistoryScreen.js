@@ -53,7 +53,7 @@ export default function OrderHistoryScreen(props) {
                       props.history.push(`/order/${order._id}`);
                     }}
                   >
-                    Details
+                    Dettàglio
                   </button>
                 </Td>
               </Tr>
