@@ -1,5 +1,5 @@
 # Pagine azzurre ECommerce Website
-![pagine_azzurre](/template/images/book-icon.png)
+![pagine_azzurre](/pagine-azzurre.png)
 
 ## Demo Website
 
@@ -19,7 +19,7 @@ $ cd pagine_azzurre
 - Local MongoDB
   - Install it from [here](https://www.mongodb.com/try/download/community)
   - Create .env file in root folder
-  - Set MONGODB_URL=mongodb://localhost/amazona  
+  - Set MONGODB_URL=mongodb://localhost/pagine-azzurre  
 - Atlas Cloud MongoDB
   - Create database at [https://cloud.mongodb.com](https://cloud.mongodb.com)
   - Create .env file in root folder
