@@ -1,3 +1,42 @@
+let msgPreRegistration = ( recipient, uuidLink, isNewsletterRegistred ) => {
+  let now = new Date()
+  let hrs = now.getHours()
+  let msg
+
+  let moment = 'Salve'
+
+  if(hrs < 12) moment = 'Buongiorno'
+  if(hrs === 12) moment = 'Buon pomeriggio'
+  if(hrs >= 13) moment = 'Buona sera'
+
+  if( isNewsletterRegistred ) {
+    msg = {
+      to: recipient,
+      from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
+      subject: `Pagine Azzurre: Verifica della registrazione`,
+      html: `<p>${moment},</p>\
+        <p>Conferma la registrazione alle pagineazzurre.net e alla sua newsletter cliccando il seguente link.</p></br>\
+        <a href="http://localhost:2998/verification/${uuidLink}" target="_blank">Link per verificare l'inscrizione</a></br></br>\
+        <p>Grazie per aver scelto le pagineazzurre.net</p>\
+      `
+    }
+  } else {
+    msg = {
+      to: recipient,
+      from: "iscrizioni.pagineazzurre@cittadini-volontari.it",
+      subject: `Pagine Azzurre: Verifica della registrazione`,
+      html: `<p>${moment},</p>\
+        <p>Conferma la registrazione alle pagineazzurre.net cliccando il seguente link.</p></br>\
+        <a href="http://localhost:2998/verification/${uuidLink}" target="_blank">Link per verificare l'inscrizione</a></br></br>\
+        <p>Grazie per aver scelto le pagineazzurre.net</p>\
+      `
+    }
+  }
+
+  return msg
+
+}
+
 let msgRegistration = (recipient, username, isNewsletterRegistred) => {
   let now = new Date()
   let hrs = now.getHours()
@@ -157,6 +196,7 @@ let newsletterWelcome = (email, name) => {
 }
 
 export { msgRegistration,
+         msgPreRegistration,
          msgPasswordRecovery,
          msgOrderNotificationToOfferer,
          msgOrderNotificationToBuyer,

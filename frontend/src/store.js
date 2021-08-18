@@ -38,6 +38,7 @@ import {
   userNewsletterReducer,
   userNewsletterVerifyReducer,
   userNewsletterUpdateReducer,
+  userVerifyAccountReducer,
 } from './reducers/userReducers';
 
 const initialState = {
@@ -94,6 +95,7 @@ const reducer = combineReducers({
   userNewsletter: userNewsletterReducer,
   userNewsletterVerify: userNewsletterVerifyReducer,
   userNewsletterUpdate: userNewsletterUpdateReducer,
+  userVerifyAccount: userVerifyAccountReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

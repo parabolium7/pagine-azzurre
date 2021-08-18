@@ -12,7 +12,7 @@ export default function PasswordRecoveryScreen(props) {
     : '/'
   
   const emailStatus = useSelector((state) => state.userPasswordRecovery)
-  const { email, loading, error} = emailStatus
+  const { email, loading, error } = emailStatus
   const dispatch = useDispatch()
   const submitHandler = (e) => {
     e.preventDefault()

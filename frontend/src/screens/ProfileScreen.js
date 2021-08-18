@@ -172,6 +172,15 @@ export default function ProfileScreen() {
       <form className="form" onSubmit={submitHandler}>
         <div className="flash">
           <h1 className="row center">Profilo di Usuario</h1>
+          {
+              userInfo && !userInfo.verified && (
+              <MessageBox variant="alert">
+                L'account deve essere ancora verificato:<br/>
+                1) Esci dalle pagineazzure.net<br/>
+                2) Contralla la tua mail<br/>
+                3) Conferma clicando il link di verifica  
+              </MessageBox>
+          )}
         </div>
         { loading ? (
           <LoadingBox></LoadingBox>
@@ -199,303 +208,307 @@ export default function ProfileScreen() {
                 style={{color: "#5A5A5A", fontSize: "1.8rem"}}
               ></input>
             </div>
-            <div>
-                <label htmlFor="account">Valazco account</label>
-                <input type="text" readOnly value={account} style={{display:"inline", whiteSpace:"nowrap", color: "#5A5A5A", fontSize: "1.8rem"}}></input>
-            </div>
-            <div>
-                <label htmlFor="balance">Saldo</label>
-                <input type="text" readOnly value={"☯ 100"} style={{display:"inline", whiteSpace:"nowrap", color: "#3A3A3A", fontSize: "1.8rem"}}></input>
-            </div>
-            <div>
-              <h2>Dati anagrafici:</h2>
-              <label htmlFor="name">Nome *</label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Aggiungere nome"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="surname">Cognome *</label>
-              <input
-                id="surname"
-                type="text"
-                placeholder="Aggiungere cognome"
-                value={surname}
-                onChange={(e) => setSurname(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="birthday">Data di Nascita *</label>
-              <DayPickerInput
-                parseDate={parseDate}
-                format={CalFORMAT}
-                formatDate={formatDate}
-                value={birthday}
-                placeholder={`${dateFnsFormat(new Date(), CalFORMAT)}`}
-                onDayChange={(e)=>GetFormattedDate(e)}
-              />
-            </div>
-            <div>
-              <label htmlFor="gender">Genere *</label>
-                <label htmlFor="male">
-                  <input type="radio" id="male" name="gender" value="M" checked={gender==='M'?true:false} onChange={(e) => setGender(e.target.value)}/>
-                  M
-                </label>
-                <label htmlFor="female">
-                  <input type="radio" id="female" name="gender" value="F" checked={gender==='F'?true:false}onChange={(e) => setGender(e.target.value)}/>
-                  F
-                </label>
-            </div>
-            <div>
-              <label htmlFor="birthplace">Comune di Nascita *</label>
-              <input
-                type="text"
-                id="birthplace"
-                placeholder="Aggiungere comune di nascita"
-                value={birthplace}
-                onChange={(e) => setBirthplace(e.target.value.toUpperCase())}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="cf">Codice Fiscale *</label>
-              <input
-                type="text"
-                id="cf"
-                maxlenght="16"
-                placeholder="Inserisci il Codice Fiscale"
-                value={cf.length>16?'':cf}
-                onChange={ (e) => { if(e.target.value && e.target.value.length <= 16) {
-                                      return setCf(e.target.value.toUpperCase())
-                                    } else if (e.target.value === '') {
-                                      return setCf('')
+            { userInfo && userInfo.verified &&
+              <>
+              <div>
+                  <label htmlFor="account">Valazco account</label>
+                  <input type="text" readOnly value={account} style={{display:"inline", whiteSpace:"nowrap", color: "#5A5A5A", fontSize: "1.8rem"}}></input>
+              </div>
+              <div>
+                  <label htmlFor="balance">Saldo</label>
+                  <input type="text" readOnly value={"☯ 100"} style={{display:"inline", whiteSpace:"nowrap", color: "#3A3A3A", fontSize: "1.8rem"}}></input>
+              </div>
+              <div>
+                <h2>Dati anagrafici:</h2>
+                <label htmlFor="name">Nome *</label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Aggiungere nome"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="surname">Cognome *</label>
+                <input
+                  id="surname"
+                  type="text"
+                  placeholder="Aggiungere cognome"
+                  value={surname}
+                  onChange={(e) => setSurname(e.target.value)}
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="birthday">Data di Nascita *</label>
+                <DayPickerInput
+                  parseDate={parseDate}
+                  format={CalFORMAT}
+                  formatDate={formatDate}
+                  value={birthday}
+                  placeholder={`${dateFnsFormat(new Date(), CalFORMAT)}`}
+                  onDayChange={(e)=>GetFormattedDate(e)}
+                />
+              </div>
+              <div>
+                <label htmlFor="gender">Genere *</label>
+                  <label htmlFor="male">
+                    <input type="radio" id="male" name="gender" value="M" checked={gender==='M'?true:false} onChange={(e) => setGender(e.target.value)}/>
+                    M
+                  </label>
+                  <label htmlFor="female">
+                    <input type="radio" id="female" name="gender" value="F" checked={gender==='F'?true:false}onChange={(e) => setGender(e.target.value)}/>
+                    F
+                  </label>
+              </div>
+              <div>
+                <label htmlFor="birthplace">Comune di Nascita *</label>
+                <input
+                  type="text"
+                  id="birthplace"
+                  placeholder="Aggiungere comune di nascita"
+                  value={birthplace}
+                  onChange={(e) => setBirthplace(e.target.value.toUpperCase())}
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="cf">Codice Fiscale *</label>
+                <input
+                  type="text"
+                  id="cf"
+                  maxlenght="16"
+                  placeholder="Inserisci il Codice Fiscale"
+                  value={cf.length>16?'':cf}
+                  onChange={ (e) => { if(e.target.value && e.target.value.length <= 16) {
+                                        return setCf(e.target.value.toUpperCase())
+                                      } else if (e.target.value === '') {
+                                        return setCf('')
+                                      }
                                     }
-                                  }
+                  }
+                ></input>
+              </div>
+              <div>
+                <h2>Dettagli contatto:</h2>
+                <label htmlFor="email">Email **</label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Aggiungere email"
+                  value={email}
+                  readOnly
+                  style={{color: "#5A5A5A", fontSize: "1.8rem"}}
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="city">Provincia *</label>
+                <Select options={options} placeholder="Aggiungere provincia di domicilio" onChange={(e) => setCity(e.target.value.toUpperCase())} />
+              </div>
+              <div>
+                <label htmlFor="zipCode">CAP</label>
+                <input
+                  id="zipCode"
+                  type="number"
+                  placeholder="Aggiungere CAP"
+                  value={zipCode}
+                  onChange={(e) => setZipcode(e.target.value)}
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="phone">Telefono</label>
+                <input
+                  id="phone"
+                  type="number"
+                  placeholder="Aggiungere telefono"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                ></input>
+              </div>
+              <div>
+                { referer.length === 0 ?
+                  (<div className="row start">
+                    <label htmlFor="isReferer">Partecipi a gruppi, movimenti, comitati o associazioni no profit?
+                      <input
+                        type="radio"
+                        id="no_referer"
+                        name="isReferer"
+                        onClick={ (e) => setHasReferer(true)}
+                      />Si
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        id="yes_referer"
+                        name="isReferer"
+                        onClick={ (e) => setHasReferer(false)}
+                        defaultChecked
+                      />No
+                    </label>
+                  </div>)
+                :''
                 }
-              ></input>
-            </div>
-            <div>
-              <h2>Dettagli contatto:</h2>
-              <label htmlFor="email">Email **</label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Aggiungere email"
-                value={email}
-                readOnly
-                style={{color: "#5A5A5A", fontSize: "1.8rem"}}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="city">Provincia *</label>
-              <Select options={options} placeholder="Aggiungere provincia di domicilio" onChange={(e) => setCity(e.target.value.toUpperCase())} />
-            </div>
-            <div>
-              <label htmlFor="zipCode">CAP</label>
-              <input
-                id="zipCode"
-                type="number"
-                placeholder="Aggiungere CAP"
-                value={zipCode}
-                onChange={(e) => setZipcode(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="phone">Telefono</label>
-              <input
-                id="phone"
-                type="number"
-                placeholder="Aggiungere telefono"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              { referer.length === 0 ?
-                (<div className="row start">
-                  <label htmlFor="isReferer">Partecipi a gruppi, movimenti, comitati o associazioni no profit?
+                {
+                  hasReferer || referer.length > 0 ?
+                    (
+                      <div>
+                        <label htmlFor="referer" className="row ">Gruppi, movimenti, comitati o associazioni no profit</label>
+                        <div className="row">
+                          <input
+                            type="text"
+                            id="referer"
+                            placeholder="Inserici al massimo numero cinque associazioni."
+                            value={ newReferer }
+                            // TODO: Autosearch here!
+                            onChange={(e) => setNewReferer(e.target.value.toUpperCase())}
+                          ></input>
+                      </div>
+                      {
+                        <div className="row">
+                            <ol>
+                            {
+                                referer.map( (item, idx ) => {
+                                  if(idx <= 4){
+                                  return <li key={idx}>{item}</li>
+                                  } else {
+                                    return ''
+                                  }
+                                })
+                            }
+                            </ol>
+                              {
+                                newReferer.length > 0 && referer.length < 5 &&
+                                  (<button className="primary blu little" onClick={addETS}>
+                                    aggiungi
+                                  </button>)
+                              }
+                        </div>
+                      }
+                      </div>
+                    ):''
+                }
+              </div>
+              <div>
+                <h2>Inscrizione Newsletter:</h2>
+                {newsletter === "Verified" ? <MessageBox variant="success">Inscritto</MessageBox>  : <MessageBox variant="info">Non inscritto</MessageBox> }
+              </div>
+              <div className="row start">
+                  <label htmlFor="newsletter">{newsletter === "Not Verified" ? "Vuoi inscriverti alla nostra newsletter" : "Vuoi annullare l'iscrizione alla nostra newsletter"}
                     <input
                       type="radio"
                       id="no_referer"
-                      name="isReferer"
-                      onClick={ (e) => setHasReferer(true)}
+                      name="newsletter"
+                      onClick={ (e) => setNewsletterUpdate(true)}
                     />Si
                   </label>
-                  <label>
+              </div>
+              {user.isSeller && (
+                <>
+                  {/* <div>
+                    <h2>Dati Offerente:</h2>
+                    <label htmlFor="sellerName">Nome offerente</label>
                     <input
-                      type="radio"
-                      id="yes_referer"
-                      name="isReferer"
-                      onClick={ (e) => setHasReferer(false)}
-                      defaultChecked
-                    />No
-                  </label>
-                </div>)
-              :''
-              }
-              {
-                hasReferer || referer.length > 0 ?
-                  (
-                    <div>
-                      <label htmlFor="referer" className="row ">Gruppi, movimenti, comitati o associazioni no profit</label>
-                      <div className="row">
-                        <input
-                          type="text"
-                          id="referer"
-                          placeholder="Inserici al massimo numero cinque associazioni."
-                          value={ newReferer }
-                          // TODO: Autosearch here!
-                          onChange={(e) => setNewReferer(e.target.value.toUpperCase())}
-                        ></input>
-                    </div>
-                    {
-                      <div className="row">
-                          <ol>
-                           {
-                              referer.map( (item, idx ) => {
-                                if(idx <= 4){
-                                 return <li key={idx}>{item}</li>
-                                } else {
-                                  return ''
-                                }
-                              })
-                           }
-                          </ol>
-                            {
-                              newReferer.length > 0 && referer.length < 5 &&
-                                (<button className="primary blu little" onClick={addETS}>
-                                  aggiungi
-                                </button>)
-                            }
-                      </div>
-                    }
-                    </div>
-                  ):''
-              }
-            </div>
-            <div>
-              <h2>Inscrizione Newsletter:</h2>
-              {newsletter === "Verified" ? <MessageBox variant="success">Inscritto</MessageBox>  : <MessageBox variant="info">Non inscritto</MessageBox> }
-            </div>
-            <div className="row start">
-                <label htmlFor="newsletter">{newsletter === "Not Verified" ? "Vuoi inscriverti alla nostra newsletter" : "Vuoi annullare l'iscrizione alla nostra newsletter"}
-                  <input
-                    type="radio"
-                    id="no_referer"
-                    name="newsletter"
-                    onClick={ (e) => setNewsletterUpdate(true)}
-                  />Si
-                </label>
-            </div>
-            {user.isSeller && (
-              <>
-                {/* <div>
-                  <h2>Dati Offerente:</h2>
-                  <label htmlFor="sellerName">Nome offerente</label>
-                  <input
-                    id="sellerName"
-                    type="text"
-                    placeholder="Inserici il tuo nome di offerente"
-                    value={sellerName}
-                    onChange={(e) => setSellerName(e.target.value)}
-                  ></input>
-                </div> */}
-                <div>
-                  <h2>Dati Offerente:</h2>
-                  <label htmlFor="sellerLogo">Logo:</label>
-                  { loadingUpload && <LoadingBox></LoadingBox> }
-                  { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
-                  { sellerLogo &&
+                      id="sellerName"
+                      type="text"
+                      placeholder="Inserici il tuo nome di offerente"
+                      value={sellerName}
+                      onChange={(e) => setSellerName(e.target.value)}
+                    ></input>
+                  </div> */}
                   <div>
-                    <img alt={`${name} logo`} src={sellerLogo} style={{ display: "block",  maxWidth:"115px", maxHeight:"115px", width: "auto", height: "auto" }}/>
+                    <h2>Dati Offerente:</h2>
+                    <label htmlFor="sellerLogo">Logo:</label>
+                    { loadingUpload && <LoadingBox></LoadingBox> }
+                    { errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox> }
+                    { sellerLogo &&
+                    <div>
+                      <img alt={`${name} logo`} src={sellerLogo} style={{ display: "block",  maxWidth:"115px", maxHeight:"115px", width: "auto", height: "auto" }}/>
+                    </div>
+                  }
+                    <input
+                      type="file"
+                      id="sellerLogo"
+                      accept="image/jpeg"
+                      onChange={uploadFileHandler}
+                    ></input>
                   </div>
-                }
-                  <input
-                    type="file"
-                    id="sellerLogo"
-                    accept="image/jpeg"
-                    onChange={uploadFileHandler}
-                  ></input>
-                </div>
-                <div>
-                  <label htmlFor="linkweb">Pagina Web</label>
-                  <input
-                    id="linkweb"
-                    type="url"
-                    placeholder="Inserici link della propria pagina web"
-                    value={sellerLink}
-                    onChange={(e) => setSellerLink(e.target.value)}
-                  ></input>
-                </div>
-                <div>
-                  <label htmlFor="partitaIva">Partita IVA</label>
-                  <input
-                    id="partitaIva"
-                    type="text"
-                    placeholder="Inserici partita IVA"
-                    value={!partitaIva.match(/GMT/)?partitaIva:''}
-                    onChange={(e) => setPartitaIva(e.target.value)}
-                  ></input>
-                </div>
-                <div>
-                  <label htmlFor="sellerDescription">Descrizione Offerente</label>
-                  <textarea
-                    id="sellerDescription"
-                    type="text"
-                    placeholder="Inserici descrizione di offerente"
-                    rows="6"
-                    value={sellerDescription}
-                    onChange={(e) => setSellerDescription(e.target.value)}
-                  ></textarea>
-                </div>
+                  <div>
+                    <label htmlFor="linkweb">Pagina Web</label>
+                    <input
+                      id="linkweb"
+                      type="url"
+                      placeholder="Inserici link della propria pagina web"
+                      value={sellerLink}
+                      onChange={(e) => setSellerLink(e.target.value)}
+                    ></input>
+                  </div>
+                  <div>
+                    <label htmlFor="partitaIva">Partita IVA</label>
+                    <input
+                      id="partitaIva"
+                      type="text"
+                      placeholder="Inserici partita IVA"
+                      value={!partitaIva.match(/GMT/)?partitaIva:''}
+                      onChange={(e) => setPartitaIva(e.target.value)}
+                    ></input>
+                  </div>
+                  <div>
+                    <label htmlFor="sellerDescription">Descrizione Offerente</label>
+                    <textarea
+                      id="sellerDescription"
+                      type="text"
+                      placeholder="Inserici descrizione di offerente"
+                      rows="6"
+                      value={sellerDescription}
+                      onChange={(e) => setSellerDescription(e.target.value)}
+                    ></textarea>
+                  </div>
+                </>
+              )}
+              <div>
+                <h2>Cambio Password:</h2>
+                <label htmlFor="password">Cambiare Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Digita nuova password"
+                  onChange={(e) => setPassword(e.target.value)}
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="confirmPassword">Conferma Password</label>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="Inserire conferma di password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                ></input>
+              </div>
+              <div className="asterisk">
+                <div className="little-line">(**)  Campo non modificabile</div>
+                <div className="little-sisterline">(*) Campi obbligatori per offrire beni o servizi su le pagine azzurre</div>
+              </div>
+              <>
+                {
+                loading ? (
+                  <LoadingBox></LoadingBox>
+                ) : error ? (
+                  <MessageBox variant="danger">{error}</MessageBox>
+                ) : loadingUpdate && <LoadingBox></LoadingBox> ?
+                    errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox> :
+                    successUpdate && (
+                      <MessageBox variant="success">
+                        Profile Updated Successfully
+                      </MessageBox>
+                    )
+                  } 
               </>
-            )}
-            <div>
-              <h2>Cambio Password:</h2>
-              <label htmlFor="password">Cambiare Password</label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Digita nuova password"
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="confirmPassword">Conferma Password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                placeholder="Inserire conferma di password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              ></input>
-            </div>
-            <div className="asterisk">
-              <div className="little-line">(**)  Campo non modificabile</div>
-              <div className="little-sisterline">(*) Campi obbligatori per offrire beni o servizi su le pagine azzurre</div>
-            </div>
-            <>
-              {
-              loading ? (
-                <LoadingBox></LoadingBox>
-              ) : error ? (
-                <MessageBox variant="danger">{error}</MessageBox>
-              ) : loadingUpdate && <LoadingBox></LoadingBox> ?
-                  errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox> :
-                  successUpdate && (
-                    <MessageBox variant="success">
-                      Profile Updated Successfully
-                    </MessageBox>
-                  )
-                } 
+              <div>
+                <button className="primary blu big" type="submit">
+                  Aggiorna Profilo
+                </button>
+              </div>
             </>
-            <div>
-              <button className="primary blu big" type="submit">
-                Aggiorna Profilo
-              </button>
-            </div>
+            }
           </>
         )}
       </form>

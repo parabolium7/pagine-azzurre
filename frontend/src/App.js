@@ -39,6 +39,8 @@ import logo5 from './resources/logos/bannergiallo.jpg';
 import PrivacyScreen from './screens/PrivacyScreen'
 import ChangePassword from './screens/ChangePassword'
 import ThankYouScreen from './screens/ThankYouScreen'
+import VerificationScreen from './screens/VerificationScreen';
+import VerifiedScreen from './screens/VerifiedScreen';
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -61,7 +63,7 @@ function App() {
   useEffect(() => {
     window.scrollTo(0,0)
     dispatch(listProductCategories());
-  }, [dispatch, userInfo]);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
@@ -137,7 +139,7 @@ function App() {
                 <li>
                   <Link to="/profile">Profilo</Link>
                 </li>
-                {userInfo && userInfo.isSeller && (
+                {(userInfo && userInfo.verified) && userInfo.isSeller && (
                 <>
                   <li>
                     <Link to="/productlist/seller">Crea Annuncio</Link>
@@ -148,11 +150,11 @@ function App() {
                   <li>
                     <Link to="/orderlist/seller">Ordini</Link>
                   </li>
+                  <li>
+                  <Link to="/orderhistory">Istoriale</Link>
+                  </li>
                 </>
               )}
-                <li>
-                  <Link to="/orderhistory">Istoriale</Link>
-                </li>
                 <li>
                   <Link to="#signout" onClick={signoutHandler}>
                     Uscire
@@ -242,6 +244,8 @@ function App() {
           <Route path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber" component={SearchScreen} exact></Route>
           <Route path="/password-recovery" component={PasswordRecovery} exact></Route>
           <Route path="/password-recovery/:id" component={ChangePassword} exact></Route>
+          <Route path="/verification/:id" component={VerifiedScreen} ></Route>
+          <Route path="/verification/" component={VerificationScreen} exact></Route>
           <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
           <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
           <AdminRoute path="/productlist" component={ProductListScreen} exact></AdminRoute>

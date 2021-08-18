@@ -45,6 +45,9 @@ import {
   USER_NEWSLETTER_UPDATE_REQUEST,
   USER_NEWSLETTER_UPDATE_SUCCESS,
   USER_NEWSLETTER_UPDATE_FAIL,
+  USER_VERIFY_ACCOUNT_REQUEST,
+  USER_VERIFY_ACCOUNT_SUCCESS,
+  USER_VERIFY_ACCOUNT_FAIL,
 } from '../constants/userConstants'
 
 export const register = (username, email, password, sellername, phone, cf, referer, newsletter) => async (dispatch) => {
@@ -61,8 +64,6 @@ export const register = (username, email, password, sellername, phone, cf, refer
       newsletter
     });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-    dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -317,5 +318,21 @@ export const updateNewsletter = (username, email ) => async (dispatch) => {
       ? error.response.data.message
       : error.message;
     dispatch({ type: USER_NEWSLETTER_UPDATE_FAIL, payload: message })
+  }
+}
+
+export const userVerifyAccount = (uuid) => async (dispatch) => {
+  dispatch({ type: USER_VERIFY_ACCOUNT_REQUEST })
+  try {
+    const { data } = await Axios.post('/api/users/verification/:id', { uuid } )
+    if(data.uuid[0].verify.verified){
+      dispatch({ type: USER_VERIFY_ACCOUNT_SUCCESS, payload: data.uuid[0] })
+    }
+  } catch(error) {
+    const message =
+    error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    dispatch({ type: USER_VERIFY_ACCOUNT_FAIL, payload: message })
   }
 }

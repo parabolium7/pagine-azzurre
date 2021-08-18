@@ -8,7 +8,9 @@ import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
 import Web3 from 'web3'
-import { msgRegistration, msgPasswordRecovery, msgPasswordReplaced, newsletterWelcome } from '../emailTemplates/mailMsg.js'
+import { msgRegistration, msgPreRegistration, msgPasswordRecovery, msgPasswordReplaced, newsletterWelcome } from '../emailTemplates/mailMsg.js'
+import pkg from 'uuid'
+const { v4: uuidv4 } = pkg
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
@@ -69,6 +71,7 @@ userRouter.post(
           isSeller: user.isSeller,
           hasAd: user.hasAd,
           token: generateToken(user),
+          verified: user.verify.verified,
         });
         return;
       }
@@ -82,9 +85,10 @@ userRouter.post(
   expressAsyncHandler(async (req, res) => {
     let subscriber = false
     let createdUser
-    let recipient
+    let mail
     const userPassword = bcrypt.hashSync(req.body.password, 8)
     const userAccount = await web3.eth.accounts.create((userPassword + process.env.ENTROPY))
+    const trusted_link = uuidv4()
     const isUser = await User.findOne({ email: req.body.email })
     const isUsername = await User.findOne({ username: req.body.username })
     if(!isUser && !isUsername){
@@ -100,6 +104,7 @@ userRouter.post(
         referer: req.body.referer,
         isSeller: true,
         hasAd: false,
+        verify: { trusted_link }
       })
       createdUser = await user.save()
       if ( createdUser.email === req.body.email ) {
@@ -108,12 +113,12 @@ userRouter.post(
           if (!subscriber) {
             const newsletterRegistry = new Newsletter({ email: req.body.email, verified: true })
             await newsletterRegistry.save()
-            recipient = msgRegistration(createdUser.email, createdUser.username, true)
+            mail = msgPreRegistration(createdUser.email, trusted_link, true)
           } else {
-            recipient = msgRegistration(createdUser.email, createdUser.username, true)
+            mail = msgPreRegistration(createdUser.email, trusted_link, true)
           }
         } else {
-          recipient = msgRegistration(createdUser.email, createdUser.username, false)
+          mail = msgPreRegistration(createdUser.email, trusted_link, false)
         }
         if(subscriber){
           res.send({
@@ -127,7 +132,8 @@ userRouter.post(
             hasAd: createdUser.hasAd,
             referer: createdUser.referer,
             newsletter: true,
-            token: generateToken(createdUser)
+            token: generateToken(createdUser),
+            verified: createdUser.verify.verified,
           })
         } else {
           res.send({
@@ -142,11 +148,12 @@ userRouter.post(
             referer: createdUser.referer,
             newsletter: false,
             token: generateToken(createdUser),
+            verified: createdUser.verify.verified,
           })
         }
-        sgMail.send(recipient)
+        sgMail.send(mail)
         .then((res) => {
-          console.log("Welcome email Sent.")
+          console.log("Verification email sent.")
         })
         .catch((error) => {console.error(error)})
       } else {
@@ -490,6 +497,35 @@ userRouter.post(
       await subscriber.save()
     }
     res.status(200).send('yeah!')
+  })
+)
+
+userRouter.post(
+  '/verification/:id',
+  expressAsyncHandler(async (req, res) => {
+    let data = await User.find({ 'verify.trusted_link': req.body.uuid })
+    if(!data[0].verify.verified) {
+      data[0].verify.verified = true
+      data[0].save()
+      let mail
+      let newsletterStatus = await Newsletter.findOne({ email: data[0].email })
+      console.log(newsletterStatus)
+      if(newsletterStatus) {
+        if(newsletterStatus.verified) mail = msgRegistration( data[0].email, data[0].username, true )
+        if(!newsletterStatus.verified) mail = msgRegistration( data[0].email, data[0].username, false)
+      } else {
+        if(!newsletterStatus.verified) mail = msgRegistration( data[0].email, data[0].username, false)
+      }
+      res.status(200).send({ uuid: data })
+      sgMail.send(mail)
+      .then((res) => {
+        console.log("Welcome email sent.")
+      })
+      .catch((error) => {console.error(error)})
+      return 
+    } else {
+      res.status(404).send({ message: 'Il processo di verifica può essere eseguito solo una volta.' })
+    }
   })
 )
 

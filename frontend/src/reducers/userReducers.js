@@ -50,7 +50,23 @@ import {
   USER_NEWSLETTER_UPDATE_REQUEST,
   USER_NEWSLETTER_UPDATE_SUCCESS,
   USER_NEWSLETTER_UPDATE_FAIL,
+  USER_VERIFY_ACCOUNT_REQUEST,
+  USER_VERIFY_ACCOUNT_SUCCESS,
+  USER_VERIFY_ACCOUNT_FAIL,
 } from '../constants/userConstants'
+
+export const userVerifyAccountReducer = ( state=  { uuid: '', loading: false }, action ) => {
+  switch (action.type) {
+    case USER_VERIFY_ACCOUNT_REQUEST:
+      return { loading: true, uuid: action.payload }
+    case USER_VERIFY_ACCOUNT_SUCCESS:
+      return { loading: false, uuid: action.payload }
+    case USER_VERIFY_ACCOUNT_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
 
 export const userPasswordRecoveryReducer = ( state = { email: '', loading: false }, action ) => {
   switch (action.type) {

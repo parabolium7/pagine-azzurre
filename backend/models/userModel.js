@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema(
     isSeller: { type: Boolean, default: true, required: true },
     hasAd: { type: Boolean, default: false, required: true },
     activity: { type: Number, default: 0, require: false },
+    verify: {
+      verified: { type: Boolean, default: false },
+      trusted_link: { type: String, required: true }
+    },
     seller: {
       name: { type: String, required: true, unique: true },
       link: { type: String, require: false },
