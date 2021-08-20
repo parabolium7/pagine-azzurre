@@ -16,7 +16,7 @@ let msgPreRegistration = ( recipient, uuidLink, isNewsletterRegistred ) => {
       subject: `Pagine Azzurre: Verifica della registrazione`,
       html: `<p>${moment},</p>\
         <p>Conferma la registrazione alle pagineazzurre.net e alla sua newsletter cliccando il seguente link.</p></br>\
-        <a href="http://localhost:2998/verification/${uuidLink}" target="_blank">Link per verificare l'inscrizione</a></br></br>\
+        <a href="https://www.pagineazzurre.net/verification/${uuidLink}" target="_blank">Link per verificare l'inscrizione</a></br></br>\
         <p>Grazie per aver scelto le pagineazzurre.net</p>\
       `
     }
@@ -27,7 +27,7 @@ let msgPreRegistration = ( recipient, uuidLink, isNewsletterRegistred ) => {
       subject: `Pagine Azzurre: Verifica della registrazione`,
       html: `<p>${moment},</p>\
         <p>Conferma la registrazione alle pagineazzurre.net cliccando il seguente link.</p></br>\
-        <a href="http://localhost:2998/verification/${uuidLink}" target="_blank">Link per verificare l'inscrizione</a></br></br>\
+        <a href="https://www.pagineazzurre.net/verification/${uuidLink}" target="_blank">Link per verificare l'inscrizione</a></br></br>\
         <p>Grazie per aver scelto le pagineazzurre.net</p>\
       `
     }
