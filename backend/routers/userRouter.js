@@ -509,12 +509,11 @@ userRouter.post(
       data[0].save()
       let mail
       let newsletterStatus = await Newsletter.findOne({ email: data[0].email })
-      console.log(newsletterStatus)
       if(newsletterStatus) {
         if(newsletterStatus.verified) mail = msgRegistration( data[0].email, data[0].username, true )
         if(!newsletterStatus.verified) mail = msgRegistration( data[0].email, data[0].username, false)
       } else {
-        if(!newsletterStatus.verified) mail = msgRegistration( data[0].email, data[0].username, false)
+        mail = msgRegistration( data[0].email, data[0].username, false)
       }
       res.status(200).send({ uuid: data })
       sgMail.send(mail)
