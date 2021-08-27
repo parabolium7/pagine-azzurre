@@ -28,8 +28,8 @@ const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.ad
 async function SendCombo(addr) {
   console.log(`Sending Combo to ${addr}`)
   const address = await web3.eth.getAccounts()
-  await web3.eth.sendTransaction({ from: address[0], to: addr, value: '250000000000000000' })
-  await sContractInstance.methods.transfer(addr, '600').send({from: address[0]})
+  web3.eth.sendTransaction({ from: address[0], to: addr, value: '250000000000000000' })
+  sContractInstance.methods.transfer(addr, '18000').send({from: address[0]})
 }
  
 userRouter.get(
