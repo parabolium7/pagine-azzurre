@@ -586,16 +586,8 @@ img.large {
   margin: 0 0.2rem;
 }
 /* Carousel */
-/* .carousel .slide img {
-  max-width: 80vw;
-} */
-
-/* .carousel.carousel-slider { 
-  width: 50%;
-} */
-
-.slider-wrapper.axis-horizontal {
-  max-width: 1vw;
+.carousel .slide img {
+  height: auto;
 }
 
 /* Privacy */
@@ -931,6 +923,12 @@ input:checked + .slider:before {
     width: 90vw;
   }
 
+  main {
+    grid-area: main;
+    padding: 0.3rem;
+    width: 100vw;
+  }
+
   .scheda_sp a img{
     height: auto;
     width: 40%;
@@ -946,9 +944,26 @@ input:checked + .slider:before {
     padding: 1rem;
   }
 
-  /* .card-body {
+  img.medium {
+    max-width: none;
+  }
+
+  .card-body {
+    width: 87vw;
+  }
+
+  .col-1.space {
+    display: contents;
+    width: 10vw;
+  }
+
+  .p_sp {
     width: 100vw;
-  } */
+  }
+
+  .col-1 {
+    width: 150vw;
+  }
 
   .flash {
     padding: 4rem 0 1.2rem 0;
@@ -976,6 +991,10 @@ input:checked + .slider:before {
     height: 1vh;
     z-index: -10000;
     background-color: white;
+  }
+
+  .carousel-root { 
+    width: 94vw;
   }
 
   .example1 {
