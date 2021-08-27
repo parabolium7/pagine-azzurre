@@ -13,6 +13,13 @@ import Select from 'react-select'
 import Axios from 'axios'
 import options from '../resources/citiesOptions.js'
 
+import Web3 from 'web3'
+import SContract from '../web3Interface/abi.js'
+const web3 = new Web3('https://goerli.infura.io/v3/ea90d8f923e5484c84e7518e9f58f16b')
+const networkId = 5
+const deployedNetwork = SContract.networks[networkId]
+const _contract = new web3.eth.Contract(SContract.abi, deployedNetwork.address)
+
 export default function ProfileScreen() {
   const [account, setAccount] = useState(''); 
   const [name, setName] = useState('');
@@ -40,6 +47,7 @@ export default function ProfileScreen() {
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
   const [newsletterUpdate, setNewsletterUpdate] = useState(false)
+  const [balance, setBalance] = useState('')
 
   function parseDate(str, format, locale) {
     const parsed = dateFnsParse(str, format, new Date(), { locale });
@@ -51,6 +59,13 @@ export default function ProfileScreen() {
 
   function formatDate(date, format, locale) {
     return dateFnsFormat(date, format, { locale });
+  }
+
+  async function getSetBalance(account) {
+    let balance = await _contract.methods.balanceOf(account).call()
+    console.log(typeof balance)
+    balance = parseFloat(balance) / 100
+    setBalance(balance)
   }
 
   const uploadFileHandler = async (e) => {
@@ -106,6 +121,7 @@ export default function ProfileScreen() {
       setName(user.name);
       setSurname(user.surname);
       setAccount(user.account);
+      getSetBalance(user.account)
       setUsername(user.username); 
       setGender(user.gender);
       setBirthday(user.birthday);
@@ -216,7 +232,7 @@ export default function ProfileScreen() {
               </div>
               <div>
                   <label htmlFor="balance">Saldo</label>
-                  <input type="text" readOnly value={"☯ 100"} style={{display:"inline", whiteSpace:"nowrap", color: "#3A3A3A", fontSize: "1.8rem"}}></input>
+                  <input type="text" readOnly value={'☯ ' + balance } style={{display:"inline", whiteSpace:"nowrap", color: "#3A3A3A", fontSize: "1.8rem"}}></input>
               </div>
               <div>
                 <h2>Dati anagrafici:</h2>

@@ -59,9 +59,9 @@ export default function ProductScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div className="flash">
-          <Link to="/">Torna ai articoli</Link>
+          {/* <Link to="/">Torna ai articoli</Link> */}
           <div className="row top">
-            <div className="col-1">
+            <div className="col-1 space">
               <Carousel>
                 { product.image.map((image, index) => <img src={image} key={index} alt="preview"/>)}
               </Carousel>
@@ -81,11 +81,11 @@ export default function ProductScreen(props) {
                 <li>Prezzo in Val: ☯ {product.priceVal}</li>
                 <li>
                   Descrizione:
-                  <p>{product.description}</p>
+                  <p className="p_sp">{product.description}</p>
                 </li>
               </ul>
             </div>
-            <div className="col-1">
+            <div className="col-1 space">
               <div className="card card-body">
                 <ul>
                   <li>
@@ -166,7 +166,7 @@ export default function ProductScreen(props) {
               </div>
             </div>
           </div>
-          <div>
+          <div className="col-1 space">
             <h2 id="reviews">Recensioni</h2>
             {product.reviews.length === 0 && (
               <MessageBox>Non ci sono commenti</MessageBox>

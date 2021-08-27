@@ -9,7 +9,7 @@ const reviewSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-// TODO: Just concider if priceVal required true is better.
+
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
