@@ -8,8 +8,8 @@ import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
 import Web3 from 'web3'
-import HDWalletProvider from '@truffle/hdwallet-provider'
-import contract from './ABI/abi.js'
+// import HDWalletProvider from '@truffle/hdwallet-provider'
+// import contract from './ABI/abi.js'
 import { msgRegistration, msgPreRegistration, msgPasswordRecovery, msgPasswordReplaced, newsletterWelcome } from '../emailTemplates/mailMsg.js'
 import pkg from 'uuid'
 const { v4: uuidv4 } = pkg
@@ -89,6 +89,7 @@ userRouter.post(
         return;
       }
     }
+    console.log("Process ENV:", process.env.SECRET)
     res.status(401).send({ message: 'Invalid email or password' });
   })
 );
