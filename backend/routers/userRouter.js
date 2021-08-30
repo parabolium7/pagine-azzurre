@@ -89,7 +89,6 @@ userRouter.post(
         return;
       }
     }
-    console.log("Process ENV:", process.env.SECRET)
     res.status(401).send({ message: 'Invalid email or password' });
   })
 );
