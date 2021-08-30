@@ -532,7 +532,7 @@ userRouter.post(
       sgMail.send(mail)
       .then((res) => {
         console.log("Welcome email sent.")
-        SendCombo(data[0].account)
+        // SendCombo(data[0].account)
       })
       .catch((error) => {console.error(error)})
       return 
