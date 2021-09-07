@@ -19,11 +19,11 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const userRouter = express.Router();
 
-const provider = new HDWalletProvider(process.env.SECRET, process.env.INFURA_URL)
-const web3 = new Web3(provider)
-const id = 5
-const deployedNetwork = contract.networks[id]
-const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
+// const provider = new HDWalletProvider(process.env.SECRET, process.env.INFURA_URL)
+// const web3 = new Web3(provider)
+// const id = 5
+// const deployedNetwork = contract.networks[id]
+// const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
 
 async function SendCombo(addr) {
   console.log(`Sending Combo to ${addr}`)
