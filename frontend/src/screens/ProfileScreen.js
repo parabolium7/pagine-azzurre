@@ -28,7 +28,7 @@ export default function ProfileScreen() {
   const [gender, setGender] = useState('');
   const [birthday, setBirthday] = useState('');
   const [birthplace, setBirthplace] = useState('');
-  const [city, setCity] = useState('')
+  const [city, setCity] = useState({ value: '', label: '' })
   const [cf, setCf] = useState('')
   const [zipCode, setZipcode ] = useState('') 
   const [phone, setPhone ] = useState('') 
@@ -67,6 +67,11 @@ export default function ProfileScreen() {
     balance = parseFloat(balance) / 100
     setBalance(balance)
   }
+
+  const handleChange = selectedOption => {
+    setCity({ value: selectedOption.value, label: selectedOption.value })
+    console.log(`Option selected:`, selectedOption)
+  };
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -128,7 +133,7 @@ export default function ProfileScreen() {
       setBirthplace(user.birthplace);
       setCf(user.cf);
       setZipcode(user.zipCode);
-      setCity(user.city);
+      setCity({value: user.city, label: user.city});
       setPhone(user.phone);
       setEmail(user.email);
       setReferer(user.referer)
@@ -162,7 +167,7 @@ export default function ProfileScreen() {
           email,
           phone,
           referer,
-          city,
+          city: city.value,
           zipCode,
           password,
           sellerName,
@@ -318,7 +323,13 @@ export default function ProfileScreen() {
               </div>
               <div>
                 <label htmlFor="city">Provincia *</label>
-                <Select options={options} placeholder="Aggiungere provincia di domicilio" onChange={(e) => setCity(e.target.value.toUpperCase())} />
+                <Select value={{ value: city.value, label: city.label}}
+                        options={options}
+                        placeholder="Aggiungere provincia di domicilio"
+                        onChange={handleChange}
+                        getOptionValue={(option) => option.value}
+                        getOptionLabel={(option) => option.value}
+                />
               </div>
               <div>
                 <label htmlFor="zipCode">CAP</label>

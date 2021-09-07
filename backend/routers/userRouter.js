@@ -7,7 +7,7 @@ import Newsletter from '../models/newsletterModel.js';
 import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
-import Web3 from 'web3'
+// import Web3 from 'web3'
 // import HDWalletProvider from '@truffle/hdwallet-provider'
 // import contract from './ABI/abi.js'
 import { msgRegistration, msgPreRegistration, msgPasswordRecovery, msgPasswordReplaced, newsletterWelcome } from '../emailTemplates/mailMsg.js'
@@ -19,17 +19,21 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const userRouter = express.Router();
 
-// const provider = new HDWalletProvider(process.env.SECRET, process.env.INFURA_URL)
-// const web3 = new Web3(provider)
-// const id = 5
-// const deployedNetwork = contract.networks[id]
-// const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
+const provider = new HDWalletProvider(process.env.SECRET, process.env.INFURA_URL)
+const web3 = new Web3(provider)
+const id = 5
+const deployedNetwork = contract.networks[id]
+const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
 
 async function SendCombo(addr) {
   console.log(`Sending Combo to ${addr}`)
   const address = await web3.eth.getAccounts()
-  web3.eth.sendTransaction({ from: address[0], to: addr, value: '250000000000000000' })
-  sContractInstance.methods.transfer(addr, '18000').send({from: address[0]})
+  try{
+    await web3.eth.sendTransaction({ from: address[0], to: addr, value: '250000000000000000' })
+    await sContractInstance.methods.transfer(addr, '18000').send({from: address[0]})
+  } catch(error) {
+    console.log("Error @ UserRouter", error)
+  }
 }
  
 userRouter.get(
@@ -254,6 +258,7 @@ userRouter.put(
         isSeller: updatedUser.isSeller,
         hasAd: updatedUser.hasAd,
         token: generateToken(updatedUser),
+        verified: updatedUser.verify.verified,
       });
     }
   })
@@ -298,6 +303,7 @@ userRouter.get(
         isSeller: updatedUser.isSeller,
         hasAd: updatedUser.hasAd,
         token: generateToken(updatedUser),
+        verified: updatedUser.verify.verified,
       });
     }
   })
@@ -379,6 +385,7 @@ userRouter.put(
         isAdmin: upgradedUser.isAdmin,
         isSeller: upgradedUser.isSeller,
         hasAd: upgradedUser.hasAd,
+        verified: upgradedUser.verify.verified,
         token: generateToken(user),
       });
     } else {
