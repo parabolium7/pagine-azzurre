@@ -103,9 +103,9 @@ let msgPasswordRecovery = (recipient, hash) => {
     to: recipient,
     from: 'iscrizioni.pagineazzurre@cittadini-volontari.it',
     subject: 'Pagine Azzurre: Richiesta cambio Password',
-    text: `Hai chiesto un recupero/cambio di password? Per confermare clicca il seguente link http://pagineazzurre.net/password-recovery/${hash} . Se la domanda di recupero/cambio password non fosse stata da te richiesta, ignora questa email e non rispondere. 
+    text: `Hai chiesto un recupero/cambio di password? Per confermare clicca il seguente link https://www.pagineazzurre.net/password-recovery/${hash} . Se la domanda di recupero/cambio password non fosse stata da te richiesta, ignora questa email e non rispondere. 
     .`,
-    html: `<p>Hai chiesto un cambio di password?  Per confermare clicca il seguente <a href="http://pagineazzurre.net/password-recovery/${hash}" target="_blank"}>Link</a> . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.</p>`
+    html: `<p>Hai chiesto un cambio di password?  Per confermare clicca il seguente <a href="https://www.pagineazzurre.net/password-recovery/${hash}" target="_blank"}>Link</a> . In caso la richiesta cambio password no sia stata solicitata ignorare questo email.</p>`
   }
   return msg 
 }
@@ -188,7 +188,7 @@ let newsletterWelcome = (email, name) => {
     <br>\
     <p>${name}, vogliamo tenerti sempre aggiornata/o con le ultime novità.</p>\
     <p>Ti ringraziamo di cuore per il tuo interesse al progetto.</p>\
-    <p>Ti chiediamo di confermare clicando <a href="http://pagineazzurre.net/newsletter/${email}" target="_blank">qui</a>.</p>\
+    <p>Ti chiediamo di confermare clicando <a href="https://www.pagineazzurre.net/newsletter/${email}" target="_blank">qui</a>.</p>\
     <p>Se hai ricevuto questa email per errore ignòrala.</p>\
     `
   }
