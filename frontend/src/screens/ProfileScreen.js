@@ -15,7 +15,7 @@ import options from '../resources/citiesOptions.js'
 
 import Web3 from 'web3'
 import SContract from '../web3Interface/abi.js'
-const web3 = new Web3('https://goerli.infura.io/v3/ea90d8f923e5484c84e7518e9f58f16b')
+const web3 = new Web3('wss://goerli.infura.io/ws/v3/ea90d8f923e5484c84e7518e9f58f16b')
 const networkId = 5
 const deployedNetwork = SContract.networks[networkId]
 const _contract = new web3.eth.Contract(SContract.abi, deployedNetwork.address)
@@ -63,7 +63,6 @@ export default function ProfileScreen() {
 
   async function getSetBalance(account) {
     let balance = await _contract.methods.balanceOf(account).call()
-    console.log(typeof balance)
     balance = parseFloat(balance) / 100
     setBalance(balance)
   }
