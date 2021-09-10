@@ -18,8 +18,9 @@ dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const userRouter = express.Router();
-
-const provider = new HDWalletProvider(process.env.SECRET, process.env.INFURA_URL)
+const mnemonic = process.env.SECRET
+const InfuraUrl = process.env.INFURA_URL
+const provider = new HDWalletProvider(mnemonic, InfuraUrl)
 const web3 = new Web3(provider)
 const id = 5
 const deployedNetwork = contract.networks[id]
