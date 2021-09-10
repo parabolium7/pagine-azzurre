@@ -110,7 +110,7 @@ function App() {
             ></Route>
           </div>
           <div>
-            <Link to="/tutti_noi">Tutti Noi!</Link>
+            <Link to="/tutti_noi">Tutti Noi</Link>
           </div>
           { userInfo ? (
             <div>
