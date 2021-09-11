@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema(
     isSeller: { type: Boolean, default: true, required: true },
     hasAd: { type: Boolean, default: false, required: true },
     activity: { type: Number, default: 0, require: false },
+    inscriptionBlock: { type: Number, required: true, default: 0 }, 
     verify: {
       verified: { type: Boolean, default: false },
       trusted_link: { type: String, required: true }

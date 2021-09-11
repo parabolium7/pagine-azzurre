@@ -8,8 +8,8 @@ import dotenv from 'dotenv'
 import { generateToken, isAdmin, isAuth } from '../utils.js';
 import sgMail from "@sendgrid/mail"
 import Web3 from 'web3'
-import HDWalletProvider from '@truffle/hdwallet-provider'
-import contract from './ABI/abi.js'
+// import HDWalletProvider from '@truffle/hdwallet-provider'
+// import contract from './ABI/abi.js'
 import { msgRegistration, msgPreRegistration, msgPasswordRecovery, msgPasswordReplaced, newsletterWelcome } from '../emailTemplates/mailMsg.js'
 import pkg from 'uuid'
 const { v4: uuidv4 } = pkg
@@ -18,13 +18,13 @@ dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const userRouter = express.Router();
-const mnemonic = process.env.SECRET
-const InfuraUrl = process.env.INFURA_URL
-const provider = new HDWalletProvider(mnemonic, InfuraUrl)
-const web3 = new Web3(provider)
-const id = 5
-const deployedNetwork = contract.networks[id]
-const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
+// const mnemonic = process.env.SECRET
+// const InfuraUrl = process.env.INFURA_URL
+// const provider = new HDWalletProvider(mnemonic, InfuraUrl)
+const web3 = new Web3()
+// const id = 5
+// const deployedNetwork = contract.networks[id]
+// const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
 
 async function SendCombo(addr) {
   console.log(`Sending Combo to ${addr}`)
@@ -540,7 +540,7 @@ userRouter.post(
       sgMail.send(mail)
       .then((res) => {
         console.log("Welcome email sent.")
-        SendCombo(data[0].account)
+        // SendCombo(data[0].account)
       })
       .catch((error) => {console.error(error)})
       return 
