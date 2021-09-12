@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
     inscriptionBlock: { type: Number, required: true, default: 0 }, 
     verify: {
       verified: { type: Boolean, default: false },
-      trusted_link: { type: String, required: true }
+      trusted_link: { type: String }
     },
     seller: {
       name: { type: String, required: true, unique: true },
