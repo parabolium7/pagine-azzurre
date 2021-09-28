@@ -96,30 +96,29 @@ export default function ProductEditScreen(props) {
   }, [product, dispatch, productId, successUpdate, props.history])
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Final Image Array", image)
-    dispatch(
-      updateProduct({
-        _id: productId,
-        name,
-        priceVal,
-        priceEuro,
-        image,
-        category,
-        brand,
-        countInStock,
-        description,
-        section,
-        isService,
-        pause,
-        auxPhone,
-        delivery,
-        expiry,
-        country,
-        state,
-        city,
-        municipality,
-      })
-    );
+      dispatch(
+        updateProduct({
+          _id: productId,
+          name,
+          priceVal,
+          priceEuro,
+          image,
+          category,
+          brand,
+          countInStock,
+          description,
+          section,
+          isService,
+          pause,
+          auxPhone,
+          delivery,
+          expiry,
+          country,
+          state,
+          city,
+          municipality,
+        })
+      );
   };
 
   const [loadingUpload, setLoadingUpload] = useState(false);
@@ -269,13 +268,14 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="category">Categoria</label>
+              <label htmlFor="category">Categoria *</label>
               <input
                 id="category"
                 type="text"
                 placeholder="Inserisci categoria"
                 value={category?category.toUpperCase():''}
                 onChange={(e) => setCategory(e.target.value.toUpperCase())}
+                required
               ></input>
             </div>
             { section !== 'avviso' && 

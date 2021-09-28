@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
     birthplace: { type: String, required: false, uppercase: true },
     gender: { type: String, enum:["M", "F"], required: false },
     cf: { type: String, required: false, unique: true, uppercase: true },
-    partitaIva: { type: String, required: false, unique: true, default: new Date()},
+    partitaIva: { type: String, required: false, unique: true, default: Date.now() },
     email: { type: String, required: true, unique: true, trim: true },
     city: { type: String, required: false, uppercase: true },
     zipCode: { type: Number, required: false },

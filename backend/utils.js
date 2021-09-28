@@ -33,7 +33,7 @@ export const isAuth = (req, res, next) => {
       process.env.JWT_SECRET || 'somethingsecret',
       (err, decode) => {
         if (err) {
-          res.status(401).send({ message: 'Invalid Token' });
+          res.status(401).send({ message: 'Token scaduto. Esci e riaccedi' });
         } else {
           req.user = decode;
           next();

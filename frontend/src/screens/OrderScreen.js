@@ -129,7 +129,7 @@ export default function OrderScreen(props) {
               <div className="card card-body">
                 <h2>Pagamento</h2>
                 <p>
-                  <strong>Metodo:</strong> {order.paymentMethod}
+                  <strong>Metodo:</strong> d'accordare fra le parti
                 </p>
                 {order.isPaid ? (
                   <MessageBox variant="success">

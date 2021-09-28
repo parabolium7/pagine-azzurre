@@ -118,6 +118,7 @@ export default function ProfileScreen() {
 
   useEffect(() => {
     // TODO: For security reasons split db
+    window.scrollTo(0, 0)
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(detailsUser(userInfo._id));
