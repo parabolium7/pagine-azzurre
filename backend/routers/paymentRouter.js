@@ -14,6 +14,7 @@ const paymentRouter = express.Router()
 paymentRouter.post(
   '/', isAuth, 
   expressAsyncHandler( async (req, res) => {
+    let response = "NULLA"
     const buyer = await User.find({ email : req.user.email })
     const seller = await User.find({ _id : req.body.item[0].seller._id })
     console.log(seller[0].account)
@@ -27,10 +28,14 @@ paymentRouter.post(
     const id = 5
     const deployedNetwork = contract.networks[id]
     const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
-    sContractInstance.methods.transfer(seller[0].account, valsToSend).send({from: buyerPbKey })
-      .then( res => console.log("YEAH!", res))
-      .catch( err => console.log(err))
-    return 1
+    await sContractInstance.methods.transfer(seller[0].account, valsToSend).send({from: buyerPbKey })
+      .then( res => {
+        console.log(typeof res.transactionHash)
+        console.log(res.transactionHash)
+        if(typeof res.transactionHash === 'string') response = res
+      })
+      .catch( err => console.log("ERrrrroR:", err))
+    res.send(response.event)
   })
 )
 

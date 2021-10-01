@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema(
   {
     account: { type: String, required: true, unique: true},
-    accountKey: { type: String, required: true, unique: true }, 
+    accountKey: { type: String, required: true, unique: true },
     username: { type: String, required: true, unique: true, uppercase: true },
     name: { type: String, required: false },
     surname: { type: String, required: false },
@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
     birthplace: { type: String, required: false, uppercase: true },
     gender: { type: String, enum:["M", "F"], required: false },
     cf: { type: String, required: false, unique: true, uppercase: true },
-    partitaIva: { type: String, required: false, unique: true, default: Date.now() },
+    partitaIva: { type: String, required: false, unique: true, default: () => Date.now() },
     email: { type: String, required: true, unique: true, trim: true },
     city: { type: String, required: false, uppercase: true },
     zipCode: { type: Number, required: false },
@@ -23,10 +23,10 @@ const userSchema = new mongoose.Schema(
     isSeller: { type: Boolean, default: true, required: true },
     hasAd: { type: Boolean, default: false, required: true },
     activity: { type: Number, default: 0, require: false },
-    inscriptionBlock: { type: Number, required: true, default: 0 }, 
+    inscriptionBlock: { type: Number, required: true, default: 0 },
     verify: {
       verified: { type: Boolean, default: false },
-      trusted_link: { type: String }
+      trusted_link: { type: String, required: false }
     },
     seller: {
       name: { type: String, required: true, unique: true },

@@ -33,6 +33,7 @@ const orderSchema = new mongoose.Schema(
       update_time: String,
       email_address: String,
     },
+    valPayment: { type: String, required: true, default: "unanswered"},
     itemsPriceVal: { type: Number, required: true},
     itemsPriceEuro: { type: Number, required: false },
     // shippingPrice: { type: Number, required: true },

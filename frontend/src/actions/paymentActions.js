@@ -9,8 +9,8 @@ export const payVals = (account, item) => async (dispatch, getState) => {
   console.log(userInfo)
   try {
     const { data } = await Axios.post('/api/payment', {  account, item  }, {headers: { Authorization: `Bearer ${userInfo.token}` } })
-    console.log(data)
-    dispatch({ type: PAYMENT_SUCCESS })
+    console.log("Data", data)
+    if(data) dispatch({ type: PAYMENT_SUCCESS, payload: data })
   } catch(error) {
     dispatch({
       type: PAYMENT_FAIL,
