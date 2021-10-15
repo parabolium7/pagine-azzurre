@@ -21,18 +21,18 @@ paymentRouter.post(
     const buyerPbKey = buyer[0].account
     const buyerPvKey = buyer[0].accountKey
     const valsToSend = (req.body.item.reduce((a, c) => a + c.priceVal * c.qty, 0)) * 100
-    console.log("vals to send", valsToSend)
     const InfuraUrl = process.env.INFURA_URL
     const provider = new HDWalletProvider(buyerPvKey, InfuraUrl)
     const web3 = new Web3(provider)
     const id = 5
     const deployedNetwork = contract.networks[id]
     const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
+    console.log("Vals to send", valsToSend)
     await sContractInstance.methods.transfer(seller[0].account, valsToSend).send({from: buyerPbKey })
-      .then( res => {
-        console.log(typeof res.transactionHash)
-        console.log(res.transactionHash)
-        if(typeof res.transactionHash === 'string') response = res
+      .then( response => {
+        console.log(typeof resp.transactionHash)
+        console.log(resp.transactionHash)
+        if(typeof resp.transactionHash === 'string') response = res
       })
       .catch( err => console.log("ERrrrroR:", err))
     res.send(response.event)
