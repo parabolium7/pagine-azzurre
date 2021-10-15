@@ -23,7 +23,7 @@ export default function Product(props) {
           rating={product.rating}
           numReviews={product.numReviews}
         ></Rating>
-          { product.section !== 'propongo' &&
+          { product.section !== 'propongo' || product.section !== 'avviso' &&
             (
               <div className="row start">
                 <div className="price euro">€{' '+product.priceEuro}&nbsp;{' e'}</div>
