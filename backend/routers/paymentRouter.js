@@ -28,13 +28,12 @@ paymentRouter.post(
     const deployedNetwork = contract.networks[id]
     const sContractInstance = new web3.eth.Contract(contract.abi, deployedNetwork.address)
     console.log("Vals to send", valsToSend)
-    await sContractInstance.methods.transfer(seller[0].account, valsToSend).send({from: buyerPbKey })
-      .then( response => {
-        console.log(typeof resp.transactionHash)
+    sContractInstance.methods.transfer(seller[0].account, valsToSend).send({from: buyerPbKey })
+      .then( resp=> {
         console.log(resp.transactionHash)
         if(typeof resp.transactionHash === 'string') response = res
       })
-      .catch( err => console.log("ERrrrroR:", err))
+      .catch( err => console.log("ERROR PAYMENT:", err))
     res.send(response.event)
   })
 )
