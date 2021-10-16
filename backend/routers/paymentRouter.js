@@ -30,10 +30,11 @@ paymentRouter.post(
     console.log("Vals to send", valsToSend)
     sContractInstance.methods.transfer(seller[0].account, valsToSend).send({from: buyerPbKey })
       .then( resp=> {
-        console.log(resp.transactionHash)
+        console.log("Tx: ", resp.transactionHash)
         if(typeof resp.transactionHash === 'string') response = res
       })
       .catch( err => console.log("ERROR PAYMENT:", err))
+      setInterval( () => console.log("Done!", ), 15000)
     res.send(response.event)
   })
 )
