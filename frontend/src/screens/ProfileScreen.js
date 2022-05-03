@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { detailsUser, updateUserProfile, updateNewsletter } from '../actions/userActions';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
-import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import { DateUtils } from 'react-day-picker';
-import dateFnsFormat from 'date-fns/format';
-import dateFnsParse from 'date-fns/parse';
-import 'react-day-picker/lib/style.css';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { detailsUser, updateUserProfile, updateNewsletter } from '../actions/userActions'
+import LoadingBox from '../components/LoadingBox'
+import MessageBox from '../components/MessageBox'
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import { DateUtils } from 'react-day-picker'
+import dateFnsFormat from 'date-fns/format'
+import dateFnsParse from 'date-fns/parse'
+import 'react-day-picker/lib/style.css'
 import Select from 'react-select'
 import Axios from 'axios'
 import options from '../resources/citiesOptions.js'
@@ -21,44 +21,44 @@ const deployedNetwork = SContract.networks[networkId]
 const _contract = new web3.eth.Contract(SContract.abi, deployedNetwork.address)
 
 export default function ProfileScreen() {
-  const [account, setAccount] = useState(''); 
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [username, setUsername] = useState('');
-  const [gender, setGender] = useState('');
-  const [birthday, setBirthday] = useState('');
-  const [birthplace, setBirthplace] = useState('');
+  const [account, setAccount] = useState('')
+  const [name, setName] = useState('')
+  const [surname, setSurname] = useState('')
+  const [username, setUsername] = useState('')
+  const [gender, setGender] = useState('')
+  const [birthday, setBirthday] = useState('')
+  const [birthplace, setBirthplace] = useState('')
   const [city, setCity] = useState({ value: '', label: '' })
   const [cf, setCf] = useState('')
   const [zipCode, setZipcode ] = useState('') 
   const [phone, setPhone ] = useState('') 
   const [referer, setReferer ] = useState([])
   const [newReferer, setNewReferer ] = useState('')
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [sellerName, setSellerName] = useState('');
-  const [sellerLogo, setSellerLogo] = useState('');
-  const [sellerDescription, setSellerDescription] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [sellerName, setSellerName] = useState('')
+  const [sellerLogo, setSellerLogo] = useState('')
+  const [sellerDescription, setSellerDescription] = useState('')
   const [hasReferer, setHasReferer] = useState(false)
   const [partitaIva, setPartitaIva] = useState('')
   const [sellerLink, setSellerLink] = useState('')
   const [newsletter, setNewsletter] = useState('')
-  const [loadingUpload, setLoadingUpload] = useState(false);
-  const [errorUpload, setErrorUpload] = useState('');
+  const [loadingUpload, setLoadingUpload] = useState(false)
+  const [errorUpload, setErrorUpload] = useState('')
   const [newsletterUpdate, setNewsletterUpdate] = useState(false)
   const [balance, setBalance] = useState('')
 
   function parseDate(str, format, locale) {
-    const parsed = dateFnsParse(str, format, new Date(), { locale });
+    const parsed = dateFnsParse(str, format, new Date(), { locale })
     if (DateUtils.isDate(parsed)) {
-      return parsed;
+      return parsed
     }
-    return undefined;
+    return undefined
   }
 
   function formatDate(date, format, locale) {
-    return dateFnsFormat(date, format, { locale });
+    return dateFnsFormat(date, format, { locale })
   }
 
   async function getSetBalance(account) {
@@ -73,23 +73,23 @@ export default function ProfileScreen() {
   };
 
   const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     console.log("File", file)
-    const bodyFormData = new FormData();
-    bodyFormData.append('image', file);
-    setLoadingUpload(true);
+    const bodyFormData = new FormData()
+    bodyFormData.append('image', file)
+    setLoadingUpload(true)
     try {
       const { data } = await Axios.post('/api/uploads/s3', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${userInfo.token}`,
         },
-      });
-      setSellerLogo(data);
-      setLoadingUpload(false);
+      })
+      setSellerLogo(data)
+      setLoadingUpload(false)
     } catch (error) {
-      setErrorUpload(error.message);
-      setLoadingUpload(false);
+      setErrorUpload(error.message)
+      setLoadingUpload(false)
     }
   };
 
@@ -101,48 +101,48 @@ export default function ProfileScreen() {
       setBirthday(`${day}/${month}/${year}`)
     }
   }
-  const CalFORMAT = 'dd/MM/yyyy';
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const CalFORMAT = 'dd/MM/yyyy'
+  const userSignin = useSelector((state) => state.userSignin)
+  const { userInfo } = userSignin
   // TODO: Delete referer from userInfo
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
-  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const userDetails = useSelector((state) => state.userDetails)
+  const { loading, error, user } = userDetails
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
   const {
     success: successUpdate,
     error: errorUpdate,
     loading: loadingUpdate,
-  } = userUpdateProfile;
+  } = userUpdateProfile
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     // TODO: For security reasons split db
     window.scrollTo(0, 0)
     if (!user) {
-      dispatch({ type: USER_UPDATE_PROFILE_RESET });
-      dispatch(detailsUser(userInfo._id));
+      dispatch({ type: USER_UPDATE_PROFILE_RESET })
+      dispatch(detailsUser(userInfo._id))
     } else {
-      setName(user.name);
-      setSurname(user.surname);
-      setAccount(user.account);
+      setName(user.name)
+      setSurname(user.surname)
+      setAccount(user.account)
       getSetBalance(user.account)
-      setUsername(user.username); 
-      setGender(user.gender);
-      setBirthday(user.birthday);
-      setBirthplace(user.birthplace);
-      setCf(user.cf);
-      setZipcode(user.zipCode);
+      setUsername(user.username)
+      setGender(user.gender)
+      setBirthday(user.birthday)
+      setBirthplace(user.birthplace)
+      setCf(user.cf)
+      setZipcode(user.zipCode)
       setCity({value: user.city, label: user.city});
-      setPhone(user.phone);
-      setEmail(user.email);
+      setPhone(user.phone)
+      setEmail(user.email)
       setReferer(user.referer)
       setNewsletter(user.newsletter)
       if (typeof parseInt(user.partitaIva) === 'number' ) setPartitaIva(user.partitaIva)
       if (user.seller) {
-        setSellerName(user.seller.name);
-        setSellerLogo(user.seller.logo);
-        setSellerDescription(user.seller.description);
+        setSellerName(user.seller.name)
+        setSellerLogo(user.seller.logo)
+        setSellerDescription(user.seller.description)
         setSellerLink(user.seller.link)
       }
     }
@@ -540,5 +540,5 @@ export default function ProfileScreen() {
         )}
       </form>
     </div>
-  );
+  )
 }
