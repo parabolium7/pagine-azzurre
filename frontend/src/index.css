@@ -15,6 +15,10 @@ body {
   background-color: white;
 }
 
+svg {
+  margin: 10px auto;
+}
+
 #root {
   height: 100%;
 }
