@@ -12,6 +12,7 @@ import 'react-day-picker/lib/style.css'
 import Select from 'react-select'
 import Axios from 'axios'
 import options from '../resources/citiesOptions.js'
+import QRCode from "react-qr-code"
 
 import Web3 from 'web3'
 import SContract from '../web3Interface/abi.js'
@@ -238,6 +239,9 @@ export default function ProfileScreen() {
               <div>
                   <label htmlFor="balance">Saldo</label>
                   <input type="text" readOnly value={'☯ ' + balance } style={{display:"inline", whiteSpace:"nowrap", color: "#3A3A3A", fontSize: "1.8rem"}}></input>
+              </div>
+              <div>
+                <QRCode value={user.account} level={'H'}/>
               </div>
               <div>
                 <h2>Dati anagrafici:</h2>
