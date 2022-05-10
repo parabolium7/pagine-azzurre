@@ -49,6 +49,8 @@ export default function ProfileScreen() {
   const [errorUpload, setErrorUpload] = useState('')
   const [newsletterUpdate, setNewsletterUpdate] = useState(false)
   const [balance, setBalance] = useState('')
+  const [passphrase, setPassphrase] = useState('')
+  const [hideField, setHideField] = useState("none")
 
   function parseDate(str, format, locale) {
     const parsed = dateFnsParse(str, format, new Date(), { locale })
@@ -134,11 +136,12 @@ export default function ProfileScreen() {
       setBirthplace(user.birthplace)
       setCf(user.cf)
       setZipcode(user.zipCode)
-      setCity({value: user.city, label: user.city});
+      setCity({value: user.city, label: user.city})
       setPhone(user.phone)
       setEmail(user.email)
       setReferer(user.referer)
       setNewsletter(user.newsletter)
+      setPassphrase(user.accountKey)
       if (typeof parseInt(user.partitaIva) === 'number' ) setPartitaIva(user.partitaIva)
       if (user.seller) {
         setSellerName(user.seller.name)
@@ -147,13 +150,13 @@ export default function ProfileScreen() {
         setSellerLink(user.seller.link)
       }
     }
-  }, [dispatch, userInfo._id, user, userInfo]);
+  }, [dispatch, userInfo._id, user, userInfo])
 
   const submitHandler = (e) => {
     // dispatch update profile
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert('Password e Conferma password non corrispondono');
+      alert('Password e Conferma password non corrispondono')
     } else {
       dispatch(
         updateUserProfile({
@@ -187,6 +190,11 @@ export default function ProfileScreen() {
     e.preventDefault()
     setReferer(referer.concat(newReferer))
     setNewReferer('')
+  }
+
+  const showPk = (e) => {
+    e.preventDefault()
+    setHideField("inline")
   }
 
   return (
@@ -242,6 +250,12 @@ export default function ProfileScreen() {
               </div>
               <div>
                 <QRCode value={user.account} level={'H'}/>
+              </div>
+              <div>
+                <h2>Integration with Metamask:</h2>
+                <label htmlFor="secret">Secret</label>
+                <input type="text" readOnly value={ passphrase } style={{display:hideField, whiteSpace:"nowrap", color: "#3A3A3A", fontSize: "1.8rem"}}></input>
+                <button onClick={ (e)=>showPk(e) } style={{ display:hideField === 'none' ? 'inline' : 'none' }}>Reveal</button>
               </div>
               <div>
                 <h2>Dati anagrafici:</h2>
