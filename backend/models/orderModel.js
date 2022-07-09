@@ -42,7 +42,7 @@ const orderSchema = new mongoose.Schema(
     totalPriceVal: { type: Number, required: true },
     totalPriceEuro: { type: Number, required: false},
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    seller: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
+    seller: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
     isDelivered: { type: Boolean, default: false },
