@@ -47,8 +47,8 @@ export default function UserListScreen(props) {
               <th>ID</th>
               <th>NOME</th>
               <th>EMAIL</th>
-              <th>OFFERENTE</th>
               <th>DATA ISCRIZIONE</th>
+              <th>OFFERENTE</th>
               <th>ADMIN</th>
               <th>MODIFICA / CANCELLA</th>
             </tr>
