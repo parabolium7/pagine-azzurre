@@ -58,6 +58,7 @@ export default function UserListScreen(props) {
                 <td>{user._id}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
+                <td>{user.createdAt}</td>
                 <td>{user.isSeller ? 'YES' : ' NO'}</td>
                 <td>{user.isAdmin ? 'YES' : 'NO'}</td>
                 <td>
