@@ -262,7 +262,7 @@ export default function ProductEditScreen(props) {
                 id="name"
                 type="text"
                 maxLength="90"
-                placeholder="Inserisci nome del bene o servizio che voi barattare"
+                placeholder="Inserisci tuo gruppo - Descrizione breve del prodotto o servizio - Provincia."
                 value={!name.match(/Annunciø/)?name:''}
                 onChange={(e) => handleTitle(e)}
               ></input>
