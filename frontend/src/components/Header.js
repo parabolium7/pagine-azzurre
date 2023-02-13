@@ -12,6 +12,9 @@ import logo3 from "./../resources/logos/yinyang.jpg";
 import logo4 from "./../resources/logos/bannerblu.jpg";
 import logo5 from "./../resources/logos/bannergiallo.jpg";
 
+import PreHeader from "./PreHeader";
+import PostHeader from "./PostHeader";
+
 export default function Header({ setSidebarIsOpen }) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -27,7 +30,8 @@ export default function Header({ setSidebarIsOpen }) {
   return (
     <>
       <div className="blubar"></div>
-      <div className="pre-header">
+      <PreHeader />
+      {/* <div className="pre-header">
         <div className="marquee">
           <p>
             CHOCOSFERA DEL VAL - UN PROGETTO FATTO CON{" "}
@@ -38,7 +42,7 @@ export default function Header({ setSidebarIsOpen }) {
             AZione COncordata -
           </p>
         </div>
-      </div>
+      </div> */}
       <header className="row">
         <div>
           <button
@@ -155,7 +159,8 @@ export default function Header({ setSidebarIsOpen }) {
           </div>
         )}
       </header>
-      <div className="post-header row center">
+      <PostHeader />
+      {/* <div className="post-header row center">
         Iscriviti qui:{" "}
         {
           <a className="val_link" href="https://valazco.it">
@@ -163,7 +168,7 @@ export default function Header({ setSidebarIsOpen }) {
           </a>
         }{" "}
         per avere i VAL contributo di esistenza giornaliero da utilizzare subito
-      </div>
+      </div> */}
     </>
   );
 }
