@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 // import { signout } from "./actions/userActions";
 // import AdminRoute from "./components/AdminRoute";
 // import PrivateRoute from "./components/PrivateRoute";
@@ -71,10 +71,9 @@ function App() {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
-      <div className="grid-container">
-        <Header setSidebarIsOpen={setSidebarIsOpen} />
-        {/* <div className="blubar"></div>
+    <div className="grid-container">
+      <Header setSidebarIsOpen={setSidebarIsOpen} />
+      {/* <div className="blubar"></div>
         <div className="pre-header">
           <div className="marquee">
             <p>
@@ -205,7 +204,7 @@ function App() {
             </div>
           )}
         </header> */}
-        {/* <div className="post-header row center">
+      {/* <div className="post-header row center">
           Iscriviti qui:{" "}
           {
             <a className="val_link" href="https://valazco.it">
@@ -215,11 +214,11 @@ function App() {
           per avere i VAL contributo di esistenza giornaliero da utilizzare
           subito
         </div> */}
-        <Aside
-          sidebarIsOpen={sidebarIsOpen}
-          setSidebarIsOpen={setSidebarIsOpen}
-        />
-        {/* <aside className={sidebarIsOpen ? "open" : ""}>
+      <Aside
+        sidebarIsOpen={sidebarIsOpen}
+        setSidebarIsOpen={setSidebarIsOpen}
+      />
+      {/* <aside className={sidebarIsOpen ? "open" : ""}>
           <ul className="categories">
             <li>
               <strong>Categorie</strong>
@@ -249,8 +248,8 @@ function App() {
             )}
           </ul>
         </aside> */}
-        <MainContent />
-        {/* <main>
+      <MainContent />
+      {/* <main>
           <Route path="/tutti_noi/" component={TuttiNoiScreen}></Route>
           <Route path="/newsletter/" component={NewsletterScreen} exact></Route>
           <Route path="/newsletter/:string" component={ThankYouScreen}></Route>
@@ -341,17 +340,16 @@ function App() {
           ></SellerRoute>
           <Route path="/" component={HomeScreen} exact></Route>
         </main> */}
-        {/* <div className="white-force" /> */}
-        <Footer />
-        {/* <footer className="row center">
+      {/* <div className="white-force" /> */}
+      <Footer />
+      {/* <footer className="row center">
           Un progetto fatto con{" "}
           <span className="emoji" role="img" aria-label="a heart">
             ❤️
           </span>{" "}
           dal team {<a href="https://valazco.it">valazco.it</a>}
         </footer> */}
-      </div>
-    </BrowserRouter>
+    </div>
   );
 }
 
