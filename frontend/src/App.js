@@ -44,6 +44,7 @@ import VerifiedScreen from "./screens/VerifiedScreen";
 
 import Header from "./components/Header";
 import Aside from "./components/Aside";
+import Footer from "./components/Footer";
 
 function App() {
   // const cart = useSelector((state) => state.cart);
@@ -339,13 +340,14 @@ function App() {
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <div className="white-force" />
-        <footer className="row center">
+        <Footer />
+        {/* <footer className="row center">
           Un progetto fatto con{" "}
           <span className="emoji" role="img" aria-label="a heart">
             ❤️
           </span>{" "}
           dal team {<a href="https://valazco.it">valazco.it</a>}
-        </footer>
+        </footer> */}
       </div>
     </BrowserRouter>
   );
