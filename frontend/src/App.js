@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Link, Route } from "react-router-dom";
-import { signout } from "./actions/userActions";
+// import { signout } from "./actions/userActions";
 import AdminRoute from "./components/AdminRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import CartScreen from "./screens/CartScreen";
@@ -23,7 +23,7 @@ import UserEditScreen from "./screens/UserEditScreen";
 import PasswordRecovery from "./screens/PasswordRecoveryScreen";
 import SellerRoute from "./components/SellerRoute";
 import SellerScreen from "./screens/SellerScreen";
-import SearchBox from "./components/SearchBox";
+// import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
 import NewsletterScreen from "./screens/NewsletterScreen";
 import TuttiNoiScreen from "./screens/TuttiNoiScreen";
@@ -31,27 +31,29 @@ import { listProductCategories } from "./actions/productActions";
 import LoadingBox from "./components/LoadingBox";
 import MessageBox from "./components/MessageBox";
 import MapScreen from "./screens/MapScreen";
-import logo1 from "./resources/logos/magic_hands.jpg";
-import logo2 from "./resources/logos/bannerarancione.jpg";
-import logo3 from "./resources/logos/yinyang.jpg";
-import logo4 from "./resources/logos/bannerblu.jpg";
-import logo5 from "./resources/logos/bannergiallo.jpg";
+// import logo1 from "./resources/logos/magic_hands.jpg";
+// import logo2 from "./resources/logos/bannerarancione.jpg";
+// import logo3 from "./resources/logos/yinyang.jpg";
+// import logo4 from "./resources/logos/bannerblu.jpg";
+// import logo5 from "./resources/logos/bannergiallo.jpg";
 import PrivacyScreen from "./screens/PrivacyScreen";
 import ChangePassword from "./screens/ChangePassword";
 import ThankYouScreen from "./screens/ThankYouScreen";
 import VerificationScreen from "./screens/VerificationScreen";
 import VerifiedScreen from "./screens/VerifiedScreen";
 
+import Header from "./components/Header";
+
 function App() {
-  const cart = useSelector((state) => state.cart);
+  // const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const { cartItems } = cart;
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  // const { cartItems } = cart;
+  // const userSignin = useSelector((state) => state.userSignin);
+  // const { userInfo } = userSignin;
   const dispatch = useDispatch();
-  const signoutHandler = () => {
-    dispatch(signout());
-  };
+  // const signoutHandler = () => {
+  //   dispatch(signout());
+  // };
 
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
@@ -68,7 +70,8 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <div className="blubar"></div>
+        <Header setSidebarIsOpen={setSidebarIsOpen} />
+        {/* <div className="blubar"></div>
         <div className="pre-header">
           <div className="marquee">
             <p>
@@ -198,8 +201,8 @@ function App() {
               </ul>
             </div>
           )}
-        </header>
-        <div className="post-header row center">
+        </header> */}
+        {/* <div className="post-header row center">
           Iscriviti qui:{" "}
           {
             <a className="val_link" href="https://valazco.it">
@@ -208,7 +211,7 @@ function App() {
           }{" "}
           per avere i VAL contributo di esistenza giornaliero da utilizzare
           subito
-        </div>
+        </div> */}
         <aside className={sidebarIsOpen ? "open" : ""}>
           <ul className="categories">
             <li>
