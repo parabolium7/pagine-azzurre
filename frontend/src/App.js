@@ -1,49 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Link, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 // import { signout } from "./actions/userActions";
-import AdminRoute from "./components/AdminRoute";
-import PrivateRoute from "./components/PrivateRoute";
-import CartScreen from "./screens/CartScreen";
-import HomeScreen from "./screens/HomeScreen";
-import OrderHistoryScreen from "./screens/OrderHistoryScreen";
-import OrderScreen from "./screens/OrderScreen";
-import PaymentMethodScreen from "./screens/PaymentMethodScreen";
-import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-import ProductListScreen from "./screens/ProductListScreen";
-import ProductScreen from "./screens/ProductScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import ShippingAddressScreen from "./screens/ShippingAddressScreen";
-import SigninScreen from "./screens/SigninScreen";
-import ProductEditScreen from "./screens/ProductEditScreen";
-import OrderListScreen from "./screens/OrderListScreen";
-import UserListScreen from "./screens/UserListScreen";
-import UserEditScreen from "./screens/UserEditScreen";
-import PasswordRecovery from "./screens/PasswordRecoveryScreen";
-import SellerRoute from "./components/SellerRoute";
-import SellerScreen from "./screens/SellerScreen";
+// import AdminRoute from "./components/AdminRoute";
+// import PrivateRoute from "./components/PrivateRoute";
+// import CartScreen from "./screens/CartScreen";
+// import HomeScreen from "./screens/HomeScreen";
+// import OrderHistoryScreen from "./screens/OrderHistoryScreen";
+// import OrderScreen from "./screens/OrderScreen";
+// import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+// import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+// import ProductListScreen from "./screens/ProductListScreen";
+// import ProductScreen from "./screens/ProductScreen";
+// import ProfileScreen from "./screens/ProfileScreen";
+// import RegisterScreen from "./screens/RegisterScreen";
+// import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+// import SigninScreen from "./screens/SigninScreen";
+// import ProductEditScreen from "./screens/ProductEditScreen";
+// import OrderListScreen from "./screens/OrderListScreen";
+// import UserListScreen from "./screens/UserListScreen";
+// import UserEditScreen from "./screens/UserEditScreen";
+// import PasswordRecovery from "./screens/PasswordRecoveryScreen";
+// import SellerRoute from "./components/SellerRoute";
+// import SellerScreen from "./screens/SellerScreen";
 // import SearchBox from "./components/SearchBox";
-import SearchScreen from "./screens/SearchScreen";
-import NewsletterScreen from "./screens/NewsletterScreen";
-import TuttiNoiScreen from "./screens/TuttiNoiScreen";
+// import SearchScreen from "./screens/SearchScreen";
+// import NewsletterScreen from "./screens/NewsletterScreen";
+// import TuttiNoiScreen from "./screens/TuttiNoiScreen";
 import { listProductCategories } from "./actions/productActions";
 // import LoadingBox from "./components/LoadingBox";
 // import MessageBox from "./components/MessageBox";
-import MapScreen from "./screens/MapScreen";
+// import MapScreen from "./screens/MapScreen";
 // import logo1 from "./resources/logos/magic_hands.jpg";
 // import logo2 from "./resources/logos/bannerarancione.jpg";
 // import logo3 from "./resources/logos/yinyang.jpg";
 // import logo4 from "./resources/logos/bannerblu.jpg";
 // import logo5 from "./resources/logos/bannergiallo.jpg";
-import PrivacyScreen from "./screens/PrivacyScreen";
-import ChangePassword from "./screens/ChangePassword";
-import ThankYouScreen from "./screens/ThankYouScreen";
-import VerificationScreen from "./screens/VerificationScreen";
-import VerifiedScreen from "./screens/VerifiedScreen";
+// import PrivacyScreen from "./screens/PrivacyScreen";
+// import ChangePassword from "./screens/ChangePassword";
+// import ThankYouScreen from "./screens/ThankYouScreen";
+// import VerificationScreen from "./screens/VerificationScreen";
+// import VerifiedScreen from "./screens/VerifiedScreen";
 
 import Header from "./components/Header";
 import Aside from "./components/Aside";
+import MainContent from "./components/MainContent";
 import Footer from "./components/Footer";
 
 function App() {
@@ -248,7 +249,8 @@ function App() {
             )}
           </ul>
         </aside> */}
-        <main>
+        <MainContent />
+        {/* <main>
           <Route path="/tutti_noi/" component={TuttiNoiScreen}></Route>
           <Route path="/newsletter/" component={NewsletterScreen} exact></Route>
           <Route path="/newsletter/:string" component={ThankYouScreen}></Route>
@@ -338,8 +340,8 @@ function App() {
             component={OrderListScreen}
           ></SellerRoute>
           <Route path="/" component={HomeScreen} exact></Route>
-        </main>
-        <div className="white-force" />
+        </main> */}
+        {/* <div className="white-force" /> */}
         <Footer />
         {/* <footer className="row center">
           Un progetto fatto con{" "}
