@@ -28,8 +28,8 @@ import SearchScreen from "./screens/SearchScreen";
 import NewsletterScreen from "./screens/NewsletterScreen";
 import TuttiNoiScreen from "./screens/TuttiNoiScreen";
 import { listProductCategories } from "./actions/productActions";
-import LoadingBox from "./components/LoadingBox";
-import MessageBox from "./components/MessageBox";
+// import LoadingBox from "./components/LoadingBox";
+// import MessageBox from "./components/MessageBox";
 import MapScreen from "./screens/MapScreen";
 // import logo1 from "./resources/logos/magic_hands.jpg";
 // import logo2 from "./resources/logos/bannerarancione.jpg";
@@ -43,6 +43,7 @@ import VerificationScreen from "./screens/VerificationScreen";
 import VerifiedScreen from "./screens/VerifiedScreen";
 
 import Header from "./components/Header";
+import Aside from "./components/Aside";
 
 function App() {
   // const cart = useSelector((state) => state.cart);
@@ -55,12 +56,12 @@ function App() {
   //   dispatch(signout());
   // };
 
-  const productCategoryList = useSelector((state) => state.productCategoryList);
-  const {
-    loading: loadingCategories,
-    error: errorCategories,
-    categories,
-  } = productCategoryList;
+  // const productCategoryList = useSelector((state) => state.productCategoryList);
+  // const {
+  //   loading: loadingCategories,
+  //   error: errorCategories,
+  //   categories,
+  // } = productCategoryList;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -212,7 +213,11 @@ function App() {
           per avere i VAL contributo di esistenza giornaliero da utilizzare
           subito
         </div> */}
-        <aside className={sidebarIsOpen ? "open" : ""}>
+        <Aside
+          sidebarIsOpen={sidebarIsOpen}
+          setSidebarIsOpen={setSidebarIsOpen}
+        />
+        {/* <aside className={sidebarIsOpen ? "open" : ""}>
           <ul className="categories">
             <li>
               <strong>Categorie</strong>
@@ -241,7 +246,7 @@ function App() {
               ))
             )}
           </ul>
-        </aside>
+        </aside> */}
         <main>
           <Route path="/tutti_noi/" component={TuttiNoiScreen}></Route>
           <Route path="/newsletter/" component={NewsletterScreen} exact></Route>
