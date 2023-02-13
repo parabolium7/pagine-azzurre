@@ -1,0 +1,18 @@
+footer {
+  grid-area: footer;
+  position: fixed;
+  background-color: #203040;
+  color: #ffffff;
+  max-height: 10%;
+  width: 100%;
+  bottom: 0;
+}
+
+footer a {
+  color: #34c6f3;
+  padding: 0.55rem;
+}
+
+footer a:hover {
+  color: #bcf7aa;
+}
