@@ -1,0 +1,18 @@
+img {
+  border-radius: 0.5rem;
+  &.small {
+    max-width: 5rem;
+    width: 100%;
+  }
+  &.medium {
+    max-width: 29rem;
+    width: 100%;
+  }
+  &.large {
+    width: 100%;
+  }
+}
+
+.emoji {
+  margin: 0 0.5rem;
+}

@@ -1,0 +1,41 @@
+.scheda {
+  background-color: #e3e3e4;
+  padding: 1rem;
+  margin: 1rem;
+  width: 15vw;
+  display: inline-flex;
+  height: 40vh;
+  font-size: 1.5rem;
+  overflow-x: scroll;
+  border-radius: 0.8rem;
+}
+
+.scheda img {
+  width: 10vw;
+  margin: auto;
+}
+
+.scheda p {
+  color: #000;
+}
+
+.scheda_sp {
+  background-color: #e3e3e4;
+  padding: 1rem;
+  margin: 1rem;
+  width: 15vw;
+  display: inline-flex;
+  height: 40vh;
+  font-size: 1.5rem;
+  overflow-x: scroll;
+  border-radius: 0.8rem;
+}
+
+.scheda_sp img {
+  width: 10vw;
+  margin: auto;
+}
+
+.scheda_sp p {
+  color: #000;
+}

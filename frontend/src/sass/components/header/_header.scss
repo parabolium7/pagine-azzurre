@@ -4,6 +4,11 @@ header {
   a {
     color: #ffffff;
     padding: 1rem;
+    &.brand {
+      color: #ffffff;
+      font-size: 3rem;
+      font-weight: bold;
+    }
   }
 }
 
@@ -14,7 +19,7 @@ button.open-sidebar {
   background: none;
   color: #ffffff;
   cursor: pointer;
-}
-button.open-sidebar:hover {
-  border-color: #ffffff;
+  &:hover {
+    border-color: #ffffff;
+  }
 }

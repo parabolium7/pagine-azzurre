@@ -17,7 +17,7 @@ import ShippingAddressScreen from "./../screens/ShippingAddressScreen";
 import SigninScreen from "./../screens/SigninScreen";
 import ProductEditScreen from "./../screens/ProductEditScreen";
 import OrderListScreen from "./../screens/OrderListScreen";
-import UserListScreen from "./../screens/UserListScreen";
+import UserListScreen from "../screens/UserListScreen";
 import UserEditScreen from "./../screens/UserEditScreen";
 import PasswordRecovery from "./../screens/PasswordRecoveryScreen";
 import SellerRoute from "./SellerRoute";

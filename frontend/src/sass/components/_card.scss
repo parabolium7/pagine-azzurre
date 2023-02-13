@@ -1,0 +1,25 @@
+.card {
+  background-color: #f8f8f8;
+  border: 0.1rem #c0c0c0 solid;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  .card-body {
+    padding: 0.2rem 1rem;
+    & > * {
+      margin-bottom: 0.5rem;
+    }
+    & > a > h2 {
+      max-width: 30ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0;
+      margin-top: 0.3rem;
+    }
+  }
+}
+.price {
+  font-size: 2rem;
+}
+.price.euro {
+  padding-left: 1.3rem;
+}
