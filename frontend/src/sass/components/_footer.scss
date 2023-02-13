@@ -6,13 +6,17 @@ footer {
   max-height: 10%;
   width: 100%;
   bottom: 0;
+  a {
+    color: #34c6f3;
+    padding: 0.55rem;
+    &:hover {
+      color: #bcf7aa;
+    }
+  }
 }
 
-footer a {
-  color: #34c6f3;
-  padding: 0.55rem;
-}
-
-footer a:hover {
-  color: #bcf7aa;
+.white-force {
+  height: 25vh;
+  z-index: -10000;
+  background-color: white;
 }

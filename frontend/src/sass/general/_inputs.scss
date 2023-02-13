@@ -9,7 +9,12 @@ button {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  &:hover {
+    // outline instead of border to prevent inputs from moving
+    outline: 0.1rem solid #9c9b9b;
+  }
 }
+
 select {
   margin-left: 1rem;
   padding: 0.5rem;
@@ -19,12 +24,6 @@ button {
   cursor: pointer;
 }
 
-input:hover,
-select:hover,
-textarea:hover,
-button:hover {
-  border: 0.1rem #9c9b9b solid;
-}
 button.primary {
   background-color: #f0c040;
 }
@@ -39,4 +38,8 @@ button.block {
 }
 button.small {
   font-size: 1.2rem;
+}
+
+.image_input {
+  margin-bottom: 0.5rem;
 }
