@@ -3,6 +3,12 @@
   border: 0.1rem #c0c0c0 solid;
   border-radius: 0.5rem;
   margin: 1rem;
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+
   .card-body {
     padding: 0.2rem 1rem;
     & > * {
