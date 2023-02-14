@@ -57,19 +57,19 @@ export default function Header({ setSidebarIsOpen }) {
           </Link>
         </div>
         <div>
-          <img className="Logo1" src={logo1} alt="Logo" />
+          <img className="Logo1 logo" src={logo1} alt="Logo" />
         </div>
         <div>
-          <img className="Logo2" src={logo2} alt="Logo" />
+          <img className="Logo2 logo" src={logo2} alt="Logo" />
         </div>
         <div>
-          <img className="Logo3" src={logo3} alt="Logo" />
+          <img className="Logo3 logo" src={logo3} alt="Logo" />
         </div>
         <div>
-          <img className="Logo4" src={logo4} alt="Logo" />
+          <img className="Logo4 logo" src={logo4} alt="Logo" />
         </div>
         <div>
-          <img className="Logo5" src={logo5} alt="Logo" />
+          <img className="Logo5 logo" src={logo5} alt="Logo" />
         </div>
         <div>
           <Route
