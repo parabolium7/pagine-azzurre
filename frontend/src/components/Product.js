@@ -4,7 +4,7 @@ import Rating from "./Rating";
 
 export default function Product({ product }) {
   return (
-    <div key={product._id} className="card">
+    <div key={product._id} className="card card-in-list">
       <Link to={`/product/${product._id}`}>
         <img className="medium" src={product.image[0]} alt={product.name} />
       </Link>
