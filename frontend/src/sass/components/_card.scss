@@ -3,9 +3,11 @@
   border: 0.1rem #c0c0c0 solid;
   border-radius: 0.5rem;
   margin: 1rem;
+  max-width: 300px;
+  height: 50rem;
   img {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
   }
 
