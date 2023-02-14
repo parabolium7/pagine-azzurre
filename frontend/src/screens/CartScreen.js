@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { addToCart, removeFromCart } from '../actions/cartActions';
-import MessageBox from '../components/MessageBox';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { addToCart, removeFromCart } from "../actions/cartActions";
+import MessageBox from "../components/MessageBox";
 
 export default function CartScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const productId = props.match.params.id;
   const qty = props.location.search
-    ? Number(props.location.search.split('=')[1])
+    ? Number(props.location.search.split("=")[1])
     : 1;
   const cart = useSelector((state) => state.cart);
   const { cartItems, error } = cart;
   const dispatch = useDispatch();
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
@@ -27,7 +27,7 @@ export default function CartScreen(props) {
   };
 
   const checkoutHandler = () => {
-    props.history.push('/signin?redirect=shipping');
+    props.history.push("/signin?redirect=shipping");
   };
   return (
     <div className="row top flash">
@@ -57,7 +57,9 @@ export default function CartScreen(props) {
                     <select
                       value={item.qty}
                       onChange={(e) =>
-                        dispatch(addToCart(item.product, Number(e.target.value)))
+                        dispatch(
+                          addToCart(item.product, Number(e.target.value))
+                        )
                       }
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
@@ -67,7 +69,7 @@ export default function CartScreen(props) {
                       ))}
                     </select>
                   </div>
-                  <div>€{'. '+item.priceEuro}</div>
+                  <div>€{". " + item.priceEuro}</div>
                   <div> e ☯{item.priceVal}</div>
                   <div>
                     <button
@@ -89,8 +91,10 @@ export default function CartScreen(props) {
             <li>
               <strong>Comincia cercando articoli che ti interessano?</strong>
               <h2>
-                totale parziale ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : ☯
-                {cartItems.reduce((a, c) => a + c.priceVal * c.qty, 0)} e € {cartItems.reduce((a, c) => a + c.priceEuro * c.qty, 0)}
+                totale parziale ({cartItems.reduce((a, c) => a + c.qty, 0)}{" "}
+                items) : ☯
+                {cartItems.reduce((a, c) => a + c.priceVal * c.qty, 0)} e €{" "}
+                {cartItems.reduce((a, c) => a + c.priceEuro * c.qty, 0)}
               </h2>
             </li>
             <li>
@@ -102,18 +106,16 @@ export default function CartScreen(props) {
               >
                 Continua per conttatare offerente
               </button>
-              { userInfo && !userInfo.hasAd && 
-                (
-                  <MessageBox variant="alert">
-                    Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina. <br></br> <Link to='/productlist/seller'>Crea l'annuncio addeso</Link>  
-                  </MessageBox>
-                )
-              }
-              { !userInfo && 
+              {userInfo && !userInfo.hasAd && (
                 <MessageBox variant="alert">
-                  Devi essere logato.
+                  Ricordati che per poter entrare in contatto con un offerente
+                  devi prima mettere un prodotto in vetrina. <br></br>{" "}
+                  <Link to="/productlist/seller">Crea l'annuncio addeso</Link>
                 </MessageBox>
-              }
+              )}
+              {!userInfo && (
+                <MessageBox variant="alert">Devi essere logato.</MessageBox>
+              )}
             </li>
           </ul>
         </div>

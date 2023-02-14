@@ -1,0 +1,26 @@
+#root {
+  height: 100%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "blubar"
+    "pre-header"
+    "header"
+    "post-header"
+    "main"
+    "footer";
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5rem 2rem 6rem 2rem 1fr 5rem;
+}
+
+main {
+  grid-area: main;
+  padding: 1rem;
+}
+
+.blubar {
+  grid-area: blubar;
+  background-color: #75bcfd;
+}

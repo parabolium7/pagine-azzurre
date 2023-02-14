@@ -1,0 +1,32 @@
+aside {
+  position: fixed;
+  width: 30rem;
+  height: 100%;
+  background-color: #dceaff;
+  z-index: 1000;
+  transform: translateX(-30rem);
+  transition: all 0.5s;
+  overflow: auto;
+
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.15rem;
+  }
+}
+
+aside.open {
+  transform: translateX(0);
+}
+
+.sp_li {
+  margin-top: 0.1rem;
+}
+
+button.close-sidebar {
+  padding: 0.3rem 0.8rem;
+}

@@ -1,0 +1,32 @@
+html {
+  font-size: 62.5%; /* 16px x 62.5 = 10px = 1rem */
+  box-sizing: border-box;
+  background-color: #203040;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100%;
+  font-size: 1.6rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    color: #ff8000;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+li {
+  margin-top: 1rem;
+}
