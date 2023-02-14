@@ -47,7 +47,8 @@ export default function UserListScreen(props) {
               <th>ID</th>
               <th>NOME</th>
               <th>EMAIL</th>
-              <th>OFFFRERENTE</th>
+              <th>DATA ISCRIZIONE</th>
+              <th>OFFERENTE</th>
               <th>ADMIN</th>
               <th>MODIFICA / CANCELLA</th>
             </tr>
@@ -56,8 +57,9 @@ export default function UserListScreen(props) {
             {users.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
-                <td>{user.name}</td>
+                <td>{user.username}</td>
                 <td>{user.email}</td>
+                <td>{user.createdAt}</td>
                 <td>{user.isSeller ? 'YES' : ' NO'}</td>
                 <td>{user.isAdmin ? 'YES' : 'NO'}</td>
                 <td>
