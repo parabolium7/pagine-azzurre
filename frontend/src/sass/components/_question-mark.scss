@@ -1,0 +1,22 @@
+.qm {
+  margin-left: 10px;
+  position: relative;
+}
+
+.qm_hidden {
+  display: none;
+  font-style: normal;
+  font-weight: normal;
+  border: 1px solid #cacad6;
+  width: 12vw;
+  background-color: #dfdede;
+  padding: 1rem;
+}
+
+.qm:hover + .qm_hidden {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 15vh;
+  right: 37vw;
+}

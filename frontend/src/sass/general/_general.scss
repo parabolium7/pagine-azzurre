@@ -14,3 +14,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: white;
 }
+
+a {
+  text-decoration: none;
+  &:hover {
+    color: #ff8000;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+li {
+  margin-top: 1rem;
+}

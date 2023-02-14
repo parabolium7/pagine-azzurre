@@ -23,6 +23,8 @@
 @use "./components/card";
 @use "./components/scheda";
 @use "./components/checkout";
+@use "./components/rating";
+@use "./components/question-mark";
 
 // MEDIA QUERIES
 @use "./media-queries/large-size";
@@ -45,13 +47,13 @@
 //   background-color: white;
 // }
 
-svg {
-  margin: 10px auto;
-}
+// svg {
+//   margin: 10px auto;
+// }
 
-#root {
-  height: 100%;
-}
+// #root {
+//   height: 100%;
+// }
 
 .val_link {
   margin: 0 0.55rem;
@@ -135,28 +137,28 @@ svg {
 //   background-color: white;
 // }
 
-.qm {
-  margin-left: 10px;
-  position: relative;
-}
+// .qm {
+//   margin-left: 10px;
+//   position: relative;
+// }
 
-.qm_hidden {
-  display: none;
-  font-style: normal;
-  font-weight: normal;
-  border: 1px solid #cacad6;
-  width: 12vw;
-  background-color: #dfdede;
-  padding: 1rem;
-}
+// .qm_hidden {
+//   display: none;
+//   font-style: normal;
+//   font-weight: normal;
+//   border: 1px solid #cacad6;
+//   width: 12vw;
+//   background-color: #dfdede;
+//   padding: 1rem;
+// }
 
-.qm:hover + .qm_hidden {
-  display: block;
-  position: absolute;
-  z-index: 1;
-  top: 15vh;
-  right: 37vw;
-}
+// .qm:hover + .qm_hidden {
+//   display: block;
+//   position: absolute;
+//   z-index: 1;
+//   top: 15vh;
+//   right: 37vw;
+// }
 
 /* Common */
 // h1 {
@@ -168,20 +170,20 @@ svg {
 //   padding: 1rem 0;
 // }
 
-a {
-  text-decoration: none;
-}
-a:hover {
-  color: #ff8000;
-}
-ul {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-li {
-  margin-top: 1rem;
-}
+// a {
+//   text-decoration: none;
+// }
+// a:hover {
+//   color: #ff8000;
+// }
+// ul {
+//   padding: 0;
+//   margin: 0;
+//   list-style-type: none;
+// }
+// li {
+//   margin-top: 1rem;
+// }
 // input,
 // select,
 // textarea,
@@ -489,13 +491,13 @@ li {
 // }
 
 /* Rating */
-.rating span {
-  color: #f0c040;
-  margin: 0.1rem;
-}
-.rating span:last-child {
-  color: #404040;
-}
+// .rating span {
+//   color: #f0c040;
+//   margin: 0.1rem;
+// }
+// .rating span:last-child {
+//   color: #404040;
+// }
 /* Alert */
 .loading {
   display: block !important;
