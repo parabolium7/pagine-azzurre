@@ -22,22 +22,37 @@ select {
 button {
   background-color: #f8f8f8;
   cursor: pointer;
+  &.primary {
+    background-color: #f0c040;
+  }
+  &.primary.blu {
+    background-color: #6ccef5;
+  }
+  &.primary.blu.big {
+    font-size: 1.65rem;
+  }
+  &.block {
+    width: 100%;
+  }
+  &.small {
+    font-size: 1.2rem;
+  }
 }
 
-button.primary {
-  background-color: #f0c040;
+.filter {
+  background-color: #caf0f8;
+  padding: 0.4rem;
+  margin: 0 0.4rem;
+  &.active {
+    background-color: #dff3f7;
+    padding: 0.6rem;
+    box-shadow: 5px 5px 8px #c7c7c7;
+    text-decoration: underline;
+  }
 }
-button.primary.blu {
-  background-color: #6ccef5;
-}
-button.primary.blu.big {
-  font-size: 1.65rem;
-}
-button.block {
-  width: 100%;
-}
-button.small {
-  font-size: 1.2rem;
+
+.active {
+  font-weight: bold;
 }
 
 .image_input {
