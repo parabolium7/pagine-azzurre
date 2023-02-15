@@ -25,6 +25,7 @@
 @use "./components/checkout";
 @use "./components/rating";
 @use "./components/question-mark";
+@use "./components/welcome-banner";
 
 // MEDIA QUERIES
 @use "./media-queries/large-size";
@@ -717,16 +718,16 @@
 //   font-size: 2rem;
 // }
 
-/* Hide HTML5 Up and Down arrows. */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+// /* Hide HTML5 Up and Down arrows. */
+// input[type="number"]::-webkit-outer-spin-button,
+// input[type="number"]::-webkit-inner-spin-button {
+//   -webkit-appearance: none;
+//   margin: 0;
+// }
 
-input[type="number"] {
-  -moz-appearance: textfield;
-}
+// input[type="number"] {
+//   -moz-appearance: textfield;
+// }
 
 // .Logo5 {
 //   height: 5.5rem;
