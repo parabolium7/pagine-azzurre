@@ -10,6 +10,7 @@
     gap: 1rem;
     flex-direction: column;
     transition: 0.3s;
+    overflow: hidden;
     &:hover {
       transform: translateY(-1%);
       box-shadow: 0px 2px 4px lighten(#c0c0c0, 20%);
@@ -49,6 +50,7 @@
   img {
     object-fit: cover;
     display: block;
+    border-radius: 0;
   }
 
   .img-not-found {
