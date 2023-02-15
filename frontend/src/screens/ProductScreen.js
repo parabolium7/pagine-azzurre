@@ -9,6 +9,9 @@ import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
+import imgNotFound from "./../resources/img-not-found.png"
+
+
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
@@ -62,9 +65,15 @@ export default function ProductScreen(props) {
           {/* <Link to="/">Torna ai articoli</Link> */}
           <div className="row top">
             <div className="col-1 space">
-              <Carousel>
+              <Carousel className="carousel">
                 {product.image.map((image, index) => (
-                  <img src={image} key={index} alt="preview" />
+                  <img src={image} key={index} alt="preview" onError={({currentTarget}) => {
+                    currentTarget.src = null;
+                    currentTarget.classList.add('img-not-found')
+                    // currentTarget.style.height = "280px" 
+                    // currentTarget.style.objectFit = 'cover'
+                    currentTarget.src = imgNotFound;
+                  }} />
                 ))}
               </Carousel>
             </div>
@@ -88,7 +97,7 @@ export default function ProductScreen(props) {
               </ul>
             </div>
             <div className="col-1 space">
-              <div className="card card-body">
+              <div className="card card--product-page">
                 <ul>
                   <li>
                     Offerente{" "}
@@ -175,6 +184,7 @@ export default function ProductScreen(props) {
               </div>
             </div>
           </div>
+
           <div className="col-1 space">
             <h2 id="reviews">Recensioni</h2>
             {product.reviews.length === 0 && (

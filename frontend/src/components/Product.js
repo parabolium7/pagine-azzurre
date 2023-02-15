@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
+import  imgNotFound  from "./../resources/img-not-found.png";
 
 export default function Product({ product }) {
   return (
     <div key={product._id} className="card card--tile">
       <Link to={`/product/${product._id}`}>
+
         <img
           className="medium"
           width="280"
@@ -14,8 +16,8 @@ export default function Product({ product }) {
           alt={product.name}
           loading="lazy"
           onError={({ currentTarget }) => {
-            currentTarget.style.display = "none";
-            currentTarget.outerHTML = "<div class='img-not-found'>Non ci sono immagini</div>"
+            currentTarget.src = null;
+            currentTarget.src = imgNotFound
           }}
         />
       </Link>

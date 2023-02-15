@@ -13,6 +13,12 @@ img {
   }
 }
 
+.slide.selected .img-not-found {
+  height: 280px;
+  width: 100%;
+  object-fit: cover;
+}
+
 .emoji {
   margin: 0 0.5rem;
 }
