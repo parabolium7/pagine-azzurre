@@ -12,6 +12,11 @@ export default function Product({ product }) {
           height="280"
           src={product.image[0]}
           alt={product.name}
+          loading="lazy"
+          onError={({ currentTarget }) => {
+            currentTarget.style.display = "none";
+            currentTarget.outerHTML = "<div class='img-not-found'>Non ci sono immagini</div>"
+          }}
         />
       </Link>
       <div className="card__text">
