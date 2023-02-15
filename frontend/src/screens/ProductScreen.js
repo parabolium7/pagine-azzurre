@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { createReview, detailsProduct } from '../actions/productActions';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
-import Rating from '../components/Rating';
-import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { createReview, detailsProduct } from "../actions/productActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import Rating from "../components/Rating";
+import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -25,14 +25,14 @@ export default function ProductScreen(props) {
   } = productReviewCreate;
 
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0);
     if (successReviewCreate) {
-      window.alert('Review Submitted Successfully');
-      setRating('');
-      setComment('');
+      window.alert("Review Submitted Successfully");
+      setRating("");
+      setComment("");
       dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
     }
     dispatch(detailsProduct(productId));
@@ -43,12 +43,12 @@ export default function ProductScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     if (comment && rating) {
-      console.log(userInfo)
+      console.log(userInfo);
       dispatch(
         createReview(productId, { rating, comment, name: userInfo.username })
       );
     } else {
-      alert('Per favore lascia la tua valutazione e un commento');
+      alert("Per favore lascia la tua valutazione e un commento");
     }
   };
   return (
@@ -63,7 +63,9 @@ export default function ProductScreen(props) {
           <div className="row top">
             <div className="col-1 space">
               <Carousel>
-                { product.image.map((image, index) => <img src={image} key={index} alt="preview"/>)}
+                {product.image.map((image, index) => (
+                  <img src={image} key={index} alt="preview" />
+                ))}
               </Carousel>
             </div>
             <div className="col-1 space">
@@ -89,17 +91,19 @@ export default function ProductScreen(props) {
               <div className="card card-body">
                 <ul>
                   <li>
-                    Offerente{' '}
+                    Offerente{" "}
                     <h2>
                       <Link to={`/seller/${product.seller._id}`}>
                         {product.seller.seller.name}
                       </Link>
                     </h2>
-                    { product.seller.seller.logo && <img
-                      className="medium"
-                      src={product.seller.seller.logo}
-                      alt={product.seller.seller.name}
-                    /> } 
+                    {product.seller.seller.logo && (
+                      <img
+                        className="medium"
+                        src={product.seller.seller.logo}
+                        alt={product.seller.seller.name}
+                      />
+                    )}
                     <Rating
                       rating={product.seller.seller.rating}
                       numReviews={product.seller.seller.numReviews}
@@ -107,8 +111,10 @@ export default function ProductScreen(props) {
                   </li>
                   <li>
                     <div className="row start">
-                      <div style={{paddingRight:"1.8rem"}}>Prezzo</div>
-                      <div className="price euro">€{product.priceEuro}&nbsp;</div>
+                      <div style={{ paddingRight: "1.8rem" }}>Prezzo</div>
+                      <div className="price euro">
+                        €{product.priceEuro}&nbsp;
+                      </div>
                       <div className="price">e ☯{product.priceVal}</div>
                     </div>
                   </li>
@@ -152,13 +158,16 @@ export default function ProductScreen(props) {
                         >
                           Contatta Offerente
                         </button>
-                        { userInfo && !userInfo.hasAd && 
-                          (
-                            <MessageBox variant="alert">
-                              Ricordati che per poter entrare in contatto con un offerente devi prima mettere un prodotto in vetrina.<br></br> <Link to='/productlist/seller'>Crea l'annuncio addeso</Link>
-                            </MessageBox>
-                          )
-                        }
+                        {userInfo && !userInfo.hasAd && (
+                          <MessageBox variant="alert">
+                            Ricordati che per poter entrare in contatto con un
+                            offerente devi prima mettere un prodotto in vetrina.
+                            <br></br>{" "}
+                            <Link to="/productlist/seller">
+                              Crea l'annuncio addeso
+                            </Link>
+                          </MessageBox>
+                        )}
                       </li>
                     </>
                   )}
@@ -226,7 +235,8 @@ export default function ProductScreen(props) {
                   </form>
                 ) : (
                   <MessageBox>
-                    Per favore <Link to="/signin">Accedi</Link> per scrivere una recensione
+                    Per favore <Link to="/signin">Accedi</Link> per scrivere una
+                    recensione
                   </MessageBox>
                 )}
               </li>
