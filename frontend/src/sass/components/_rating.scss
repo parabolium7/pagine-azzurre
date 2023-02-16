@@ -1,7 +1,17 @@
-.rating span {
-  color: #f0c040;
-  margin: 0.1rem;
-  &:last-child {
-    color: #404040;
+.card--tile .rating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating {
+  &__count {
+    margin-left: auto !important;
+  }
+  span {
+    color: #f0c040;
+    margin: 0.1rem;
+    &:last-child {
+      color: #404040;
+    }
   }
 }

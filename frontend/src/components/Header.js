@@ -15,6 +15,8 @@ import logo5 from "./../resources/logos/bannergiallo.jpg";
 import PreHeader from "./PreHeader";
 import PostHeader from "./PostHeader";
 
+import {ReactComponent as CartSVG} from "./../resources/cart.svg"
+
 export default function Header({ setSidebarIsOpen }) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -53,7 +55,7 @@ export default function Header({ setSidebarIsOpen }) {
             <i className="fa fa-bars"></i>
           </button>
           <Link className="brand" to="/">
-            Chocosfera
+            Pagine Azzurre
           </Link>
         </div>
         <div>
@@ -82,9 +84,10 @@ export default function Header({ setSidebarIsOpen }) {
         {userInfo ? (
           <div>
             <Link to="/cart">
-              <span role="img" className="carrellino" aria-label="carrello">
+              {/* <span role="img" className="carrellino" aria-label="carrello">
                 🤝
-              </span>
+              </span> */}
+              <CartSVG className="cart-icon" />
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}

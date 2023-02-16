@@ -1,4 +1,4 @@
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 675px) {
   .grid-container {
     display: grid;
     grid-template-areas:
@@ -56,10 +56,13 @@
   img.medium {
     max-width: none;
   }
-
-  .card img {
+  .card {
     width: 100%;
   }
+
+  // .card img {
+  //   width: 100%;
+  // }
 
   .card-body {
     width: 87vw;

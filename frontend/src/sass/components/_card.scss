@@ -3,25 +3,75 @@
   border: 0.1rem #c0c0c0 solid;
   border-radius: 0.5rem;
   margin: 1rem;
-  img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
+  &--product-page {
+    padding: 1rem;
+  }
+  &--tile {
+    width: 280px;
+    height: 48rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    transition: transform 0.3s;
+    // overflow: hidden;
+    &:hover {
+      transform: translateY(-1%);
+      box-shadow: 0px 2px 4px lighten(#c0c0c0, 20%);
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 1rem 1rem 1rem;
+    }
   }
 
-  .card-body {
-    padding: 0.2rem 1rem;
-    & > * {
-      margin-bottom: 0.5rem;
-    }
-    & > a > h2 {
-      max-width: 30ch;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding: 0;
-      margin-top: 0.3rem;
-    }
+  &__text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
+
+  &__product-name {
+    // this removes padding applied to all h2
+    padding: 0;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__price-container {
+    margin: 0 auto;
+  }
+
+  img {
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+  }
+
+
+
+  // .card-body {
+  //   padding: 0.2rem 1rem;
+  //   width: 93%;
+  //   & > * {
+  //     margin-bottom: 0.5rem;
+  //   }
+  //   & > a > h2 {
+  //     max-width: 30ch;
+  //     overflow: hidden;
+  //     text-overflow: ellipsis;
+  //     padding: 0;
+  //     margin-top: 0.3rem;
+  //   }
+  // }
 }
 .price {
   font-size: 2rem;
