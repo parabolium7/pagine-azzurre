@@ -78,7 +78,7 @@ export default function ProductScreen(props) {
               </Carousel>
             </div>
             <div className="col-1 space">
-              <ul>
+              <ul className="product-page__info">
                 <li>
                   <h1>{product.name}</h1>
                 </li>

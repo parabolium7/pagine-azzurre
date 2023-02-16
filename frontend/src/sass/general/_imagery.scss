@@ -27,6 +27,20 @@ svg {
   margin: 10px auto;
 }
 
+
+.cart-container {
+  position: relative;
+}
 .cart-icon {
   height: 30px;
+}
+.badge {
+  position: absolute;
+  right: 2.4rem;
+  background-color: #f02020;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.4rem;
+  // margin-left: -10px;
 }
