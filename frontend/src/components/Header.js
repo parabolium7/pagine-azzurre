@@ -55,7 +55,7 @@ export default function Header({ setSidebarIsOpen }) {
             <i className="fa fa-bars"></i>
           </button>
           <Link className="brand" to="/">
-            Chocosfera
+            Pagine Azzurre
           </Link>
         </div>
         <div>
