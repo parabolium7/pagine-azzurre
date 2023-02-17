@@ -30,13 +30,17 @@ svg {
 
 .cart-container {
   position: relative;
+  display: block;
+  padding: 0;
 }
 .cart-icon {
   height: 30px;
+  width: 80px;
+  height: 40px;
 }
 .badge {
   position: absolute;
-  right: 2.4rem;
+  right: 1rem;
   background-color: #f02020;
   color: #ffffff;
   border-radius: 50%;

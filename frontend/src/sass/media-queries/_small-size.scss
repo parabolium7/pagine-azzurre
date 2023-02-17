@@ -1,0 +1,29 @@
+@media screen and (max-width: 500px) {
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      "blubar"
+      "pre-header"
+      "header"
+      "post-header"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5rem 2rem 13rem 2rem 1fr 5rem;
+  }
+}
+
+@media screen and (max-width: 374px) {
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      "blubar"
+      "pre-header"
+      "header"
+      "post-header"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5rem 2rem 14rem 2rem 1fr 5rem;
+  }
+}
