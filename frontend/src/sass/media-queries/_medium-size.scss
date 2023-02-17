@@ -11,7 +11,9 @@
     grid-template-columns: 1fr;
     grid-template-rows: 0.5rem 2rem 12rem 2rem 1fr 5rem;
   }
-
+  .dropdown-content {
+    left: 0;
+  }
 }
 
 @media screen and (max-width: 675px) {
