@@ -14,6 +14,10 @@
   .dropdown-content {
     left: 0;
   }
+
+  .schede__container {
+    grid-template-columns: 25fr 25fr;
+  }
 }
 
 @media screen and (max-width: 675px) {
@@ -35,24 +39,11 @@
     border: none;
   }
 
-  .scheda_sp {
-    background-color: #e3e3e4;
-    padding: 0 0 0 0;
-    margin: auto;
-    width: 74vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40vh;
-    font-size: 1.5rem;
-    overflow-x: scroll;
-    border-radius: 0.8rem;
-  }
-
-  .scheda_sp {
-    margin: 1.5rem auto;
-    height: auto;
-    width: 90vw;
+  .schede__container {
+    grid-template-columns: 25fr 25fr;
+    h1 {
+      padding-top: 1rem !important;
+    }
   }
 
   main {
@@ -68,21 +59,6 @@
         width: 100%;
       }
     }
-  }
-
-  .scheda_sp a img {
-    height: auto;
-    width: 40%;
-    margin: auto;
-  }
-
-  /* .scheda_sp a {
-    padding-top: 5rem;
-  } */
-
-  .scheda_sp p {
-    color: #000;
-    padding: 1rem;
   }
 
   img.medium {
