@@ -14,9 +14,10 @@ export default function Aside({ sidebarIsOpen, setSidebarIsOpen }) {
   } = productCategoryList;
 
   return (
-    <aside className={sidebarIsOpen ? "open" : ""}>
-      <ul className="categories">
-        <li>
+    <>
+      <div className={sidebarIsOpen ? "active overlay": "overlay"} onClick={() => setSidebarIsOpen(false)}></div>
+      <aside className={sidebarIsOpen ? "open" : ""}>
+        <div className="sidebar-header">
           <strong>Categorie</strong>
           <button
             onClick={() => setSidebarIsOpen(false)}
@@ -25,24 +26,26 @@ export default function Aside({ sidebarIsOpen, setSidebarIsOpen }) {
           >
             <i className="fa fa-close"></i>
           </button>
-        </li>
-        {loadingCategories ? (
-          <LoadingBox></LoadingBox>
-        ) : errorCategories ? (
-          <MessageBox variant="danger">{errorCategories}</MessageBox>
-        ) : (
-          categories.map((c) => (
-            <li className="sp_li" key={c}>
-              <Link
-                to={`/search/category/${c}`}
-                onClick={() => setSidebarIsOpen(false)}
-              >
-                {c}
-              </Link>
-            </li>
-          ))
-        )}
-      </ul>
-    </aside>
+        </div>
+        <ul className="categories">
+          {loadingCategories ? (
+            <LoadingBox></LoadingBox>
+          ) : errorCategories ? (
+            <MessageBox variant="danger">{errorCategories}</MessageBox>
+          ) : (
+            categories.map((c) => (
+              <li className="sp_li" key={c}>
+                <Link
+                  to={`/search/category/${c}`}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  {c}
+                </Link>
+              </li>
+            ))
+            )}
+        </ul>
+      </aside>
+    </>
   );
 }

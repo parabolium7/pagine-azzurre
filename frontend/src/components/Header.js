@@ -83,7 +83,7 @@ export default function Header({ setSidebarIsOpen }) {
         </div>
         {userInfo ? (
           <div>
-            <Link to="/cart">
+            <Link to="/cart" className="cart-container">
               {/* <span role="img" className="carrellino" aria-label="carrello">
                 🤝
               </span> */}

@@ -1,3 +1,19 @@
+@media screen and (min-width: 675px) and (max-width: 801px) {
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      "blubar"
+      "pre-header"
+      "header"
+      "post-header"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5rem 2rem 12rem 2rem 1fr 5rem;
+  }
+
+}
+
 @media screen and (max-width: 675px) {
   .grid-container {
     display: grid;
@@ -10,6 +26,11 @@
       "footer";
     grid-template-columns: 1fr;
     grid-template-rows: 0.5rem 2rem 12rem 2rem 1fr 5rem;
+  }
+
+  .welcome-banner {
+    background: none;
+    border: none;
   }
 
   .scheda_sp {
@@ -38,6 +59,15 @@
     width: 100vw;
   }
 
+  .product-page {
+    &__info {
+      width: 100%;
+      .p_sp {
+        width: 100%;
+      }
+    }
+  }
+
   .scheda_sp a img {
     height: auto;
     width: 40%;
@@ -56,13 +86,16 @@
   img.medium {
     max-width: none;
   }
+
   .card {
     width: 100%;
+    &__img-container {
+      background-color: rgb(184, 184, 184);
+    }
+    img {
+      object-fit: contain;
+    }
   }
-
-  // .card img {
-  //   width: 100%;
-  // }
 
   .card-body {
     width: 87vw;

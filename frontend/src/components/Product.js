@@ -6,7 +6,7 @@ import  imgNotFound  from "./../resources/img-not-found.png";
 export default function Product({ product }) {
   return (
     <div key={product._id} className="card card--tile">
-      <Link to={`/product/${product._id}`}>
+      <Link className="card__img-container" to={`/product/${product._id}`}>
 
         <img
           className="medium"
@@ -18,6 +18,7 @@ export default function Product({ product }) {
           onError={({ currentTarget }) => {
             currentTarget.src = null;
             currentTarget.src = imgNotFound
+            currentTarget.style.objectFit = "cover";
           }}
         />
       </Link>

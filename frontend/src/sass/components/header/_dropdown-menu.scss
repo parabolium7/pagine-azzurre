@@ -4,6 +4,9 @@
   &:hover .dropdown-content {
     display: block;
   }
+  &.last-element {
+    margin: 0;
+  }
 }
 .dropdown-content {
   position: absolute;
