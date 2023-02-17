@@ -47,6 +47,9 @@
 
   &__price-container {
     margin: 0 auto;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
   }
 
   img {
@@ -71,10 +74,4 @@
   //     margin-top: 0.3rem;
   //   }
   // }
-}
-.price {
-  font-size: 2rem;
-}
-.price.euro {
-  padding-left: 1.3rem;
 }
