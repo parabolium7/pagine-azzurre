@@ -31,7 +31,8 @@
     h1 {
       padding: 1rem 0.5rem;
       border-bottom: 1px solid rgb(173, 173, 173);
-      text-align: center
+      text-align: center;
+      word-break: break-word;
     }
 
     &__img-container {
@@ -50,6 +51,9 @@
       overflow-y: scroll;
       padding: 1rem;
       padding-left: 1.6rem;
+      p {
+        word-break: break-word;
+      }
       &::-webkit-scrollbar {
         width: 6px;
         &-thumb {
