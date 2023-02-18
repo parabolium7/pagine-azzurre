@@ -45,7 +45,6 @@ export default function Product({ product }) {
               rating={product.rating}
               numReviews={product.numReviews}
             ></Rating>
-            {console.log(product)}
             {(product.section !== "propongo" ||
               product.section !== "avviso") && (
               <div className="row start card__price-container">

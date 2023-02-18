@@ -5,6 +5,7 @@ import MessageBox from '../components/MessageBox'
 import { listSellers } from '../actions/userActions'
 import questionMark from '../resources/logos/informazioni.png'
 import { Link } from 'react-router-dom'
+import imgNotFound from '../resources/img-not-found.png';
 
 
 export default function TuttiNoi() {
@@ -15,6 +16,8 @@ export default function TuttiNoi() {
     error: errorSellers,
     users: sellers,
   } = userSellersList;
+
+  
 
   useEffect(() => {
     dispatch(listSellers());
@@ -32,15 +35,32 @@ export default function TuttiNoi() {
           ) : ( 
             <>
               {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
-                {sellers.map((seller) => (
+              <div className="schede__container">
+                {sellers.map((seller) => {
+                  return (
                   ((seller.seller.logo && seller.seller.description) && (<div className="scheda_sp" key={seller._id}>
-                    <Link to={`/seller/${seller._id}`}>
+                    <Link className="scheda_sp__elements" to={`/seller/${seller._id}`}>
+                      <div className="scheda_sp__img-container">
+                        <img 
+                          className="row center" 
+                          src={seller.seller.logo} 
+                          alt={seller.seller.name} 
+                          loading="lazy"
+                          onError={({ currentTarget }) => {
+                            currentTarget.src = null;
+                            currentTarget.src = imgNotFound
+                            currentTarget.style.objectFit = "cover";
+                          }}
+                        />
+                      </div>
                       <h1 className="row center">{seller.seller.name}</h1>
-                      <img className="row center" src={seller.seller.logo} alt={seller.seller.name} />
-                      <p>{seller.seller.description}</p>
+                      <div className="scheda_sp__description-container">
+                        <p>{seller.seller.description}</p>
+                      </div>
                     </Link>
                   </div>))
-                ))}
+                )})}
+              </div>
             </>
           )}
         </div>

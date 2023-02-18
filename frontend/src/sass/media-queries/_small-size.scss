@@ -11,6 +11,10 @@
     grid-template-columns: 1fr;
     grid-template-rows: 0.5rem 2rem 13rem 2rem 1fr 5rem;
   }
+
+  .schede__container {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 374px) {

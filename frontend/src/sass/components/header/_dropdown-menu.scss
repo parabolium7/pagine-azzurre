@@ -11,9 +11,10 @@
 .dropdown-content {
   position: absolute;
   display: none;
-  right: -65px;
-  min-width: 15rem;
-  max-width: 16rem;
+  // right: -65px;
+  right: 0;
+  width: 20rem;
+  
   padding: 1rem;
   z-index: 1;
   background-color: #203040;
