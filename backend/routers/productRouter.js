@@ -21,7 +21,7 @@ productRouter.get(
       query = query.replace(city[0], '')
       city[0] = city[0].toUpperCase()
     }
-    const pageSize = 3;
+    const pageSize = 100;
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const category = req.query.category || '';
