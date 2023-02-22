@@ -21,7 +21,7 @@ productRouter.get(
       query = query.replace(city[0], '')
       city[0] = city[0].toUpperCase()
     }
-    const pageSize = 100;
+    const pageSize = 10;
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const category = req.query.category || '';
@@ -36,7 +36,9 @@ productRouter.get(
         ? Number(req.query.rating)
         : 0;
 
-    const nameFilter = name ? { name: { $regex: query.trim(), $options: 'i' } } : {};
+    const nameFilter = name 
+      ? { name: { $regex: query.trim(), $options: 'i' } } 
+      : { name: { $not: { $regex: 'Annunciø' } } };
     const literalFilter = name ? { name: { $regex: req.query.name, $options: 'i' } } : {};
     const sellerFilter = seller ? { seller } : {};
     const categoryFilter = category ? { category } : {};

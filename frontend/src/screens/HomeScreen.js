@@ -8,12 +8,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 // import { listTopSellers } from '../actions/userActions';
 import CookieConsent from "react-cookie-consent";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function HomeScreen() {
+  const {
+    pageNumber = 1,
+  } = useParams();
+
+  const [section, setSection] = useState("offro");
+
+
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, pages, page } = productList;
+
+  useEffect(() => {
+    dispatch(
+      listProducts({
+        pageNumber,
+      })
+    );
+  }, [pageNumber]);
 
   // const userTopSellersList = useSelector((state) => state.userTopSellersList);
   // const {
@@ -22,10 +37,9 @@ export default function HomeScreen() {
   //   users: sellers,
   // } = userTopSellersList;
 
-  const [section, setSection] = useState("offro");
-
+  
   useEffect(() => {
-    dispatch(listProducts({}));
+    dispatch(listProducts({ pageNumber }));
     // dispatch(listTopSellers());
   }, [dispatch]);
   return (
@@ -107,13 +121,13 @@ export default function HomeScreen() {
         ) : (
           <>
             {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-            <div className="row center">
+            <div className="row center cards-container">
               {products.map((product) => {
                 // let expired = new Date(product.expiry)
                 // let now = new Date()
                 // const isExpired = expired.getTime() <= now
                 return (
-                  !product.name.match(/Annunciø/) &&
+                  // !product.name.match(/Annunciø/) &&
                   product.section === section &&
                   !product.pause && (
                     <Product key={product._id} product={product}></Product>
@@ -121,6 +135,17 @@ export default function HomeScreen() {
                 );
               })}
             </div>
+            <div className="row center pagination">
+                {[...Array(pages).keys()].map((x) => (
+                  <Link
+                    className={x + 1 === page ? 'active' : ''}
+                    key={x + 1}
+                    to={`/pageNumber/${x + 1}`}
+                  >
+                    {x + 1}
+                  </Link>
+                ))}
+              </div>
           </>
         )}
       </div>

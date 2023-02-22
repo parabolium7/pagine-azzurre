@@ -1,4 +1,18 @@
-@media screen and (min-width: 675px) and (max-width: 801px) {
+@use '../general/color';
+
+@media screen and (min-width: 808px) and (max-width: 880px) {
+  header.row {
+    .brand {
+      font-size: 2.5rem;
+    }
+    .header-actions {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+
+@media screen and (min-width: 675px) and (max-width: 808px) {
   .grid-container {
     display: grid;
     grid-template-areas:
@@ -9,34 +23,48 @@
       "main"
       "footer";
     grid-template-columns: 1fr;
-    grid-template-rows: 0.5rem 2rem 12rem 2rem 1fr 5rem;
+    grid-template-rows: 0.5rem 2rem 7rem 2rem 1fr 5rem;
   }
-  .dropdown-content {
-    left: 0;
+
+  header.row {
+    // flex-direction: column;
+    .brand {
+      font-size: 2rem;
+    }
+    .header-actions {
+      font-size: 1.3rem;
+    }
   }
 
   .schede__container {
     grid-template-columns: 25fr 25fr;
   }
 }
-
-@media screen and (max-width: 675px) {
+@media screen and (max-width: 720px) {
   .grid-container {
-    display: grid;
-    grid-template-areas:
-      "blubar"
-      "pre-header"
-      "header"
-      "post-header"
-      "main"
-      "footer";
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.5rem 2rem 12rem 2rem 1fr 5rem;
+    grid-template-rows: 0.5rem 2rem 10rem 2rem 1fr 5rem;
   }
-
-  .dropdown-content {
-    left: 0;
+  header.row {
+    flex-direction: column;
+    justify-content: center;
+    .brand {
+      font-size: 2rem;
+    }
+    .header-actions {
+      font-size: 1.3rem;
+      width: 100%;
+      justify-content: space-between;
+      svg {
+        margin: 0;
+      }
+    }
   }
+  .header-nav {
+    width: 100%;
+    padding-right: 1.8rem;
+  }
+}
+@media screen and (max-width: 675px) {
 
   .welcome-banner {
     background: none;
@@ -72,11 +100,16 @@
   .card {
     width: 100%;
     &__img-container {
-      background-color: rgb(184, 184, 184);
+      background-color: color.$img-background;
     }
     img {
       object-fit: contain;
     }
+  }
+
+  .card--cart {
+    width: 100% !important;
+    margin: 2rem 0;
   }
 
   .card-body {

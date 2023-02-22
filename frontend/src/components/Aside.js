@@ -39,7 +39,7 @@ export default function Aside({ sidebarIsOpen, setSidebarIsOpen }) {
                   to={`/search/category/${c}`}
                   onClick={() => setSidebarIsOpen(false)}
                 >
-                  {c}
+                  {c[0] + c.slice(1).toLowerCase()}
                 </Link>
               </li>
             ))

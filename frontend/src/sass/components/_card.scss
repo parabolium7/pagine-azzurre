@@ -1,18 +1,30 @@
+@use '../general/color';
+
+.cards-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .card {
-  background-color: #f8f8f8;
+  background-color: color.$background;
   border: 0.1rem #c0c0c0 solid;
   border-radius: 0.5rem;
   margin: 1rem;
+  &--cart {
+    padding: 1rem;
+  }
   &--product-page {
     padding: 1rem;
   }
   &--tile {
+    border: none;
     width: 280px;
     height: 48rem;
     display: flex;
     gap: 1rem;
     flex-direction: column;
     transition: transform 0.3s;
+    overflow: hidden;
     &:hover {
       transform: translateY(-1%);
       box-shadow: 0px 2px 4px lighten(#c0c0c0, 20%);
@@ -24,6 +36,7 @@
       justify-content: space-between;
       height: 100%;
       padding: 0 1rem 1rem 1rem;
+      
     }
   }
 
@@ -37,6 +50,7 @@
   &__product-name {
     // this removes padding applied to all h2
     padding: 0;
+    word-break: break-word;
   }
 
   &__details {
