@@ -36,3 +36,11 @@ ul {
 li {
   margin-top: 1rem;
 }
+
+.flex-container {
+  display: flex;
+  gap: 10px;
+  input {
+    margin-left: 10px;
+  }
+}

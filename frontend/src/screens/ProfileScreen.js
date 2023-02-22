@@ -201,14 +201,14 @@ export default function ProfileScreen() {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div className="flash">
-          <h1 className="row center">Profilo di Usuario</h1>
+          <h1 className="row center">Profilo dell'utente</h1>
           {
               userInfo && !userInfo.verified && (
               <MessageBox variant="alert">
                 L'account deve essere ancora verificato:<br/>
                 1) Esci dalle pagineazzure.net<br/>
-                2) Contralla la tua mail<br/>
-                3) Conferma clicando il link di verifica  
+                2) Controlla la tua mail<br/>
+                3) Conferma cliccando il link di verifica  
               </MessageBox>
           )}
         </div>
@@ -371,14 +371,14 @@ export default function ProfileScreen() {
               </div>
               <div>
                 { referer.length === 0 ?
-                  (<div className="row start">
+                  (<div className="row start flex-container">
                     <label htmlFor="isReferer">Partecipi a gruppi, movimenti, comitati o associazioni no profit?
                       <input
                         type="radio"
                         id="no_referer"
                         name="isReferer"
                         onClick={ (e) => setHasReferer(true)}
-                      />Si
+                      /> Si
                     </label>
                     <label>
                       <input
@@ -387,7 +387,7 @@ export default function ProfileScreen() {
                         name="isReferer"
                         onClick={ (e) => setHasReferer(false)}
                         defaultChecked
-                      />No
+                      /> No
                     </label>
                   </div>)
                 :''
@@ -433,11 +433,11 @@ export default function ProfileScreen() {
                 }
               </div>
               <div>
-                <h2>Inscrizione Newsletter:</h2>
-                {newsletter === "Verified" ? <MessageBox variant="success">Inscritto</MessageBox>  : <MessageBox variant="info">Non inscritto</MessageBox> }
+                <h2>Iscrizione Newsletter:</h2>
+                {newsletter === "Verified" ? <MessageBox variant="success">Iscritto</MessageBox>  : <MessageBox variant="info">Non iscritto</MessageBox> }
               </div>
-              <div className="row start">
-                  <label htmlFor="newsletter">{newsletter === "Not Verified" ? "Vuoi inscriverti alla nostra newsletter" : "Vuoi annullare l'iscrizione alla nostra newsletter"}
+              <div className="row start flex-container">
+                  <label htmlFor="newsletter">{newsletter === "Not Verified" ? "Vuoi iscriverti alla nostra newsletter" : "Vuoi annullare l'iscrizione alla nostra newsletter"}
                     <input
                       type="radio"
                       id="no_referer"

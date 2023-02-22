@@ -31,7 +31,7 @@ export default function CartScreen(props) {
   return (
     <div className="row top flash cart__container">
       <div className="col-2">
-        <h1>Processo di conttato al offerente</h1>
+        <h1>Processo di conttato all'offerente</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
@@ -64,17 +64,17 @@ export default function CartScreen(props) {
                 className="primary block"
                 disabled={cartItems.length === 0}
               >
-                Continua per conttatare offerente
+                Continua per conttatare l'offerente
               </button>
               {userInfo && !userInfo.hasAd && (
                 <MessageBox variant="alert">
                   Ricordati che per poter entrare in contatto con un offerente
                   devi prima mettere un prodotto in vetrina. <br></br>{" "}
-                  <Link to="/productlist/seller">Crea l'annuncio addeso</Link>
+                  <Link to="/productlist/seller">Crea l'annuncio addesso</Link>
                 </MessageBox>
               )}
               {!userInfo && (
-                <MessageBox variant="alert">Devi essere logato.</MessageBox>
+                <MessageBox variant="alert">Devi essere loggato.</MessageBox>
               )}
             </li>
           </ul>

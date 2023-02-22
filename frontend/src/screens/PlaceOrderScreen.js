@@ -51,7 +51,7 @@ export default function PlaceOrderScreen(props) {
         <div className="col-2">
           <ul>
             <li>
-              <div className="card card-body">
+              <div className="card card-body card--place-order">
                 <h2>Spedizione</h2>
                 <p>
                   <strong>Nome:</strong> {cart.shippingAddress.fullName} <br />
@@ -66,7 +66,7 @@ export default function PlaceOrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="card card-body">
+              <div className="card card-body card--place-order">
                 <h2>Pagamento spedizione</h2>
                 <p>
                   <strong>Metodo: Da concordare con l'offerente</strong>
@@ -75,7 +75,7 @@ export default function PlaceOrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="card card-body">
+              <div className="card card-body card--place-order">
                 <h2>Articoli dell'ordine</h2>
                 <ul>
                   {cart.cartItems.map((item) => (
@@ -105,7 +105,7 @@ export default function PlaceOrderScreen(props) {
           </ul>
         </div>
         <div className="col-1">
-          <div className="card card-body">
+          <div className="card card-body card--place-order">
             <ul>
               <li>
                 <h2>Riepilogo dell'ordine</h2>
