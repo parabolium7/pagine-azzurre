@@ -8,6 +8,10 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_RESET,
   USER_DETAILS_SUCCESS,
+  SELLER_DETAILS_FAIL,
+  SELLER_DETAILS_REQUEST,
+  SELLER_DETAILS_RESET,
+  SELLER_DETAILS_SUCCESS,
   USER_LIST_FAIL,
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
@@ -118,6 +122,21 @@ export const userDetailsReducer = (state = { loading: true }, action) => {
     case USER_DETAILS_FAIL:
       return { loading: false, error: action.payload }
     case USER_DETAILS_RESET:
+      return { loading: true }
+    default:
+      return state
+  }
+}
+
+export const sellerDetailsReducer = (state = { loading: true }, action) => {
+  switch (action.type) {
+    case SELLER_DETAILS_REQUEST:
+      return { loading: true }
+    case SELLER_DETAILS_SUCCESS:
+      return { loading: false, user: action.payload }
+    case SELLER_DETAILS_FAIL:
+      return { loading: false, error: action.payload }
+    case SELLER_DETAILS_RESET:
       return { loading: true }
     default:
       return state
