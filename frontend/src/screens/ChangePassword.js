@@ -59,7 +59,7 @@ export default function ChangePassword(props){
         <br/>
         <div>
           <button className="primary blu big" type="submit">
-            Ricupera Password
+            Recupera Password
           </button>
         </div>
       </form>

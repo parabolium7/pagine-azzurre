@@ -110,6 +110,7 @@ export default function MainContent() {
         component={OrderListScreen}
       ></SellerRoute>
       <Route path="/" component={HomeScreen} exact></Route>
+      <Route path="/pageNumber/:pageNumber" component={HomeScreen} exact></Route>
     </main>
   );
 }

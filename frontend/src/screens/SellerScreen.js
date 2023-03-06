@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
-import { detailsUser } from '../actions/userActions';
+import { detailsSeller } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Product from '../components/Product';
@@ -9,8 +9,8 @@ import Rating from '../components/Rating';
 
 export default function SellerScreen(props) {
   const sellerId = props.match.params.id;
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
+  const sellerDetails = useSelector((state) => state.sellerDetails);
+  const { loading, error, user } = sellerDetails;
 
   const productList = useSelector((state) => state.productList);
   const {
@@ -21,7 +21,7 @@ export default function SellerScreen(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(detailsUser(sellerId));
+    dispatch(detailsSeller(sellerId));
     dispatch(listProducts({ seller: sellerId }));
   }, [dispatch, sellerId]);
   return (

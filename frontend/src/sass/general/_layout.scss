@@ -1,5 +1,8 @@
+@use './color';
+
 #root {
-  height: 100%;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .grid-container {
@@ -17,7 +20,7 @@
 
 main {
   grid-area: main;
-  padding: 1rem;
+  padding: 1rem; 
 }
 
 .blubar {

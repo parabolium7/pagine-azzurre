@@ -1,17 +1,59 @@
-@media screen and (max-width: 500px) {
-  .grid-container {
-    display: grid;
-    grid-template-areas:
-      "blubar"
-      "pre-header"
-      "header"
-      "post-header"
-      "main"
-      "footer";
+@media screen and (max-width: 515px) {
+  .cart__item {
     grid-template-columns: 1fr;
-    grid-template-rows: 0.5rem 2rem 13rem 2rem 1fr 5rem;
-  }
+    height: fit-content;
+    position: relative;
+    &__img-container {
+      height: 10rem;
+    }
 
+    &__description-container {
+      padding: 1rem;
+    }
+
+    &__actions-container {
+      justify-content: center;
+      padding-bottom: 1rem;
+      &__delete-btn__container {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
+        
+        button {
+          border-radius: 0.8rem;
+          align-self: flex-start;
+          padding: 0;
+          height: 3rem;
+          width: 3rem;
+          // border-radius: 50%;
+          svg {
+            margin: 0
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  // .grid-container {
+  //   display: grid;
+  //   grid-template-areas:
+  //     "blubar"
+  //     "pre-header"
+  //     "header"
+  //     "post-header"
+  //     "main"
+  //     "footer";
+  //   grid-template-columns: 1fr;
+  //   grid-template-rows: 0.5rem 2rem 13rem 2rem 1fr 5rem;
+  // }
+  .searchbox-container {
+    input {
+      width: 25vw;
+    }
+  }
   .schede__container {
     grid-template-columns: 1fr;
   }
@@ -29,5 +71,19 @@
       "footer";
     grid-template-columns: 1fr;
     grid-template-rows: 0.5rem 2rem 14rem 2rem 1fr 5rem;
+  }
+
+  header.row {
+    gap: 0.3rem;
+    .header-nav {
+      flex-direction: column;
+      gap: 0.3rem;
+      .brand-container {
+        align-self: flex-start;
+      }
+      .search input {
+        width: 70vw;
+      }
+    }
   }
 }

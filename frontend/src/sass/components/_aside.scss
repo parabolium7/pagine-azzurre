@@ -1,21 +1,26 @@
+@use "../general/color";
+
 aside {
   position: fixed;
   width: 30rem;
   height: 100%;
-  background-color: #dceaff;
+  // background-color: #dceaff;
+  background-color: color.$background;
   z-index: 1000;
   transform: translateX(-30rem);
   transition: all 0.5s;
   overflow: auto;
   &::-webkit-scrollbar-track {
-    background-color: #dceaff;
+    // background-color: #dceaff;
+    background-color: color.$background;
   }
   
   .sidebar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(200, 200, 200);
+    background-color: color.$primary;
+    color: #fff;
     padding: 1rem 1.8rem;
   }
 
@@ -41,6 +46,11 @@ aside.open {
 
 button.close-sidebar {
   padding: 0.3rem 0.8rem;
+  border: none;
+  transition: 0.1s;
+  &:hover {
+    outline: 3px solid #6ccef5;
+  }
 }
 
 .overlay {

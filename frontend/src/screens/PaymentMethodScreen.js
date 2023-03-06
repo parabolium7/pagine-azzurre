@@ -72,7 +72,7 @@ export default function PaymentMethodScreen(props) {
             </div>
           </div> */}
           <div>
-            <div>
+            <div className="flex-container">
               <input
                 type="radio"
                 id="stripe"
@@ -86,7 +86,7 @@ export default function PaymentMethodScreen(props) {
             </div>
           </div>
           <div>
-            <div>
+            <div className="flex-container">
               <input
                 type="radio"
                 id="stripe"
@@ -100,12 +100,13 @@ export default function PaymentMethodScreen(props) {
             </div>
           </div>
           <div>
-            <div>
+            <div className="flex-container">
               <input
                 type="radio"
                 id="stripe"
                 value="Stripe"
                 name="paymentMethod"
+                checked={true}
                 required
                 onChange={(e) => setPaymentMethod(e.target.value)}
               ></input>

@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart, removeFromCart } from "../actions/cartActions";
+import { addToCart } from "../actions/cartActions";
 import MessageBox from "../components/MessageBox";
+ import CartItem from "../components/CartItem";
 
 export default function CartScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
@@ -14,6 +15,7 @@ export default function CartScreen(props) {
   const cart = useSelector((state) => state.cart);
   const { cartItems, error } = cart;
   const dispatch = useDispatch();
+
   useEffect(() => {
     window.scrollTo(0, 0);
     if (productId) {
@@ -21,75 +23,33 @@ export default function CartScreen(props) {
     }
   }, [dispatch, productId, qty]);
 
-  const removeFromCartHandler = (id) => {
-    // delete action
-    dispatch(removeFromCart(id));
-  };
+
 
   const checkoutHandler = () => {
     props.history.push("/signin?redirect=shipping");
   };
   return (
-    <div className="row top flash">
+    <div className="row top flash cart__container">
       <div className="col-2">
-        <h1>Processo di conttato al offerente</h1>
+        <h1>Processo di conttato all'offerente</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
             Il carrelo e vuoto. <Link to="/">Torna alla Vetrina</Link>
           </MessageBox>
         ) : (
-          <ul>
+          <ul className="cart">
             {cartItems.map((item) => (
-              <li key={item.product}>
-                <div className="row">
-                  <div>
-                    <img
-                      src={item.image[0]}
-                      alt={item.name}
-                      className="small"
-                    ></img>
-                  </div>
-                  <div className="min-30">
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
-                  </div>
-                  <div>
-                    <select
-                      value={item.qty}
-                      onChange={(e) =>
-                        dispatch(
-                          addToCart(item.product, Number(e.target.value))
-                        )
-                      }
-                    >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>€{". " + item.priceEuro}</div>
-                  <div> e ☯{item.priceVal}</div>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => removeFromCartHandler(item.product)}
-                    >
-                      Cancella
-                    </button>
-                  </div>
-                </div>
-              </li>
+              <CartItem item={item} key={item.product} />
             ))}
           </ul>
         )}
       </div>
       <div className="col-1">
-        <div className="card card-body">
+        <div className="card card-body card--cart">
           <ul>
             <li>
-              <strong>Comincia cercando articoli che ti interessano?</strong>
+              <p>Comincia cercando articoli che ti interessano</p>
               <h2>
                 totale parziale ({cartItems.reduce((a, c) => a + c.qty, 0)}{" "}
                 items) : ☯
@@ -104,17 +64,17 @@ export default function CartScreen(props) {
                 className="primary block"
                 disabled={cartItems.length === 0}
               >
-                Continua per conttatare offerente
+                Continua per conttatare l'offerente
               </button>
               {userInfo && !userInfo.hasAd && (
                 <MessageBox variant="alert">
                   Ricordati che per poter entrare in contatto con un offerente
                   devi prima mettere un prodotto in vetrina. <br></br>{" "}
-                  <Link to="/productlist/seller">Crea l'annuncio addeso</Link>
+                  <Link to="/productlist/seller">Crea l'annuncio addesso</Link>
                 </MessageBox>
               )}
               {!userInfo && (
-                <MessageBox variant="alert">Devi essere logato.</MessageBox>
+                <MessageBox variant="alert">Devi essere loggato.</MessageBox>
               )}
             </li>
           </ul>

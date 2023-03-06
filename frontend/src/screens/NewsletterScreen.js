@@ -31,7 +31,7 @@ export default function Newsletter(){
         
         <form className="form" onSubmit={submitHandler}>
           <div>
-            <h2 className="row center">Iscrivitti alla nostra Newsletter</h2>
+            <h2 className="row center">Iscriviti alla nostra Newsletter</h2>
             <label htmlFor="name">Nome:</label>
             <input
               type="text"

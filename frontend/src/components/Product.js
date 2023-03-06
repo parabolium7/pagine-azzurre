@@ -47,7 +47,7 @@ export default function Product({ product }) {
             ></Rating>
             {(product.section !== "propongo" ||
               product.section !== "avviso") && (
-              <div className="row start card__price-container">
+              <div className="card__price-container">
                 <div className="price euro">
                   €{" " + product.priceEuro}&nbsp;{" e"}
                 </div>

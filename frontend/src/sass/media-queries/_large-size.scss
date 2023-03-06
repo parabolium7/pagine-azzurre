@@ -1,8 +1,3 @@
-@media screen and (max-width: 1150px) {
-  .schede__container {
-    grid-template-columns: 25fr 25fr 25fr;
-  }  
-}
 
 @media screen and (max-width: 1450px) {
   .logo {
@@ -16,5 +11,30 @@
   .logo {
     display: none;
   }
-
+  
 }
+
+@media screen and (min-width: 1150px) {
+  .searchbox-container {
+    input {
+      width: 20vw;
+    }
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .schede__container {
+    grid-template-columns: 25fr 25fr 25fr;
+  }  
+
+  .header-nav {
+    width: 59%;
+    .searchbox-container {
+      transform: none;
+    }
+  }
+  .header-actions {
+    gap: 0
+  }
+}
+
