@@ -6,12 +6,10 @@ import { signout } from "./../actions/userActions";
 
 import SearchBox from "./../components/SearchBox";
 
-
-
 import PreHeader from "./PreHeader";
 import PostHeader from "./PostHeader";
 
-import {ReactComponent as CartSVG} from "./../resources/cart.svg"
+import { ReactComponent as CartSVG } from "./../resources/cart-icon.svg";
 
 export default function Header({ setSidebarIsOpen }) {
   const cart = useSelector((state) => state.cart);
@@ -57,7 +55,9 @@ export default function Header({ setSidebarIsOpen }) {
           </div>
           <div className="searchbox-container">
             <Route
-              render={({ history }) => <SearchBox history={history}></SearchBox>}
+              render={({ history }) => (
+                <SearchBox history={history}></SearchBox>
+              )}
             ></Route>
           </div>
         </div>
