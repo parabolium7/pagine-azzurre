@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
-import  imgNotFound  from "./../resources/img-not-found.png";
+import imgNotFound from "./../resources/img-not-found.png";
 
 export default function Product({ product }) {
   return (
     <div key={product._id} className="card card--tile">
       <Link className="card__img-container" to={`/product/${product._id}`}>
-
         <img
           className="medium"
           width="280"
@@ -17,7 +16,7 @@ export default function Product({ product }) {
           loading="lazy"
           onError={({ currentTarget }) => {
             currentTarget.src = null;
-            currentTarget.src = imgNotFound
+            currentTarget.src = imgNotFound;
             currentTarget.style.objectFit = "cover";
           }}
         />
@@ -45,8 +44,8 @@ export default function Product({ product }) {
               rating={product.rating}
               numReviews={product.numReviews}
             ></Rating>
-            {(product.section !== "propongo" ||
-              product.section !== "avviso") && (
+            {/* {(product.section !== "propongo" || product.section !== "avviso") && ( */}
+            {(product.section !== "propongo" && product.section !== "avviso") && (
               <div className="card__price-container">
                 <div className="price euro">
                   €{" " + product.priceEuro}&nbsp;{" e"}

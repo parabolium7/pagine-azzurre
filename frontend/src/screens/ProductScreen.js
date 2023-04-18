@@ -9,8 +9,7 @@ import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
-import imgNotFound from "./../resources/img-not-found.png"
-
+import imgNotFound from "./../resources/img-not-found.png";
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -67,13 +66,18 @@ export default function ProductScreen(props) {
             <div className="col-1 space">
               <Carousel className="carousel">
                 {product.image.map((image, index) => (
-                  <img src={image} key={index} alt="preview" onError={({currentTarget}) => {
-                    currentTarget.src = null;
-                    currentTarget.classList.add('img-not-found')
-                    // currentTarget.style.height = "280px" 
-                    // currentTarget.style.objectFit = 'cover'
-                    currentTarget.src = imgNotFound;
-                  }} />
+                  <img
+                    src={image}
+                    key={index}
+                    alt="preview"
+                    onError={({ currentTarget }) => {
+                      currentTarget.src = null;
+                      currentTarget.classList.add("img-not-found");
+                      // currentTarget.style.height = "280px"
+                      // currentTarget.style.objectFit = 'cover'
+                      currentTarget.src = imgNotFound;
+                    }}
+                  />
                 ))}
               </Carousel>
             </div>
@@ -88,8 +92,13 @@ export default function ProductScreen(props) {
                     numReviews={product.numReviews}
                   ></Rating>
                 </li>
-                <li>Prezzo in Euro: € {product.priceEuro}</li>
-                <li>Prezzo in Val: ☯ {product.priceVal}</li>
+                {product.section !== "avviso" &&
+                  product.section !== "propongo" && (
+                    <>
+                      <li>Prezzo in Euro: € {product.priceEuro}</li>
+                      <li>Prezzo in Val: ☯ {product.priceVal}</li>
+                    </>
+                  )}
                 <li>
                   Descrizione:
                   <p className="p_sp">{product.description}</p>
@@ -118,15 +127,18 @@ export default function ProductScreen(props) {
                       numReviews={product.seller.seller.numReviews}
                     ></Rating>
                   </li>
-                  <li>
-                    <div className="row start">
-                      <div style={{ paddingRight: "1.8rem" }}>Prezzo</div>
-                      <div className="price euro">
-                        €{product.priceEuro}&nbsp;
-                      </div>
-                      <div className="price">e ☯{product.priceVal}</div>
-                    </div>
-                  </li>
+                  {product.section !== "avviso" &&
+                    product.section !== "propongo" && (
+                      <li>
+                        <div className="row start">
+                          <div style={{ paddingRight: "1.8rem" }}>Prezzo</div>
+                          <div className="price euro">
+                            €{product.priceEuro}&nbsp;
+                          </div>
+                          <div className="price">e ☯{product.priceVal}</div>
+                        </div>
+                      </li>
+                    )}
                   <li>
                     <div className="row">
                       <div>Disponibilità</div>
