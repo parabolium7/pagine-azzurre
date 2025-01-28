@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+// useState is never used.
+//import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
@@ -26,7 +28,8 @@ export default function TuttiNoi() {
   return (
     <>
       <div className="flash">
-        <h1 className="row center">Le Pagine Azzurre Siamo Noi <img className="qm" src={questionMark} alt="question mark"/><div className="qm_hidden">Per comparire in questa sezione aggiungi una immagine e una descrizione nel tuo profilo</div></h1>
+        <h1 className="row center">Le Pagine Azzurre Siamo Noi</h1>
+        <p>Per comparire in questa sezione aggiungi una immagine e una descrizione <a href="https://pagineazzurre.net/profile">nel tuo profilo</a></p>
         <div className="mobile_sp">
           { loadingSellers ? (
             <LoadingBox></LoadingBox>
